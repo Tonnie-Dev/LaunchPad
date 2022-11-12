@@ -9,24 +9,45 @@ on:
     branches: [ master ]
 
 jobs:
+
+  lint-check:
+    name: 🔍 Lint
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Lint check
+        run: ./gradlew lint
+
+      - name: Generate lint report
+        uses: actions/upload-artifact@v2
+        with:
+          name: lint_report.html
+          path: app/build/reports/lint-results-debug.html
+
   build:
+    name: ⚒ Build
+    runs-on: ubuntu-latest
+    steps:
 
+        -name: Checkout Code
+        uses: actions/checkout@v1
 
-runs-on: ubuntu-latest
-
-steps:
-  -uses: actions/checkout@v1
-
-  -name: Set Up JDK
-    uses: actions/setup-java@v1
-    with:
-      java-version:1.8
+        -name: Set Up JDK
+        uses: actions/setup-java@v1
+        with:
+    java-version:1.8
 
     -name: Run Tests
       run: ./gradlew test
 
-      - name: Build Project
-        run: ./gradlew assemble
+      -name: Build Project
+      run: ./gradlew assemble
+
+
+
 
 
 
