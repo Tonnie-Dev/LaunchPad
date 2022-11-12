@@ -2,9 +2,9 @@ package com.uxstate.launchpad.data.remote.dtos
 
 import com.squareup.moshi.Json
 
-data class Rocket(
+data class RocketDTO(
     @Json(name = "configuration")
-    val configuration: Configuration,
+    val configuration: ConfigurationDTO,
     @Json(name = "id")
     val id: Int
 )

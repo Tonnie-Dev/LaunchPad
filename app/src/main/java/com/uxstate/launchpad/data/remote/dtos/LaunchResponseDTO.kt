@@ -10,5 +10,5 @@ data class LaunchResponseDTO(
     @Json(name = "previous")
     val previous: String,
     @Json(name = "results")
-    val results: List<Result>
+    val launchDTOS: List<LaunchDTO>
 )

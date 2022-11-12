@@ -2,7 +2,7 @@ package com.uxstate.launchpad.data.remote.dtos
 
 import com.squareup.moshi.Json
 
-data class LaunchServiceProvider(
+data class LaunchServiceProviderDTO(
     @Json(name = "id")
     val id: Int,
     @Json(name = "name")

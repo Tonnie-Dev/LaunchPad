@@ -2,7 +2,7 @@ package com.uxstate.launchpad.data.remote.dtos
 
 import com.squareup.moshi.Json
 
-data class Pad(
+data class PadDTO(
     @Json(name = "agency_id")
     val agencyId: Any?,
     @Json(name = "id")
@@ -12,7 +12,7 @@ data class Pad(
     @Json(name = "latitude")
     val latitude: String,
     @Json(name = "location")
-    val location: Location,
+    val location: LocationDTO,
     @Json(name = "longitude")
     val longitude: String,
     @Json(name = "map_image")

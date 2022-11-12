@@ -2,7 +2,7 @@ package com.uxstate.launchpad.data.remote.dtos
 
 import com.squareup.moshi.Json
 
-data class Location(
+data class LocationDTO(
     @Json(name = "country_code")
     val countryCode: String,
     @Json(name = "id")

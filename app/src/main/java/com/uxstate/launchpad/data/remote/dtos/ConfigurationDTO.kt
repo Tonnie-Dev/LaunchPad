@@ -2,7 +2,7 @@ package com.uxstate.launchpad.data.remote.dtos
 
 import com.squareup.moshi.Json
 
-data class Configuration(
+data class ConfigurationDTO(
     @Json(name = "family")
     val family: String,
     @Json(name = "full_name")

@@ -2,7 +2,7 @@ package com.uxstate.launchpad.data.remote.dtos
 
 import com.squareup.moshi.Json
 
-data class Result(
+data class LaunchDTO(
     @Json(name = "agency_launch_attempt_count")
     val agencyLaunchAttemptCount: Int,
     @Json(name = "agency_launch_attempt_count_year")
@@ -22,13 +22,13 @@ data class Result(
     @Json(name = "last_updated")
     val lastUpdated: String,
     @Json(name = "launch_service_provider")
-    val launchServiceProvider: LaunchServiceProvider,
+    val launchServiceProviderDTO: LaunchServiceProviderDTO,
     @Json(name = "location_launch_attempt_count")
     val locationLaunchAttemptCount: Int,
     @Json(name = "location_launch_attempt_count_year")
     val locationLaunchAttemptCountYear: Int,
     @Json(name = "mission")
-    val mission: Mission,
+    val mission: MissionDTO,
     @Json(name = "name")
     val name: String,
     @Json(name = "net")
@@ -38,7 +38,7 @@ data class Result(
     @Json(name = "orbital_launch_attempt_count_year")
     val orbitalLaunchAttemptCountYear: Int,
     @Json(name = "pad")
-    val pad: Pad,
+    val padDTO: PadDTO,
     @Json(name = "pad_launch_attempt_count")
     val padLaunchAttemptCount: Int,
     @Json(name = "pad_launch_attempt_count_year")
@@ -48,11 +48,11 @@ data class Result(
     @Json(name = "program")
     val program: List<Any>,
     @Json(name = "rocket")
-    val rocket: Rocket,
+    val rocketDTO: RocketDTO,
     @Json(name = "slug")
     val slug: String,
     @Json(name = "status")
-    val status: Status,
+    val statusDTO: StatusDTO,
     @Json(name = "url")
     val url: String,
     @Json(name = "webcast_live")
