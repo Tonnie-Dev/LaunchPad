@@ -1,6 +1,6 @@
 package com.uxstate.launchpad.data.remote
 
-import com.uxstate.launchpad.data.remote.dtos.LaunchResponseDTO
+import com.uxstate.launchpad.data.remote.dtos.ApiResponseDTO
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -11,13 +11,13 @@ interface LaunchAPI {
     suspend fun getUpcomingLaunches(
         @Query("limit") limit: Int = 10,
         @Query("offset") offSet: Int = 0
-    ): LaunchResponseDTO
+    ): ApiResponseDTO
 
     @GET("launch/previous")
     suspend fun getPreviousLaunches(
         @Query("limit") limit: Int = 10,
         offSet: Int = 0
-    ): LaunchResponseDTO
+    ): ApiResponseDTO
 
     companion object{
 
