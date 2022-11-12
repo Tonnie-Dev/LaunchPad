@@ -1,16 +1,22 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
+    id 'com.google.devtools.ksp' version '1.6.10-1.0.2'
+    // KtLint Gradle plugin
+    id "org.jlleitschuh.gradle.ktlint" version "11.0.0"
 }
 
 android {
     namespace 'com.uxstate.launchpad'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.uxstate.launchpad"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -20,6 +26,19 @@ android {
         }
     }
 
+   /* Kotlin Block - makes sure that the KSP Plugin looks at
+    the right paths when it comes to generated classes*/
+
+    kotlin {
+        sourceSets {
+            debug {
+                kotlin.srcDir("build/generated/ksp/debug/kotlin")
+            }
+            release {
+                kotlin.srcDir("build/generated/ksp/release/kotlin")
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -45,15 +64,27 @@ android {
         }
     }
 }
+//ktlintFormat task will need to run before preBuild
+tasks.getByPath("preBuild").dependsOn("ktlintFormat")
+ktlint{
+    android = true
+    ignoreFailures = false
+    disabledRules = ["final-newline","no-wildcard-imports"]
+    reporters {
+        reporter "plain"
+        reporter "checkstyle"
+        reporter "sarif"
+    }
+}
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.3.1'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.activity:activity-compose:1.6.1'
     implementation "androidx.compose.ui:ui:$compose_ui_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
-    implementation 'androidx.compose.material:material:1.1.1'
+    implementation 'androidx.compose.material:material:1.3.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
