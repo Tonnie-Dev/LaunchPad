@@ -18,4 +18,9 @@ interface LaunchAPI {
         @Query("limit") limit: Int = 10,
         offSet: Int = 0
     ): LaunchResponseDTO
+
+    companion object{
+
+        const val BASE_URL = "https://lldev.thespacedevs.com/2.2.0/"
+    }
 }
