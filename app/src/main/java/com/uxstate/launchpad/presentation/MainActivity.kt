@@ -1,4 +1,4 @@
-package com.uxstate.launchpad
+package com.uxstate.launchpad.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.uxstate.launchpad.ui.theme.LaunchPadTheme
+import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

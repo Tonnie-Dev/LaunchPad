@@ -1,6 +1,5 @@
 package com.uxstate.launchpad.data.remote.dtos
 
-
 import com.squareup.moshi.Json
 
 data class Status(
