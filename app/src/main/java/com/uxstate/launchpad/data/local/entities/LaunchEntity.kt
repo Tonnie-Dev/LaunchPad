@@ -14,8 +14,8 @@ data class LaunchEntity(
     val name: String,
     val imageUrl: String,
     val status: String,
-    val mission: Mission,
     val startWindowDate: String,
+    val mission: Mission,
     val provider: Provider,
     val pad: Pad,
     val rocket: Rocket

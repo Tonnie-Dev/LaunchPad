@@ -15,5 +15,19 @@ class Converters {
         return missionListString.joinToString(separator = ",")
     }
 
+    @TypeConverter
+    fun readMissionFromRoom(roomString: String): Mission {
+
+
+        val roomStringList = roomString.split(",")
+                .map { it }
+
+        return Mission(
+                name = roomStringList[0],
+                description = roomStringList[1],
+                type = roomStringList[2]
+        )
+    }
+
 }
 
