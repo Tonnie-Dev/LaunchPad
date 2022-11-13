@@ -10,7 +10,7 @@ import com.uxstate.launchpad.data.local.entities.LaunchEntity
 import com.uxstate.launchpad.data.local.entities.RemoteKeysEntity
 
 @Database(
-        entities = [LaunchEntity::class, RemoteKeysEntity::class],
+        entities = [LaunchEntity::class],
         version = 1,
         exportSchema = true
 )

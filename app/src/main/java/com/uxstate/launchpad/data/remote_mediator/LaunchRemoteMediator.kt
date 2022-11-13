@@ -17,10 +17,10 @@ import javax.inject.Inject
 class LaunchRemoteMediator @Inject constructor(
     private val db: LaunchDatabase,
     private val api: LaunchAPI
-) : RemoteMediator<String, Launch>() {
+) : RemoteMediator<Int, Launch>() {
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<String, Launch>
+        state: PagingState<Int, Launch>
     ): MediatorResult {
 
         //obtain daos

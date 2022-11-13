@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.uxstate.launchpad.data.local.entities.RemoteKeysEntity
 
 
-@Dao
+
 interface RemoteKeysDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRemoteKeys(keys: List<RemoteKeysEntity>)

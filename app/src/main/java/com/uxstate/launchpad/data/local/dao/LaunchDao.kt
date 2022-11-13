@@ -16,7 +16,7 @@ interface LaunchDao{
     suspend fun insertLaunches(launches: List<LaunchEntity>)
 
     @Query("SELECT * FROM launch_table")
-    suspend fun getLaunches():PagingSource<String,Launch>
+   fun getLaunches():PagingSource<Int,Launch>
 
     @Query("DELETE FROM launch_table")
     suspend fun clearLaunches()
