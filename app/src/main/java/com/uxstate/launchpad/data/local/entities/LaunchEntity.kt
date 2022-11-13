@@ -9,8 +9,8 @@ import com.uxstate.launchpad.domain.model.Rocket
 
 @Entity(tableName = "launch_table")
 data class LaunchEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    @PrimaryKey(autoGenerate = false)
+    val id: String,
     val name: String,
     val imageUrl: String,
     val status: String,
