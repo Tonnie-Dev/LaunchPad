@@ -2,6 +2,7 @@ package com.uxstate.launchpad.data.local.converters
 
 import androidx.room.TypeConverter
 import com.uxstate.launchpad.domain.model.Mission
+import com.uxstate.launchpad.domain.model.Pad
 import com.uxstate.launchpad.domain.model.Provider
 
 class Converters {
@@ -53,5 +54,18 @@ class Converters {
         )
     }
 
+
+    @TypeConverter
+    fun writePadToRoom (pad: Pad):String {
+
+        val padLocationName = pad.locationName
+        val padLatitude  = pad.latitude
+        val padLongitude = pad.longitude
+
+        val padProviderList = listOf(padLocationName, padLatitude, padLongitude)
+
+        return padProviderList.joinToString(separator = ",")
+
+    }
 }
 
