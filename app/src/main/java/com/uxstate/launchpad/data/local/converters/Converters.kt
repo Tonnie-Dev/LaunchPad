@@ -92,5 +92,17 @@ class Converters {
         return rocketPropertiesList.joinToString(separator = ",")
 
     }
+
+    @TypeConverter
+    fun readRocketFromRoom(roomString: String): Rocket {
+
+        val rocketPropertiesListString = roomString.split(",")
+                .map { it }
+
+        return Rocket(
+                name = rocketPropertiesListString[0],
+                family = rocketPropertiesListString[1]
+        )
+    }
 }
 
