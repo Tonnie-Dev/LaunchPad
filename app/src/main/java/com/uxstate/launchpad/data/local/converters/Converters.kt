@@ -56,16 +56,27 @@ class Converters {
 
 
     @TypeConverter
-    fun writePadToRoom (pad: Pad):String {
+    fun writePadToRoom(pad: Pad): String {
 
         val padLocationName = pad.locationName
-        val padLatitude  = pad.latitude
+        val padLatitude = pad.latitude
         val padLongitude = pad.longitude
 
         val padProviderList = listOf(padLocationName, padLatitude, padLongitude)
 
         return padProviderList.joinToString(separator = ",")
 
+    }
+
+    @TypeConverter
+    fun readPadFromRoom(roomString: String): Pad {
+
+        val padStringList = roomString.split(",")
+        return Pad(
+                locationName = padStringList[0],
+                latitude = padStringList[1],
+                longitude = padStringList[2]
+        )
     }
 }
 
