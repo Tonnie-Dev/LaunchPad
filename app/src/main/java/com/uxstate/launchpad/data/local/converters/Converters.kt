@@ -41,5 +41,17 @@ class Converters {
 
     }
 
+    @TypeConverter
+    fun readProviderFromRoom(roomString: String): Provider {
+
+        val providerList = roomString.split(",")
+                .map { it }
+        return Provider(
+                id = providerList[0].toInt(),
+                name = providerList[1],
+                type = providerList[2]
+        )
+    }
+
 }
 
