@@ -35,10 +35,21 @@ class LaunchRemoteMediator @Inject constructor(
 
                 LoadType.REFRESH -> 0
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
-                LoadType.APPEND -> state.anchorPosition ?: 0
+                LoadType.APPEND -> {
+
+                    val lastItem = state.lastItemOrNull()
+
+
+                    if (lastItem == null) {
+
+                        return MediatorResult.Success(endOfPaginationReached = true)
+
+                    }
+                    lastItem.id
+                }
             }
 
-            val response = api.getPreviousLaunches(offSet = loadKey)
+            val response = api.getPreviousLaunches(offSet = loadKey.plus(10))
 
             db.withTransaction {
 
