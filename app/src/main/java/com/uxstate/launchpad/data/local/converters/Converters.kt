@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.uxstate.launchpad.domain.model.Mission
 import com.uxstate.launchpad.domain.model.Pad
 import com.uxstate.launchpad.domain.model.Provider
+import com.uxstate.launchpad.domain.model.Rocket
 
 class Converters {
     @TypeConverter
@@ -77,6 +78,19 @@ class Converters {
                 latitude = padStringList[1],
                 longitude = padStringList[2]
         )
+    }
+
+
+    @TypeConverter
+    fun writeRocketToRoom(rocket: Rocket): String {
+
+        val rocketName = rocket.name
+        val rocketFamily = rocket.family
+
+        val rocketPropertiesList = listOf(rocketName, rocketFamily)
+
+        return rocketPropertiesList.joinToString(separator = ",")
+
     }
 }
 
