@@ -2,6 +2,7 @@ package com.uxstate.launchpad.data.local.converters
 
 import androidx.room.TypeConverter
 import com.uxstate.launchpad.domain.model.Mission
+import com.uxstate.launchpad.domain.model.Provider
 
 class Converters {
     @TypeConverter
@@ -27,6 +28,17 @@ class Converters {
                 description = roomStringList[1],
                 type = roomStringList[2]
         )
+    }
+
+    @TypeConverter
+    fun writeProviderToRoom(provider: Provider): String {
+        val providerId = provider.id.toString()
+        val providerName = provider.name
+        val providerType = provider.type
+
+        val providerStringList = listOf(providerId, providerName, providerType)
+        return providerStringList.joinToString(separator = ",")
+
     }
 
 }
