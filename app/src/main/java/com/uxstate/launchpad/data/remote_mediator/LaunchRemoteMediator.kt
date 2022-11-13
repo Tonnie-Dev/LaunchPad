@@ -4,21 +4,61 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
+import androidx.room.withTransaction
 import com.uxstate.launchpad.data.local.LaunchDatabase
 import com.uxstate.launchpad.data.remote.LaunchAPI
 import com.uxstate.launchpad.domain.model.Launch
+import retrofit2.HttpException
+import java.io.IOException
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class LaunchRemoteMediator @Inject constructor(
     private val db: LaunchDatabase,
     private val api: LaunchAPI
-): RemoteMediator<String, Launch>() {
+) : RemoteMediator<String, Launch>() {
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<String, Launch>
     ): MediatorResult {
-        TODO("Not yet implemented")
+
+        //obtain daos
+        val launchDao = db.launchDao
+        val remoteKeysDao = db.remoteKeysDao
+
+
+        return try {
+
+            //Determine which page to load depending on the supplied LoadType
+            val loadKey = when (loadType) {
+
+                LoadType.REFRESH -> 0
+                LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
+                LoadType.APPEND -> state.anchorPosition ?: 0
+            }
+
+            val response = api.getPreviousLaunches(offSet = loadKey)
+
+            db.withTransaction {
+
+                if (loadType == LoadType.REFRESH) {
+
+                    launchDao.clearLaunches()
+                }
+                launchDao.insertLaunches(response.launchDTOS)
+
+                MediatorResult.Success(endOfPaginationReached = response.launchDTOS.isEmpty())
+
+            }
+
+
+        } catch (e: IOException) {
+
+            MediatorResult.Error(e)
+        } catch (e: HttpException) {
+
+            MediatorResult.Error(e)
+        }
     }
 
     override suspend fun initialize(): InitializeAction {
