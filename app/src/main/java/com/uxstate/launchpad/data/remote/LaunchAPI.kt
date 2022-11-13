@@ -6,7 +6,6 @@ import retrofit2.http.Query
 
 interface LaunchAPI {
 
-
     @GET("launch/upcoming")
     suspend fun getUpcomingLaunches(
         @Query("limit") limit: Int = 10,
@@ -19,7 +18,7 @@ interface LaunchAPI {
         offSet: Int = 0
     ): ApiResponseDTO
 
-    companion object{
+    companion object {
 
         const val BASE_URL = "https://lldev.thespacedevs.com/2.2.0/"
     }
