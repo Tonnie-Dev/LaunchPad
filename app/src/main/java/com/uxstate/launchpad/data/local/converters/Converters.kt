@@ -21,14 +21,13 @@ class Converters {
     @TypeConverter
     fun readMissionFromRoom(roomString: String): Mission {
 
-
         val roomStringList = roomString.split(",")
-                .map { it }
+            .map { it }
 
         return Mission(
-                name = roomStringList[0],
-                description = roomStringList[1],
-                type = roomStringList[2]
+            name = roomStringList[0],
+            description = roomStringList[1],
+            type = roomStringList[2]
         )
     }
 
@@ -40,21 +39,19 @@ class Converters {
 
         val providerStringList = listOf(providerId, providerName, providerType)
         return providerStringList.joinToString(separator = ",")
-
     }
 
     @TypeConverter
     fun readProviderFromRoom(roomString: String): Provider {
 
         val providerList = roomString.split(",")
-                .map { it }
+            .map { it }
         return Provider(
-                id = providerList[0].toInt(),
-                name = providerList[1],
-                type = providerList[2]
+            id = providerList[0].toInt(),
+            name = providerList[1],
+            type = providerList[2]
         )
     }
-
 
     @TypeConverter
     fun writePadToRoom(pad: Pad): String {
@@ -66,7 +63,6 @@ class Converters {
         val padProviderList = listOf(padLocationName, padLatitude, padLongitude)
 
         return padProviderList.joinToString(separator = ",")
-
     }
 
     @TypeConverter
@@ -74,12 +70,11 @@ class Converters {
 
         val padStringList = roomString.split(",")
         return Pad(
-                locationName = padStringList[0],
-                latitude = padStringList[1],
-                longitude = padStringList[2]
+            locationName = padStringList[0],
+            latitude = padStringList[1],
+            longitude = padStringList[2]
         )
     }
-
 
     @TypeConverter
     fun writeRocketToRoom(rocket: Rocket): String {
@@ -90,19 +85,17 @@ class Converters {
         val rocketPropertiesList = listOf(rocketName, rocketFamily)
 
         return rocketPropertiesList.joinToString(separator = ",")
-
     }
 
     @TypeConverter
     fun readRocketFromRoom(roomString: String): Rocket {
 
         val rocketPropertiesListString = roomString.split(",")
-                .map { it }
+            .map { it }
 
         return Rocket(
-                name = rocketPropertiesListString[0],
-                family = rocketPropertiesListString[1]
+            name = rocketPropertiesListString[0],
+            family = rocketPropertiesListString[1]
         )
     }
 }
-
