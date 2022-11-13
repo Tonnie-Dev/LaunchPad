@@ -6,6 +6,7 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.uxstate.launchpad.data.local.LaunchDatabase
+import com.uxstate.launchpad.data.mapper.toEntity
 import com.uxstate.launchpad.data.remote.LaunchAPI
 import com.uxstate.launchpad.domain.model.Launch
 import retrofit2.HttpException
@@ -45,7 +46,7 @@ class LaunchRemoteMediator @Inject constructor(
 
                     launchDao.clearLaunches()
                 }
-                launchDao.insertLaunches(response.launchDTOS)
+                launchDao.insertLaunches(response.launchDTOS.map { it.toEntity() })
 
                 MediatorResult.Success(endOfPaginationReached = response.launchDTOS.isEmpty())
 
