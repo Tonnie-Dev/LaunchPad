@@ -26,7 +26,6 @@ class LaunchRemoteMediator @Inject constructor(
         // obtain daos
         val launchDao = db.launchDao
 
-
         return try {
 
             // Determine which page to load depending on the supplied LoadType
