@@ -2,7 +2,6 @@ package com.uxstate.launchpad.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.uxstate.launchpad.data.local.LaunchDatabase
@@ -34,7 +33,7 @@ object AppModule {
     @Provides
     @Singleton
 
-    fun provideDatabase(@ApplicationContext context: Context): RoomDatabase {
+    fun provideDatabase(@ApplicationContext context: Context): LaunchDatabase {
 
         return Room.databaseBuilder(context, LaunchDatabase::class.java, DATABASE_NAME)
             .build()
