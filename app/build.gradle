@@ -111,12 +111,15 @@ dependencies {
     implementation "com.squareup.moshi:moshi:1.12.0"
     implementation "com.squareup.moshi:moshi-kotlin:1.12.0"
 
-    // Paging 3.0
-    implementation 'androidx.paging:paging-compose:1.0.0-alpha17'
-
     // Room KTX with Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:2.4.3"
     kapt "androidx.room:room-compiler:2.4.3"
+    
+    // room-paging artifact
+    implementation 'androidx.room:room-paging:2.4.3'
+    // Paging 3.0
+    implementation 'androidx.paging:paging-compose:1.0.0-alpha17'
+
 
     //Lottie Animation
     implementation "com.airbnb.android:lottie-compose:5.0.1"

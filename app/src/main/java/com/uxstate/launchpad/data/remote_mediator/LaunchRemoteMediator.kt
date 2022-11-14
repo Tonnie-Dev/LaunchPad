@@ -9,9 +9,9 @@ import com.uxstate.launchpad.data.local.LaunchDatabase
 import com.uxstate.launchpad.data.mapper.toEntity
 import com.uxstate.launchpad.data.remote.LaunchAPI
 import com.uxstate.launchpad.domain.model.Launch
-import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
+import retrofit2.HttpException
 
 @OptIn(ExperimentalPagingApi::class)
 class LaunchRemoteMediator @Inject constructor(
@@ -23,14 +23,13 @@ class LaunchRemoteMediator @Inject constructor(
         state: PagingState<Int, Launch>
     ): MediatorResult {
 
-        //obtain daos
+        // obtain daos
         val launchDao = db.launchDao
         val remoteKeysDao = db.remoteKeysDao
 
-
         return try {
 
-            //Determine which page to load depending on the supplied LoadType
+            // Determine which page to load depending on the supplied LoadType
             val loadKey = when (loadType) {
 
                 LoadType.REFRESH -> 0
@@ -39,11 +38,9 @@ class LaunchRemoteMediator @Inject constructor(
 
                     val lastItem = state.lastItemOrNull()
 
-
                     if (lastItem == null) {
 
                         return MediatorResult.Success(endOfPaginationReached = true)
-
                     }
                     lastItem.id
                 }
@@ -60,10 +57,7 @@ class LaunchRemoteMediator @Inject constructor(
                 launchDao.insertLaunches(response.launchDTOS.map { it.toEntity() })
 
                 MediatorResult.Success(endOfPaginationReached = response.launchDTOS.isEmpty())
-
             }
-
-
         } catch (e: IOException) {
 
             MediatorResult.Error(e)

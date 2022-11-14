@@ -4,7 +4,6 @@ import androidx.paging.PagingData
 import com.uxstate.launchpad.domain.model.Launch
 import kotlinx.coroutines.flow.Flow
 
-
 interface RemoteDataSource {
 
     fun getLaunches(): Flow<PagingData<Launch>>

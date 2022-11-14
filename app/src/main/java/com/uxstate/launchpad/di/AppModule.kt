@@ -7,7 +7,6 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.uxstate.launchpad.data.local.LaunchDatabase
 import com.uxstate.launchpad.data.remote.LaunchAPI
-import com.uxstate.launchpad.util.Constants
 import com.uxstate.launchpad.util.Constants.CONNECT_TIMEOUT
 import com.uxstate.launchpad.util.Constants.DATABASE_NAME
 import com.uxstate.launchpad.util.Constants.READ_TIMEOUT
@@ -16,17 +15,16 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-
 
 object AppModule {
 
@@ -36,9 +34,8 @@ object AppModule {
     fun provideDatabase(@ApplicationContext context: Context): RoomDatabase {
 
         return Room.databaseBuilder(context, LaunchDatabase::class.java, DATABASE_NAME)
-                .build()
+            .build()
     }
-
 
     /*For debugging purposes it’s nice to have a log feature integrated to
  show request and response information. */
@@ -52,7 +49,6 @@ object AppModule {
         }
     }
 
-
     /* connect timeout defines a time period in which our
        client should establish a connection with a target host.
   By default, for the OkHttpClient, this timeout is set to 10 seconds.   */
@@ -65,10 +61,10 @@ object AppModule {
     fun provideOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient {
 
         return OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-                .build()
+            .addInterceptor(interceptor)
+            .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+            .build()
     }
 
     @Provides
@@ -76,15 +72,13 @@ object AppModule {
     fun provideLaunchAPI(): LaunchAPI {
 
         val moshi = Moshi.Builder()
-                .addLast(KotlinJsonAdapterFactory())
-                .build()
+            .addLast(KotlinJsonAdapterFactory())
+            .build()
 
         return Retrofit.Builder()
-                .baseUrl(LaunchAPI.BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .build()
-                .create()
+            .baseUrl(LaunchAPI.BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
+            .create()
     }
-
-
 }

@@ -25,5 +25,4 @@ abstract class RepositoryModule {
     abstract fun bindRemoteDataSource(
         remoteDataSourceImpl: RemoteDataSourceImpl
     ): RemoteDataSource
-
 }

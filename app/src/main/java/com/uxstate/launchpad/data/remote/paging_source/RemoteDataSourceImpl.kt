@@ -10,8 +10,8 @@ import com.uxstate.launchpad.data.remote_mediator.LaunchRemoteMediator
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.paging_source.RemoteDataSource
 import com.uxstate.launchpad.util.Constants
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
 class RemoteDataSourceImpl @Inject constructor(
     private val api: LaunchAPI,
@@ -25,12 +25,10 @@ class RemoteDataSourceImpl @Inject constructor(
 
         val pagingSourceFactory = { dao.getLaunches() }
 
-
         return Pager(
-                config = PagingConfig(pageSize = Constants.ITEMS_PER_PAGE_LIMIT),
-                remoteMediator = LaunchRemoteMediator(db = db, api = api),
-                pagingSourceFactory =pagingSourceFactory
+            config = PagingConfig(pageSize = Constants.ITEMS_PER_PAGE_LIMIT),
+            remoteMediator = LaunchRemoteMediator(db = db, api = api),
+            pagingSourceFactory = pagingSourceFactory
         ).flow
-
     }
 }

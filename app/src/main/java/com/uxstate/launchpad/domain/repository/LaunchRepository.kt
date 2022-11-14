@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface LaunchRepository {
 
-    fun getPreviousLaunches():Flow<PagingData<Launch>>
+    fun getPreviousLaunches(): Flow<PagingData<Launch>>
 }

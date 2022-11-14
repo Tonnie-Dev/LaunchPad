@@ -1,8 +1,6 @@
 package com.uxstate.launchpad.data.local.entities
 
-import androidx.room.Entity
 import androidx.room.PrimaryKey
-
 
 data class RemoteKeysEntity(
     @PrimaryKey(autoGenerate = true) val id: Int,
