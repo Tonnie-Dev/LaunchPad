@@ -15,5 +15,5 @@ import com.uxstate.launchpad.data.local.entities.LaunchEntity
 @TypeConverters(Converters::class)
 abstract class LaunchDatabase : RoomDatabase() {
     abstract val launchDao: LaunchDao
-    abstract val remoteKeysDao: RemoteKeysDao
+
 }

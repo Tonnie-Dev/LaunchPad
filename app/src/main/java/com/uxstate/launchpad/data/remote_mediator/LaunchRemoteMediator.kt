@@ -25,7 +25,7 @@ class LaunchRemoteMediator @Inject constructor(
 
         // obtain daos
         val launchDao = db.launchDao
-        val remoteKeysDao = db.remoteKeysDao
+
 
         return try {
 
