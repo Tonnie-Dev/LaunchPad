@@ -46,7 +46,8 @@ class LaunchRemoteMediator @Inject constructor(
                 }
             }
 
-            val response = api.getPreviousLaunches(offSet = loadKey.plus(10))
+            Timber.i("loadKey is: $loadKey")
+            val response = api.getPreviousLaunches(offSet = loadKey)
 
             db.withTransaction {
 

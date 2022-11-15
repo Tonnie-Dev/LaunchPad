@@ -1,6 +1,6 @@
 package com.uxstate.launchpad.di
 
-import com.uxstate.launchpad.data.remote.paging_source.RemoteDataSourceImpl
+import com.uxstate.launchpad.data.remote.data_source.RemoteDataSourceImpl
 import com.uxstate.launchpad.data.repository.LaunchRepositoryImpl
 import com.uxstate.launchpad.domain.paging_source.RemoteDataSource
 import com.uxstate.launchpad.domain.repository.LaunchRepository

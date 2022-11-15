@@ -1,4 +1,4 @@
-package com.uxstate.launchpad.data.remote.paging_source
+package com.uxstate.launchpad.data.remote.data_source
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
@@ -10,6 +10,7 @@ import com.uxstate.launchpad.data.remote_mediator.LaunchRemoteMediator
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.paging_source.RemoteDataSource
 import com.uxstate.launchpad.util.Constants
+import com.uxstate.launchpad.util.Constants.INITIL_LOAD_SIZE
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
@@ -26,7 +27,10 @@ class RemoteDataSourceImpl @Inject constructor(
         val pagingSourceFactory = { dao.getLaunches() }
 
         return Pager(
-            config = PagingConfig(pageSize = Constants.ITEMS_PER_PAGE_LIMIT),
+            config = PagingConfig(
+                pageSize = Constants.ITEMS_PER_PAGE_LIMIT,
+                initialLoadSize = INITIL_LOAD_SIZE
+            ),
             remoteMediator = LaunchRemoteMediator(db = db, api = api),
             pagingSourceFactory = pagingSourceFactory
         ).flow
