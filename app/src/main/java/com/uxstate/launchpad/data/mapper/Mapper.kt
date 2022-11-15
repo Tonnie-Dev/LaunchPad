@@ -14,7 +14,7 @@ fun LaunchDTO.toEntity(): LaunchEntity {
     return LaunchEntity(
         id = this.id,
         name = this.name,
-        imageUrl = this.url,
+        imageUrl = this.image,
         status = this.statusDTO.abbrev,
         startWindowDate = this.windowStart,
         mission = Mission(

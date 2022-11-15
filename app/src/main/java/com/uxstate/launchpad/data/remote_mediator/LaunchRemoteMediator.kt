@@ -12,6 +12,7 @@ import com.uxstate.launchpad.domain.model.Launch
 import java.io.IOException
 import javax.inject.Inject
 import retrofit2.HttpException
+import timber.log.Timber
 
 @OptIn(ExperimentalPagingApi::class)
 class LaunchRemoteMediator @Inject constructor(
@@ -22,7 +23,7 @@ class LaunchRemoteMediator @Inject constructor(
         loadType: LoadType,
         state: PagingState<Int, Launch>
     ): MediatorResult {
-
+        Timber.i("Inside load() of the Remote Mediator")
         // obtain daos
         val launchDao = db.launchDao
 
@@ -58,15 +59,21 @@ class LaunchRemoteMediator @Inject constructor(
                 MediatorResult.Success(endOfPaginationReached = response.launchDTOS.isEmpty())
             }
         } catch (e: IOException) {
-
+            Timber.i("IO Error in RemoteMediator: $e")
+            e.printStackTrace()
             MediatorResult.Error(e)
         } catch (e: HttpException) {
+            Timber.i("Http Error in RemoteMediator: $e")
+            e.printStackTrace()
+            MediatorResult.Error(e)
+        } catch (e: Exception) {
 
+            Timber.i("Other Errors in RemoteMediator: $e")
             MediatorResult.Error(e)
         }
     }
 
     override suspend fun initialize(): InitializeAction {
-        return super.initialize()
+        return InitializeAction.LAUNCH_INITIAL_REFRESH
     }
 }

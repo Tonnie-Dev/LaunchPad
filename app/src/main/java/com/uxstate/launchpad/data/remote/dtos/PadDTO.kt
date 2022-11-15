@@ -28,5 +28,5 @@ data class PadDTO(
     @Json(name = "url")
     val url: String,
     @Json(name = "wiki_url")
-    val wikiUrl: String
+    val wikiUrl: String?
 )
