@@ -18,21 +18,21 @@ fun LaunchImage(launch: Launch, modifier: Modifier = Modifier) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
     val painter = rememberAsyncImagePainter(
-            model = ImageRequest.Builder(context = context)
-                    .data(launch.imageUrl)
-                    .placeholder(R.drawable.placeholder_image)
-                    .error(R.drawable.broken_image)
-                    .crossfade(true)
-                    .build()
+        model = ImageRequest.Builder(context = context)
+            .data(launch.imageUrl)
+            .placeholder(R.drawable.placeholder_image)
+            .error(R.drawable.broken_image)
+            .crossfade(true)
+            .build()
 
     )
 
     Image(
-            painter = painter,
-            contentDescription = launch.name,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(3f / 2f)
+        painter = painter,
+        contentDescription = launch.name,
+        contentScale = ContentScale.Crop,
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(3f / 2f)
     )
 }

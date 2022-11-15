@@ -15,6 +15,7 @@ interface LaunchAPI {
     @GET("launch/previous")
     suspend fun getPreviousLaunches(
         @Query("limit") limit: Int = 10,
+        @Query("offset")
         offSet: Int = 0
     ): ApiResponseDTO
 
