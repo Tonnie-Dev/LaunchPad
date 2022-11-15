@@ -6,10 +6,18 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.util.LocalSpacing
+import com.uxstate.launchpad.R
 
 @Composable
-fun LaunchImage(launch:Launch) {
+fun LaunchImage(launch: Launch) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
-    val painter = rememberAsyncImagePainter(model = ImageRequest.Builder(context = context).data(launch.imageUrl).placeholder())
+    val painter = rememberAsyncImagePainter(
+            model = ImageRequest.Builder(context = context)
+                    .data(launch.imageUrl)
+                    .placeholder(R.drawable.placeholder_image)
+
+                    .crossfade(true)
+
+    )
 }
