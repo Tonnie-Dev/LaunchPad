@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LaunchPad</string>
+    <string name="launch_app_label">Launch App</string>
 </resources>
