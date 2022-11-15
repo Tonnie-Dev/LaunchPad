@@ -28,13 +28,13 @@ data class LaunchDTO(
     @Json(name = "location_launch_attempt_count_year")
     val locationLaunchAttemptCountYear: Int,
     @Json(name = "mission")
-    val mission: MissionDTO,
+    val mission: MissionDTO?,
     @Json(name = "name")
     val name: String,
     @Json(name = "net")
     val net: String,
     @Json(name = "orbital_launch_attempt_count")
-    val orbitalLaunchAttemptCount: Int,
+    val orbitalLaunchAttemptCount: Int?,
     @Json(name = "orbital_launch_attempt_count_year")
     val orbitalLaunchAttemptCountYear: Int,
     @Json(name = "pad")

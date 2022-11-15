@@ -18,9 +18,9 @@ fun LaunchDTO.toEntity(): LaunchEntity {
         status = this.statusDTO.abbrev,
         startWindowDate = this.windowStart,
         mission = Mission(
-            name = this.mission.name,
-            description = this.mission.description,
-            type = this.mission.type
+            name = this.mission?.name ?: "Not Found",
+            description = this.mission?.description ?: "",
+            type = this.mission?.type ?: ""
         ),
         provider = Provider(
             id = this.launchServiceProviderDTO.id,
