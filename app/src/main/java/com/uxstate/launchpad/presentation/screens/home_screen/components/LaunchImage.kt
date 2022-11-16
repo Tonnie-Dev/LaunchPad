@@ -23,6 +23,7 @@ import com.uxstate.launchpad.util.LocalSpacing
 fun LaunchImage(launch: Launch, modifier: Modifier = Modifier) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
+
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(context = context)
             .data(launch.imageUrl)

@@ -33,16 +33,24 @@ class LaunchRemoteMediator @Inject constructor(
             // Determine which page to load depending on the supplied LoadType
             val loadKey = when (loadType) {
 
-                LoadType.REFRESH -> Constants.OFFSET_STARTING_INDEX
-                LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
+                LoadType.REFRESH -> {
+                    Timber.i("Hitting Refresh loadkey should be 0")
+                    Constants.OFFSET_STARTING_INDEX
+                }
+                LoadType.PREPEND -> {
+                    Timber.i("PrePend!!")
+                    return MediatorResult.Success(endOfPaginationReached = true)
+                }
                 LoadType.APPEND -> {
 
                     val lastItem = state.lastItemOrNull()
 
                     if (lastItem == null) {
 
+                        Timber.i("Hit Append - End Reached!")
                         return MediatorResult.Success(endOfPaginationReached = true)
                     }
+                    Timber.i("Hitting Append with ${lastItem.id}")
                     lastItem.id
                 }
             }
@@ -50,16 +58,21 @@ class LaunchRemoteMediator @Inject constructor(
             Timber.i("loadKey is: $loadKey")
             val response = api.getPreviousLaunches(offSet = loadKey)
 
-            db.withTransaction {
+            if (response.launchDTOS.isNotEmpty()) {
+                db.withTransaction {
 
-                if (loadType == LoadType.REFRESH) {
+                    if (loadType == LoadType.REFRESH) {
 
-                    launchDao.clearLaunches()
+                        launchDao.clearLaunches()
+                        Timber.i("REFRESH - Data cleared")
+                    }
+
+                    Timber.i("NOT REFRESH - Data Inserted")
+                    launchDao.insertLaunches(response.launchDTOS.map { it.toEntity() })
                 }
-                launchDao.insertLaunches(response.launchDTOS.map { it.toEntity() })
-
-                MediatorResult.Success(endOfPaginationReached = response.launchDTOS.isEmpty())
             }
+
+            MediatorResult.Success(endOfPaginationReached = response.next == null)
         } catch (e: IOException) {
             Timber.i("IO Error in RemoteMediator: $e")
             e.printStackTrace()
@@ -76,6 +89,8 @@ class LaunchRemoteMediator @Inject constructor(
     }
 
     override suspend fun initialize(): InitializeAction {
+
+        Timber.i("Initialize Call Detected")
         return InitializeAction.LAUNCH_INITIAL_REFRESH
     }
 }
