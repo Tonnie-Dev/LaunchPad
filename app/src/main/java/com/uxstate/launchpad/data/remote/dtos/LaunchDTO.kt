@@ -16,7 +16,7 @@ data class LaunchDTO(
     @Json(name = "id")
     val id: String,
     @Json(name = "image")
-    val image: String,
+    val image: String?,
     @Json(name = "infographic")
     val infographic: Any?,
     @Json(name = "last_updated")

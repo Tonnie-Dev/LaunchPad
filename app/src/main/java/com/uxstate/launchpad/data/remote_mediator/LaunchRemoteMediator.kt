@@ -76,6 +76,6 @@ class LaunchRemoteMediator @Inject constructor(
     }
 
     override suspend fun initialize(): InitializeAction {
-        return InitializeAction.SKIP_INITIAL_REFRESH
+        return InitializeAction.LAUNCH_INITIAL_REFRESH
     }
 }

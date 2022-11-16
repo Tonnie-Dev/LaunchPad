@@ -12,9 +12,9 @@ import com.uxstate.launchpad.domain.model.Rocket
 fun LaunchDTO.toEntity(): LaunchEntity {
 
     return LaunchEntity(
-        
+
         name = this.name,
-        imageUrl = this.image,
+        imageUrl = this.image ?: "",
         status = this.statusDTO.abbrev,
         startWindowDate = this.windowStart,
         mission = Mission(
