@@ -9,6 +9,7 @@ import com.uxstate.launchpad.data.local.LaunchDatabase
 import com.uxstate.launchpad.data.mapper.toEntity
 import com.uxstate.launchpad.data.remote.LaunchAPI
 import com.uxstate.launchpad.domain.model.Launch
+import com.uxstate.launchpad.util.Constants
 import java.io.IOException
 import javax.inject.Inject
 import retrofit2.HttpException
@@ -32,7 +33,7 @@ class LaunchRemoteMediator @Inject constructor(
             // Determine which page to load depending on the supplied LoadType
             val loadKey = when (loadType) {
 
-                LoadType.REFRESH -> 0
+                LoadType.REFRESH -> Constants.OFFSET_STARTING_INDEX
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
 
@@ -75,6 +76,6 @@ class LaunchRemoteMediator @Inject constructor(
     }
 
     override suspend fun initialize(): InitializeAction {
-        return InitializeAction.LAUNCH_INITIAL_REFRESH
+        return InitializeAction.SKIP_INITIAL_REFRESH
     }
 }

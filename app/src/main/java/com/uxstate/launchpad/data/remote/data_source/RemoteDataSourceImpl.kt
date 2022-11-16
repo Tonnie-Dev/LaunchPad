@@ -10,7 +10,6 @@ import com.uxstate.launchpad.data.remote_mediator.LaunchRemoteMediator
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.paging_source.RemoteDataSource
 import com.uxstate.launchpad.util.Constants
-import com.uxstate.launchpad.util.Constants.INITIL_LOAD_SIZE
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
@@ -28,8 +27,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
         return Pager(
             config = PagingConfig(
-                pageSize = Constants.ITEMS_PER_PAGE_LIMIT,
-                initialLoadSize = INITIL_LOAD_SIZE
+                pageSize = Constants.ITEMS_PER_PAGE
             ),
             remoteMediator = LaunchRemoteMediator(db = db, api = api),
             pagingSourceFactory = pagingSourceFactory
