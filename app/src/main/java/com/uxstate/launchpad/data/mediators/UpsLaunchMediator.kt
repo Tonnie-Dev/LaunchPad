@@ -6,6 +6,7 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.uxstate.launchpad.data.local.LaunchDatabase
+import com.uxstate.launchpad.data.mapper.toUpsEntity
 import com.uxstate.launchpad.data.remote.LaunchAPI
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.util.Constants
@@ -16,21 +17,19 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class UpsLaunchMediator @Inject constructor(
-    private val db: LaunchDatabase,
-    private val api: LaunchAPI
+    private val db: LaunchDatabase, private val api: LaunchAPI
 ) : RemoteMediator<Int, Launch>() {
 
     private val dao = db.launchDao
 
     override suspend fun load(
-        loadType: LoadType,
-        state: PagingState<Int, Launch>
+        loadType: LoadType, state: PagingState<Int, Launch>
     ): MediatorResult {
 
         return try {
 
             Timber.i("load() called with state:  ${state.lastItemOrNull()}")
-            val loadKey = when(loadType){
+            val loadKey = when (loadType) {
 
                 LoadType.REFRESH -> {
 
@@ -57,37 +56,33 @@ class UpsLaunchMediator @Inject constructor(
                 }
 
 
-
             }
 
-            //Make API request
-
+            Timber.i("Load Key is $loadKey") //Make API request
             val response = api.getUpcomingLaunches(offSet = loadKey)
 
 
 
-                db.withTransaction {
+            db.withTransaction {
 
-                    if (loadType==LoadType.REFRESH){
-                        dao.clearUpcomingLaunches()
-                    }
-
-                    dao.insertUpcomingLaunches(response.launchDTOS.map { it. })
+                if (loadType == LoadType.REFRESH) {
+                    dao.clearUpcomingLaunches()
+                    Timber.i("Existing Data Wiped")
                 }
+                Timber.i("New Data in place")
+                dao.insertUpcomingLaunches(response.launchDTOS.map { it.toUpsEntity() })
+            }
 
-
+            MediatorResult.Success(endOfPaginationReached = response.next == null)
         } catch (e: HttpException) {
             e.printStackTrace()
             Timber.i("Http Error: $e")
             MediatorResult.Error(e)
-        }
-
-        catch (e: IOException) {
+        } catch (e: IOException) {
             e.printStackTrace()
             Timber.i("IO Error: $e")
             MediatorResult.Error(e)
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
 
             Timber.i("Other errors: $e")

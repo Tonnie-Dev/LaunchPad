@@ -9,9 +9,7 @@ import com.uxstate.launchpad.domain.model.Provider
 import com.uxstate.launchpad.domain.model.Rocket
 
 // LaunchDTO to entity
-
 fun LaunchDTO.toPrevEntity(): PrevsEntity {
-
     return PrevsEntity(
 
             name = this.name,
@@ -41,7 +39,6 @@ fun LaunchDTO.toPrevEntity(): PrevsEntity {
 }
 
 //LaunchDTO to entity
-
 fun LaunchDTO.toUpsEntity(): UpsEntity {
 
     return UpsEntity(
