@@ -1,4 +1,4 @@
 package com.uxstate.launchpad.data.mediators
 
-class UpcomingLaunchesMediator {
+class UpsLaunchMediator {
 }

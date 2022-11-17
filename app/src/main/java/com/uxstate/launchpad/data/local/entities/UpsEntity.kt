@@ -7,10 +7,10 @@ import com.uxstate.launchpad.domain.model.Pad
 import com.uxstate.launchpad.domain.model.Provider
 import com.uxstate.launchpad.domain.model.Rocket
 
-@Entity(tableName = "prevs_table")
-data class PrevsEntity(
+@Entity(tableName = "ups_table")
+data class UpsEntity(
     @PrimaryKey(autoGenerate = false)
-    val id: Int? = null,
+    val id: Int = 0,
     val name: String,
     val imageUrl: String,
     val status: String,

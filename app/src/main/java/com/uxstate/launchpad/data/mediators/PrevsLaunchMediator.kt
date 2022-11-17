@@ -16,7 +16,7 @@ import retrofit2.HttpException
 import timber.log.Timber
 
 @OptIn(ExperimentalPagingApi::class)
-class PrevLaunchesMediator @Inject constructor(
+class PrevsLaunchMediator @Inject constructor(
     private val db: LaunchDatabase,
     private val api: LaunchAPI
 ) : RemoteMediator<Int, Launch>() {
@@ -66,12 +66,12 @@ class PrevLaunchesMediator @Inject constructor(
 
                     if (loadType == LoadType.REFRESH) {
 
-                        launchDao.clearLaunches()
+                        launchDao.clearPreviousLaunches()
                         Timber.i("REFRESH - Data cleared")
                     }
 
                     Timber.i("NOT REFRESH - Data Inserted")
-                    launchDao.insertLaunches(response.launchDTOS.map { it.toEntity() })
+                    launchDao.insertPreviousLaunches(response.launchDTOS.map { it.toEntity() })
                 }
             }
 
