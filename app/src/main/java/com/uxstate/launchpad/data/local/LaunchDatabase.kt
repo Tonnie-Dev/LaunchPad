@@ -5,10 +5,10 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.uxstate.launchpad.data.local.converters.Converters
 import com.uxstate.launchpad.data.local.dao.LaunchDao
-import com.uxstate.launchpad.data.local.entities.LaunchEntity
+import com.uxstate.launchpad.data.local.entities.PrevsEntity
 
 @Database(
-    entities = [LaunchEntity::class],
+    entities = [PrevsEntity::class],
     version = 1,
     exportSchema = true
 )

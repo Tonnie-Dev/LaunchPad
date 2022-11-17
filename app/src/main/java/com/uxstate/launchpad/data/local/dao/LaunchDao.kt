@@ -5,14 +5,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.uxstate.launchpad.data.local.entities.LaunchEntity
+import com.uxstate.launchpad.data.local.entities.PrevsEntity
 import com.uxstate.launchpad.domain.model.Launch
 
 @Dao
 interface LaunchDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertLaunches(launches: List<LaunchEntity>)
+    suspend fun insertLaunches(launches: List<PrevsEntity>)
 
     @Query("SELECT * FROM launch_table")
     fun getLaunches(): PagingSource<Int, Launch>

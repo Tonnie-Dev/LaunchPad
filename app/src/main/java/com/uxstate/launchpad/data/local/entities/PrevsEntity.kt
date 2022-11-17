@@ -7,8 +7,8 @@ import com.uxstate.launchpad.domain.model.Pad
 import com.uxstate.launchpad.domain.model.Provider
 import com.uxstate.launchpad.domain.model.Rocket
 
-@Entity(tableName = "launch_table")
-data class LaunchEntity(
+@Entity(tableName = "prev_table")
+data class PrevsEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Int? = null,
     val name: String,

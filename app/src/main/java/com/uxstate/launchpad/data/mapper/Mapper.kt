@@ -1,6 +1,6 @@
 package com.uxstate.launchpad.data.mapper
 
-import com.uxstate.launchpad.data.local.entities.LaunchEntity
+import com.uxstate.launchpad.data.local.entities.PrevsEntity
 import com.uxstate.launchpad.data.remote.dtos.LaunchDTO
 import com.uxstate.launchpad.domain.model.Mission
 import com.uxstate.launchpad.domain.model.Pad
@@ -9,9 +9,9 @@ import com.uxstate.launchpad.domain.model.Rocket
 
 // LaunchDTO to entity
 
-fun LaunchDTO.toEntity(): LaunchEntity {
+fun LaunchDTO.toEntity(): PrevsEntity {
 
-    return LaunchEntity(
+    return PrevsEntity(
 
         name = this.name,
         imageUrl = this.image ?: "",
