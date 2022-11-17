@@ -6,7 +6,7 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.uxstate.launchpad.data.local.LaunchDatabase
-import com.uxstate.launchpad.data.mapper.toEntity
+import com.uxstate.launchpad.data.mapper.toPrevEntity
 import com.uxstate.launchpad.data.remote.LaunchAPI
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.util.Constants
@@ -71,7 +71,7 @@ class PrevsLaunchMediator @Inject constructor(
                     }
 
                     Timber.i("NOT REFRESH - Data Inserted")
-                    launchDao.insertPreviousLaunches(response.launchDTOS.map { it.toEntity() })
+                    launchDao.insertPreviousLaunches(response.launchDTOS.map { it.toPrevEntity() })
                 }
             }
 
