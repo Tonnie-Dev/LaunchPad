@@ -9,7 +9,7 @@ import com.uxstate.launchpad.data.local.entities.PrevsEntity
 import com.uxstate.launchpad.data.local.entities.UpsEntity
 
 @Database(
-    entities = [PrevsEntity::class,UpsEntity::class],
+    entities = [PrevsEntity::class, UpsEntity::class],
     version = 1,
     exportSchema = true
 )

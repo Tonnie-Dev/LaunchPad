@@ -1,6 +1,5 @@
 package com.uxstate.launchpad.data.local.dao
 
-import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
@@ -13,7 +12,7 @@ import com.uxstate.launchpad.domain.model.Launch
 @Dao
 interface LaunchDao {
 
-    //PREVIOUS LAUNCHES
+    // PREVIOUS LAUNCHES
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPreviousLaunches(launches: List<PrevsEntity>)
 
@@ -23,13 +22,13 @@ interface LaunchDao {
     @Query("DELETE FROM prevs_table")
     suspend fun clearPreviousLaunches()
 
-    //UPS_LAUNCHES
+    // UPS_LAUNCHES
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUpcomingLaunches(launches: List<UpsEntity>)
 
     @Query("SELECT * FROM ups_table")
-    fun getUpcomingLaunches():PagingSource<Int,Launch>
+    fun getUpcomingLaunches(): PagingSource<Int, Launch>
 
     @Query("DELETE FROM ups_table")
     suspend fun clearUpcomingLaunches()

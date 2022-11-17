@@ -12,58 +12,58 @@ import com.uxstate.launchpad.domain.model.Rocket
 fun LaunchDTO.toPrevEntity(): PrevsEntity {
     return PrevsEntity(
 
-            name = this.name,
-            imageUrl = this.image ?: "",
-            status = this.statusDTO.abbrev,
-            startWindowDate = this.windowStart,
-            mission = Mission(
-                    name = this.mission?.name ?: "Not Found",
-                    description = this.mission?.description ?: "",
-                    type = this.mission?.type ?: ""
-            ),
-            provider = Provider(
-                    id = this.launchServiceProviderDTO.id,
-                    name = this.launchServiceProviderDTO.name,
-                    type = this.launchServiceProviderDTO.type
-            ),
-            pad = Pad(
-                    locationName = this.padDTO.location.name,
-                    latitude = this.padDTO.latitude,
-                    longitude = this.padDTO.longitude
-            ),
-            rocket = Rocket(
-                    name = this.rocketDTO.configuration.name,
-                    family = this.rocketDTO.configuration.family
-            )
+        name = this.name,
+        imageUrl = this.image ?: "",
+        status = this.statusDTO.abbrev,
+        startWindowDate = this.windowStart,
+        mission = Mission(
+            name = this.mission?.name ?: "Not Found",
+            description = this.mission?.description ?: "",
+            type = this.mission?.type ?: ""
+        ),
+        provider = Provider(
+            id = this.launchServiceProviderDTO.id,
+            name = this.launchServiceProviderDTO.name,
+            type = this.launchServiceProviderDTO.type ?: "Not Found"
+        ),
+        pad = Pad(
+            locationName = this.padDTO.location.name,
+            latitude = this.padDTO.latitude,
+            longitude = this.padDTO.longitude
+        ),
+        rocket = Rocket(
+            name = this.rocketDTO.configuration.name,
+            family = this.rocketDTO.configuration.family
+        )
     )
 }
 
-//LaunchDTO to entity
+// LaunchDTO to entity
 fun LaunchDTO.toUpsEntity(): UpsEntity {
 
     return UpsEntity(
-            name = this.name,
-            imageUrl = this.image ?: "",
-            status = this.statusDTO.abbrev,
-            startWindowDate = this.windowStart,
-            mission = Mission(
-                    name = this.mission?.name ?: "Not Found",
-                    description = this.mission?.description ?: "",
-                    type = this.mission?.type ?: ""
-            ),
-            provider = Provider(
-                    id = this.launchServiceProviderDTO.id,
-                    name = this.launchServiceProviderDTO.name,
-                    type = this.launchServiceProviderDTO.type
-            ),
-            pad = Pad(
-                    locationName = this.padDTO.location.name,
-                    latitude = this.padDTO.latitude,
-                    longitude = this.padDTO.longitude
-            ),
-            rocket = Rocket(
-                    name = this.rocketDTO.configuration.name,
-                    family = this.rocketDTO.configuration.family
-            )
+        name = this.name,
+        imageUrl = this.image ?: "",
+        status = this.statusDTO.abbrev,
+        startWindowDate = this.windowStart,
+        mission = Mission(
+            name = this.mission?.name ?: "Not Found",
+            description = this.mission?.description ?: "",
+            type = this.mission?.type ?: ""
+        ),
+        provider = Provider(
+            id = this.launchServiceProviderDTO.id,
+            name = this.launchServiceProviderDTO.name,
+            type = this.launchServiceProviderDTO.type ?: "Not Found"
+        ),
+        pad = Pad(
+            locationName = this.padDTO.location.name,
+            latitude = this.padDTO.latitude,
+            longitude = this.padDTO.longitude
+        ),
+        rocket = Rocket(
+            name = this.rocketDTO.configuration.name,
+            family = this.rocketDTO.configuration.family
+        )
     )
 }

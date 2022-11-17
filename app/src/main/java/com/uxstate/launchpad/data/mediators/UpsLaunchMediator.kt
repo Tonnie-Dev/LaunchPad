@@ -10,20 +10,22 @@ import com.uxstate.launchpad.data.mapper.toUpsEntity
 import com.uxstate.launchpad.data.remote.LaunchAPI
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.util.Constants
-import retrofit2.HttpException
-import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
+import retrofit2.HttpException
+import timber.log.Timber
 
 @OptIn(ExperimentalPagingApi::class)
 class UpsLaunchMediator @Inject constructor(
-    private val db: LaunchDatabase, private val api: LaunchAPI
+    private val db: LaunchDatabase,
+    private val api: LaunchAPI
 ) : RemoteMediator<Int, Launch>() {
 
     private val dao = db.launchDao
 
     override suspend fun load(
-        loadType: LoadType, state: PagingState<Int, Launch>
+        loadType: LoadType,
+        state: PagingState<Int, Launch>
     ): MediatorResult {
 
         return try {
@@ -49,19 +51,14 @@ class UpsLaunchMediator @Inject constructor(
 
                         Timber.i("END REACHED!!")
                         return MediatorResult.Success(endOfPaginationReached = true)
-
                     }
                     Timber.i("Returned ${lastItem.id} as ke")
                     lastItem.id
                 }
-
-
             }
 
-            Timber.i("Load Key is $loadKey") //Make API request
+            Timber.i("Load Key is $loadKey") // Make API request
             val response = api.getUpcomingLaunches(offSet = loadKey)
-
-
 
             db.withTransaction {
 
@@ -88,7 +85,5 @@ class UpsLaunchMediator @Inject constructor(
             Timber.i("Other errors: $e")
             MediatorResult.Error(e)
         }
-
-
     }
 }

@@ -10,6 +10,5 @@ class HomeViewModel @Inject constructor(
     useCaseWrapper: UseCaseWrapper
 ) : ViewModel() {
     val previousLaunches = useCaseWrapper.getPreviousLaunchesUseCase()
-    init {
-    }
+    val upcomingLaunches = useCaseWrapper.getUpcomingLaunchesUseCase()
 }
