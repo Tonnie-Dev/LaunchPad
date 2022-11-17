@@ -15,6 +15,6 @@ class LaunchRepositoryImpl @Inject constructor(
 
     override fun getPreviousLaunches(): Flow<PagingData<Launch>> {
         Timber.i("Repo getPReviousLaunches Called")
-        return dataSource.getLaunches()
+        return dataSource.getPreviousLaunches()
     }
 }

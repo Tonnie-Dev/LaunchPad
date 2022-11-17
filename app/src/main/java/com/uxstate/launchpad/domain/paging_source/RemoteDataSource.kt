@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface RemoteDataSource {
 
-    fun getLaunches(): Flow<PagingData<Launch>>
+    fun getPreviousLaunches(): Flow<PagingData<Launch>>
+    fun getUpcomingLaunches():Flow<PagingData<Launch>>
 
 }
