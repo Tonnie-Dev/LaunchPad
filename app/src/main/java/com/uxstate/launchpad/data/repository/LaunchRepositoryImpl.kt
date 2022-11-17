@@ -6,6 +6,7 @@ import com.uxstate.launchpad.domain.paging_source.RemoteDataSource
 import com.uxstate.launchpad.domain.repository.LaunchRepository
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
+import timber.log.Timber
 
 class LaunchRepositoryImpl @Inject constructor(
     private val dataSource:
@@ -13,7 +14,7 @@ class LaunchRepositoryImpl @Inject constructor(
 ) : LaunchRepository {
 
     override fun getPreviousLaunches(): Flow<PagingData<Launch>> {
-
+        Timber.i("Repo getPReviousLaunches Called")
         return dataSource.getLaunches()
     }
 }

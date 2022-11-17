@@ -27,7 +27,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
         return Pager(
             config = PagingConfig(
-                pageSize = Constants.ITEMS_PER_PAGE
+                pageSize = Constants.PAGE_SIZE
             ),
             remoteMediator = LaunchRemoteMediator(db = db, api = api),
             pagingSourceFactory = pagingSourceFactory

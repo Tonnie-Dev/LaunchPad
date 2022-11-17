@@ -20,13 +20,14 @@ class LaunchRemoteMediator @Inject constructor(
     private val db: LaunchDatabase,
     private val api: LaunchAPI
 ) : RemoteMediator<Int, Launch>() {
+
+    // obtain daos
+    private val launchDao = db.launchDao
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, Launch>
     ): MediatorResult {
         Timber.i("Inside load() of the Remote Mediator")
-        // obtain daos
-        val launchDao = db.launchDao
 
         return try {
 
@@ -41,10 +42,11 @@ class LaunchRemoteMediator @Inject constructor(
                     Timber.i("PrePend!!")
                     return MediatorResult.Success(endOfPaginationReached = true)
                 }
+
                 LoadType.APPEND -> {
 
                     val lastItem = state.lastItemOrNull()
-
+                    Timber.i("Hitting Append with ${lastItem?.id ?: "NULL"}")
                     if (lastItem == null) {
 
                         Timber.i("Hit Append - End Reached!")
@@ -58,6 +60,7 @@ class LaunchRemoteMediator @Inject constructor(
             Timber.i("loadKey is: $loadKey")
             val response = api.getPreviousLaunches(offSet = loadKey)
 
+            Timber.i("The size is: ${response.launchDTOS.size}")
             if (response.launchDTOS.isNotEmpty()) {
                 db.withTransaction {
 
@@ -88,9 +91,9 @@ class LaunchRemoteMediator @Inject constructor(
         }
     }
 
-    override suspend fun initialize(): InitializeAction {
+ /*   override suspend fun initialize(): InitializeAction {
 
         Timber.i("Initialize Call Detected")
         return InitializeAction.LAUNCH_INITIAL_REFRESH
-    }
+    }*/
 }
