@@ -1,4 +1,4 @@
-package com.uxstate.launchpad.data.remote_mediator
+package com.uxstate.launchpad.data.mediators
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
@@ -38,10 +38,6 @@ class LaunchRemoteMediator @Inject constructor(
                     Timber.i("Hitting Refresh loadkey should be 0")
                     Constants.OFFSET_STARTING_INDEX
                 }
-                LoadType.PREPEND -> {
-                    Timber.i("PrePend!!")
-                    return MediatorResult.Success(endOfPaginationReached = true)
-                }
 
                 LoadType.APPEND -> {
 
@@ -54,6 +50,10 @@ class LaunchRemoteMediator @Inject constructor(
                     }
                     Timber.i("Hitting Append with ${lastItem.id}")
                     lastItem.id
+                }
+                LoadType.PREPEND -> {
+                    Timber.i("PrePend!!")
+                    return MediatorResult.Success(endOfPaginationReached = true)
                 }
             }
 
