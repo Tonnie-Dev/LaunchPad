@@ -14,6 +14,7 @@ import com.uxstate.launchpad.util.Constants
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+@OptIn(ExperimentalPagingApi::class)
 class RemoteDataSourceImpl @Inject constructor(
     private val api: LaunchAPI,
     private val db: LaunchDatabase
@@ -21,7 +22,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     private val dao = db.launchDao
 
-    @OptIn(ExperimentalPagingApi::class)
+
     override fun getPreviousLaunches(): Flow<PagingData<Launch>> {
 
         val pagingSourceFactory = { dao.getPreviousLaunches() }
@@ -35,11 +36,11 @@ class RemoteDataSourceImpl @Inject constructor(
         ).flow
     }
 
-    @OptIn(ExperimentalPagingApi::class)
-    override fun getUpcomingLaunches(): Flow<PagingData<Launch>> {
 
+    override fun getUpcomingLaunches(): Flow<PagingData<Launch>> {
         val pagingSourceFactory = { dao.getUpcomingLaunches() }
-        val pager = Pager(
+
+        return Pager(
                 config = PagingConfig(pageSize = Constants.PAGE_SIZE),
                 pagingSourceFactory = pagingSourceFactory,
                 remoteMediator = UpsLaunchMediator(db = db, api = api)
