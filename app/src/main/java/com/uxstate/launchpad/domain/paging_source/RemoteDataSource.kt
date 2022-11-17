@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface RemoteDataSource {
 
     fun getLaunches(): Flow<PagingData<Launch>>
+
 }
