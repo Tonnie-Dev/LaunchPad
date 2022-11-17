@@ -16,7 +16,7 @@ import retrofit2.HttpException
 import timber.log.Timber
 
 @OptIn(ExperimentalPagingApi::class)
-class LaunchRemoteMediator @Inject constructor(
+class PrevLaunchesMediator @Inject constructor(
     private val db: LaunchDatabase,
     private val api: LaunchAPI
 ) : RemoteMediator<Int, Launch>() {

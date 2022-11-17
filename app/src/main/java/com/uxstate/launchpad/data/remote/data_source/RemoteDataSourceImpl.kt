@@ -6,7 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.uxstate.launchpad.data.local.LaunchDatabase
 import com.uxstate.launchpad.data.remote.LaunchAPI
-import com.uxstate.launchpad.data.mediators.LaunchRemoteMediator
+import com.uxstate.launchpad.data.mediators.PrevLaunchesMediator
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.paging_source.RemoteDataSource
 import com.uxstate.launchpad.util.Constants
@@ -29,7 +29,7 @@ class RemoteDataSourceImpl @Inject constructor(
             config = PagingConfig(
                 pageSize = Constants.PAGE_SIZE
             ),
-            remoteMediator = LaunchRemoteMediator(db = db, api = api),
+            remoteMediator = PrevLaunchesMediator(db = db, api = api),
             pagingSourceFactory = pagingSourceFactory
         ).flow
     }
