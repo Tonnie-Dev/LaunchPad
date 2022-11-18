@@ -18,7 +18,7 @@ data class PadDTO(
     @Json(name = "map_image")
     val mapImage: String,
     @Json(name = "map_url")
-    val mapUrl: String,
+    val mapUrl: String?,
     @Json(name = "name")
     val name: String,
     @Json(name = "orbital_launch_attempt_count")

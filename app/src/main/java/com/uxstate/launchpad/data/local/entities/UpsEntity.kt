@@ -9,7 +9,7 @@ import com.uxstate.launchpad.domain.model.Rocket
 
 @Entity(tableName = "ups_table")
 data class UpsEntity(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
     val name: String,
     val imageUrl: String,

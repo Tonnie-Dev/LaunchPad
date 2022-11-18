@@ -31,7 +31,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
 
         LazyColumn {
 
-            items(items = previousLaunches) { launch ->
+            items(items = upcomingLaunches) { launch ->
 
                 launch?.let {
 
