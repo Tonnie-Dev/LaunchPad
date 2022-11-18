@@ -11,7 +11,7 @@ interface LaunchAPI {
     @GET("launch/upcoming")
     suspend fun getUpcomingLaunches(
         @Query("limit") limit: Int = DEFAULT_API_ITEMS_LIMIT,
-        @Query("offset") offSet: Int = DEFAULT_API_ITEMS_LIMIT
+        @Query("offset") offSet: Int = OFFSET_STARTING_INDEX
     ): ApiResponseDTO
 
     @GET("launch/previous")

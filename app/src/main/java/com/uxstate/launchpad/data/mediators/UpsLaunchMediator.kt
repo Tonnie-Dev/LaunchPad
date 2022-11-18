@@ -21,16 +21,15 @@ class UpsLaunchMediator @Inject constructor(
     private val api: LaunchAPI
 ) : RemoteMediator<Int, Launch>() {
 
-    private val dao = db.launchDao
+    private val dao = db.dao
 
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, Launch>
     ): MediatorResult {
-
+        Timber.i("load() called with state:  ${state.lastItemOrNull()}")
         return try {
 
-            Timber.i("load() called with state:  ${state.lastItemOrNull()}")
             val loadKey = when (loadType) {
 
                 LoadType.REFRESH -> {
@@ -52,22 +51,26 @@ class UpsLaunchMediator @Inject constructor(
                         Timber.i("END REACHED!!")
                         return MediatorResult.Success(endOfPaginationReached = true)
                     }
-                    Timber.i("Returned ${lastItem.id} as ke")
+                    Timber.i("Returned ${lastItem.id} as key")
                     lastItem.id
                 }
             }
 
             Timber.i("Load Key is $loadKey") // Make API request
             val response = api.getUpcomingLaunches(offSet = loadKey)
+            Timber.i("The size of response is: ${response.launchDTOS.map { it.name }}")
 
-            db.withTransaction {
+            if (response.launchDTOS.isNotEmpty()) {
 
-                if (loadType == LoadType.REFRESH) {
-                    dao.clearUpcomingLaunches()
-                    Timber.i("Existing Data Wiped")
+                db.withTransaction {
+
+                    if (loadType == LoadType.REFRESH) {
+                        dao.clearUpcomingLaunches()
+                        Timber.i("Existing Data Wiped")
+                    }
+                    Timber.i("New Data in place")
+                    dao.insertUpcomingLaunches(response.launchDTOS.map { it.toUpsEntity() })
                 }
-                Timber.i("New Data in place")
-                dao.insertUpcomingLaunches(response.launchDTOS.map { it.toUpsEntity() })
             }
 
             MediatorResult.Success(endOfPaginationReached = response.next == null)
@@ -85,5 +88,9 @@ class UpsLaunchMediator @Inject constructor(
             Timber.i("Other errors: $e")
             MediatorResult.Error(e)
         }
+    }
+
+    override suspend fun initialize(): InitializeAction {
+        return InitializeAction.LAUNCH_INITIAL_REFRESH
     }
 }

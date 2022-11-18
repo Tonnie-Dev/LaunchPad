@@ -12,7 +12,7 @@ data class MissionDTO(
     @Json(name = "name")
     val name: String,
     @Json(name = "orbit")
-    val orbit: OrbitDTO,
+    val orbit: OrbitDTO?,
     @Json(name = "type")
     val type: String
 )

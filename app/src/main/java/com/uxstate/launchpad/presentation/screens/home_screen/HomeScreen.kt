@@ -19,7 +19,7 @@ import com.uxstate.launchpad.util.LocalSpacing
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
 
-    // val previousLaunches = viewModel.previousLaunches.collectAsLazyPagingItems()
+    val previousLaunches = viewModel.previousLaunches.collectAsLazyPagingItems()
     val upcomingLaunches = viewModel.upcomingLaunches.collectAsLazyPagingItems()
     val spacing = LocalSpacing.current
 
@@ -31,7 +31,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
 
         LazyColumn {
 
-            items(items = upcomingLaunches) { launch ->
+            items(items = previousLaunches) { launch ->
 
                 launch?.let {
 

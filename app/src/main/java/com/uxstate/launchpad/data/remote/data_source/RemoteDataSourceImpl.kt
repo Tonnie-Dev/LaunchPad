@@ -20,28 +20,28 @@ class RemoteDataSourceImpl @Inject constructor(
     private val db: LaunchDatabase
 ) : RemoteDataSource {
 
-    private val dao = db.launchDao
+    private val dao = db.dao
 
     override fun getPreviousLaunches(): Flow<PagingData<Launch>> {
 
         val pagingSourceFactory = { dao.getPreviousLaunches() }
 
         return Pager(
-            config = PagingConfig(
-                pageSize = Constants.PAGE_SIZE
-            ),
+            config = PagingConfig(pageSize = Constants.PAGE_SIZE),
             remoteMediator = PrevsLaunchMediator(db = db, api = api),
             pagingSourceFactory = pagingSourceFactory
         ).flow
     }
 
     override fun getUpcomingLaunches(): Flow<PagingData<Launch>> {
+
         val pagingSourceFactory = { dao.getUpcomingLaunches() }
 
         return Pager(
             config = PagingConfig(pageSize = Constants.PAGE_SIZE),
+            remoteMediator = UpsLaunchMediator(db = db, api = api),
             pagingSourceFactory = pagingSourceFactory,
-            remoteMediator = UpsLaunchMediator(db = db, api = api)
+
         ).flow
     }
 }
