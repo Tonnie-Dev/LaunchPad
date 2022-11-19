@@ -8,7 +8,7 @@ data class LaunchDTO(
     @Json(name = "agency_launch_attempt_count_year")
     val agencyLaunchAttemptCountYear: Int,
     @Json(name = "failreason")
-    val failreason: String,
+    val failreason: String?,
     @Json(name = "hashtag")
     val hashtag: Any?,
     @Json(name = "holdreason")
