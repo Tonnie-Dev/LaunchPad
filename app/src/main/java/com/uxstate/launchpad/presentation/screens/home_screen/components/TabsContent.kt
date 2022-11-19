@@ -7,8 +7,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
-import com.google.accompanist.pager.rememberPagerState
-import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -26,11 +24,11 @@ fun TabsContent(tabs: List<TabItem>, pagerState: PagerState) {
 @Composable
 fun TabsContentPreviewLight() {
 
-    val tabs = listOf(TabItem.Upcoming, TabItem.Previous)
+    /*val tabs = listOf(TabItem.Upcoming, TabItem.Previous)
     val pagerState = rememberPagerState()
     LaunchPadTheme() {
         TabsContent(tabs = tabs, pagerState = pagerState)
-    }
+    }*/
 }
 
 @OptIn(ExperimentalPagerApi::class)
@@ -38,9 +36,9 @@ fun TabsContentPreviewLight() {
 @Composable
 fun TabsContentPreviewDark() {
 
-    val tabs = listOf(TabItem.Upcoming, TabItem.Previous)
+   /* val tabs = listOf(TabItem.Upcoming, TabItem.Previous)
     val pagerState = rememberPagerState()
     LaunchPadTheme() {
         TabsContent(tabs = tabs, pagerState = pagerState)
-    }
+    }*/
 }

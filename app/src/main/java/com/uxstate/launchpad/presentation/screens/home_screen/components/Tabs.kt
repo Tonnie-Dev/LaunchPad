@@ -10,7 +10,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.pager.*
 import com.uxstate.launchpad.R
-import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
@@ -55,11 +54,12 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
 @Composable
 fun TabsPreviewLight() {
 
-    val tabs = listOf(TabItem.Previous, TabItem.Upcoming)
+  /*
+    val tabs = listOf(TabItem.Previous(data = null ), TabItem.Upcoming)
     val pagerState = rememberPagerState()
     LaunchPadTheme() {
         Tabs(tabs = tabs, pagerState = pagerState)
-    }
+    }*/
 }
 
 @OptIn(ExperimentalPagerApi::class)
@@ -67,9 +67,9 @@ fun TabsPreviewLight() {
 @Composable
 fun TabsPreviewDark() {
 
-    val tabs = listOf(TabItem.Previous, TabItem.Upcoming)
+  /*  val tabs = listOf(TabItem.Previous, TabItem.Upcoming)
     val pagerState = rememberPagerState()
     LaunchPadTheme() {
         Tabs(tabs = tabs, pagerState = pagerState)
-    }
+    }*/
 }

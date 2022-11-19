@@ -8,11 +8,11 @@ import androidx.paging.compose.items
 import com.uxstate.launchpad.domain.model.Launch
 
 @Composable
-fun LaunchList(data: LazyPagingItems<Launch>?, modifier: Modifier = Modifier) {
+fun LaunchList(data: LazyPagingItems<Launch>, modifier: Modifier = Modifier) {
 
     LazyColumn(modifier = modifier, content = {
 
-        items(data!!) { launch ->
+        items(data) { launch ->
 
             launch?.let {
 
