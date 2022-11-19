@@ -12,7 +12,7 @@ data class LaunchDTO(
     @Json(name = "hashtag")
     val hashtag: Any?,
     @Json(name = "holdreason")
-    val holdreason: String,
+    val holdreason: String?,
     @Json(name = "id")
     val id: String,
     @Json(name = "image")
