@@ -6,7 +6,6 @@ import com.uxstate.launchpad.R
 
 typealias ComposableFun = @Composable () -> Unit
 
-
 sealed class TabItem(
     @DrawableRes var icon: Int,
     var title: String,
@@ -14,14 +13,14 @@ sealed class TabItem(
 ) {
 
     object Upcoming : TabItem(
-            R.drawable.hourglass_svg,
-            "UPCOMING",
-            { LaunchList(data = null) }
+        R.drawable.hourglass_svg,
+        "UPCOMING",
+        { LaunchList(data = null) }
     )
 
     object Previous : TabItem(
-            R.drawable.rocket_svg,
-            "PREVIOUS",
-            { LaunchList(data = null) }
+        R.drawable.rocket_svg,
+        "PREVIOUS",
+        { LaunchList(data = null) }
     )
 }
