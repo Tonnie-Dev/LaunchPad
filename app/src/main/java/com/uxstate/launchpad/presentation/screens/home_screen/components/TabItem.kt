@@ -11,7 +11,7 @@ sealed class TabItem(
     var title: String,
     var screen: ComposableFun,
 
-    ) {
+) {
 
     object Upcoming : TabItem(
         R.drawable.hourglass_svg,
