@@ -25,6 +25,9 @@ interface LaunchDao {
     @Query("SELECT * FROM prevs_table WHERE id = (SELECT MAX(id)FROM prevs_table)")
     suspend fun selectLastPrevLaunch():PrevsEntity
 
+    @Query("SELECT COUNT(id) FROM prevs_table")
+    suspend fun countPrevs()
+
     // UPS_LAUNCHES
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -38,4 +41,7 @@ interface LaunchDao {
 
     @Query("SELECT * FROM ups_table WHERE id = (SELECT MAX(id) FROM ups_table) ")
     suspend fun selectLastUpLaunch(): UpsEntity?
+
+    @Query("SELECT COUNT(id) FROM ups_table")
+    suspend fun countUps()
 }
