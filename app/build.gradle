@@ -26,8 +26,8 @@ android {
         }
     }
 
-   /* Kotlin Block - makes sure that the KSP Plugin looks at
-    the right paths when it comes to generated classes*/
+    /* Kotlin Block - makes sure that the KSP Plugin looks at
+     the right paths when it comes to generated classes*/
 
     kotlin {
         sourceSets {
@@ -66,10 +66,10 @@ android {
 }
 //ktlintFormat task will need to run before preBuild
 tasks.getByPath("preBuild").dependsOn("ktlintFormat")
-ktlint{
+ktlint {
     android = true
     ignoreFailures = false
-    disabledRules = ["final-newline","no-wildcard-imports"]
+    disabledRules = ["final-newline", "no-wildcard-imports"]
     reporters {
         reporter "plain"
         reporter "checkstyle"
@@ -114,12 +114,12 @@ dependencies {
     // Room KTX with Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:2.4.3"
     kapt "androidx.room:room-compiler:2.4.3"
-    
+
     // room-paging artifact
     implementation 'androidx.room:room-paging:2.4.3'
+
     // Paging 3.0
     implementation 'androidx.paging:paging-compose:1.0.0-alpha17'
-
 
     //Lottie Animation
     implementation "com.airbnb.android:lottie-compose:5.0.1"
@@ -135,15 +135,16 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.1'
     implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
 
-    //Flow Layout
-    implementation 'com.google.accompanist:accompanist-flowlayout:0.24.9-beta'
-
-    //Timber Logging
-    implementation 'com.jakewharton.timber:timber:5.0.1'
+    // Accompanist
+    implementation "com.google.accompanist:accompanist-pager:0.25.0" // Pager
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.25.0" // Pager Indicators
 
     // Swipe to Refresh - Accompanist
     implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist_version"
 
     // System UI Controller - Accompanist
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
+    
+    //Timber Logging
+    implementation 'com.jakewharton.timber:timber:5.0.1'
 }
