@@ -11,7 +11,7 @@ import com.uxstate.launchpad.domain.model.Rocket
 data class UpsEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Int? = null,
-    val lastUpdated:Long =0L,
+    val timeStamp: Long = 0L,
     val name: String,
     val imageUrl: String,
     val status: String,
