@@ -12,7 +12,7 @@ import com.uxstate.launchpad.domain.model.Launch
 @Dao
 interface LaunchDao {
 
-    // PREVIOUS LAUNCHES
+    // PREVIOUS_LAUNCHES
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPreviousLaunches(launches: List<PrevsEntity>)
 
@@ -23,13 +23,12 @@ interface LaunchDao {
     suspend fun clearPreviousLaunches()
 
     @Query("SELECT * FROM prevs_table WHERE id = (SELECT MAX(id)FROM prevs_table)")
-    suspend fun selectLastPrevLaunch():PrevsEntity
+    suspend fun selectLastPrevLaunch():PrevsEntity?
 
     @Query("SELECT COUNT(id) FROM prevs_table")
     suspend fun countPrevs()
 
     // UPS_LAUNCHES
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUpcomingLaunches(launches: List<UpsEntity>)
 

@@ -47,15 +47,16 @@ class PrevsLaunchMediator @Inject constructor(
 
                 LoadType.APPEND -> {
 
+                    val lastPrevLaunch = dao.selectLastPrevLaunch()
                     val lastItem = state.lastItemOrNull()
                     Timber.i("Hitting Append with ${lastItem?.id ?: "NULL"}")
-                    if (lastItem == null) {
+                    if (lastPrevLaunch?.id == null) {
 
                         Timber.i("Hit Append - End Reached!")
                         return MediatorResult.Success(endOfPaginationReached = true)
                     }
-                    Timber.i("Hitting Append with ${lastItem.id}")
-                    lastItem.id
+                    Timber.i("Hitting Append with ${lastPrevLaunch.id}")
+                    lastPrevLaunch.id
                 }
             }
 
@@ -95,7 +96,7 @@ class PrevsLaunchMediator @Inject constructor(
 
     override suspend fun initialize(): InitializeAction {
 
-        Timber.i("Initialize Call Detected")
+       // val lastTimeStamp = dao.selectLastPrevLaunch().timeStamp
         return InitializeAction.LAUNCH_INITIAL_REFRESH
     }
 }
