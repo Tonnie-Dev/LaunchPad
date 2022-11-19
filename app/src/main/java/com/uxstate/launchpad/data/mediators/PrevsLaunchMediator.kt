@@ -10,10 +10,11 @@ import com.uxstate.launchpad.data.mapper.toPrevEntity
 import com.uxstate.launchpad.data.remote.LaunchAPI
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.util.Constants
-import java.io.IOException
-import javax.inject.Inject
+import com.uxstate.launchpad.util.Constants.CACHE_TIMEOUT
 import retrofit2.HttpException
 import timber.log.Timber
+import java.io.IOException
+import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class PrevsLaunchMediator @Inject constructor(
@@ -96,7 +97,22 @@ class PrevsLaunchMediator @Inject constructor(
 
     override suspend fun initialize(): InitializeAction {
 
-       // val lastTimeStamp = dao.selectLastPrevLaunch().timeStamp
-        return InitializeAction.LAUNCH_INITIAL_REFRESH
+        val timeNow = System.currentTimeMillis()
+        val lastUpdated = dao.selectFirstPrevLaunch()?.timeStamp ?: 0
+        val timeDifference = (timeNow - lastUpdated) / 1000 / 60
+
+        return if (timeDifference.toInt() >= CACHE_TIMEOUT) {
+
+            Timber.i("Initialize() - LAUNCH_INITIAL_REFRESH")
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+
+
+        } else {
+
+            Timber.i("Initialize() - SKIP_INITIAL_REFRESH")
+            InitializeAction.SKIP_INITIAL_REFRESH
+
+        }
+
     }
 }

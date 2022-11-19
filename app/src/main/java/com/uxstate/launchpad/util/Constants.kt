@@ -12,5 +12,5 @@ object Constants {
     const val DATABASE_NAME = "LaunchDatabase"
     const val READ_TIMEOUT = 15L
     const val CONNECT_TIMEOUT = 15L
-    const val CACHE_TIMEOUT = 1440
+    const val CACHE_TIMEOUT = 720
 }
