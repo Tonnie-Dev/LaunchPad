@@ -42,7 +42,7 @@ fun LaunchDTO.toPrevEntity(): PrevsEntity {
 fun LaunchDTO.toUpsEntity(): UpsEntity {
 
     return UpsEntity(
-        lastUpdated = System.currentTimeMillis(),
+        timeStamp = System.currentTimeMillis(),
         name = this.name,
         imageUrl = this.image ?: "",
         status = this.statusDTO.abbrev,

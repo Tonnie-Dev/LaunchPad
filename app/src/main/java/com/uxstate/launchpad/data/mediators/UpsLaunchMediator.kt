@@ -45,14 +45,15 @@ class UpsLaunchMediator @Inject constructor(
                 LoadType.APPEND -> {
                     Timber.i("Inside APPEND Block")
                     val lastItem = state.lastItemOrNull()
+                    val lastId = dao.selectLast()?.id
 
-                    if (lastItem == null) {
+                    if (lastId == null) {
 
                         Timber.i("END REACHED!!")
                         return MediatorResult.Success(endOfPaginationReached = true)
                     }
-                    Timber.i("Returned ${lastItem.id} as key")
-                    lastItem.id
+                    // Timber.i("Returned ${lastItem.id} as key")
+                    lastId
                 }
             }
 
