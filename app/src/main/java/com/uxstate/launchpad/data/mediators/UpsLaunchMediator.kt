@@ -10,10 +10,11 @@ import com.uxstate.launchpad.data.mapper.toUpsEntity
 import com.uxstate.launchpad.data.remote.LaunchAPI
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.util.Constants
-import java.io.IOException
-import javax.inject.Inject
+import com.uxstate.launchpad.util.Constants.CACHE_TIMEOUT
 import retrofit2.HttpException
 import timber.log.Timber
+import java.io.IOException
+import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class UpsLaunchMediator @Inject constructor(
@@ -92,6 +93,17 @@ class UpsLaunchMediator @Inject constructor(
     }
 
     override suspend fun initialize(): InitializeAction {
-        return InitializeAction.LAUNCH_INITIAL_REFRESH
+
+        val timeNow = System.currentTimeMillis()
+        val lastUpdate = dao.selectFirstPrevLaunch()?.timeStamp ?: 0L
+        val timeDifference = (timeNow - lastUpdate) / 1000 / 60
+
+        return if (timeDifference >= CACHE_TIMEOUT) {
+            Timber.i("Initialize() - LAUNCH_INITIAL_REFRESH")
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+        } else {
+            Timber.i("Initialize() - LAUNCH_INITIAL_REFRESH")
+            InitializeAction.SKIP_INITIAL_REFRESH
+        }
     }
 }

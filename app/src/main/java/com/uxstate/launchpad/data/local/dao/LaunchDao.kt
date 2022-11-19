@@ -23,10 +23,10 @@ interface LaunchDao {
     suspend fun clearPreviousLaunches()
 
     @Query("SELECT * FROM prevs_table WHERE id = (SELECT MAX(id)FROM prevs_table)")
-    suspend fun selectLastPrevLaunch():PrevsEntity?
+    suspend fun selectLastPrevLaunch(): PrevsEntity?
 
-    @Query("SELECT * FROM prevs_table WHERE timeStamp = (SELECT MIN(timeStamp) FROM prevs_table)")
-    fun selectFirstPrevLaunch():PrevsEntity?
+    @Query("SELECT * FROM prevs_table WHERE timeStamp= (SELECT MIN(timeStamp) FROM prevs_table)")
+    fun selectFirstPrevLaunch(): PrevsEntity?
 
     @Query("SELECT COUNT(id) FROM prevs_table")
     suspend fun countPrevs()
@@ -45,7 +45,7 @@ interface LaunchDao {
     suspend fun selectLastUpLaunch(): UpsEntity?
 
     @Query("SELECT * FROM ups_table WHERE timeStamp = (SELECT MIN(timeStamp) FROM ups_table)")
-    fun selectFirstUpLaunch():UpsEntity?
+    fun selectFirstUpLaunch(): UpsEntity?
 
     @Query("SELECT COUNT(id) FROM ups_table")
     suspend fun countUps()

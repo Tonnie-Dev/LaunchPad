@@ -1,9 +1,5 @@
 package com.uxstate.launchpad.util
 
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.util.concurrent.TimeUnit
-
 object Constants {
     const val OFFSET_STARTING_INDEX = 0
     const val PAGE_SIZE = 5
