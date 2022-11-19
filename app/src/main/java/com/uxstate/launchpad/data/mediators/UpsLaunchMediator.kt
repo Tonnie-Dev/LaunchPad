@@ -45,7 +45,7 @@ class UpsLaunchMediator @Inject constructor(
                 LoadType.APPEND -> {
                     Timber.i("Inside APPEND Block")
                     val lastItem = state.lastItemOrNull()
-                    val lastId = dao.selectLast()?.id
+                    val lastId = dao.selectLastUpLaunch()?.id
 
                     if (lastId == null) {
 

@@ -22,6 +22,9 @@ interface LaunchDao {
     @Query("DELETE FROM prevs_table")
     suspend fun clearPreviousLaunches()
 
+    @Query("SELECT * FROM prevs_table WHERE id = (SELECT MAX(id)FROM prevs_table)")
+    suspend fun selectLastPrevLaunch():PrevsEntity
+
     // UPS_LAUNCHES
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -34,5 +37,5 @@ interface LaunchDao {
     suspend fun clearUpcomingLaunches()
 
     @Query("SELECT * FROM ups_table WHERE id = (SELECT MAX(id) FROM ups_table) ")
-    suspend fun selectLast(): UpsEntity?
+    suspend fun selectLastUpLaunch(): UpsEntity?
 }
