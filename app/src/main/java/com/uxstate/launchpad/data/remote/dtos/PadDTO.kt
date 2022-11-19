@@ -10,11 +10,11 @@ data class PadDTO(
     @Json(name = "info_url")
     val infoUrl: Any?,
     @Json(name = "latitude")
-    val latitude: String,
+    val latitude: String?,
     @Json(name = "location")
     val location: LocationDTO,
     @Json(name = "longitude")
-    val longitude: String,
+    val longitude: String?,
     @Json(name = "map_image")
     val mapImage: String,
     @Json(name = "map_url")
