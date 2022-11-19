@@ -9,8 +9,9 @@ typealias ComposableFun = @Composable () -> Unit
 sealed class TabItem(
     @DrawableRes var icon: Int,
     var title: String,
-    var tab: ComposableFun
-) {
+    var screen: ComposableFun,
+
+    ) {
 
     object Upcoming : TabItem(
         R.drawable.hourglass_svg,
