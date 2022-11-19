@@ -32,4 +32,7 @@ interface LaunchDao {
 
     @Query("DELETE FROM ups_table")
     suspend fun clearUpcomingLaunches()
+
+    @Query("SELECT * FROM ups_table WHERE stringId=:stringId")
+    suspend fun getIdFromStringId(stringId: String): UpsEntity
 }

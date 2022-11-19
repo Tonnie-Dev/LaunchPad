@@ -42,6 +42,7 @@ fun LaunchDTO.toPrevEntity(): PrevsEntity {
 fun LaunchDTO.toUpsEntity(): UpsEntity {
 
     return UpsEntity(
+        stringId = this.id,
         name = this.name,
         imageUrl = this.image ?: "",
         status = this.statusDTO.abbrev,
