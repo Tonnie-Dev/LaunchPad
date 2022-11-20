@@ -30,12 +30,12 @@ class Converters {
     fun readMissionFromRoom(roomString: String): Mission {
 
         val roomStringList = roomString.split("~")
-                .map { it }
+            .map { it }
 
         return Mission(
-                name = roomStringList[0],
-                description = roomStringList[1],
-                type = roomStringList[2]
+            name = roomStringList[0],
+            description = roomStringList[1],
+            type = roomStringList[2]
         )
     }
 
@@ -53,11 +53,11 @@ class Converters {
     fun readProviderFromRoom(roomString: String): Provider {
 
         val providerList = roomString.split("~")
-                .map { it }
+            .map { it }
         return Provider(
-                id = providerList[0].toInt(),
-                name = providerList[1],
-                type = providerList[2]
+            id = providerList[0].toInt(),
+            name = providerList[1],
+            type = providerList[2]
         )
     }
 
@@ -78,9 +78,9 @@ class Converters {
 
         val padStringList = roomString.split("~")
         return Pad(
-                locationName = padStringList[0],
-                latitude = padStringList[1],
-                longitude = padStringList[2]
+            locationName = padStringList[0],
+            latitude = padStringList[1],
+            longitude = padStringList[2]
         )
     }
 
@@ -99,14 +99,13 @@ class Converters {
     fun readRocketFromRoom(roomString: String): Rocket {
 
         val rocketPropertiesListString = roomString.split("~")
-                .map { it }
+            .map { it }
 
         return Rocket(
-                name = rocketPropertiesListString[0],
-                family = rocketPropertiesListString[1]
+            name = rocketPropertiesListString[0],
+            family = rocketPropertiesListString[1]
         )
     }
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     @TypeConverter
@@ -117,4 +116,3 @@ class Converters {
         return LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
     }
 }
-
