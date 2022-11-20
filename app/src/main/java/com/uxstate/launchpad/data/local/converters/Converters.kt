@@ -103,12 +103,20 @@ class Converters {
         )
     }
 
-
     @RequiresApi(Build.VERSION_CODES.O)
     @TypeConverter
-    fun writeDateToRoom(date:LocalDateTime):String{
+    fun writeDateToRoom(date: LocalDateTime): String {
         val pattern = "dd-MM-yyyy HH:mm aa"
         val dateFormatter = DateTimeFormatter.ofPattern(pattern)
         return date.format(dateFormatter)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @TypeConverter
+    fun readStringDateFromRoom(date: String): LocalDateTime {
+
+        val pattern = "dd-MM-yyyy HH:mm aa"
+        val dateFormatter = DateTimeFormatter.ofPattern(pattern)
+        return LocalDateTime.parse(date, dateFormatter)
     }
 }
