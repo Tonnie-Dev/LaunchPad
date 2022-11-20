@@ -12,7 +12,7 @@ import com.uxstate.launchpad.domain.model.Rocket
 fun LaunchDTO.toPrevEntity(): PrevsEntity {
     return PrevsEntity(
         timeStamp = System.currentTimeMillis(),
-        name = this.name,
+        name = this.name.substringBefore('|'),
         imageUrl = this.image ?: "",
         status = this.statusDTO.abbrev,
         startWindowDate = this.windowStart,
@@ -43,7 +43,7 @@ fun LaunchDTO.toUpsEntity(): UpsEntity {
 
     return UpsEntity(
         timeStamp = System.currentTimeMillis(),
-        name = this.name,
+        name = this.name.substringBefore('|'),
         imageUrl = this.image ?: "",
         status = this.statusDTO.abbrev,
         startWindowDate = this.windowStart,
