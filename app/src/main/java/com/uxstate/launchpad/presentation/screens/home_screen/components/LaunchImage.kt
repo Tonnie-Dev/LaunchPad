@@ -107,7 +107,7 @@ fun LaunchImage(launch: Launch, modifier: Modifier = Modifier) {
 @RequiresApi(Build.VERSION_CODES.O)
 fun parseLocalDateToString(date: LocalDateTime): String {
 
-    val pattern = "dd-MM-yyyy HH:mm aa"
+    val pattern = "dd-MM-yyyy hh:mm"
     val dateFormatter = DateTimeFormatter.ofPattern(pattern)
     return date.format(dateFormatter)
 }

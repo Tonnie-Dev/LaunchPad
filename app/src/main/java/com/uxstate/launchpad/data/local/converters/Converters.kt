@@ -7,8 +7,12 @@ import com.uxstate.launchpad.domain.model.Mission
 import com.uxstate.launchpad.domain.model.Pad
 import com.uxstate.launchpad.domain.model.Provider
 import com.uxstate.launchpad.domain.model.Rocket
+import java.time.Instant
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
+import java.time.temporal.TemporalAccessor
+import java.util.*
 
 class Converters {
     @TypeConverter
@@ -26,12 +30,12 @@ class Converters {
     fun readMissionFromRoom(roomString: String): Mission {
 
         val roomStringList = roomString.split("~")
-            .map { it }
+                .map { it }
 
         return Mission(
-            name = roomStringList[0],
-            description = roomStringList[1],
-            type = roomStringList[2]
+                name = roomStringList[0],
+                description = roomStringList[1],
+                type = roomStringList[2]
         )
     }
 
@@ -49,11 +53,11 @@ class Converters {
     fun readProviderFromRoom(roomString: String): Provider {
 
         val providerList = roomString.split("~")
-            .map { it }
+                .map { it }
         return Provider(
-            id = providerList[0].toInt(),
-            name = providerList[1],
-            type = providerList[2]
+                id = providerList[0].toInt(),
+                name = providerList[1],
+                type = providerList[2]
         )
     }
 
@@ -74,9 +78,9 @@ class Converters {
 
         val padStringList = roomString.split("~")
         return Pad(
-            locationName = padStringList[0],
-            latitude = padStringList[1],
-            longitude = padStringList[2]
+                locationName = padStringList[0],
+                latitude = padStringList[1],
+                longitude = padStringList[2]
         )
     }
 
@@ -95,28 +99,22 @@ class Converters {
     fun readRocketFromRoom(roomString: String): Rocket {
 
         val rocketPropertiesListString = roomString.split("~")
-            .map { it }
+                .map { it }
 
         return Rocket(
-            name = rocketPropertiesListString[0],
-            family = rocketPropertiesListString[1]
+                name = rocketPropertiesListString[0],
+                family = rocketPropertiesListString[1]
         )
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    @TypeConverter
-    fun writeDateToRoom(date: LocalDateTime): String {
-        val pattern = "dd-MM-yyyy HH:mm aa"
-        val dateFormatter = DateTimeFormatter.ofPattern(pattern)
-        return date.format(dateFormatter)
-    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     @TypeConverter
     fun readStringDateFromRoom(date: String): LocalDateTime {
 
-        val pattern = "dd-MM-yyyy HH:mm aa"
-        val dateFormatter = DateTimeFormatter.ofPattern(pattern)
-        return LocalDateTime.parse(date, dateFormatter)
+        val temporalAccessor: TemporalAccessor = DateTimeFormatter.ISO_INSTANT.parse(date)
+        val instant: Instant = Instant.from(temporalAccessor)
+        return LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
     }
 }
+

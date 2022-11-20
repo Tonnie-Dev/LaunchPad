@@ -26,7 +26,7 @@ class GetUpcomingLaunchesUseCase(private val repository: LaunchRepository) {
 
     private fun parseStringDate(date: String): LocalDateTime {
 
-        val pattern = "dd-MM-yy HH:mm aa"
+        val pattern = "dd-MM-yy hh:mm aa"
         val formatter = DateTimeFormatter.ofPattern(pattern)
 
         return LocalDateTime.parse(date, formatter)
