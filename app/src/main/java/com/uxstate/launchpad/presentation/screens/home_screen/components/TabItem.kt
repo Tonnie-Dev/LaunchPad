@@ -22,7 +22,7 @@ sealed class TabItem(
     )
 
     data class Previous(val data: LazyPagingItems<Launch>) : TabItem(
-        R.drawable.rocket_svg,
+        R.drawable.rocket_icon,
         "PREVIOUS",
         { LaunchList(data = data) }
     )
