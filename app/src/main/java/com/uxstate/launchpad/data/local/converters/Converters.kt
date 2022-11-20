@@ -1,10 +1,14 @@
 package com.uxstate.launchpad.data.local.converters
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.room.TypeConverter
 import com.uxstate.launchpad.domain.model.Mission
 import com.uxstate.launchpad.domain.model.Pad
 import com.uxstate.launchpad.domain.model.Provider
 import com.uxstate.launchpad.domain.model.Rocket
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class Converters {
     @TypeConverter
@@ -97,5 +101,14 @@ class Converters {
             name = rocketPropertiesListString[0],
             family = rocketPropertiesListString[1]
         )
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @TypeConverter
+    fun writeDateToRoom(date:LocalDateTime):String{
+        val pattern = "dd-MM-yyyy HH:mm aa"
+        val dateFormatter = DateTimeFormatter.ofPattern(pattern)
+        return date.format(dateFormatter)
     }
 }

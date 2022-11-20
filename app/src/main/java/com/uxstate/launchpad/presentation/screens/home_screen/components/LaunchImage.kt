@@ -1,5 +1,7 @@
 package com.uxstate.launchpad.presentation.screens.home_screen.components
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -19,7 +21,10 @@ import coil.request.ImageRequest
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.util.LocalSpacing
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun LaunchImage(launch: Launch, modifier: Modifier = Modifier) {
     val spacing = LocalSpacing.current
@@ -88,7 +93,7 @@ fun LaunchImage(launch: Launch, modifier: Modifier = Modifier) {
 
         // Date
         Text(
-            text = launch.startWindowDate,
+            text = parseLocalDateToString(launch.startWindowDate),
             style = MaterialTheme.typography.body1,
             fontWeight = FontWeight.Bold,
             overflow = TextOverflow.Ellipsis,
@@ -97,4 +102,12 @@ fun LaunchImage(launch: Launch, modifier: Modifier = Modifier) {
             textAlign = TextAlign.Center
         )
     }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun parseLocalDateToString(date: LocalDateTime): String {
+
+    val pattern = "dd-MM-yyyy HH:mm aa"
+    val dateFormatter = DateTimeFormatter.ofPattern(pattern)
+    return date.format(dateFormatter)
 }

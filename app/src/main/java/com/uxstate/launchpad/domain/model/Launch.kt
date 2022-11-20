@@ -1,5 +1,7 @@
 package com.uxstate.launchpad.domain.model
 
+import java.time.LocalDateTime
+
 data class Launch(
     val id: Int,
     val name: String,
@@ -8,6 +10,6 @@ data class Launch(
     val provider: Provider,
     val status: String,
     val pad: Pad,
-    val startWindowDate: String,
+    val startWindowDate: LocalDateTime,
     val rocket: Rocket
 )
