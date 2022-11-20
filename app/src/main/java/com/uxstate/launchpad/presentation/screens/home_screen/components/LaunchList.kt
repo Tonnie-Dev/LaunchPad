@@ -11,7 +11,11 @@ import com.uxstate.launchpad.domain.model.Launch
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun LaunchList(data: LazyPagingItems<Launch>, modifier: Modifier = Modifier) {
+fun LaunchList(
+    data: LazyPagingItems<Launch>,
+    showCountDown: Boolean,
+    modifier: Modifier = Modifier
+) {
 
     LazyColumn(modifier = modifier, content = {
 
@@ -19,7 +23,7 @@ fun LaunchList(data: LazyPagingItems<Launch>, modifier: Modifier = Modifier) {
 
             launch?.let {
 
-                LaunchImage(launch = launch)
+                LaunchImage(launch = launch, showCountDown)
             }
         }
     })

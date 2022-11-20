@@ -14,7 +14,7 @@ typealias ComposableFun = @Composable () -> Unit
 sealed class TabItem(
     @DrawableRes val icon: Int,
     val title: String,
-    // val screen: ComposableFun,
+
     val compos: @Composable () -> Unit
 ) {
 
@@ -22,13 +22,13 @@ sealed class TabItem(
     data class Upcoming(val data: LazyPagingItems<Launch>) : TabItem(
         icon = R.drawable.hourglass,
         title = "UPCOMING",
-        compos = { LaunchList(data = data) }
+        compos = { LaunchList(data = data, showCountDown = true) }
     )
 
     @RequiresApi(Build.VERSION_CODES.O)
     data class Previous(val data: LazyPagingItems<Launch>) : TabItem(
-        R.drawable.rocket_icon,
-        "PREVIOUS",
-        { LaunchList(data = data) }
+        icon = R.drawable.rocket_icon,
+        title = "PREVIOUS",
+        compos = { LaunchList(data = data, showCountDown = false) }
     )
 }

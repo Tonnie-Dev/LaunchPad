@@ -1,5 +1,7 @@
 package com.uxstate.launchpad.presentation.screens.home_screen
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
@@ -17,6 +19,7 @@ import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.Ta
 import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.TopBar
 import com.uxstate.launchpad.util.LocalSpacing
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalPagerApi::class)
 @Destination()
 @RootNavGraph(start = true)

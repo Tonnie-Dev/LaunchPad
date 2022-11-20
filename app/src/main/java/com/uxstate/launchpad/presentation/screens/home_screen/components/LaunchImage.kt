@@ -26,7 +26,7 @@ import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun LaunchImage(launch: Launch, modifier: Modifier = Modifier) {
+fun LaunchImage(launch: Launch, showCountDown: Boolean, modifier: Modifier = Modifier) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
 
@@ -81,15 +81,18 @@ fun LaunchImage(launch: Launch, modifier: Modifier = Modifier) {
             textAlign = TextAlign.Center
         )
 
-        // T-Time
-        Text(
-            text = launch.name,
-            style = MaterialTheme.typography.h5,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
-        )
+        if (showCountDown) {
+
+            // T-Time
+            Text(
+                text = launch.name,
+                style = MaterialTheme.typography.h5,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
+            )
+        }
 
         // Date
         Text(
