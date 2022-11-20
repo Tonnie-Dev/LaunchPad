@@ -1,10 +1,11 @@
-package com.uxstate.launchpad.presentation.screens.home_screen.components
+package com.uxstate.launchpad.presentation.screens.home_screen.components.tabs
 
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import androidx.paging.compose.LazyPagingItems
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
+import com.uxstate.launchpad.presentation.screens.home_screen.components.LaunchList
 
 typealias ComposableFun = @Composable () -> Unit
 

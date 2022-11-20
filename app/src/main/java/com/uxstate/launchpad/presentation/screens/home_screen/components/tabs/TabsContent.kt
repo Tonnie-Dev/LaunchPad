@@ -7,6 +7,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
+import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.TabItem
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable

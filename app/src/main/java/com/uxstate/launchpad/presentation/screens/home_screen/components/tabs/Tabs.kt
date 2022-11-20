@@ -10,6 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.pager.*
 import com.uxstate.launchpad.R
+import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.TabItem
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
