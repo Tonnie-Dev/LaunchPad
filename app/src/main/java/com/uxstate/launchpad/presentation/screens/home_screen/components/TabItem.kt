@@ -16,7 +16,7 @@ sealed class TabItem(
 ) {
 
     data class Upcoming(val data: LazyPagingItems<Launch>) : TabItem(
-        icon = R.drawable.hourglass_svg,
+        icon = R.drawable.hourglass,
         title = "UPCOMING",
         screen = { LaunchList(data = data) }
     )
