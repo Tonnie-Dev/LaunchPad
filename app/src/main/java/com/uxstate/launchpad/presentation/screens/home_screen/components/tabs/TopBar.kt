@@ -1,4 +1,4 @@
-package com.uxstate.launchpad.presentation.screens.home_screen.components
+package com.uxstate.launchpad.presentation.screens.home_screen.components.tabs
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.material.MaterialTheme

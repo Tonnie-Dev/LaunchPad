@@ -1,4 +1,4 @@
-package com.uxstate.launchpad.presentation.screens.home_screen.components
+package com.uxstate.launchpad.presentation.screens.home_screen.components.tabs
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.material.*
@@ -10,7 +10,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.pager.*
 import com.uxstate.launchpad.R
-import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.TabItem
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)

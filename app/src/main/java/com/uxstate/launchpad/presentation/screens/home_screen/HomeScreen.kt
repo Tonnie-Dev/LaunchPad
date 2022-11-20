@@ -11,10 +11,10 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
-import com.uxstate.launchpad.presentation.screens.home_screen.components.Tabs
-import com.uxstate.launchpad.presentation.screens.home_screen.components.TabsContent
-import com.uxstate.launchpad.presentation.screens.home_screen.components.TopBar
 import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.TabItem
+import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.Tabs
+import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.TabsContent
+import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.TopBar
 import com.uxstate.launchpad.util.LocalSpacing
 
 @OptIn(ExperimentalPagerApi::class)
