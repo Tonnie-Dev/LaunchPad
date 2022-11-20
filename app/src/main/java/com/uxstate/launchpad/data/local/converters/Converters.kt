@@ -15,13 +15,13 @@ class Converters {
         val missionType = mission.type
         val missionListString = listOf(missionName, missionDesc, missionType)
 
-        return missionListString.joinToString(separator = ",")
+        return missionListString.joinToString(separator = "~")
     }
 
     @TypeConverter
     fun readMissionFromRoom(roomString: String): Mission {
 
-        val roomStringList = roomString.split(",")
+        val roomStringList = roomString.split("~")
             .map { it }
 
         return Mission(
@@ -38,13 +38,13 @@ class Converters {
         val providerType = provider.type
 
         val providerStringList = listOf(providerId, providerName, providerType)
-        return providerStringList.joinToString(separator = ",")
+        return providerStringList.joinToString(separator = "~")
     }
 
     @TypeConverter
     fun readProviderFromRoom(roomString: String): Provider {
 
-        val providerList = roomString.split(",")
+        val providerList = roomString.split("~")
             .map { it }
         return Provider(
             id = providerList[0].toInt(),
@@ -62,13 +62,13 @@ class Converters {
 
         val padProviderList = listOf(padLocationName, padLatitude, padLongitude)
 
-        return padProviderList.joinToString(separator = ",")
+        return padProviderList.joinToString(separator = "~")
     }
 
     @TypeConverter
     fun readPadFromRoom(roomString: String): Pad {
 
-        val padStringList = roomString.split(",")
+        val padStringList = roomString.split("~")
         return Pad(
             locationName = padStringList[0],
             latitude = padStringList[1],
@@ -84,13 +84,13 @@ class Converters {
 
         val rocketPropertiesList = listOf(rocketName, rocketFamily)
 
-        return rocketPropertiesList.joinToString(separator = ",")
+        return rocketPropertiesList.joinToString(separator = "~")
     }
 
     @TypeConverter
     fun readRocketFromRoom(roomString: String): Rocket {
 
-        val rocketPropertiesListString = roomString.split(",")
+        val rocketPropertiesListString = roomString.split("~")
             .map { it }
 
         return Rocket(

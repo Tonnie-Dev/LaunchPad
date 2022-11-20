@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.rememberAsyncImagePainter
@@ -44,9 +45,52 @@ fun LaunchImage(launch: Launch, modifier: Modifier = Modifier) {
                 .padding(spacing.spaceSmall)
         )
 
+        // Name
         Text(
             text = launch.name,
             style = MaterialTheme.typography.h5,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth(),
+            maxLines = 1,
+            textAlign = TextAlign.Center
+        )
+
+        // Agency
+        Text(
+            text = launch.provider.name,
+            style = MaterialTheme.typography.body1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth(),
+            maxLines = 1,
+            textAlign = TextAlign.Center
+        )
+
+        // Pad
+
+        Text(
+            text = launch.pad.locationName,
+            style = MaterialTheme.typography.caption,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth(),
+            maxLines = 1,
+            textAlign = TextAlign.Center
+        )
+
+        // T-Time
+        Text(
+            text = launch.name,
+            style = MaterialTheme.typography.h5,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth(),
+            maxLines = 1,
+            textAlign = TextAlign.Center
+        )
+
+        // Date
+        Text(
+            text = launch.startWindowDate,
+            style = MaterialTheme.typography.body1,
+            fontWeight = FontWeight.Bold,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.fillMaxWidth(),
             maxLines = 1,
