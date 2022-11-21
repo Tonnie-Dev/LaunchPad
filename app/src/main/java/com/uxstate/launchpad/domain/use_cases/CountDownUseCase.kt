@@ -3,12 +3,12 @@ package com.uxstate.launchpad.domain.use_cases
 import android.os.Build
 import android.os.CountDownTimer
 import androidx.annotation.RequiresApi
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 
 @RequiresApi(Build.VERSION_CODES.O)
 class CountDownUseCase {
@@ -18,10 +18,10 @@ class CountDownUseCase {
             var remainingTimeString: String = ""
             val currentDateTime = System.currentTimeMillis()
 
-            //convert LocalDateTime to millis
+            // convert LocalDateTime to millis
             val zdt = launchDate.atZone(ZoneId.systemDefault())
             val futureLaunchDate = zdt.toInstant()
-                    .toEpochMilli()
+                .toEpochMilli()
             val timeDifference = futureLaunchDate - currentDateTime
 
             val countDownTimer = object : CountDownTimer(timeDifference, 1000) {
@@ -32,20 +32,15 @@ class CountDownUseCase {
                    ${TimeUnit.MILLISECONDS.toHours(millscUntilFinish) % 24}: 
                    ${TimeUnit.MILLISECONDS.toMinutes(millscUntilFinish) % 60}:
                    ${TimeUnit.MILLISECONDS.toSeconds(millscUntilFinish) % 60}
-                """.trimIndent()
-
-                    emit(remainingTimeString)
+                    """.trimIndent()
                 }
 
                 override fun onFinish() {
                     Timber.i("Time is Up!")
-
                 }
             }
 
             countDownTimer.start()
-
-
         }
 }
 
@@ -54,12 +49,11 @@ private fun setTimer(launchDate: LocalDateTime) {
     var remainingTimeString: String? = null
     val currentDateTime = System.currentTimeMillis()
 
-    //convert LocalDateTime to millis
+    // convert LocalDateTime to millis
     val zdt = launchDate.atZone(ZoneId.systemDefault())
     val futureLaunchDate = zdt.toInstant()
-            .toEpochMilli()
+        .toEpochMilli()
     val timeDifference = futureLaunchDate - currentDateTime
-
 
     val countDownTimer = object : CountDownTimer(timeDifference, 1000) {
         override fun onTick(millscUntilFinish: Long) {
@@ -70,18 +64,13 @@ private fun setTimer(launchDate: LocalDateTime) {
                    ${TimeUnit.MILLISECONDS.toHours(millscUntilFinish) % 24}: 
                    ${TimeUnit.MILLISECONDS.toMinutes(millscUntilFinish) % 60}:
                    ${TimeUnit.MILLISECONDS.toSeconds(millscUntilFinish) % 60}
-                """.trimIndent()
-
+            """.trimIndent()
         }
 
         override fun onFinish() {
             Timber.i("Time is Up!")
-
         }
     }
 
     countDownTimer.start()
-
-
-}
 }

@@ -1,6 +1,7 @@
 package com.uxstate.launchpad.presentation.screens.home_screen.components
 
 import android.os.Build
+import android.os.CountDownTimer
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -21,8 +22,11 @@ import coil.request.ImageRequest
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.util.LocalSpacing
+import timber.log.Timber
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.concurrent.TimeUnit
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -31,78 +35,78 @@ fun LaunchImage(launch: Launch, showCountDown: Boolean, modifier: Modifier = Mod
     val context = LocalContext.current
 
     val painter = rememberAsyncImagePainter(
-        model = ImageRequest.Builder(context = context)
-            .data(launch.imageUrl)
-            .placeholder(R.drawable.placeholder_image)
-            .error(R.drawable.broken_image)
-            .crossfade(true)
-            .build()
+            model = ImageRequest.Builder(context = context)
+                    .data(launch.imageUrl)
+                    .placeholder(R.drawable.placeholder_image)
+                    .error(R.drawable.broken_image)
+                    .crossfade(true)
+                    .build()
 
     )
     Column {
         Image(
-            painter = painter,
-            contentDescription = launch.name,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(3f / 2f)
-                .padding(spacing.spaceSmall)
+                painter = painter,
+                contentDescription = launch.name,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(3f / 2f)
+                        .padding(spacing.spaceSmall)
         )
 
         // Name
         Text(
-            text = launch.name,
-            style = MaterialTheme.typography.h5,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
-        )
-
-        // Agency
-        Text(
-            text = launch.provider.name,
-            style = MaterialTheme.typography.body1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
-        )
-
-        // Pad
-
-        Text(
-            text = launch.pad.locationName,
-            style = MaterialTheme.typography.caption,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
-        )
-
-        if (showCountDown) {
-
-            // T-Time
-            Text(
                 text = launch.name,
                 style = MaterialTheme.typography.h5,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
                 maxLines = 1,
                 textAlign = TextAlign.Center
+        )
+
+        // Agency
+        Text(
+                text = launch.provider.name,
+                style = MaterialTheme.typography.body1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
+        )
+
+        // Pad
+
+        Text(
+                text = launch.pad.locationName,
+                style = MaterialTheme.typography.caption,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
+        )
+
+        if (showCountDown) {
+
+            // T-Time
+            Text(
+                    text = countDownTimer(launchDate = launch.startWindowDate),
+                    style = MaterialTheme.typography.h5,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.fillMaxWidth(),
+                    maxLines = 1,
+                    textAlign = TextAlign.Center
             )
         }
 
         // Date
         Text(
-            text = parseLocalDateToString(launch.startWindowDate),
-            style = MaterialTheme.typography.body1,
-            fontWeight = FontWeight.Bold,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
+                text = parseLocalDateToString(launch.startWindowDate),
+                style = MaterialTheme.typography.body1,
+                fontWeight = FontWeight.Bold,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
         )
     }
 }
@@ -113,4 +117,44 @@ fun parseLocalDateToString(date: LocalDateTime): String {
     val pattern = "dd-MM-yyyy HH:mm a"
     val dateFormatter = DateTimeFormatter.ofPattern(pattern)
     return date.format(dateFormatter)
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun countDownTimer(launchDate: LocalDateTime): String {
+
+    var remainingTimeString: String = "xxx"
+    val currentDateTime = System.currentTimeMillis()
+
+    // convert LocalDateTime to millis
+    val zdt = launchDate.atZone(ZoneId.systemDefault())
+    val futureLaunchDate = zdt.toInstant()
+            .toEpochMilli()
+    val timeDifference = futureLaunchDate - currentDateTime
+
+    val countDownTimer = object : CountDownTimer(timeDifference, 1000) {
+        override fun onTick(millscUntilFinish: Long) {
+            remainingTimeString = """
+                   
+                   ${TimeUnit.MILLISECONDS.toDays(millscUntilFinish)}:${
+                TimeUnit.MILLISECONDS.toHours(
+                        millscUntilFinish
+                ) % 24
+            }: ${TimeUnit.MILLISECONDS.toMinutes(millscUntilFinish) % 60}:${
+                TimeUnit.MILLISECONDS.toSeconds(
+                        millscUntilFinish
+                ) % 60
+            }
+            """.trimIndent()
+
+            Timber.i("OnTicK called: $millscUntilFinish Bal: $remainingTimeString")
+        }
+
+        override fun onFinish() {
+            Timber.i("Time is Up!")
+        }
+    }
+
+    countDownTimer.start()
+
+    return remainingTimeString
 }
