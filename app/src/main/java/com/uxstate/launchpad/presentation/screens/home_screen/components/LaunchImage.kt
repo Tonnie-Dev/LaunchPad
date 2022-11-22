@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -21,11 +21,13 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
+import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.util.LocalSpacing
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.delay
 import timber.log.Timber
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -33,6 +35,19 @@ import timber.log.Timber
 fun LaunchImage(launch: Launch, showCountDown: Boolean, modifier: Modifier = Modifier) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
+    var time = 20
+    var remainingTime by remember {
+        mutableStateOf(TimerState(launch).toString())
+    }
+
+    LaunchedEffect(key1 = launch, block = {
+        while (time >= 0) {
+            delay(1000)
+            someTrialFun(launch)
+
+            time = -1
+        }
+    })
 
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(context = context)
@@ -87,9 +102,11 @@ fun LaunchImage(launch: Launch, showCountDown: Boolean, modifier: Modifier = Mod
 
         if (showCountDown) {
 
+            Timber.i("Test Timer ${TimerState(launch = launch)}")
             // T-Time
             Text(
-                text = parseCountDown(10000),
+                // text = TimerState(launch = launch).toString(),
+                text = remainingTime,
                 style = MaterialTheme.typography.h5,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
@@ -162,4 +179,10 @@ fun parseCountDown(millSecUntilFinish: Long = 0): String {
     ) % 60
     }
     """.trimIndent()
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun someTrialFun(launch: Launch): String {
+
+    return TimerState(launch = launch).toString()
 }

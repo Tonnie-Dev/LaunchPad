@@ -10,6 +10,6 @@ data class Launch(
     val provider: Provider,
     val status: String,
     val pad: Pad,
-    val startWindowDate: LocalDateTime,
+    val startWindowDate: String,
     val rocket: Rocket
 )

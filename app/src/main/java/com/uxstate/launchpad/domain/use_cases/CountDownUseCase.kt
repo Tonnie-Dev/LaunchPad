@@ -1,76 +1,42 @@
 package com.uxstate.launchpad.domain.use_cases
 
 import android.os.Build
-import android.os.CountDownTimer
 import androidx.annotation.RequiresApi
+import com.uxstate.launchpad.domain.model.Launch
+import com.uxstate.launchpad.domain.model.TimerState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
+import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.util.concurrent.TimeUnit
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import timber.log.Timber
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.time.temporal.TemporalAccessor
 
 @RequiresApi(Build.VERSION_CODES.O)
-class CountDownUseCase {
+class CountDownUseCase(private val timerScope: CoroutineScope) {
+    operator fun invoke(launch: Launch): Flow<TimerState> = flow {
 
-    operator fun invoke(launchDate: LocalDateTime): Flow<String> =
-        flow {
-            var remainingTimeString: String = ""
-            val currentDateTime = System.currentTimeMillis()
+        val startWindowStringDate = launch.startWindowDate
+        val startWindowLocalDate = convertStringToLocalDate(startWindowStringDate)
 
-            // convert LocalDateTime to millis
-            val zdt = launchDate.atZone(ZoneId.systemDefault())
-            val futureLaunchDate = zdt.toInstant()
-                .toEpochMilli()
-            val timeDifference = futureLaunchDate - currentDateTime
+        //convert local date to seconds
+        val zoneId = ZoneId.systemDefault()
+        val totalSecondsToLaunch = startWindowLocalDate.atZone(ZoneId.systemDefault())
+                .toEpochSecond()
 
-            val countDownTimer = object : CountDownTimer(timeDifference, 1000) {
-                override fun onTick(millscUntilFinish: Long) {
-                    remainingTimeString = """
-                   
-                   ${TimeUnit.MILLISECONDS.toDays(millscUntilFinish)}:
-                   ${TimeUnit.MILLISECONDS.toHours(millscUntilFinish) % 24}: 
-                   ${TimeUnit.MILLISECONDS.toMinutes(millscUntilFinish) % 60}:
-                   ${TimeUnit.MILLISECONDS.toSeconds(millscUntilFinish) % 60}
-                    """.trimIndent()
-                }
-
-                override fun onFinish() {
-                    Timber.i("Time is Up!")
-                }
-            }
-
-            countDownTimer.start()
-        }
-}
-
-@RequiresApi(Build.VERSION_CODES.O)
-private fun setTimer(launchDate: LocalDateTime) {
-    var remainingTimeString: String? = null
-    val currentDateTime = System.currentTimeMillis()
-
-    // convert LocalDateTime to millis
-    val zdt = launchDate.atZone(ZoneId.systemDefault())
-    val futureLaunchDate = zdt.toInstant()
-        .toEpochMilli()
-    val timeDifference = futureLaunchDate - currentDateTime
-
-    val countDownTimer = object : CountDownTimer(timeDifference, 1000) {
-        override fun onTick(millscUntilFinish: Long) {
-
-            remainingTimeString = """
-                    
-                   ${TimeUnit.MILLISECONDS.toDays(millscUntilFinish)}:
-                   ${TimeUnit.MILLISECONDS.toHours(millscUntilFinish) % 24}: 
-                   ${TimeUnit.MILLISECONDS.toMinutes(millscUntilFinish) % 60}:
-                   ${TimeUnit.MILLISECONDS.toSeconds(millscUntilFinish) % 60}
-            """.trimIndent()
-        }
-
-        override fun onFinish() {
-            Timber.i("Time is Up!")
-        }
+        (totalSecondsToLaunch - 1 downTo 0).asFlow()
+                .onEach { delay(1000) }
+                .onStart { emit(totalSecondsToLaunch) }
+                .conflate()
+                .transform { remainingSeconds -> emit(TimerState(remainingSeconds)) }
     }
 
-    countDownTimer.start()
+    private fun convertStringToLocalDate(date: String): LocalDateTime {
+
+        val temporalAccessor: TemporalAccessor = DateTimeFormatter.ISO_INSTANT.parse(date)
+        val instant: Instant = Instant.from(temporalAccessor)
+        return LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
+    }
 }
