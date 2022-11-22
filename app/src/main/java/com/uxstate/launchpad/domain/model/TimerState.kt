@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 @RequiresApi(Build.VERSION_CODES.O)
 data class TimerState(
-    val totalSecondsToLaunch:Long
+    val totalSecondsToLaunch:Long = 0
 
 ) {
 

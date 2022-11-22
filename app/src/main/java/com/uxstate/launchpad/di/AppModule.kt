@@ -1,12 +1,15 @@
 package com.uxstate.launchpad.di
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.room.Room
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.uxstate.launchpad.data.local.LaunchDatabase
 import com.uxstate.launchpad.data.remote.LaunchAPI
 import com.uxstate.launchpad.domain.repository.LaunchRepository
+import com.uxstate.launchpad.domain.use_cases.CountDownUseCase
 import com.uxstate.launchpad.domain.use_cases.GetPreviousLaunchesUseCase
 import com.uxstate.launchpad.domain.use_cases.GetUpcomingLaunchesUseCase
 import com.uxstate.launchpad.domain.use_cases.UseCaseWrapper
@@ -28,7 +31,7 @@ import retrofit2.create
 
 @Module
 @InstallIn(SingletonComponent::class)
-
+@RequiresApi(Build.VERSION_CODES.O)
 object AppModule {
 
     @Provides
@@ -85,13 +88,15 @@ object AppModule {
             .create()
     }
 
+
     @Provides
     @Singleton
     fun provideUseCaseWrapper(repository: LaunchRepository): UseCaseWrapper {
 
         return UseCaseWrapper(
             getPreviousLaunchesUseCase = GetPreviousLaunchesUseCase(repository = repository),
-            getUpcomingLaunchesUseCase = GetUpcomingLaunchesUseCase(repository = repository)
+            getUpcomingLaunchesUseCase = GetUpcomingLaunchesUseCase(repository = repository),
+                countDownUseCase = CountDownUseCase()
         )
     }
 }

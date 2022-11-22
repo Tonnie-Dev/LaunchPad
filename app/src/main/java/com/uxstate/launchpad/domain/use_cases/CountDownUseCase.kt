@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 
 @RequiresApi(Build.VERSION_CODES.O)
-class CountDownUseCase(private val timerScope: CoroutineScope) {
+class CountDownUseCase() {
     operator fun invoke(launch: Launch): Flow<TimerState> = flow {
 
         val startWindowStringDate = launch.startWindowDate
