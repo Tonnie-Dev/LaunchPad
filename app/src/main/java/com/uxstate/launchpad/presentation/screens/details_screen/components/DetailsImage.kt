@@ -1,7 +1,9 @@
 package com.uxstate.launchpad.presentation.screens.details_screen.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -15,7 +17,7 @@ import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.util.LocalSpacing
 
 @Composable
-fun DetailsImage(launch: Launch) {
+fun DetailsImage(launch: Launch, timerText: String, modifier: Modifier = Modifier) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
     val painter = rememberAsyncImagePainter(
@@ -26,14 +28,17 @@ fun DetailsImage(launch: Launch) {
             .build()
 
     )
-    Image(
-        painter = painter,
-        contentDescription = launch.name,
-        modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(9f / 10f),
-        contentScale = ContentScale.Crop
-    )
 
-    Text(text = launch.name)
+    Column(modifier = modifier.fillMaxSize()) {
+        Image(
+            painter = painter,
+            contentDescription = launch.name,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(9f / 10f),
+            contentScale = ContentScale.Crop
+        )
+
+        Text(text = timerText)
+    }
 }

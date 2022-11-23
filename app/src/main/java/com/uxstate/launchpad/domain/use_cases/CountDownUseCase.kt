@@ -12,7 +12,6 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
-import timber.log.Timber
 
 @RequiresApi(Build.VERSION_CODES.O)
 class CountDownUseCase() {
@@ -26,15 +25,24 @@ class CountDownUseCase() {
         val totalSecondsToLaunch = startWindowLocalDate.atZone(ZoneId.systemDefault())
             .toEpochSecond()
 
-        if (totalSecondsToLaunch> 0) {
+        if (totalSecondsToLaunch > 0) {
 
-            (totalSecondsToLaunch..0).asSequence()
-                .asFlow()
-                .onEach {
-                    Timber.i("Delay Called")
-                    delay(1000)
-                    emit(TimerState(it))
+            (totalSecondsToLaunch - 1 downTo 0).asFlow()
+                .onEach { delay(1000) } // Each second later emit a number
+                .onStart { emit(totalSecondsToLaunch) } // Emit total seconds immediately
+                .conflate() // In case the operation onTick takes
+                // some time, conflate keeps the time ticking separately
+                .transform { remainingSeconds ->
+                    emit(TimerState(remainingSeconds))
                 }
+
+            /* (totalSecondsToLaunch..0).asSequence()
+                 .asFlow()
+                 .onEach {
+                     Timber.i("Delay Called")
+                     delay(1000)
+                     emit(TimerState(it))
+                 }*/
         }
 
         // .onStart { emit(TimerState()) }
