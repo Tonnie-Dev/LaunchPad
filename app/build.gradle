@@ -125,8 +125,8 @@ dependencies {
     implementation "com.airbnb.android:lottie-compose:5.0.1"
 
     // Compose Nav Destinations
-    implementation 'io.github.raamcosta.compose-destinations:core:1.5.15-beta'
-    ksp 'io.github.raamcosta.compose-destinations:ksp:1.5.15-beta'
+    implementation 'io.github.raamcosta.compose-destinations:core:1.6.23-beta'
+    ksp 'io.github.raamcosta.compose-destinations:ksp:1.6.23-beta'
 
     //shimmer
     implementation "com.facebook.shimmer:shimmer:$shimmer"
