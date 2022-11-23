@@ -1,10 +1,9 @@
-package com.uxstate.launchpad.presentation.screens.details_screen.compents
+package com.uxstate.launchpad.presentation.screens.details_screen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -38,6 +37,6 @@ fun DetailsImage(launch: Launch) {
     )
 
     Text(text = launch.name)
-    
+
 
 }
