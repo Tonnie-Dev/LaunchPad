@@ -31,7 +31,7 @@ fun DetailsImage(launch: Launch) {
         contentDescription = launch.name,
         modifier = Modifier
             .fillMaxWidth()
-            .aspectRatio(5f / 4f),
+            .aspectRatio(9f / 10f),
         contentScale = ContentScale.Crop
     )
 
