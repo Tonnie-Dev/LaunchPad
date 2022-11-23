@@ -4,15 +4,15 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
+import timber.log.Timber
 
 @RequiresApi(Build.VERSION_CODES.O)
 class CountDownUseCase() {
@@ -21,16 +21,25 @@ class CountDownUseCase() {
         val startWindowStringDate = launch.startWindowDate
         val startWindowLocalDate = convertStringToLocalDate(startWindowStringDate)
 
-        //convert local date to seconds
+        // convert local date to seconds
         val zoneId = ZoneId.systemDefault()
         val totalSecondsToLaunch = startWindowLocalDate.atZone(ZoneId.systemDefault())
-                .toEpochSecond()
+            .toEpochSecond()
 
-        (totalSecondsToLaunch - 1 downTo 0).asFlow()
-                .onEach { delay(1000) }
-                .onStart { emit(totalSecondsToLaunch) }
-                .conflate()
-                .transform { remainingSeconds -> emit(TimerState(remainingSeconds)) }
+        if (totalSecondsToLaunch> 0) {
+
+            (totalSecondsToLaunch..0).asSequence()
+                .asFlow()
+                .onEach {
+                    Timber.i("Delay Called")
+                    delay(1000)
+                    emit(TimerState(it))
+                }
+        }
+
+        // .onStart { emit(TimerState()) }
+        // .conflate()
+        // .transform { remainingSeconds -> emit(TimerState(remainingSeconds)) }
     }
 
     private fun convertStringToLocalDate(date: String): LocalDateTime {

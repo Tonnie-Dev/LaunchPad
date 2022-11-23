@@ -8,7 +8,7 @@ class TimerFlow {
 
     // Create the timer flow
     val timer = (0..Int.MAX_VALUE)
-            .asSequence()
-            .asFlow()
-            .onEach { delay(1_000) } // sp
+        .asSequence()
+        .asFlow()
+        .onEach { delay(1_000) } // sp
 }

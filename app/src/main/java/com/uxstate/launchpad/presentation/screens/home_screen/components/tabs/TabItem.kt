@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.paging.compose.LazyPagingItems
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
+import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.presentation.screens.home_screen.components.LaunchList
 
 typealias ComposableFun = @Composable () -> Unit
@@ -19,10 +20,10 @@ sealed class TabItem(
 ) {
 
     @RequiresApi(Build.VERSION_CODES.O)
-    data class Upcoming(val data: LazyPagingItems<Launch>) : TabItem(
+    data class Upcoming(val data: LazyPagingItems<Launch>, val state: TimerState) : TabItem(
         icon = R.drawable.hourglass,
         title = "UPCOMING",
-        compos = { LaunchList(data = data, showCountDown = true) }
+        compos = { LaunchList(data = data, showCountDown = true, state = state) }
     )
 
     @RequiresApi(Build.VERSION_CODES.O)

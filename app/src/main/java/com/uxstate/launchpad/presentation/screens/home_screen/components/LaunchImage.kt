@@ -1,7 +1,6 @@
 package com.uxstate.launchpad.presentation.screens.home_screen.components
 
 import android.os.Build
-import android.os.CountDownTimer
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -23,30 +22,33 @@ import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.util.LocalSpacing
+import java.time.Instant
 import java.time.LocalDateTime
-import java.time.ZoneId
+import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
+import java.time.temporal.TemporalAccessor
 import java.util.concurrent.TimeUnit
-import kotlinx.coroutines.delay
 import timber.log.Timber
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun LaunchImage(launch: Launch, showCountDown: Boolean, modifier: Modifier = Modifier) {
+fun LaunchImage(
+    launch: Launch,
+    showCountDown: Boolean,
+    state: TimerState,
+    modifier: Modifier = Modifier
+) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
-    var time = 20
     var remainingTime by remember {
-        mutableStateOf(TimerState(launch).toString())
+        mutableStateOf(TimerState().toString())
     }
 
     LaunchedEffect(key1 = launch, block = {
-        while (time >= 0) {
-            delay(1000)
-            someTrialFun(launch)
 
-            time = -1
-        }
+        remainingTime = state.toString()
+
+        Timber.i("Inside LI LaunchedEffect time is: $remainingTime")
     })
 
     val painter = rememberAsyncImagePainter(
@@ -102,7 +104,7 @@ fun LaunchImage(launch: Launch, showCountDown: Boolean, modifier: Modifier = Mod
 
         if (showCountDown) {
 
-            Timber.i("Test Timer ${TimerState(launch = launch)}")
+            // Timber.i("Test Timer ${TimerState(launch = launch)}")
             // T-Time
             Text(
                 // text = TimerState(launch = launch).toString(),
@@ -117,7 +119,7 @@ fun LaunchImage(launch: Launch, showCountDown: Boolean, modifier: Modifier = Mod
 
         // Date
         Text(
-            text = parseLocalDateToString(launch.startWindowDate),
+            text = formatStringDate(launch.startWindowDate),
             style = MaterialTheme.typography.body1,
             fontWeight = FontWeight.Bold,
             overflow = TextOverflow.Ellipsis,
@@ -129,13 +131,18 @@ fun LaunchImage(launch: Launch, showCountDown: Boolean, modifier: Modifier = Mod
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun parseLocalDateToString(date: LocalDateTime): String {
+fun formatStringDate(date: String): String {
+    // convert string date to local date
+    val temporalAccessor: TemporalAccessor = DateTimeFormatter.ISO_INSTANT.parse(date)
+    val instant: Instant = Instant.from(temporalAccessor)
+    val localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault())
 
     val pattern = "dd-MM-yyyy HH:mm a"
     val dateFormatter = DateTimeFormatter.ofPattern(pattern)
-    return date.format(dateFormatter)
-}
 
+    return localDateTime.format(dateFormatter)
+}
+/*
 @RequiresApi(Build.VERSION_CODES.O)
 fun countDownTimer(launch: Launch) {
     var time = "ss"
@@ -145,7 +152,7 @@ fun countDownTimer(launch: Launch) {
     // convert LocalDateTime to millis
     val zdt = launch.startWindowDate.atZone(ZoneId.systemDefault())
     val futureLaunchDate = zdt.toInstant()
-        .toEpochMilli()
+            .toEpochMilli()
     val timeDifference = futureLaunchDate - currentDateTime
 
     val countDownTimer = object : CountDownTimer(timeDifference, 1000) {
@@ -153,7 +160,7 @@ fun countDownTimer(launch: Launch) {
             time = parseCountDown(millSecUntilFinish)
 
             Timber.i(
-                "OnTicK- $millSecUntilFinish T= ${parseCountDown(millSecUntilFinish)}"
+                    "OnTicK- $millSecUntilFinish T= ${parseCountDown(millSecUntilFinish)}"
             )
         }
 
@@ -164,6 +171,7 @@ fun countDownTimer(launch: Launch) {
 
     countDownTimer.start()
 }
+*/
 
 fun parseCountDown(millSecUntilFinish: Long = 0): String {
 
@@ -179,10 +187,4 @@ fun parseCountDown(millSecUntilFinish: Long = 0): String {
     ) % 60
     }
     """.trimIndent()
-}
-
-@RequiresApi(Build.VERSION_CODES.O)
-fun someTrialFun(launch: Launch): String {
-
-    return TimerState(launch = launch).toString()
 }

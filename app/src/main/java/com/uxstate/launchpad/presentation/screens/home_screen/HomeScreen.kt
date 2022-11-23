@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -29,9 +31,9 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     val previousLaunches = viewModel.previousLaunches.collectAsLazyPagingItems()
     val upcomingLaunches = viewModel.upcomingLaunches.collectAsLazyPagingItems()
     val spacing = LocalSpacing.current
-
+    val timerState by viewModel.timerStateFlow.collectAsState()
     val tabs = listOf(
-        TabItem.Upcoming(data = upcomingLaunches),
+        TabItem.Upcoming(data = upcomingLaunches, state = timerState),
         TabItem.Previous(data = previousLaunches)
     )
 

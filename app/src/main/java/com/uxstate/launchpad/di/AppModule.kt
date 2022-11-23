@@ -88,7 +88,6 @@ object AppModule {
             .create()
     }
 
-
     @Provides
     @Singleton
     fun provideUseCaseWrapper(repository: LaunchRepository): UseCaseWrapper {
@@ -96,7 +95,7 @@ object AppModule {
         return UseCaseWrapper(
             getPreviousLaunchesUseCase = GetPreviousLaunchesUseCase(repository = repository),
             getUpcomingLaunchesUseCase = GetUpcomingLaunchesUseCase(repository = repository),
-                countDownUseCase = CountDownUseCase()
+            countDownUseCase = CountDownUseCase()
         )
     }
 }

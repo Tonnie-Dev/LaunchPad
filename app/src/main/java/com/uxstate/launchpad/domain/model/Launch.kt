@@ -1,7 +1,5 @@
 package com.uxstate.launchpad.domain.model
 
-import java.time.LocalDateTime
-
 data class Launch(
     val id: Int,
     val name: String,
