@@ -26,7 +26,7 @@ fun LaunchList(
 
             launch?.let {
 
-                LaunchImage(launch = launch, showCountDown = showCountDown, state = state)
+                LaunchImage(launch = it, showCountDown = showCountDown, state = state)
             }
         }
     })
