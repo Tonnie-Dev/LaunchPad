@@ -8,4 +8,4 @@ data class Pad(
     val locationName: String,
     val latitude: String,
     val longitude: String
-): Parcelable
+) : Parcelable

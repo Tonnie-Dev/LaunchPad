@@ -8,4 +8,4 @@ data class Mission(
     val name: String,
     val description: String,
     val type: String
-): Parcelable
+) : Parcelable

@@ -8,7 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.ramcosta.composedestinations.DestinationsNavHost
-import com.uxstate.launchpad.presentation.screens.home_screen.NavGraphs
+import com.uxstate.launchpad.presentation.screens.NavGraphs
 import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 import dagger.hilt.android.AndroidEntryPoint
 

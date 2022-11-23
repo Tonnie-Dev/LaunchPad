@@ -19,24 +19,21 @@ fun DetailsImage(launch: Launch) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
     val painter = rememberAsyncImagePainter(
-            model = ImageRequest.Builder(context)
-                    .data(launch.imageUrl)
-                    .crossfade(true)
-                    .placeholder(R.drawable.placeholder_image)
-                    .build()
-
+        model = ImageRequest.Builder(context)
+            .data(launch.imageUrl)
+            .crossfade(true)
+            .placeholder(R.drawable.placeholder_image)
+            .build()
 
     )
     Image(
-            painter = painter,
-            contentDescription = launch.name,
-            modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(5f / 4f),
-            contentScale = ContentScale.Crop
+        painter = painter,
+        contentDescription = launch.name,
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(5f / 4f),
+        contentScale = ContentScale.Crop
     )
 
     Text(text = launch.name)
-
-
 }

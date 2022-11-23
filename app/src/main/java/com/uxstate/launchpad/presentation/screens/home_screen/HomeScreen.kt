@@ -15,6 +15,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.TabItem
 import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.Tabs
 import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.TabsContent
@@ -26,15 +27,15 @@ import com.uxstate.launchpad.util.LocalSpacing
 @Destination()
 @RootNavGraph(start = true)
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
+fun HomeScreen(viewModel: HomeViewModel = hiltViewModel(), navigator: DestinationsNavigator) {
 
     val previousLaunches = viewModel.previousLaunches.collectAsLazyPagingItems()
     val upcomingLaunches = viewModel.upcomingLaunches.collectAsLazyPagingItems()
     val spacing = LocalSpacing.current
     val timerState by viewModel.timerStateFlow.collectAsState()
     val tabs = listOf(
-        TabItem.Upcoming(data = upcomingLaunches, state = timerState),
-        TabItem.Previous(data = previousLaunches)
+        TabItem.Upcoming(data = upcomingLaunches, state = timerState, navigator = navigator),
+        TabItem.Previous(data = previousLaunches, navigator = navigator)
     )
 
     val pagerState = rememberPagerState()

@@ -14,4 +14,4 @@ data class Launch(
     val pad: Pad,
     val startWindowDate: String,
     val rocket: Rocket
-):Parcelable
+) : Parcelable
