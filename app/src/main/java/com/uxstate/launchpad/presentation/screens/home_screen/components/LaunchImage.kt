@@ -3,6 +3,7 @@ package com.uxstate.launchpad.presentation.screens.home_screen.components
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,13 +23,13 @@ import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.util.LocalSpacing
+import timber.log.Timber
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 import java.util.concurrent.TimeUnit
-import timber.log.Timber
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -36,6 +37,7 @@ fun LaunchImage(
     launch: Launch,
     showCountDown: Boolean,
     state: TimerState,
+    onClick: (launch: Launch) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val spacing = LocalSpacing.current
@@ -52,54 +54,54 @@ fun LaunchImage(
     })
 
     val painter = rememberAsyncImagePainter(
-        model = ImageRequest.Builder(context = context)
-            .data(launch.imageUrl)
-            .placeholder(R.drawable.placeholder_image)
-            .error(R.drawable.broken_image)
-            .crossfade(true)
-            .build()
+            model = ImageRequest.Builder(context = context)
+                    .data(launch.imageUrl)
+                    .placeholder(R.drawable.placeholder_image)
+                    .error(R.drawable.broken_image)
+                    .crossfade(true)
+                    .build()
 
     )
-    Column {
+    Column(modifier = modifier.clickable { onClick(launch) }) {
         Image(
-            painter = painter,
-            contentDescription = launch.name,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(3f / 2f)
-                .padding(spacing.spaceSmall)
+                painter = painter,
+                contentDescription = launch.name,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(3f / 2f)
+                        .padding(spacing.spaceSmall)
         )
 
         // Name
         Text(
-            text = launch.name,
-            style = MaterialTheme.typography.h5,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
+                text = launch.name,
+                style = MaterialTheme.typography.h5,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
         )
 
         // Agency
         Text(
-            text = launch.provider.name,
-            style = MaterialTheme.typography.body1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
+                text = launch.provider.name,
+                style = MaterialTheme.typography.body1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
         )
 
         // Pad
 
         Text(
-            text = launch.pad.locationName,
-            style = MaterialTheme.typography.caption,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
+                text = launch.pad.locationName,
+                style = MaterialTheme.typography.caption,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
         )
 
         if (showCountDown) {
@@ -107,25 +109,25 @@ fun LaunchImage(
             // Timber.i("Test Timer ${TimerState(launch = launch)}")
             // T-Time
             Text(
-                // text = TimerState(launch = launch).toString(),
-                text = remainingTime,
-                style = MaterialTheme.typography.h5,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.fillMaxWidth(),
-                maxLines = 1,
-                textAlign = TextAlign.Center
+                    // text = TimerState(launch = launch).toString(),
+                    text = remainingTime,
+                    style = MaterialTheme.typography.h5,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.fillMaxWidth(),
+                    maxLines = 1,
+                    textAlign = TextAlign.Center
             )
         }
 
         // Date
         Text(
-            text = formatStringDate(launch.startWindowDate),
-            style = MaterialTheme.typography.body1,
-            fontWeight = FontWeight.Bold,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
+                text = formatStringDate(launch.startWindowDate),
+                style = MaterialTheme.typography.body1,
+                fontWeight = FontWeight.Bold,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
         )
     }
 }
@@ -178,13 +180,13 @@ fun parseCountDown(millSecUntilFinish: Long = 0): String {
     return """
                    
   ${TimeUnit.MILLISECONDS.toDays(millSecUntilFinish)}:${
-    TimeUnit.MILLISECONDS.toHours(
-        millSecUntilFinish
-    ) % 24
+        TimeUnit.MILLISECONDS.toHours(
+                millSecUntilFinish
+        ) % 24
     }: ${TimeUnit.MILLISECONDS.toMinutes(millSecUntilFinish) % 60}:${
-    TimeUnit.MILLISECONDS.toSeconds(
-        millSecUntilFinish
-    ) % 60
+        TimeUnit.MILLISECONDS.toSeconds(
+                millSecUntilFinish
+        ) % 60
     }
     """.trimIndent()
 }
