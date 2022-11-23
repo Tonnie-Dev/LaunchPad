@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
-    id 'com.google.devtools.ksp' version '1.6.10-1.0.2'
+    id 'com.google.devtools.ksp' version '1.7.21-1.0.8'
     // KtLint Gradle plugin
     id "org.jlleitschuh.gradle.ktlint" version "11.0.0"
 }
