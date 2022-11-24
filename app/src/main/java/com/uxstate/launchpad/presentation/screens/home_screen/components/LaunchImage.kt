@@ -28,7 +28,6 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 import java.util.concurrent.TimeUnit
-import timber.log.Timber
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -47,8 +46,6 @@ fun LaunchImage(
     LaunchedEffect(key1 = launch, block = {
 
         remainingTime = state.toString()
-
-        Timber.i("Inside LI LaunchedEffect time is: $remainingTime")
     })
 
     val painter = rememberAsyncImagePainter(

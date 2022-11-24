@@ -8,7 +8,6 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.uxstate.launchpad.domain.model.Launch
-import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsImage
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -18,5 +17,6 @@ fun DetailsScreen(launch: Launch, viewModel: DetailsViewModel = hiltViewModel())
     val timer by viewModel.timerStateFlow.collectAsState()
     val longFlow by viewModel.runTimer(launch).collectAsState(initial = 0)
 
-    DetailsImage(launch = launch, timerText = TimerState(longFlow).toString())
+    // DetailsImage(launch = launch, timerText = TimerState(longFlow).toString())
+    DetailsImage(launch = launch, timerText = timer.toString())
 }
