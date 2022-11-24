@@ -12,8 +12,6 @@ import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @HiltViewModel
 @RequiresApi(Build.VERSION_CODES.O)
@@ -28,27 +26,5 @@ class HomeViewModel @Inject constructor(
     val previousLaunches = useCaseWrapper.getPreviousLaunchesUseCase()
     val upcomingLaunches = useCaseWrapper.getUpcomingLaunchesUseCase()
 
-      /*  .map {
-
-            data ->
-            data.map {
-
-                launch: Launch ->
-                collectTimerFlow(launch)
-                launch.copy(startWindowDate = TimerState(13).toString())
-            }
-        }*/
-
-    fun collectTimerFlow(launch: Launch) {
-
-        timerJob?.cancel()
-        // reinitialize job
-
-        timerJob = viewModelScope.launch {
-
-            useCaseWrapper.countDownUseCase(launch).collectLatest {
-                _timerStateFlow.value = it
-            }
-        }
-    }
+    fun collectTimerFlow(launch: Launch) = useCaseWrapper.timerFlowUseCase(launch, viewModelScope)
 }

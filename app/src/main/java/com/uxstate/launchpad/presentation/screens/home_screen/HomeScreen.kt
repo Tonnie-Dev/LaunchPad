@@ -31,6 +31,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel(), navigator: Destinatio
 
     val previousLaunches = viewModel.previousLaunches.collectAsLazyPagingItems()
     val upcomingLaunches = viewModel.upcomingLaunches.collectAsLazyPagingItems()
+
     val spacing = LocalSpacing.current
     val timerState by viewModel.timerStateFlow.collectAsState()
     val tabs = listOf(

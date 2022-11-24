@@ -24,10 +24,14 @@ import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.util.LocalSpacing
 import java.time.Instant
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
-import java.util.concurrent.TimeUnit
+import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -37,16 +41,14 @@ fun LaunchImage(
     state: TimerState,
     modifier: Modifier = Modifier
 ) {
+    val job: Job? = null
+
+    val flow = makeFlow(launch).collectAsState(initial = 0)
     val spacing = LocalSpacing.current
     val context = LocalContext.current
     var remainingTime by remember {
-        mutableStateOf(TimerState().toString())
+        mutableStateOf(0L)
     }
-
-    LaunchedEffect(key1 = launch, block = {
-
-        remainingTime = state.toString()
-    })
 
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(context = context)
@@ -101,11 +103,9 @@ fun LaunchImage(
 
         if (showCountDown) {
 
-            // Timber.i("Test Timer ${TimerState(launch = launch)}")
-            // T-Time
             Text(
                 // text = TimerState(launch = launch).toString(),
-                text = remainingTime,
+                text = TimerState(flow.value).toString(),
                 style = MaterialTheme.typography.h5,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
@@ -139,49 +139,32 @@ fun formatStringDate(date: String): String {
 
     return localDateTime.format(dateFormatter)
 }
-/*
+
 @RequiresApi(Build.VERSION_CODES.O)
-fun countDownTimer(launch: Launch) {
-    var time = "ss"
+private fun readStringDateToMillis(launch: Launch): Long {
 
-    val currentDateTime = System.currentTimeMillis()
+    // convert string date to local date
+    val temporalAccessor: TemporalAccessor =
+        DateTimeFormatter.ISO_INSTANT.parse(launch.startWindowDate)
+    val instant: Instant = Instant.from(temporalAccessor)
+    val localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault())
 
-    // convert LocalDateTime to millis
-    val zdt = launch.startWindowDate.atZone(ZoneId.systemDefault())
-    val futureLaunchDate = zdt.toInstant()
-            .toEpochMilli()
-    val timeDifference = futureLaunchDate - currentDateTime
+    // convert local date to millis
 
-    val countDownTimer = object : CountDownTimer(timeDifference, 1000) {
-        override fun onTick(millSecUntilFinish: Long) {
-            time = parseCountDown(millSecUntilFinish)
-
-            Timber.i(
-                    "OnTicK- $millSecUntilFinish T= ${parseCountDown(millSecUntilFinish)}"
-            )
-        }
-
-        override fun onFinish() {
-            Timber.i("Time is Up!")
-        }
-    }
-
-    countDownTimer.start()
+    return localDateTime.atZone(ZoneId.systemDefault())
+        .toEpochSecond()
 }
-*/
 
-fun parseCountDown(millSecUntilFinish: Long = 0): String {
+@RequiresApi(Build.VERSION_CODES.O)
+private fun makeFlow(launch: Launch): Flow<Long> = flow {
+    val countDownFrom = readStringDateToMillis(launch)
+    var counter = countDownFrom
+    emit(counter)
 
-    return """
-                   
-  ${TimeUnit.MILLISECONDS.toDays(millSecUntilFinish)}:${
-    TimeUnit.MILLISECONDS.toHours(
-        millSecUntilFinish
-    ) % 24
-    }: ${TimeUnit.MILLISECONDS.toMinutes(millSecUntilFinish) % 60}:${
-    TimeUnit.MILLISECONDS.toSeconds(
-        millSecUntilFinish
-    ) % 60
+    while (counter > 0) {
+        delay(1.seconds)
+
+        counter--
+        emit(counter)
     }
-    """.trimIndent()
 }
