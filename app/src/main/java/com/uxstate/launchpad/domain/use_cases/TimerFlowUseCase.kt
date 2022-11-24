@@ -3,9 +3,6 @@ package com.uxstate.launchpad.domain.use_cases
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.uxstate.launchpad.domain.model.Launch
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -13,12 +10,22 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.O)
 class TimerFlowUseCase() {
+    private var job: Job? = null
+    operator fun invoke(launch: Launch, scope: CoroutineScope): Flow<Long> = flow {
 
+        job?.cancel()
 
-    operator fun invoke(launch: Launch): Flow<Long> = flow {
+        job = scope.launch {
+        }
 
         val countDownFrom = readStringDateToMillis(launch)
         var counter = countDownFrom
@@ -26,11 +33,11 @@ class TimerFlowUseCase() {
 
         while (counter > 0) {
             delay(1.seconds)
-            emit(counter)
+
             counter--
+            emit(counter)
         }
     }
-
 
     private fun readStringDateToMillis(launch: Launch): Long {
 
@@ -43,6 +50,6 @@ class TimerFlowUseCase() {
         // convert local date to millis
 
         return localDateTime.atZone(ZoneId.systemDefault())
-                .toEpochSecond()
+            .toEpochSecond()
     }
 }

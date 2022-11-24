@@ -93,7 +93,7 @@ object AppModule {
             getPreviousLaunchesUseCase = GetPreviousLaunchesUseCase(repository = repository),
             getUpcomingLaunchesUseCase = GetUpcomingLaunchesUseCase(repository = repository),
             countDownUseCase = CountDownUseCase(),
-                timerFlowUseCase = TimerFlowUseCase()
+            timerFlowUseCase = TimerFlowUseCase()
         )
     }
 }
