@@ -9,10 +9,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.uxstate.launchpad.data.local.LaunchDatabase
 import com.uxstate.launchpad.data.remote.LaunchAPI
 import com.uxstate.launchpad.domain.repository.LaunchRepository
-import com.uxstate.launchpad.domain.use_cases.CountDownUseCase
-import com.uxstate.launchpad.domain.use_cases.GetPreviousLaunchesUseCase
-import com.uxstate.launchpad.domain.use_cases.GetUpcomingLaunchesUseCase
-import com.uxstate.launchpad.domain.use_cases.UseCaseWrapper
+import com.uxstate.launchpad.domain.use_cases.*
 import com.uxstate.launchpad.util.Constants.CONNECT_TIMEOUT
 import com.uxstate.launchpad.util.Constants.DATABASE_NAME
 import com.uxstate.launchpad.util.Constants.READ_TIMEOUT
@@ -95,7 +92,8 @@ object AppModule {
         return UseCaseWrapper(
             getPreviousLaunchesUseCase = GetPreviousLaunchesUseCase(repository = repository),
             getUpcomingLaunchesUseCase = GetUpcomingLaunchesUseCase(repository = repository),
-            countDownUseCase = CountDownUseCase()
+            countDownUseCase = CountDownUseCase(),
+                timerFlowUseCase = TimerFlowUseCase()
         )
     }
 }
