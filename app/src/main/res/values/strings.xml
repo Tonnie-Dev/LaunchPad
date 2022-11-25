@@ -2,4 +2,6 @@
     <string name="app_name">LaunchPad</string>
     <string name="launch_app_label">Launch App</string>
     <string name="upcoming_label">Upcoming</string>
+    <string name="time_slot">%02d</string>
+
 </resources>

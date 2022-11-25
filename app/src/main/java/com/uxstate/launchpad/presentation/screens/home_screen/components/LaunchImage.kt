@@ -21,6 +21,7 @@ import coil.request.ImageRequest
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
+import com.uxstate.launchpad.domain.model.computeTimeBoard
 import com.uxstate.launchpad.util.LocalSpacing
 import java.time.Instant
 import java.time.LocalDateTime
@@ -103,9 +104,15 @@ fun LaunchImage(
 
         if (showCountDown) {
 
+            val timerState = TimerState(flow.value)
+            val timeBoard = timerState.computeTimeBoard()
+
+            val hours = timeBoard.hours
+            val seconds = timeBoard.seconds
+
             Text(
                 // text = TimerState(launch = launch).toString(),
-                text = TimerState(flow.value).toString(),
+                text = "$seconds",
                 style = MaterialTheme.typography.h5,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),

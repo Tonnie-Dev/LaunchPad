@@ -12,17 +12,11 @@ data class TimerState(
 
     private val currentDateTime = System.currentTimeMillis()
 
-    // convert LocalDateTime to millis
-
-    /*private val zdt: ZonedDateTime = launch.startWindowDate.atZone(ZoneId.systemDefault())
-    private val futureLaunchDate = zdt.toInstant()
-        .toEpochMilli()*/
     private val timeDifference = totalSecondsToLaunch - currentDateTime / 1000
-
-    private val daysLeft = TimeUnit.SECONDS.toDays(timeDifference)
-    private val hoursLeft = TimeUnit.SECONDS.toHours(timeDifference) % 24
-    private val minutesLeft = TimeUnit.SECONDS.toMinutes(timeDifference) % 60
-    private val secondsLeft = TimeUnit.SECONDS.toSeconds(timeDifference) % 60
+    val daysLeft = TimeUnit.SECONDS.toDays(timeDifference)
+    val hoursLeft = TimeUnit.SECONDS.toHours(timeDifference) % 24
+    val minutesLeft = TimeUnit.SECONDS.toMinutes(timeDifference) % 60
+    val secondsLeft = TimeUnit.SECONDS.toSeconds(timeDifference) % 60
 
     val textWhenStopped: String = "- - -"
     /* val displaySeconds: String =
@@ -34,3 +28,13 @@ data class TimerState(
         // return "$daysLeft: $hoursLeft : $minutesLeft $secondsLeft"
     }
 }
+@RequiresApi(Build.VERSION_CODES.O)
+fun TimerState.computeTimeBoard(): TimeBoard {
+    return TimeBoard(
+        days = if (this.daysLeft >= 0) this.daysLeft.toInt() else 0,
+        hours = if (this.daysLeft >= 0) this.daysLeft.toInt() else 0,
+        minutes = if (this.daysLeft >= 0) this.daysLeft.toInt() else 0,
+        seconds = if (this.secondsLeft >= 0) this.secondsLeft.toInt() else 0,
+    )
+}
+data class TimeBoard(val days: Int, val hours: Int, val minutes: Int, val seconds: Int)
