@@ -2,6 +2,12 @@
     <string name="app_name">LaunchPad</string>
     <string name="launch_app_label">Launch App</string>
     <string name="upcoming_label">Upcoming</string>
-    <string name="time_slot">%02d</string>
+    <string name="time_slot">%s%02d%s</string>
+    <string name="t_minus_label">T- </string>
+    <string name="time_colon_separator">:</string>
+    <string name="time_label">days</string>
+    <string name="hrs_abbrev">hrs</string>
+    <string name="min_abbrev">min</string>
+    <string name="sec_abbrev">sec</string>
 
 </resources>

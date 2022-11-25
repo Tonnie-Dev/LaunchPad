@@ -107,10 +107,13 @@ fun LaunchImage(
             val timerState = TimerState(flow.value)
             val timeBoard = timerState.computeTimeBoard()
 
+            val days = timeBoard.days
             val hours = timeBoard.hours
+            val minutes = timeBoard.minutes
             val seconds = timeBoard.seconds
 
-            Text(
+            TimeBoardWidget(timeBoard = timeBoard)
+            /*Text(
                 // text = TimerState(launch = launch).toString(),
                 text = "$seconds",
                 style = MaterialTheme.typography.h5,
@@ -118,7 +121,7 @@ fun LaunchImage(
                 modifier = Modifier.fillMaxWidth(),
                 maxLines = 1,
                 textAlign = TextAlign.Center
-            )
+            )*/
         }
 
         // Date
