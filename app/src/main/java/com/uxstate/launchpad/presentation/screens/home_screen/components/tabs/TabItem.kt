@@ -11,13 +11,13 @@ import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.presentation.screens.home_screen.components.LaunchList
 
-typealias ComposableFun = @Composable () -> Unit
+
 
 sealed class TabItem(
-    @DrawableRes val icon: Int,
+    @DrawableRes
+    val icon: Int,
     val title: String,
-
-    val compos: @Composable () -> Unit
+    val composeFunction: @Composable () -> Unit
 ) {
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -26,23 +26,30 @@ sealed class TabItem(
         val state: TimerState,
         val navigator: DestinationsNavigator,
     ) : TabItem(
-        icon = R.drawable.hourglass,
-        title = "UPCOMING",
-        compos = {
-            LaunchList(
-                data = data,
-                showCountDown = true,
-                state = state,
-                navigator = navigator
-            )
-        }
+            icon = R.drawable.hourglass,
+            title = "UPCOMING",
+            composeFunction = {
+                LaunchList(
+                        data = data,
+                        showCountDown = true,
+                        navigator = navigator
+                )
+            }
     )
 
     @RequiresApi(Build.VERSION_CODES.O)
-    data class Previous(val data: LazyPagingItems<Launch>, val navigator: DestinationsNavigator) :
-        TabItem(
+    data class Previous(
+        val data: LazyPagingItems<Launch>,
+        val navigator: DestinationsNavigator
+    ) : TabItem(
             icon = R.drawable.rocket_icon,
             title = "PREVIOUS",
-            compos = { LaunchList(data = data, showCountDown = false, navigator = navigator) }
-        )
+            composeFunction = {
+                LaunchList(
+                        data = data,
+                        showCountDown = false,
+                        navigator = navigator
+                )
+            }
+    )
 }

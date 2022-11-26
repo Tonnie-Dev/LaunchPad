@@ -15,7 +15,7 @@ fun TabsContent(tabs: List<TabItem>, pagerState: PagerState) {
     HorizontalPager(state = pagerState, count = tabs.size) {
         page ->
 
-        tabs[page].compos()
+        tabs[page].composeFunction()
     }
 }
 
