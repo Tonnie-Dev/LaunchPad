@@ -32,8 +32,8 @@ data class TimerState(
 fun TimerState.computeTimeBoard(): TimeBoard {
     return TimeBoard(
         days = if (this.daysLeft >= 0) this.daysLeft.toInt() else 0,
-        hours = if (this.daysLeft >= 0) this.daysLeft.toInt() else 0,
-        minutes = if (this.daysLeft >= 0) this.daysLeft.toInt() else 0,
+        hours = if (this.hoursLeft >= 0) this.hoursLeft.toInt() else 0,
+        minutes = if (this.minutesLeft >= 0) this.minutesLeft.toInt() else 0,
         seconds = if (this.secondsLeft >= 0) this.secondsLeft.toInt() else 0,
     )
 }
