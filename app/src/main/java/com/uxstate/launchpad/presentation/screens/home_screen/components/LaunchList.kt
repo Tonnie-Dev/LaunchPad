@@ -28,13 +28,13 @@ fun LaunchList(
             launch?.let {
 
                 LaunchImage(
-                        launch = it,
-                        showCountDown = showCountDown,
-                        modifier = Modifier.clickable {
-                            navigator.navigate(
-                                    DetailsScreenDestination(it)
-                            )
-                        }
+                    launch = it,
+                    showCountDown = showCountDown,
+                    modifier = Modifier.clickable {
+                        navigator.navigate(
+                            DetailsScreenDestination(it)
+                        )
+                    }
 
                 )
             }

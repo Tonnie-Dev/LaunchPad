@@ -24,8 +24,6 @@ import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.domain.model.computeTimeBoard
 import com.uxstate.launchpad.util.LocalSpacing
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -33,6 +31,8 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -47,54 +47,54 @@ fun LaunchImage(
     val context = LocalContext.current
 
     val painter = rememberAsyncImagePainter(
-            model = ImageRequest.Builder(context = context)
-                    .data(launch.imageUrl)
-                    .placeholder(R.drawable.placeholder_image)
-                    .error(R.drawable.broken_image)
-                    .crossfade(true)
-                    .build()
+        model = ImageRequest.Builder(context = context)
+            .data(launch.imageUrl)
+            .placeholder(R.drawable.placeholder_image)
+            .error(R.drawable.broken_image)
+            .crossfade(true)
+            .build()
 
     )
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Image(
-                painter = painter,
-                contentDescription = launch.name,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(3f / 2f)
-                        .padding(spacing.spaceSmall)
+            painter = painter,
+            contentDescription = launch.name,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(3f / 2f)
+                .padding(spacing.spaceSmall)
         )
 
         // Name
         Text(
-                text = launch.name,
-                style = MaterialTheme.typography.h5,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.fillMaxWidth(),
-                maxLines = 1,
-                textAlign = TextAlign.Center
+            text = launch.name,
+            style = MaterialTheme.typography.h5,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth(),
+            maxLines = 1,
+            textAlign = TextAlign.Center
         )
 
         // Agency
         Text(
-                text = launch.provider.name,
-                style = MaterialTheme.typography.body1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.fillMaxWidth(),
-                maxLines = 1,
-                textAlign = TextAlign.Center
+            text = launch.provider.name,
+            style = MaterialTheme.typography.body1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth(),
+            maxLines = 1,
+            textAlign = TextAlign.Center
         )
 
         // Pad
 
         Text(
-                text = launch.pad.locationName,
-                style = MaterialTheme.typography.caption,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.fillMaxWidth(),
-                maxLines = 1,
-                textAlign = TextAlign.Center
+            text = launch.pad.locationName,
+            style = MaterialTheme.typography.caption,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth(),
+            maxLines = 1,
+            textAlign = TextAlign.Center
         )
 
         if (showCountDown) {
@@ -103,18 +103,17 @@ fun LaunchImage(
             val timeBoard = timerState.computeTimeBoard()
 
             TimeBoardWidget(timeBoard = timeBoard)
-
         }
 
         // Date
         Text(
-                text = formatStringDate(launch.startWindowDate),
-                style = MaterialTheme.typography.body1,
-                fontWeight = FontWeight.Bold,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.fillMaxWidth(),
-                maxLines = 1,
-                textAlign = TextAlign.Center
+            text = formatStringDate(launch.startWindowDate),
+            style = MaterialTheme.typography.body1,
+            fontWeight = FontWeight.Bold,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth(),
+            maxLines = 1,
+            textAlign = TextAlign.Center
         )
     }
 }
@@ -145,7 +144,7 @@ private fun readStringDateToMillis(launch: Launch): Long {
     // convert local date to millis
 
     return localDateTime.atZone(ZoneId.systemDefault())
-            .toEpochSecond()
+        .toEpochSecond()
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
