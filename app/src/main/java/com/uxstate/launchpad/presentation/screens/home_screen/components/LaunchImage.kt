@@ -24,6 +24,8 @@ import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.domain.model.computeTimeBoard
 import com.uxstate.launchpad.util.LocalSpacing
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -31,76 +33,70 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 import kotlin.time.Duration.Companion.seconds
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun LaunchImage(
     launch: Launch,
     showCountDown: Boolean,
-    state: TimerState,
     modifier: Modifier = Modifier
 ) {
-    val job: Job? = null
 
-    val flow = makeFlow(launch).collectAsState(initial = 0)
+
+    val flow = generateSecondsFlow(launch).collectAsState(initial = 0)
+
     val spacing = LocalSpacing.current
     val context = LocalContext.current
-    var remainingTime by remember {
-        mutableStateOf(0L)
-    }
 
     val painter = rememberAsyncImagePainter(
-        model = ImageRequest.Builder(context = context)
-            .data(launch.imageUrl)
-            .placeholder(R.drawable.placeholder_image)
-            .error(R.drawable.broken_image)
-            .crossfade(true)
-            .build()
+            model = ImageRequest.Builder(context = context)
+                    .data(launch.imageUrl)
+                    .placeholder(R.drawable.placeholder_image)
+                    .error(R.drawable.broken_image)
+                    .crossfade(true)
+                    .build()
 
     )
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Image(
-            painter = painter,
-            contentDescription = launch.name,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(3f / 2f)
-                .padding(spacing.spaceSmall)
+                painter = painter,
+                contentDescription = launch.name,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(3f / 2f)
+                        .padding(spacing.spaceSmall)
         )
 
         // Name
         Text(
-            text = launch.name,
-            style = MaterialTheme.typography.h5,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
+                text = launch.name,
+                style = MaterialTheme.typography.h5,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
         )
 
         // Agency
         Text(
-            text = launch.provider.name,
-            style = MaterialTheme.typography.body1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
+                text = launch.provider.name,
+                style = MaterialTheme.typography.body1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
         )
 
         // Pad
 
         Text(
-            text = launch.pad.locationName,
-            style = MaterialTheme.typography.caption,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
+                text = launch.pad.locationName,
+                style = MaterialTheme.typography.caption,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
         )
 
         if (showCountDown) {
@@ -108,39 +104,26 @@ fun LaunchImage(
             val timerState = TimerState(flow.value)
             val timeBoard = timerState.computeTimeBoard()
 
-            val days = timeBoard.days
-            val hours = timeBoard.hours
-            val minutes = timeBoard.minutes
-            val seconds = timeBoard.seconds
-
             TimeBoardWidget(timeBoard = timeBoard)
-            /*Text(
-                // text = TimerState(launch = launch).toString(),
-                text = "$seconds",
-                style = MaterialTheme.typography.h5,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.fillMaxWidth(),
-                maxLines = 1,
-                textAlign = TextAlign.Center
-            )*/
+
         }
 
         // Date
         Text(
-            text = formatStringDate(launch.startWindowDate),
-            style = MaterialTheme.typography.body1,
-            fontWeight = FontWeight.Bold,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
+                text = formatStringDate(launch.startWindowDate),
+                style = MaterialTheme.typography.body1,
+                fontWeight = FontWeight.Bold,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
         )
     }
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun formatStringDate(date: String): String {
-    
+
     // convert string date to local date
     val temporalAccessor: TemporalAccessor = DateTimeFormatter.ISO_INSTANT.parse(date)
     val instant: Instant = Instant.from(temporalAccessor)
@@ -164,11 +147,11 @@ private fun readStringDateToMillis(launch: Launch): Long {
     // convert local date to millis
 
     return localDateTime.atZone(ZoneId.systemDefault())
-        .toEpochSecond()
+            .toEpochSecond()
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-private fun makeFlow(launch: Launch): Flow<Long> = flow {
+private fun generateSecondsFlow(launch: Launch): Flow<Long> = flow {
     val countDownFrom = readStringDateToMillis(launch)
     var counter = countDownFrom
     emit(counter)

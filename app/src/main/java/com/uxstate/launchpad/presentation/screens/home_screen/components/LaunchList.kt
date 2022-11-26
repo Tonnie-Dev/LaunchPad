@@ -33,7 +33,7 @@ fun LaunchList(
                 LaunchImage(
                     launch = it,
                     showCountDown = showCountDown,
-                    state = state,
+                    Sstate = state,
                     modifier = Modifier.clickable {
                         navigator.navigate(
                             DetailsScreenDestination(
