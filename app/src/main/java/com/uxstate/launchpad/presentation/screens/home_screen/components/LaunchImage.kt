@@ -140,12 +140,13 @@ fun LaunchImage(
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun formatStringDate(date: String): String {
+    
     // convert string date to local date
     val temporalAccessor: TemporalAccessor = DateTimeFormatter.ISO_INSTANT.parse(date)
     val instant: Instant = Instant.from(temporalAccessor)
     val localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault())
 
-    val pattern = "dd-MM-yyyy HH:mm a"
+    val pattern = "MMM dd, yyyy hh:mm a"
     val dateFormatter = DateTimeFormatter.ofPattern(pattern)
 
     return localDateTime.format(dateFormatter)

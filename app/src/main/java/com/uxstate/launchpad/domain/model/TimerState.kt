@@ -18,10 +18,8 @@ data class TimerState(
     val minutesLeft = TimeUnit.SECONDS.toMinutes(timeDifference) % 60
     val secondsLeft = TimeUnit.SECONDS.toSeconds(timeDifference) % 60
 
-
     override fun toString(): String {
         return String.format("%02d:%02d:%02d", hoursLeft, minutesLeft, secondsLeft)
-
     }
 }
 @RequiresApi(Build.VERSION_CODES.O)
