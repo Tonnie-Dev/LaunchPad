@@ -10,7 +10,6 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.launchpad.domain.model.Launch
-import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.presentation.screens.destinations.DetailsScreenDestination
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -20,8 +19,6 @@ fun LaunchList(
     showCountDown: Boolean,
     navigator: DestinationsNavigator,
     modifier: Modifier = Modifier,
-    state: TimerState = TimerState(0),
-
 ) {
 
     LazyColumn(modifier = modifier, content = {
@@ -31,16 +28,13 @@ fun LaunchList(
             launch?.let {
 
                 LaunchImage(
-                    launch = it,
-                    showCountDown = showCountDown,
-                    Sstate = state,
-                    modifier = Modifier.clickable {
-                        navigator.navigate(
-                            DetailsScreenDestination(
-                                it
+                        launch = it,
+                        showCountDown = showCountDown,
+                        modifier = Modifier.clickable {
+                            navigator.navigate(
+                                    DetailsScreenDestination(it)
                             )
-                        )
-                    }
+                        }
 
                 )
             }

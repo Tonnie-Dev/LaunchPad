@@ -42,9 +42,7 @@ fun LaunchImage(
     modifier: Modifier = Modifier
 ) {
 
-
     val flow = generateSecondsFlow(launch).collectAsState(initial = 0)
-
     val spacing = LocalSpacing.current
     val context = LocalContext.current
 
