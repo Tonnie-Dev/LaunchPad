@@ -2,9 +2,7 @@ package com.uxstate.launchpad.presentation.screens.home_screen.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -28,58 +26,61 @@ fun TimeBoardWidget(modifier: Modifier = Modifier, timeBoard: TimeBoard) {
 
     ) {
 
-        /*Text(
-                text = stringResource(R.string.t_minus_label),
-                style = MaterialTheme.typography.h6,
-
-                )*/
         TimeSlot(
             timeValue = timeBoard.days,
-            timeType = stringResource(R.string.time_label),
-            tMinus = stringResource(id = R.string.t_minus_label)
+            prefix = stringResource(id = R.string.t_minus_label),
+            timeType = stringResource(R.string.time_label)
         )
-        /* Text(
-                 text = stringResource(R.string.time_colon_gap),
-                 style = MaterialTheme.typography.h6,
-                 modifier = Modifier
-                         .width(intrinsicSize = IntrinsicSize.Min)
-                         .alignBy(LastBaseline)
 
-         )*/
         TimeSlot(
             timeValue = timeBoard.hours,
-            timeType = stringResource(R.string.hrs_abbrev),
-            colonSeparator = stringResource(id = R.string.time_colon_separator)
+            prefix = stringResource(id = R.string.time_colon_separator),
+            timeType = stringResource(R.string.hrs_abbrev)
         )
-        // Text(text = stringResource(R.string.time_colon_gap), style = MaterialTheme.typography.h6)
+
         TimeSlot(
             timeValue = timeBoard.minutes,
-            timeType = stringResource(R.string.min_abbrev),
-            colonSeparator = stringResource(id = R.string.time_colon_separator)
+            prefix = stringResource(id = R.string.time_colon_separator),
+            timeType = stringResource(R.string.min_abbrev)
         )
-        // Text(text = stringResource(R.string.time_colon_separator), style = MaterialTheme.typography.h6
 
-        TimeSlot(timeValue = timeBoard.seconds, timeType = stringResource(R.string.sec_abbrev))
+        TimeSlot(
+            timeValue = timeBoard.seconds,
+            prefix = stringResource(id = R.string.time_colon_separator),
+            timeType = stringResource(R.string.sec_abbrev)
+        )
     }
 }
 
 @Composable
-fun TimeSlot(timeValue: Int, timeType: String, colonSeparator: String = "", tMinus: String = "") {
+fun TimeSlot(timeValue: Int, timeType: String, prefix: String = "") {
     val spacing = LocalSpacing.current
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(spacing.spaceDoubleDp)
+        modifier = Modifier
+            .width(IntrinsicSize.Max)
+            .padding(spacing.spaceDoubleDp)
     ) {
-        Text(
-            text = stringResource(id = R.string.time_slot, tMinus, timeValue, colonSeparator),
-            style = MaterialTheme.typography.h6,
-            modifier = Modifier.padding(spacing.spaceExtraSmall)
-        )
+        Row(horizontalArrangement = Arrangement.SpaceBetween) {
+            Text(
+                text = prefix,
+                style = MaterialTheme.typography.h5,
+
+            )
+            Text(
+                text = stringResource(id = R.string.time_slot, timeValue),
+                style = MaterialTheme.typography.h5,
+
+            )
+        }
 
         Text(
             text = timeType,
             style = MaterialTheme.typography.overline,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.End,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = spacing.spaceSmall)
         )
     }
 }
@@ -87,7 +88,9 @@ fun TimeSlot(timeValue: Int, timeType: String, colonSeparator: String = "", tMin
 @Preview
 @Composable
 fun TimeBoardPreview() {
-    TimeBoardWidget(timeBoard = TimeBoard(days = 8, hours = 18, minutes = 12, seconds = 32))
+    TimeBoardWidget(
+        timeBoard = TimeBoard(days = 8, hours = 18, minutes = 12, seconds = 32)
+    )
 }
 
 @Preview(uiMode = UI_MODE_NIGHT_NO)
