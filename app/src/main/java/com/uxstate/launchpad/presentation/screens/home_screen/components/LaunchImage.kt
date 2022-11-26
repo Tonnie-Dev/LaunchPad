@@ -70,6 +70,7 @@ fun LaunchImage(
         Text(
             text = launch.name,
             style = MaterialTheme.typography.h5,
+            fontWeight = FontWeight.Bold,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.fillMaxWidth(),
             maxLines = 1,

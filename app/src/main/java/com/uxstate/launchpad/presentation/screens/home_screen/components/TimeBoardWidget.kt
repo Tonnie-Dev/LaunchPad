@@ -80,7 +80,7 @@ fun TimeSlot(timeValue: Int, timeType: String, prefix: String = "") {
             textAlign = TextAlign.End,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = spacing.spaceSmall)
+                .padding(horizontal = spacing.spaceExtraSmall)
         )
     }
 }
