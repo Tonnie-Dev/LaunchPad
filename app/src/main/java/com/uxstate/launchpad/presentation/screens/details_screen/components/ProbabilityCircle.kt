@@ -2,14 +2,14 @@ package com.uxstate.launchpad.presentation.screens.details_screen.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,13 +30,20 @@ fun ProbabilityCircle(
     val spacing = LocalSpacing.current
     val strokeWidth = (spacing.spaceSmall)
 
-    val animatedProbability = remember { Animatable(initialValue = 0f) }
+    val animatedProbRatio = remember { Animatable(initialValue = 0f) }
+    var probCounter by remember { mutableStateOf(0) }
+    val animatedProbInt by animateIntAsState(
+        targetValue = probCounter,
+        animationSpec = tween(durationMillis = 1_500, easing = FastOutSlowInEasing)
+    )
 
     LaunchedEffect(key1 = probability, block = {
 
-        animatedProbability.animateTo(
+        //when the provided targetValue is changed, the animation will run automatically
+        probCounter = probability
+        animatedProbRatio.animateTo(
             targetValue = if (probability > 0) (probability / 100f) else 0f,
-            animationSpec = tween(durationMillis = 1_500)
+            animationSpec = tween(durationMillis = 1_500, easing = FastOutSlowInEasing)
         )
     })
 
@@ -60,7 +67,7 @@ fun ProbabilityCircle(
                 drawArc(
                     color = activeColor,
                     startAngle = -90f,
-                    sweepAngle = animatedProbability.value * 360,
+                    sweepAngle = animatedProbRatio.value * 360,
                     useCenter = false,
                     size = size,
                     style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Butt)
@@ -71,7 +78,7 @@ fun ProbabilityCircle(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "$probability%", style = MaterialTheme.typography.caption)
+            Text(text = "$animatedProbInt%", style = MaterialTheme.typography.caption)
             Text(text = "Probability", style = MaterialTheme.typography.overline)
         }
     }
