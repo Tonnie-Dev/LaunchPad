@@ -42,26 +42,31 @@ fun ProbabilityCircle(
 
     Box(contentAlignment = Alignment.Center) {
 
-        Canvas(modifier = modifier, onDraw = {
+        Canvas(
+            modifier = modifier
+                .fillMaxWidth()
+                .aspectRatio(1f),
+            onDraw = {
 
-            drawArc(
-                color = inactiveColor,
-                startAngle = -90f,
-                sweepAngle = 360f * (probability / 100),
-                useCenter = false,
-                size = size,
-                style = Stroke(strokeWidth.toPx())
-            )
+                drawArc(
+                    color = inactiveColor,
+                    startAngle = -90f,
+                    sweepAngle = 360f * (probability / 100),
+                    useCenter = false,
+                    size = size,
+                    style = Stroke(strokeWidth.toPx())
+                )
 
-            drawArc(
-                color = activeColor,
-                startAngle = -90f,
-                sweepAngle = animatedProbability.value,
-                useCenter = false,
-                size = size,
-                style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Butt)
-            )
-        })
+                drawArc(
+                    color = activeColor,
+                    startAngle = -90f,
+                    sweepAngle = animatedProbability.value,
+                    useCenter = false,
+                    size = size,
+                    style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Butt)
+                )
+            }
+        )
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally

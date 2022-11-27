@@ -17,7 +17,7 @@ import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.util.LocalSpacing
 
 @Composable
-fun DetailsImage(launch: Launch, timerText: String, modifier: Modifier = Modifier) {
+fun DetailsImage(launch: Launch, modifier: Modifier = Modifier) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
     val painter = rememberAsyncImagePainter(
@@ -39,6 +39,6 @@ fun DetailsImage(launch: Launch, timerText: String, modifier: Modifier = Modifie
             contentScale = ContentScale.Crop
         )
 
-        Text(text = timerText)
+        
     }
 }

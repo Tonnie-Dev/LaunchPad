@@ -21,37 +21,5 @@ class DetailsViewModel @Inject constructor(
     private val wrapper: UseCaseWrapper
 ) : ViewModel() {
 
-    fun runTimer(launch: Launch) = wrapper.timerFlowUseCase(launch, viewModelScope)
 
-    private fun readStringDateToMillis(launch: Launch): Long {
-
-        // convert string date to local date
-        val temporalAccessor: TemporalAccessor =
-            DateTimeFormatter.ISO_INSTANT.parse(launch.startWindowDate)
-        val instant: Instant = Instant.from(temporalAccessor)
-        val localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault())
-
-        // convert local date to millis
-
-        return localDateTime.atZone(ZoneId.systemDefault())
-            .toEpochSecond()
-    }
-
-    private fun alternateFlow(launch: Launch) {
-        val countDownFrom = readStringDateToMillis(launch)
-        /*viewModelScope.launch {
-
-            (countDownFrom..0).asFlow() // Emit total - 1 because the first was emitted onStart
-                .onEach { delay(1000) } // Each second later emit a number
-                .onStart { emit(countDownFrom) } // Emit total seconds immediately
-                .conflate() // In case the operation onTick
-                // takes some time, conflate keeps the time ticking separately
-                .transform { remainingSeconds ->
-                    emit(TimerState(remainingSeconds))
-                }.onCompletion { _timerStateFlow.emit(TimerState()) }
-                .collect {
-                    _timerStateFlow.emit(it)
-                }
-        }*/
-    }
 }

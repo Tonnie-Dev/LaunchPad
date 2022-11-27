@@ -13,11 +13,9 @@ import com.uxstate.launchpad.presentation.screens.details_screen.components.Deta
 @Composable
 fun DetailsScreen(launch: Launch, viewModel: DetailsViewModel = hiltViewModel()) {
 
-    val timeFlow by viewModel.runTimer(launch)
-        .collectAsState(initial = 0)
+
 
     DetailsImage(
-        launch = launch,
-        timerText = TimerState(timeFlow).toString()
+        launch = launch
     )
 }
