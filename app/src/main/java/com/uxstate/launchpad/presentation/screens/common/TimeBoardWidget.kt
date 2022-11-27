@@ -1,4 +1,4 @@
-package com.uxstate.launchpad.presentation.screens.home_screen.components
+package com.uxstate.launchpad.presentation.screens.common
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES

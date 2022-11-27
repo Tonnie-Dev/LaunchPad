@@ -3,10 +3,7 @@ package com.uxstate.launchpad.presentation.screens.home_screen.components
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -23,6 +20,7 @@ import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.domain.model.computeTimeBoard
+import com.uxstate.launchpad.presentation.screens.common.TimeBoardWidget
 import com.uxstate.launchpad.util.LocalSpacing
 import java.time.Instant
 import java.time.LocalDateTime
@@ -55,67 +53,71 @@ fun LaunchImage(
             .build()
 
     )
-    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(
-            painter = painter,
-            contentDescription = launch.name,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(3f / 2f)
-                .padding(spacing.spaceSmall)
-        )
 
-        // Name
-        Text(
-            text = launch.name,
-            style = MaterialTheme.typography.h5,
-            fontWeight = FontWeight.Bold,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
-        )
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
 
-        // Agency
-        Text(
-            text = launch.provider.name,
-            style = MaterialTheme.typography.body1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
-        )
+        Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                painter = painter,
+                contentDescription = launch.name,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(3f / 2f)
+                    .padding(spacing.spaceSmall)
+            )
 
-        // Pad
+            // Name
+            Text(
+                text = launch.name,
+                style = MaterialTheme.typography.h5,
+                fontWeight = FontWeight.Bold,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
+            )
 
-        Text(
-            text = launch.pad.locationName,
-            style = MaterialTheme.typography.caption,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
-        )
+            // Agency
+            Text(
+                text = launch.provider.name,
+                style = MaterialTheme.typography.body1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
+            )
 
-        if (showCountDown) {
+            // Pad
 
-            val timerState = TimerState(flow.value)
-            val timeBoard = timerState.computeTimeBoard()
+            Text(
+                text = launch.pad.locationName,
+                style = MaterialTheme.typography.caption,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
+            )
 
-            TimeBoardWidget(timeBoard = timeBoard)
+            if (showCountDown) {
+
+                val timerState = TimerState(flow.value)
+                val timeBoard = timerState.computeTimeBoard()
+
+                TimeBoardWidget(timeBoard = timeBoard)
+            }
+
+            // Date
+            Text(
+                text = formatStringDate(launch.startWindowDate),
+                style = MaterialTheme.typography.body1,
+                fontWeight = FontWeight.Bold,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
+            )
         }
-
-        // Date
-        Text(
-            text = formatStringDate(launch.startWindowDate),
-            style = MaterialTheme.typography.body1,
-            fontWeight = FontWeight.Bold,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 1,
-            textAlign = TextAlign.Center
-        )
     }
 }
 
