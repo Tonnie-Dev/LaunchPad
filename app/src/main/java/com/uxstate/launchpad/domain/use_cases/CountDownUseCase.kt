@@ -13,7 +13,7 @@ import java.time.temporal.TemporalAccessor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 class CountDownUseCase() {
     operator fun invoke(launch: Launch): Flow<TimerState> = flow {
 

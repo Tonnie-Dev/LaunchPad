@@ -11,7 +11,7 @@ import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsImage
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 @Destination
 @Composable
 fun DetailsScreen(launch: Launch, viewModel: DetailsViewModel = hiltViewModel()) {

@@ -17,7 +17,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
 

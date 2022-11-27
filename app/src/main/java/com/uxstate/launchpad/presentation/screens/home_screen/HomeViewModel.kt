@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-@RequiresApi(Build.VERSION_CODES.O)
+
 class HomeViewModel @Inject constructor(
     useCaseWrapper: UseCaseWrapper
 ) : ViewModel() {

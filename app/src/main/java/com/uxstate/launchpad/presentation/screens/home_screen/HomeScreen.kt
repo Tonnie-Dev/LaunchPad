@@ -20,7 +20,7 @@ import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.Ta
 import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.TabsContent
 import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.TopBar
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 @OptIn(ExperimentalPagerApi::class)
 @Destination()
 @RootNavGraph(start = true)

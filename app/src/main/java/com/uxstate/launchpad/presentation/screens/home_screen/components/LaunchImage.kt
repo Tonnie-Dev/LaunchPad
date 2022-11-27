@@ -32,7 +32,7 @@ import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 @Composable
 fun LaunchImage(
     launch: Launch,
@@ -121,7 +121,7 @@ fun LaunchImage(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 fun formatStringDate(date: String): String {
 
     // convert string date to local date
@@ -135,7 +135,7 @@ fun formatStringDate(date: String): String {
     return localDateTime.format(dateFormatter)
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 private fun readStringDateToMillis(launch: Launch): Long {
 
     // convert string date to local date
@@ -150,7 +150,7 @@ private fun readStringDateToMillis(launch: Launch): Long {
         .toEpochSecond()
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 private fun generateSecondsFlow(launch: Launch): Flow<Long> = flow {
     val countDownFrom = readStringDateToMillis(launch)
     var counter = countDownFrom

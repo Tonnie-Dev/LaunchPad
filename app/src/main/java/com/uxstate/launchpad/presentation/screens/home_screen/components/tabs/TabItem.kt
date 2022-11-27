@@ -17,7 +17,7 @@ sealed class TabItem(
     val composeFunction: @Composable () -> Unit
 ) {
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     data class Upcoming(
         val data: LazyPagingItems<Launch>,
         val navigator: DestinationsNavigator,
@@ -33,7 +33,7 @@ sealed class TabItem(
         }
     )
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     data class Previous(
         val data: LazyPagingItems<Launch>,
         val navigator: DestinationsNavigator

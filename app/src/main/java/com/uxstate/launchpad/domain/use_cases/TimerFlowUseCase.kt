@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 class TimerFlowUseCase() {
     private var job: Job? = null
     operator fun invoke(launch: Launch, scope: CoroutineScope): Flow<Long> = flow {

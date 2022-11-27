@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 class GetUpcomingLaunchesUseCase(private val repository: LaunchRepository) {
 
     operator fun invoke(): Flow<PagingData<Launch>> {
