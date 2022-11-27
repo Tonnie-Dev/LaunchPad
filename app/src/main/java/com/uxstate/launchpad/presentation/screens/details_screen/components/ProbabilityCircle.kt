@@ -39,7 +39,7 @@ fun ProbabilityCircle(
 
     LaunchedEffect(key1 = probability, block = {
 
-        //when the provided targetValue is changed, the animation will run automatically
+        // when the provided targetValue is changed, the animation will run automatically
         probCounter = probability
         animatedProbRatio.animateTo(
             targetValue = if (probability > 0) (probability / 100f) else 0f,
