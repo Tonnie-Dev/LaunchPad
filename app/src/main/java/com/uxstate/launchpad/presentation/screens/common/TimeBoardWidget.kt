@@ -89,7 +89,12 @@ fun TimeSlot(timeValue: Int, timeType: String, prefix: String = "") {
 @Composable
 fun TimeBoardPreview() {
     TimeBoardWidget(
-        timeBoard = TimeBoard(days = 8, hours = 18, minutes = 12, seconds = 32)
+        timeBoard = TimeBoard(
+                days = 8,
+                hours = 18,
+                minutes = 12,
+                seconds = 32
+        )
     )
 }
 
