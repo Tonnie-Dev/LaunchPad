@@ -1,10 +1,7 @@
 package com.uxstate.launchpad.presentation.screens.common
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -29,7 +26,7 @@ fun StatusIcon(launch: Launch, modifier: Modifier = Modifier) {
 
         "Success" -> R.drawable.check_icon
         "Go" -> R.drawable.outbound_icon
-        "TBC" -> R.drawable.pending_icon
+        "TBD" -> R.drawable.pending_icon
         "Failure" -> R.drawable.dangerous_icon
         else -> R.drawable.lens_icon
     }
@@ -37,7 +34,7 @@ fun StatusIcon(launch: Launch, modifier: Modifier = Modifier) {
 
         "Success" -> MintGreen
         "Go" -> MintGreen
-        "TBC" -> DahliaYellow
+        "TBD" -> DahliaYellow
         "Failure" -> LuminousRed
         else -> OysterWhite
     }
@@ -46,24 +43,17 @@ fun StatusIcon(launch: Launch, modifier: Modifier = Modifier) {
 
         "Success" -> stringResource(R.string.success_label)
         "Go" -> stringResource(R.string.go_label)
-        "TBC" -> stringResource(R.string.tbd_label)
+        "TBD" -> stringResource(R.string.tbd_label)
         "Failure" -> stringResource(R.string.failure_label)
         else -> stringResource(R.string.null_label)
     }
 
-    Card(
-        elevation = spacing.spaceSingleDp,
-        shape = CircleShape,
-        modifier = modifier.padding(spacing.spaceDefault)
-    ) {
-
-        Icon(
-            painter = painterResource(icon),
-            tint = iconTint,
-            contentDescription = iconDesc,
-            modifier = Modifier.size(spacing.spaceLarge)
-        )
-    }
+    Icon(
+        painter = painterResource(icon),
+        tint = iconTint,
+        contentDescription = iconDesc,
+        modifier = modifier.size(spacing.spaceLarge)
+    )
 }
 
 @Preview

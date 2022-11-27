@@ -2,11 +2,13 @@ package com.uxstate.launchpad.presentation.screens.home_screen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -18,6 +20,7 @@ import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.domain.model.computeTimeBoard
+import com.uxstate.launchpad.presentation.screens.common.StatusIcon
 import com.uxstate.launchpad.presentation.screens.common.TimeBoardWidget
 import com.uxstate.launchpad.util.LocalSpacing
 import java.time.Instant
@@ -51,8 +54,7 @@ fun LaunchImage(
 
     )
 
-    Box(modifier = modifier, contentAlignment = Alignment.Center) {
-
+    Box(modifier = modifier.padding(spacing.spaceExtraSmall), contentAlignment = Alignment.Center) {
         Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
                 painter = painter,
@@ -60,8 +62,9 @@ fun LaunchImage(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .clip(RoundedCornerShape(topEnd = spacing.spaceMedium))
                     .aspectRatio(3f / 2f)
-                    .padding(spacing.spaceSmall)
+
             )
 
             // Name
@@ -115,6 +118,8 @@ fun LaunchImage(
                 textAlign = TextAlign.Center
             )
         }
+
+        StatusIcon(launch = launch, modifier = Modifier.align(Alignment.TopEnd))
     }
 }
 
