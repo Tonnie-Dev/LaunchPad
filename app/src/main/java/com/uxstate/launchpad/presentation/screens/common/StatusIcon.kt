@@ -20,4 +20,6 @@ fun StatusIcon(launch: Launch) {
         else -> OysterWhite
     }
 
+    
+
 }
