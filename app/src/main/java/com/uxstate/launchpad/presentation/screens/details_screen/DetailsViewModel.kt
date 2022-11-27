@@ -1,7 +1,5 @@
 package com.uxstate.launchpad.presentation.screens.details_screen
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uxstate.launchpad.domain.model.Launch
@@ -16,7 +14,6 @@ import java.time.temporal.TemporalAccessor
 import javax.inject.Inject
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(

@@ -9,5 +9,10 @@
     <string name="hrs_abbrev">hrs</string>
     <string name="min_abbrev">min</string>
     <string name="sec_abbrev">sec</string>
+    <string name="success_label">Success</string>
+    <string name="go_label">Go</string>
+    <string name="tbd_label">To Be Confirmed</string>
+    <string name="failure_label">Failure</string>
+    <string name="null_label">Null</string>
 
 </resources>

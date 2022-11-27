@@ -1,7 +1,5 @@
 package com.uxstate.launchpad.domain.use_cases
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.uxstate.launchpad.domain.model.Launch
@@ -10,7 +8,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-
 
 class GetUpcomingLaunchesUseCase(private val repository: LaunchRepository) {
 

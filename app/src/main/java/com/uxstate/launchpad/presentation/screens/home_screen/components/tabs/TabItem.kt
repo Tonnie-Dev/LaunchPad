@@ -1,8 +1,6 @@
 package com.uxstate.launchpad.presentation.screens.home_screen.components.tabs
 
-import android.os.Build
 import androidx.annotation.DrawableRes
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.paging.compose.LazyPagingItems
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -16,7 +14,6 @@ sealed class TabItem(
     val title: String,
     val composeFunction: @Composable () -> Unit
 ) {
-
 
     data class Upcoming(
         val data: LazyPagingItems<Launch>,
@@ -32,7 +29,6 @@ sealed class TabItem(
             )
         }
     )
-
 
     data class Previous(
         val data: LazyPagingItems<Launch>,

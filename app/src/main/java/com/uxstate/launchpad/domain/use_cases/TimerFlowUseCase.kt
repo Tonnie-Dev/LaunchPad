@@ -1,7 +1,5 @@
 package com.uxstate.launchpad.domain.use_cases
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.uxstate.launchpad.domain.model.Launch
 import java.time.Instant
 import java.time.LocalDateTime
@@ -16,7 +14,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-
 
 class TimerFlowUseCase() {
     private var job: Job? = null

@@ -1,7 +1,5 @@
 package com.uxstate.launchpad.presentation.screens.home_screen.components
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -31,7 +29,6 @@ import java.time.temporal.TemporalAccessor
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
-
 
 @Composable
 fun LaunchImage(
@@ -121,7 +118,6 @@ fun LaunchImage(
     }
 }
 
-
 fun formatStringDate(date: String): String {
 
     // convert string date to local date
@@ -134,7 +130,6 @@ fun formatStringDate(date: String): String {
 
     return localDateTime.format(dateFormatter)
 }
-
 
 private fun readStringDateToMillis(launch: Launch): Long {
 
@@ -149,7 +144,6 @@ private fun readStringDateToMillis(launch: Launch): Long {
     return localDateTime.atZone(ZoneId.systemDefault())
         .toEpochSecond()
 }
-
 
 private fun generateSecondsFlow(launch: Launch): Flow<Long> = flow {
     val countDownFrom = readStringDateToMillis(launch)
