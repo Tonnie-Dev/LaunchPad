@@ -28,22 +28,22 @@ fun ProbabilityCircle(
 
 ) {
     val spacing = LocalSpacing.current
-    val strokeWidth = (spacing.spaceExtraSmall)
+    val strokeWidth = (spacing.spaceSmall)
 
     val animatedProbability = remember { Animatable(initialValue = 0f) }
 
     LaunchedEffect(key1 = probability, block = {
 
         animatedProbability.animateTo(
-            targetValue = if (probability > 0) (probability / 100) * 360f else 0f,
-            animationSpec = tween(durationMillis = 500)
+            targetValue = if (probability > 0) (probability / 100f) else 0f,
+            animationSpec = tween(durationMillis = 1_500)
         )
     })
 
-    Box(contentAlignment = Alignment.Center) {
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
 
         Canvas(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f),
             onDraw = {
@@ -51,7 +51,7 @@ fun ProbabilityCircle(
                 drawArc(
                     color = inactiveColor,
                     startAngle = -90f,
-                    sweepAngle = 360f * (probability / 100),
+                    sweepAngle = 360f,
                     useCenter = false,
                     size = size,
                     style = Stroke(strokeWidth.toPx())
@@ -60,7 +60,7 @@ fun ProbabilityCircle(
                 drawArc(
                     color = activeColor,
                     startAngle = -90f,
-                    sweepAngle = animatedProbability.value,
+                    sweepAngle = animatedProbability.value * 360,
                     useCenter = false,
                     size = size,
                     style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Butt)

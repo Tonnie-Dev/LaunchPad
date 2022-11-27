@@ -6,16 +6,14 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.uxstate.launchpad.domain.model.Launch
-import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsImage
 
 @Destination
 @Composable
 fun DetailsScreen(launch: Launch, viewModel: DetailsViewModel = hiltViewModel()) {
 
-
-
+    val probability by viewModel.probability.collectAsState()
     DetailsImage(
-        launch = launch
+        launch = launch, probability = probability
     )
 }
