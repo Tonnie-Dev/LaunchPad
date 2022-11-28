@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.domain.model.computeTimeBoard
@@ -23,7 +24,7 @@ fun LaunchBottomSheet(modifier: Modifier = Modifier, probability: Int, launch: L
     
     val timerState = TimerState(secondsFlow)
     val timeBoard = timerState.computeTimeBoard()
-    Row(modifier = modifier.fillMaxWidth()) {
+    Column(modifier = modifier.fillMaxWidth()) {
 
         //name
         Text(
@@ -49,6 +50,21 @@ fun LaunchBottomSheet(modifier: Modifier = Modifier, probability: Int, launch: L
        
 
         //status
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Text(
+                    text = launch.status.name,
+                    style = MaterialTheme.typography.body1,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+            )
+            Text(
+                    text = launch.status.description,
+                    style = MaterialTheme.typography.body1,
+                    modifier = Modifier.fillMaxWidth()
+            )
+
+        }
 
     }
 }
