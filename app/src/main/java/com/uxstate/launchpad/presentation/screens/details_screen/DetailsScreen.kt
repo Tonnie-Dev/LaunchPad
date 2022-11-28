@@ -1,5 +1,6 @@
 package com.uxstate.launchpad.presentation.screens.details_screen
 
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -7,14 +8,34 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsImage
+import com.uxstate.launchpad.presentation.screens.details_screen.components.LaunchBottomSheet
+import com.uxstate.launchpad.util.LocalSpacing
 
+@OptIn(ExperimentalMaterialApi::class)
 @Destination
 @Composable
 fun DetailsScreen(launch: Launch, viewModel: DetailsViewModel = hiltViewModel()) {
 
     val probability by viewModel.probability.collectAsState()
-    val timeFlow = viewModel.generateLongFlow(launch = launch)
-    DetailsImage(
-        launch = launch, probability = probability
-    )
+    val spacing = LocalSpacing.current
+    val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Expanded)
+    val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
+
+    
+    BottomSheetScaffold(
+            scaffoldState = scaffoldState,
+            sheetPeekHeight = (spacing.spaceTwoHundred * 2),
+
+            //bottom sheet content
+            sheetContent = {
+
+                LaunchBottomSheet(probability = probability, launch = launch)
+            })
+
+    //underlying stuff
+    {
+        DetailsImage(launch = launch)
+    }
+
+
 }

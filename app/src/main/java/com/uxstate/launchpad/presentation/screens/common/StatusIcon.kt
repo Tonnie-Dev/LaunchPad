@@ -22,7 +22,7 @@ fun StatusIcon(launch: Launch, modifier: Modifier = Modifier) {
     val spacing = LocalSpacing.current
 
     @DrawableRes
-    val icon = when (launch.status) {
+    val icon = when (launch.status.abbrev) {
 
         "Success" -> R.drawable.check_icon
         "Go" -> R.drawable.outbound_icon
@@ -30,7 +30,7 @@ fun StatusIcon(launch: Launch, modifier: Modifier = Modifier) {
         "Failure" -> R.drawable.dangerous_icon
         else -> R.drawable.lens_icon
     }
-    val iconTint = when (launch.status) {
+    val iconTint = when (launch.status.abbrev) {
 
         "Success" -> MintGreen
         "Go" -> MintGreen
@@ -39,7 +39,7 @@ fun StatusIcon(launch: Launch, modifier: Modifier = Modifier) {
         else -> OysterWhite
     }
 
-    val iconDesc = when (launch.status) {
+    val iconDesc = when (launch.status.abbrev) {
 
         "Success" -> stringResource(R.string.success_label)
         "Go" -> stringResource(R.string.go_label)
@@ -70,7 +70,7 @@ fun StatusIconPreview() {
         ),
         imageUrl = "",
         provider = Provider(id = 0, name = "", type = ""),
-        status = "Success",
+        status = Status(name = "Name", abbrev = "TBD", description = ""),
         pad = Pad(
             locationName = "",
             latitude = "",

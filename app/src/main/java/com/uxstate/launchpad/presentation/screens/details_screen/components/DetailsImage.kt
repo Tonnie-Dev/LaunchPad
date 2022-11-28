@@ -1,7 +1,10 @@
 package com.uxstate.launchpad.presentation.screens.details_screen.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -13,28 +16,28 @@ import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.util.LocalSpacing
 
 @Composable
-fun DetailsImage(launch: Launch, modifier: Modifier = Modifier, probability: Int) {
+fun DetailsImage(launch: Launch, modifier: Modifier = Modifier) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
     val painter = rememberAsyncImagePainter(
-        model = ImageRequest.Builder(context)
-            .data(launch.imageUrl)
-            .crossfade(true)
-            .placeholder(R.drawable.placeholder_image)
-            .build()
+            model = ImageRequest.Builder(context)
+                    .data(launch.imageUrl)
+                    .crossfade(true)
+                    .placeholder(R.drawable.placeholder_image)
+                    .build()
 
     )
 
     Column(modifier = modifier.fillMaxSize()) {
         Image(
-            painter = painter,
-            contentDescription = launch.name,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(9f / 10f),
-            contentScale = ContentScale.Crop
+                painter = painter,
+                contentDescription = launch.name,
+                modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(9f / 10f),
+                contentScale = ContentScale.Crop
         )
     }
 
-    ProbabilityCircle(probability = probability, modifier = Modifier.size(spacing.spaceOneHundred))
+
 }

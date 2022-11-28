@@ -7,6 +7,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,7 +35,7 @@ fun LaunchImage(
     modifier: Modifier = Modifier
 ) {
 
-    val secondsFlow = launch.generateSecondsFlow().collectAsState(initial = 0)
+    val secondsFlow by launch.generateSecondsFlow().collectAsState(initial = 0)
     val spacing = LocalSpacing.current
     val context = LocalContext.current
 
@@ -98,7 +99,7 @@ fun LaunchImage(
 
             if (showCountDown) {
 
-                val timerState = TimerState(secondsFlow.value)
+                val timerState = TimerState(secondsFlow)
                 val timeBoard = timerState.computeTimeBoard()
 
                 TimeBoardWidget(timeBoard = timeBoard)

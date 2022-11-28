@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -13,6 +15,7 @@ import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.domain.model.computeTimeBoard
 import com.uxstate.launchpad.presentation.screens.common.TimeBoardWidget
+import com.uxstate.launchpad.util.generateSecondsFlow
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -20,8 +23,8 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 
 @Composable
-fun LaunchBottomSheet(modifier: Modifier = Modifier, probability: Int, launch: Launch, secondsFlow:Long) {
-    
+fun LaunchBottomSheet(modifier: Modifier = Modifier, probability: Int, launch: Launch) {
+    val secondsFlow by launch.generateSecondsFlow().collectAsState(initial = 0)
     val timerState = TimerState(secondsFlow)
     val timeBoard = timerState.computeTimeBoard()
     Column(modifier = modifier.fillMaxWidth()) {
