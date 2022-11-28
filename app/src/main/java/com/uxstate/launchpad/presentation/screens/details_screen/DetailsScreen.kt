@@ -13,6 +13,7 @@ import com.uxstate.launchpad.presentation.screens.details_screen.components.Deta
 fun DetailsScreen(launch: Launch, viewModel: DetailsViewModel = hiltViewModel()) {
 
     val probability by viewModel.probability.collectAsState()
+    val timeFlow = viewModel.generateLongFlow(launch = launch)
     DetailsImage(
         launch = launch, probability = probability
     )

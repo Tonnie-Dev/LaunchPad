@@ -9,10 +9,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import com.uxstate.launchpad.domain.model.Launch
+import com.uxstate.launchpad.domain.model.TimerState
+import com.uxstate.launchpad.domain.model.computeTimeBoard
 import com.uxstate.launchpad.presentation.screens.common.TimeBoardWidget
 
 @Composable
-fun LaunchBottomSheet(modifier: Modifier = Modifier, probability: Int, launch: Launch) {
+fun LaunchBottomSheet(modifier: Modifier = Modifier, probability: Int, launch: Launch, secondsFlow:Long) {
+    
+    val timerState = TimerState(secondsFlow)
+    val timeBoard = timerState.computeTimeBoard()
     Row(modifier = modifier.fillMaxWidth()) {
 
         //name
@@ -26,12 +31,14 @@ fun LaunchBottomSheet(modifier: Modifier = Modifier, probability: Int, launch: L
             //c1 - Probability Circle
 
             Column() {
+                
+                ProbabilityCircle(probability = probability)
 
             }
             //c2 - Timeboard
             
             Column() {
-                TimeBoardWidget(timeBoard = )
+                TimeBoardWidget(timeBoard = timeBoard)
             }
         }
        
