@@ -13,10 +13,10 @@ import java.time.temporal.TemporalAccessor
 import kotlin.time.Duration.Companion.seconds
 
 
-fun formatStringDate(date: String): String {
+fun String.formatLaunchDatabaseStringDate(): String {
 
     // convert string date to local date
-    val temporalAccessor: TemporalAccessor = DateTimeFormatter.ISO_INSTANT.parse(date)
+    val temporalAccessor: TemporalAccessor = DateTimeFormatter.ISO_INSTANT.parse(this)
     val instant: Instant = Instant.from(temporalAccessor)
     val localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault())
 
@@ -27,11 +27,11 @@ fun formatStringDate(date: String): String {
 }
 
 
-fun readStringDateToSeconds(launch: Launch): Long {
+fun Launch.convertLaunchDatabaseDateToSeconds(): Long {
 
     // convert string date to local date
     val temporalAccessor: TemporalAccessor =
-        DateTimeFormatter.ISO_INSTANT.parse(launch.startWindowDate)
+        DateTimeFormatter.ISO_INSTANT.parse(this.startWindowDate)
     val instant: Instant = Instant.from(temporalAccessor)
     val localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault())
 
@@ -41,8 +41,8 @@ fun readStringDateToSeconds(launch: Launch): Long {
             .toEpochSecond()
 }
 
-fun generateSecondsFlow(launch: Launch): Flow<Long> = flow {
-    val countDownFrom = readStringDateToSeconds(launch)
+fun Launch.generateSecondsFlow(): Flow<Long> = flow {
+    val countDownFrom = convertLaunchDatabaseDateToSeconds()
     var counter = countDownFrom
     emit(counter)
 
