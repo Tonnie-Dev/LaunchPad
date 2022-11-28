@@ -15,7 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import com.uxstate.launchpad.R
 import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 import com.uxstate.launchpad.util.LocalSpacing
 
@@ -46,41 +49,50 @@ fun ProbabilityCircle(
             animationSpec = tween(durationMillis = 1_500, easing = FastOutSlowInEasing)
         )
     })
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+    ) {
+        Box(contentAlignment = Alignment.Center) {
 
-    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+            Canvas(
+                modifier = Modifier
+                    .width(IntrinsicSize.Min)
+                    .aspectRatio(1f)
+                    .padding(spacing.spaceSmall),
+                onDraw = {
 
-        Canvas(
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f),
-            onDraw = {
+                    drawArc(
+                        color = inactiveColor,
+                        startAngle = -90f,
+                        sweepAngle = 360f,
+                        useCenter = false,
+                        size = size,
+                        style = Stroke(strokeWidth.toPx())
+                    )
 
-                drawArc(
-                    color = inactiveColor,
-                    startAngle = -90f,
-                    sweepAngle = 360f,
-                    useCenter = false,
-                    size = size,
-                    style = Stroke(strokeWidth.toPx())
-                )
+                    drawArc(
+                        color = activeColor,
+                        startAngle = -90f,
+                        sweepAngle = animatedProbRatio.value * 360,
+                        useCenter = false,
+                        size = size,
+                        style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Butt)
+                    )
+                }
+            )
 
-                drawArc(
-                    color = activeColor,
-                    startAngle = -90f,
-                    sweepAngle = animatedProbRatio.value * 360,
-                    useCenter = false,
-                    size = size,
-                    style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Butt)
-                )
-            }
-        )
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(text = "$animatedProbInt%", style = MaterialTheme.typography.caption)
-            Text(text = "Probability", style = MaterialTheme.typography.overline)
+            Text(
+                text = "$animatedProbInt%",
+                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.body1
+            )
         }
+        Text(
+            text = stringResource(R.string.probability_label),
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.body1
+        )
     }
 }
 
@@ -92,7 +104,7 @@ fun ProbabilityCirclePreview() {
         probability = 90,
         modifier = Modifier
             .size(spacing.spaceExtraLarge)
-            .padding(spacing.spaceExtraSmall)
+
     )
 }
 
@@ -105,7 +117,7 @@ fun ProbabilityCirclePreviewDark() {
             probability = 50,
             modifier = Modifier
                 .size(spacing.spaceExtraLarge)
-                .padding(spacing.spaceExtraSmall)
+
         )
     }
 }

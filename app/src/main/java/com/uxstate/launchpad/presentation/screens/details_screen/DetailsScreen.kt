@@ -18,12 +18,12 @@ fun DetailsScreen(launch: Launch, viewModel: DetailsViewModel = hiltViewModel())
 
     val probability by viewModel.probability.collectAsState()
     val spacing = LocalSpacing.current
-    val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Expanded)
+    val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
 
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
-        sheetPeekHeight = (spacing.spaceTwoHundred * 2),
+        sheetPeekHeight = (spacing.spaceExtraLarge * 2.5f),
 
         // bottom sheet content
         sheetContent = {
