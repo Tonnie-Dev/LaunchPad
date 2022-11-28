@@ -10,7 +10,7 @@ data class Launch(
     val mission: Mission,
     val imageUrl: String,
     val provider: Provider,
-    val status: String,
+    val status: Status,
     val pad: Pad,
     val startWindowDate: String,
     val rocket: Rocket

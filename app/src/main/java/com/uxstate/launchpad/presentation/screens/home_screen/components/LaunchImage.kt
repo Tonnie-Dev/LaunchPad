@@ -23,6 +23,7 @@ import com.uxstate.launchpad.domain.model.computeTimeBoard
 import com.uxstate.launchpad.presentation.screens.common.StatusIcon
 import com.uxstate.launchpad.presentation.screens.common.TimeBoardWidget
 import com.uxstate.launchpad.util.LocalSpacing
+import com.uxstate.launchpad.util.formatStringDate
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -123,7 +124,7 @@ fun LaunchImage(
     }
 }
 
-fun formatStringDate(date: String): String {
+/*fun formatStringDate(date: String): String {
 
     // convert string date to local date
     val temporalAccessor: TemporalAccessor = DateTimeFormatter.ISO_INSTANT.parse(date)
@@ -134,7 +135,7 @@ fun formatStringDate(date: String): String {
     val dateFormatter = DateTimeFormatter.ofPattern(pattern)
 
     return localDateTime.format(dateFormatter)
-}
+}*/
 
 private fun readStringDateToMillis(launch: Launch): Long {
 
