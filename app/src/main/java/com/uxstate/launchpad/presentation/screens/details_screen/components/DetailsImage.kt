@@ -34,8 +34,8 @@ fun DetailsImage(launch: Launch, modifier: Modifier = Modifier) {
             painter = painter,
             contentDescription = launch.name,
             modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(9f / 10f),
+                .fillMaxWidth()
+                .aspectRatio(9f / 10f),
             contentScale = ContentScale.Crop
         )
 
@@ -48,8 +48,24 @@ fun DetailsImage(launch: Launch, modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxWidth()
         )
 
-        Row(modifier = Modifier.fillMaxWidth()) {
+        Row(modifier = Modifier.fillMaxWidth(), Arrangement.SpaceBetween) {
+            RocketIcon(
+                itemText = launch.rocket.name,
+                icon = R.drawable.rocket_icon,
+                modifier = Modifier.size(spacing.spaceExtraSmall)
+            )
 
+            RocketIcon(
+                itemText = launch.rocket.family,
+                icon = R.drawable.satellite_icon,
+                modifier = Modifier.size(spacing.spaceExtraSmall)
+            )
+
+            RocketIcon(
+                itemText = launch.provider.name,
+                icon = R.drawable.flag_icon,
+                modifier = Modifier.size(spacing.spaceExtraSmall)
+            )
         }
     }
 }
