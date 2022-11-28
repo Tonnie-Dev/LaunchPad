@@ -48,23 +48,23 @@ fun DetailsImage(launch: Launch, modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxWidth()
         )
 
-        Row(modifier = Modifier.fillMaxWidth(), Arrangement.SpaceBetween) {
+        Row(modifier = Modifier.fillMaxWidth(), Arrangement.SpaceAround) {
             RocketIcon(
                 itemText = launch.rocket.name,
                 icon = R.drawable.rocket_icon,
-                modifier = Modifier.size(spacing.spaceExtraSmall)
+                // modifier = Modifier.size(spacing.spaceLarge)
             )
 
             RocketIcon(
                 itemText = launch.rocket.family,
                 icon = R.drawable.satellite_icon,
-                modifier = Modifier.size(spacing.spaceExtraSmall)
+                // modifier = Modifier.size(spacing.spaceExtraLarge)
             )
 
             RocketIcon(
                 itemText = launch.provider.name,
                 icon = R.drawable.flag_icon,
-                modifier = Modifier.size(spacing.spaceExtraSmall)
+                // modifier = Modifier.size(spacing.spaceLarge)
             )
         }
     }
