@@ -1,10 +1,7 @@
 package com.uxstate.launchpad.presentation.screens.details_screen.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -37,8 +34,8 @@ fun DetailsImage(launch: Launch, modifier: Modifier = Modifier) {
             painter = painter,
             contentDescription = launch.name,
             modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(9f / 10f),
+                    .fillMaxWidth()
+                    .aspectRatio(9f / 10f),
             contentScale = ContentScale.Crop
         )
 
@@ -50,5 +47,9 @@ fun DetailsImage(launch: Launch, modifier: Modifier = Modifier) {
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
         )
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+
+        }
     }
 }
