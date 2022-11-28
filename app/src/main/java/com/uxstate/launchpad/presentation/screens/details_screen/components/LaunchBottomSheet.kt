@@ -16,11 +16,6 @@ import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.domain.model.computeTimeBoard
 import com.uxstate.launchpad.presentation.screens.common.TimeBoardWidget
 import com.uxstate.launchpad.util.generateSecondsFlow
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
-import java.time.temporal.TemporalAccessor
 
 @Composable
 fun LaunchBottomSheet(modifier: Modifier = Modifier, probability: Int, launch: Launch) {
@@ -29,47 +24,41 @@ fun LaunchBottomSheet(modifier: Modifier = Modifier, probability: Int, launch: L
     val timeBoard = timerState.computeTimeBoard()
     Column(modifier = modifier.fillMaxWidth()) {
 
-        //name
+        // name
         Text(
-                text = launch.name,
-                style = MaterialTheme.typography.h5,
-                fontWeight = FontWeight.Bold
+            text = launch.name,
+            style = MaterialTheme.typography.h5,
+            fontWeight = FontWeight.Bold
         )
-        
+
         Row() {
-            //c1 - Probability Circle
+            // c1 - Probability Circle
 
             Column() {
-                
-                ProbabilityCircle(probability = probability)
 
+                ProbabilityCircle(probability = probability)
             }
-            //c2 - Timeboard
-            
+            // c2 - Timeboard
+
             Column() {
                 TimeBoardWidget(timeBoard = timeBoard)
             }
         }
-       
 
-        //status
+        // status
         Column(modifier = Modifier.fillMaxWidth()) {
             Text(
-                    text = launch.status.name,
-                    style = MaterialTheme.typography.body1,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
+                text = launch.status.name,
+                style = MaterialTheme.typography.body1,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
             Text(
-                    text = launch.status.description,
-                    style = MaterialTheme.typography.body1,
-                    modifier = Modifier.fillMaxWidth()
+                text = launch.status.description,
+                style = MaterialTheme.typography.body1,
+                modifier = Modifier.fillMaxWidth()
             )
-
         }
-
     }
 }
-
-

@@ -21,21 +21,19 @@ fun DetailsScreen(launch: Launch, viewModel: DetailsViewModel = hiltViewModel())
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Expanded)
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
 
-    
     BottomSheetScaffold(
-            scaffoldState = scaffoldState,
-            sheetPeekHeight = (spacing.spaceTwoHundred * 2),
+        scaffoldState = scaffoldState,
+        sheetPeekHeight = (spacing.spaceTwoHundred * 2),
 
-            //bottom sheet content
-            sheetContent = {
+        // bottom sheet content
+        sheetContent = {
 
-                LaunchBottomSheet(probability = probability, launch = launch)
-            })
+            LaunchBottomSheet(probability = probability, launch = launch)
+        }
+    )
 
-    //underlying stuff
+    // underlying stuff
     {
         DetailsImage(launch = launch)
     }
-
-
 }

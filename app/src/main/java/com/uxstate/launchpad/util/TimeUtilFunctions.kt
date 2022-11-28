@@ -1,9 +1,6 @@
 package com.uxstate.launchpad.util
 
 import com.uxstate.launchpad.domain.model.Launch
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -11,7 +8,9 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 import kotlin.time.Duration.Companion.seconds
-
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 fun String.formatLaunchDatabaseStringDate(): String {
 
@@ -26,7 +25,6 @@ fun String.formatLaunchDatabaseStringDate(): String {
     return localDateTime.format(dateFormatter)
 }
 
-
 fun Launch.convertLaunchDatabaseDateToSeconds(): Long {
 
     // convert string date to local date
@@ -38,7 +36,7 @@ fun Launch.convertLaunchDatabaseDateToSeconds(): Long {
     // convert local date to millis
 
     return localDateTime.atZone(ZoneId.systemDefault())
-            .toEpochSecond()
+        .toEpochSecond()
 }
 
 fun Launch.generateSecondsFlow(): Flow<Long> = flow {

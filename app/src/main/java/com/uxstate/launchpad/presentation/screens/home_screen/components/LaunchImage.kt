@@ -40,61 +40,61 @@ fun LaunchImage(
     val context = LocalContext.current
 
     val painter = rememberAsyncImagePainter(
-            model = ImageRequest.Builder(context = context)
-                    .data(launch.imageUrl)
-                    .placeholder(R.drawable.placeholder_image)
-                    .error(R.drawable.broken_image)
-                    .crossfade(true)
-                    .build()
+        model = ImageRequest.Builder(context = context)
+            .data(launch.imageUrl)
+            .placeholder(R.drawable.placeholder_image)
+            .error(R.drawable.broken_image)
+            .crossfade(true)
+            .build()
 
     )
 
     Box(
-            modifier = modifier.padding(spacing.spaceExtraSmall),
-            contentAlignment = Alignment.Center
+        modifier = modifier.padding(spacing.spaceExtraSmall),
+        contentAlignment = Alignment.Center
     ) {
         Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
-                    painter = painter,
-                    contentDescription = launch.name,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(topEnd = spacing.spaceMedium))
-                            .aspectRatio(3f / 2f)
+                painter = painter,
+                contentDescription = launch.name,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(topEnd = spacing.spaceMedium))
+                    .aspectRatio(3f / 2f)
 
             )
 
             // Name
             Text(
-                    text = launch.name,
-                    style = MaterialTheme.typography.h5,
-                    fontWeight = FontWeight.Bold,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.fillMaxWidth(),
-                    maxLines = 1,
-                    textAlign = TextAlign.Center
+                text = launch.name,
+                style = MaterialTheme.typography.h5,
+                fontWeight = FontWeight.Bold,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
             )
 
             // Agency
             Text(
-                    text = launch.provider.name,
-                    style = MaterialTheme.typography.body1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.fillMaxWidth(),
-                    maxLines = 1,
-                    textAlign = TextAlign.Center
+                text = launch.provider.name,
+                style = MaterialTheme.typography.body1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
             )
 
             // Pad
 
             Text(
-                    text = launch.pad.locationName,
-                    style = MaterialTheme.typography.caption,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.fillMaxWidth(),
-                    maxLines = 1,
-                    textAlign = TextAlign.Center
+                text = launch.pad.locationName,
+                style = MaterialTheme.typography.caption,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
             )
 
             if (showCountDown) {
@@ -107,18 +107,17 @@ fun LaunchImage(
 
             // Date
             Text(
-                    /* text = formatLaunchDatabaseStringDate(launch.startWindowDate),*/
-                    text = (launch.startWindowDate).formatLaunchDatabaseStringDate(),
-                    style = MaterialTheme.typography.body1,
-                    fontWeight = FontWeight.Bold,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.fillMaxWidth(),
-                    maxLines = 1,
-                    textAlign = TextAlign.Center
+                /* text = formatLaunchDatabaseStringDate(launch.startWindowDate),*/
+                text = (launch.startWindowDate).formatLaunchDatabaseStringDate(),
+                style = MaterialTheme.typography.body1,
+                fontWeight = FontWeight.Bold,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 1,
+                textAlign = TextAlign.Center
             )
         }
 
         StatusIcon(launch = launch, modifier = Modifier.align(Alignment.TopEnd))
     }
 }
-
