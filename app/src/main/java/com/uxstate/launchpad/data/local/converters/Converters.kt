@@ -104,6 +104,21 @@ class Converters {
         return statusPropertiesList.joinToString(separator = "~")
 
     }
+
+    @TypeConverter
+    fun readStatusFromRoom(roomString: String): Status {
+
+        val statusPropertiesList = roomString.split("~")
+                .map { it }
+
+        return Status(
+                name = statusPropertiesList[0],
+                abbrev = statusPropertiesList[1],
+                description = statusPropertiesList[2]
+        )
+    }
+
+
     /* @RequiresApi(Build.VERSION_CODES.O)
      @TypeConverter
      fun readStringDateFromRoom(date: String): LocalDateTime {
