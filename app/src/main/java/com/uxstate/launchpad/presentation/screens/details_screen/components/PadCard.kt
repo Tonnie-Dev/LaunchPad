@@ -1,5 +1,6 @@
 package com.uxstate.launchpad.presentation.screens.details_screen.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,73 +31,76 @@ fun PadCard(
     val spacing = LocalSpacing.current
     Card(elevation = spacing.spaceExtraSmall, modifier = modifier) {
 
-        Column {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                    text = launch.pad.locationName,
-                    style = MaterialTheme.typography.h5,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                text = launch.pad.locationName,
+                style = MaterialTheme.typography.h5,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
 
             Text(
-                    text = launch.pad.complex,
-                    style = MaterialTheme.typography.body1,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                text = launch.pad.complex,
+                style = MaterialTheme.typography.body1,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
 
-            Row() {
+            Row(horizontalArrangement = Arrangement.SpaceBetween) {
                 PadCounter(
-                        value = launch.pad.totalLaunchCount,
-                        countDesc = stringResource(R.string.total_launches_text)
+                    value = launch.pad.totalLaunchCount,
+                    countDesc = stringResource(R.string.total_launches_text)
                 )
 
                 PadCounter(
-                        value = launch.pad.totalLandingCount,
-                        countDesc = stringResource(R.string.landing_count_text)
+                    value = launch.pad.totalLandingCount,
+                    countDesc = stringResource(R.string.landing_count_text)
                 )
 
                 PadCounter(
-                        value = launch.pad.total,
-                        countDesc = stringResource(R.string.total_text)
+                    value = launch.pad.total,
+                    countDesc = stringResource(R.string.total_text)
                 )
             }
 
             Button(onClick = {
-                onClickViewMap(launch.pad.latitude.toDouble(),
-                        launch.pad.latitude.toDouble())}) {
+                onClickViewMap(
+                    launch.pad.latitude.toDouble(),
+                    launch.pad.latitude.toDouble()
+                )
+            }) {
 
                 Text(text = stringResource(R.string.view_map_button_text))
-                }
             }
         }
     }
+}
 
-    @Composable
-    fun PadCounter(value: Int, countDesc: String, modifier: Modifier = Modifier) {
+@Composable
+fun PadCounter(value: Int, countDesc: String, modifier: Modifier = Modifier) {
 
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(
-                    text = value.toString(),
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.h6,
-                    color = Color.Magenta
-            )
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            text = value.toString(),
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.h6,
+            color = Color.Magenta
+        )
 
-            Text(
-                    text = countDesc,
-                    style = MaterialTheme.typography.caption,
+        Text(
+            text = countDesc,
+            style = MaterialTheme.typography.caption,
 
-                    )
-        }
+        )
     }
+}
 
-    @Preview
-    @Composable
-    fun PadCounterPreview() {
-        PadCounter(value = 13, countDesc = stringResource(id = R.string.total_launches_text))
-    }
+@Preview
+@Composable
+fun PadCounterPreview() {
+    PadCounter(value = 13, countDesc = stringResource(id = R.string.total_launches_text))
+}

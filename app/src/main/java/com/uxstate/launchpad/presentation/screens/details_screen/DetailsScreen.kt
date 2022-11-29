@@ -22,18 +22,18 @@ fun DetailsScreen(launch: Launch, viewModel: DetailsViewModel = hiltViewModel())
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
 
     BottomSheetScaffold(
-            scaffoldState = scaffoldState,
-            sheetPeekHeight = (spacing.spaceExtraLarge * 2.5f),
+        scaffoldState = scaffoldState,
+        sheetPeekHeight = (spacing.spaceExtraLarge * 2.5f),
 
-            // bottom sheet content
-            sheetContent = {
+        // bottom sheet content
+        sheetContent = {
 
-                LaunchBottomSheet(
-                        probability = probability,
-                        launch = launch,
-                        onClickViewMap = {latitude, longitude -> }
-                )
-            }
+            LaunchBottomSheet(
+                probability = probability,
+                launch = launch,
+                onClickViewMap = { latitude, longitude -> }
+            )
+        }
     )
 
     // underlying stuff

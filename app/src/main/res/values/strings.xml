@@ -21,9 +21,9 @@
     <string name="agency_label">Agency</string>
     <string name="type_label">Type</string>
     <string name="status_label">Status</string>
-    <string name="total_launches_text">Total Launches</string>
+    <string name="total_launches_text">Launches</string>
     <string name="total_text">Total</string>
-    <string name="landing_count_text">Landing Count</string>
+    <string name="landing_count_text">Landings</string>
     <string name="view_map_button_text">View Map</string>
 
 </resources>

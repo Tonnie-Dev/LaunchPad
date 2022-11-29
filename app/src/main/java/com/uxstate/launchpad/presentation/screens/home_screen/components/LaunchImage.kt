@@ -42,7 +42,7 @@ fun LaunchImage(
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(context = context)
             .data(launch.imageUrl)
-            .placeholder(R.drawable.placeholder_image)
+            .placeholder(R.drawable.rocket_svgrepo)
             .error(R.drawable.broken_image)
             .crossfade(true)
             .build()
