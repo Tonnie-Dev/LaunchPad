@@ -7,5 +7,12 @@ import kotlinx.parcelize.Parcelize
 data class Pad(
     val locationName: String,
     val latitude: String,
-    val longitude: String
-) : Parcelable
+    val longitude: String,
+    val totalLaunchCount: Int,
+    val totalLandingCount:Int,
+
+) : Parcelable {
+
+    val total:Int
+    get() = totalLaunchCount + totalLandingCount
+}
