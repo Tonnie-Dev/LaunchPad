@@ -16,5 +16,9 @@
     <string name="null_label">Null</string>
     <string name="mission_label">Mission</string>
     <string name="probability_label">Probability</string>
+    <string name="rocket_label">Rocket</string>
+    <string name="family_label">Family</string>
+    <string name="agency_label">Agency</string>
+    <string name="type_label">Type</string>
 
 </resources>
