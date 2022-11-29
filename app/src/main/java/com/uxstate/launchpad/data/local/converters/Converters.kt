@@ -19,12 +19,12 @@ class Converters {
     fun readMissionFromRoom(roomString: String): Mission {
 
         val roomStringList = roomString.split("~")
-            .map { it }
+                .map { it }
 
         return Mission(
-            name = roomStringList[0],
-            description = roomStringList[1],
-            type = roomStringList[2]
+                name = roomStringList[0],
+                description = roomStringList[1],
+                type = roomStringList[2]
         )
     }
 
@@ -42,11 +42,11 @@ class Converters {
     fun readProviderFromRoom(roomString: String): Provider {
 
         val providerList = roomString.split("~")
-            .map { it }
+                .map { it }
         return Provider(
-            id = providerList[0].toInt(),
-            name = providerList[1],
-            type = providerList[2]
+                id = providerList[0].toInt(),
+                name = providerList[1],
+                type = providerList[2]
         )
     }
 
@@ -56,8 +56,16 @@ class Converters {
         val padLocationName = pad.locationName
         val padLatitude = pad.latitude
         val padLongitude = pad.longitude
+        val padTotalLaunchCount = pad.totalLaunchCount
+        val padTotalLandingCount = pad.totalLandingCount
 
-        val padProviderList = listOf(padLocationName, padLatitude, padLongitude)
+        val padProviderList = listOf(
+                padLocationName,
+                padLatitude,
+                padLongitude,
+                padTotalLaunchCount,
+                padTotalLandingCount
+        )
 
         return padProviderList.joinToString(separator = "~")
     }
@@ -67,10 +75,12 @@ class Converters {
 
         val padStringList = roomString.split("~")
         return Pad(
-            locationName = padStringList[0],
-            latitude = padStringList[1],
-            longitude = padStringList[2]
-        )
+                locationName = padStringList[0],
+                latitude = padStringList[1],
+                longitude = padStringList[2],
+                totalLaunchCount = padStringList[3].toInt(),
+                totalLandingCount = padStringList[4].toInt()
+                )
     }
 
     @TypeConverter
@@ -88,11 +98,11 @@ class Converters {
     fun readRocketFromRoom(roomString: String): Rocket {
 
         val rocketPropertiesListString = roomString.split("~")
-            .map { it }
+                .map { it }
 
         return Rocket(
-            name = rocketPropertiesListString[0],
-            family = rocketPropertiesListString[1]
+                name = rocketPropertiesListString[0],
+                family = rocketPropertiesListString[1]
         )
     }
 
@@ -107,12 +117,12 @@ class Converters {
     fun readStatusFromRoom(roomString: String): Status {
 
         val statusPropertiesList = roomString.split("~")
-            .map { it }
+                .map { it }
 
         return Status(
-            name = statusPropertiesList[0],
-            abbrev = statusPropertiesList[1],
-            description = statusPropertiesList[2]
+                name = statusPropertiesList[0],
+                abbrev = statusPropertiesList[1],
+                description = statusPropertiesList[2]
         )
     }
 
