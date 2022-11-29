@@ -74,7 +74,11 @@ fun StatusIconPreview() {
         pad = Pad(
             locationName = "",
             latitude = "",
-            longitude = ""
+            longitude = "",
+            complex = "",
+            totalLaunchCount = 0,
+            totalLandingCount = 0,
+
         ),
         startWindowDate = "",
         rocket = Rocket(name = "", family = "")

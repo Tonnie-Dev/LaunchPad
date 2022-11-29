@@ -65,7 +65,10 @@ numquam blanditiis harum quisquam eius
         pad = Pad(
             locationName = "",
             latitude = "",
-            longitude = ""
+            longitude = "", complex = "",
+            totalLaunchCount = 0,
+            totalLandingCount = 0,
+
         ),
         startWindowDate = "",
         rocket = Rocket(name = "", family = "")
@@ -99,7 +102,9 @@ numquam blanditiis harum quisquam eius
             pad = Pad(
                 locationName = "",
                 latitude = "",
-                longitude = ""
+                longitude = "", complex = "",
+                totalLaunchCount = 0,
+                totalLandingCount = 0
             ),
             startWindowDate = "",
             rocket = Rocket(name = "", family = "")

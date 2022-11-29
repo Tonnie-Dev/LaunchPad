@@ -8,11 +8,12 @@ data class Pad(
     val locationName: String,
     val latitude: String,
     val longitude: String,
+    val complex: String,
     val totalLaunchCount: Int,
-    val totalLandingCount:Int,
+    val totalLandingCount: Int,
 
 ) : Parcelable {
 
-    val total:Int
-    get() = totalLaunchCount + totalLandingCount
+    val total: Int
+        get() = totalLaunchCount + totalLandingCount
 }

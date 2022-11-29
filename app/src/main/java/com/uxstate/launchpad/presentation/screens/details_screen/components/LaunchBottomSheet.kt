@@ -28,9 +28,14 @@ import com.uxstate.launchpad.util.formatLaunchDatabaseStringDate
 import com.uxstate.launchpad.util.generateSecondsFlow
 
 @Composable
-fun LaunchBottomSheet(modifier: Modifier = Modifier, probability: Int, launch: Launch) {
+fun LaunchBottomSheet(
+    probability: Int,
+    launch: Launch,
+    onClickViewMap: (Double, Double) -> Unit,
+    modifier: Modifier = Modifier
+) {
     val secondsFlow by launch.generateSecondsFlow()
-        .collectAsState(initial = 0)
+            .collectAsState(initial = 0)
 
     val timerState = TimerState(secondsFlow)
     val timeBoard = timerState.computeTimeBoard()
@@ -46,29 +51,29 @@ fun LaunchBottomSheet(modifier: Modifier = Modifier, probability: Int, launch: L
 
     val spacing = LocalSpacing.current
     Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(spacing.spaceSmall)
+            modifier = modifier
+                    .fillMaxWidth()
+                    .padding(spacing.spaceSmall)
     ) {
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
         ) {
             // c1 - Probability Circle
 
             Column(
-                modifier = Modifier
-                    .weight(.35f)
-                    .fillMaxWidth()
+                    modifier = Modifier
+                            .weight(.35f)
+                            .fillMaxWidth()
             ) {
                 Card(
-                    elevation = spacing.spaceExtraSmall,
-                    modifier = Modifier.padding(spacing.spaceSmall)
+                        elevation = spacing.spaceExtraSmall,
+                        modifier = Modifier.padding(spacing.spaceSmall)
                 ) {
 
                     ProbabilityCircle(
-                        probability = probability,
+                            probability = probability,
                             /*  modifier = Modifier
                                   .size(spacing.spaceExtraLarge + spacing.spaceLarge)
                                   .padding(spacing.spaceExtraSmall)*/
@@ -80,34 +85,34 @@ fun LaunchBottomSheet(modifier: Modifier = Modifier, probability: Int, launch: L
             Column(modifier = Modifier.weight(.65f)) {
 
                 Card(
-                    elevation = spacing.spaceExtraSmall,
-                    modifier = Modifier.padding(spacing.spaceSmall)
+                        elevation = spacing.spaceExtraSmall,
+                        modifier = Modifier.padding(spacing.spaceSmall)
                 ) {
                     Column(modifier = Modifier.padding(spacing.spaceExtraSmall)) {
                         TimeBoardWidget(
-                            timeBoard = timeBoard,
-                            modifier = Modifier
-                                .fillMaxWidth()
+                                timeBoard = timeBoard,
+                                modifier = Modifier
+                                        .fillMaxWidth()
 
                         )
                         Text(
-                            text = (launch.startWindowDate).formatLaunchDatabaseStringDate(),
-                            style = MaterialTheme.typography.body1,
-                            fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .fillMaxWidth()
+                                text = (launch.startWindowDate).formatLaunchDatabaseStringDate(),
+                                style = MaterialTheme.typography.body1,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier
+                                        .fillMaxWidth()
                         )
 
                         Spacer(modifier = Modifier.height(spacing.spaceMedium + spacing.spaceSmall))
                         Text(
-                            text = (launch.status.name),
-                            style = MaterialTheme.typography.body1,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clip(CutCornerShape(spacing.spaceExtraSmall))
-                                .background(color = backgroundColor)
+                                text = (launch.status.name),
+                                style = MaterialTheme.typography.body1,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clip(CutCornerShape(spacing.spaceExtraSmall))
+                                        .background(color = backgroundColor)
                         )
                     }
                 }
@@ -117,17 +122,19 @@ fun LaunchBottomSheet(modifier: Modifier = Modifier, probability: Int, launch: L
         // status
         Column(modifier = Modifier.fillMaxWidth()) {
             Text(
-                text = stringResource(R.string.status_label),
-                style = MaterialTheme.typography.h5,
-                fontWeight = FontWeight.Bold
+                    text = stringResource(R.string.status_label),
+                    style = MaterialTheme.typography.h5,
+                    fontWeight = FontWeight.Bold
             )
             Text(
-                text = launch.status.description,
-                style = MaterialTheme.typography.body1,
-                modifier = Modifier.fillMaxWidth()
+                    text = launch.status.description,
+                    style = MaterialTheme.typography.body1,
+                    modifier = Modifier.fillMaxWidth()
             )
         }
 
         MissionCard(launch = launch)
+
+        PadCard(launch = launch, onClickViewMap =onClickViewMap)
     }
 }
