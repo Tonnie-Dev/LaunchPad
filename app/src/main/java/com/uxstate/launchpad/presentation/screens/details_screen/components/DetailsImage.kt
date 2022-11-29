@@ -28,54 +28,53 @@ fun DetailsImage(launch: Launch, modifier: Modifier = Modifier) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
 
-
     val painter = rememberAsyncImagePainter(
-            model = ImageRequest.Builder(context)
-                    .data(launch.imageUrl)
-                    .crossfade(true)
-                    .placeholder(R.drawable.placeholder_image)
-                    .build()
+        model = ImageRequest.Builder(context)
+            .data(launch.imageUrl)
+            .crossfade(true)
+            .placeholder(R.drawable.placeholder_image)
+            .build()
 
     )
     val rocketIcons = listOf(
-            RocketIconDataClass(
-                    itemText = stringResource(R.string.rocket_label),
-                    value = launch.rocket.name,
-                    icon = R.drawable.rocket_icon
-            ),
-            RocketIconDataClass(
-                    itemText = launch.rocket.family,
-                    value = stringResource(R.string.family_label),
-                    icon = R.drawable.flight_icon
-            ),
-            RocketIconDataClass(
-                    itemText = stringResource(R.string.agency_label),
-                    value = launch.provider.name,
-                    icon = R.drawable.flag_icon
-            ),
-            RocketIconDataClass(
-                    itemText = stringResource(R.string.type_label),
-                    value = launch.provider.type,
-                    icon = R.drawable.satellite_icon
-            )
+        RocketIconDataClass(
+            itemText = stringResource(R.string.rocket_label),
+            value = launch.rocket.name,
+            icon = R.drawable.rocket_icon
+        ),
+        RocketIconDataClass(
+            itemText = stringResource(R.string.family_label),
+            value = launch.rocket.family,
+            icon = R.drawable.flight_icon
+        ),
+        RocketIconDataClass(
+            itemText = stringResource(R.string.agency_label),
+            value = launch.provider.name,
+            icon = R.drawable.flag_icon
+        ),
+        RocketIconDataClass(
+            itemText = stringResource(R.string.type_label),
+            value = launch.provider.type,
+            icon = R.drawable.satellite_icon
+        )
     )
     Column(modifier = modifier.fillMaxSize()) {
         Image(
-                painter = painter,
-                contentDescription = launch.name,
-                modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(9f / 10f),
-                contentScale = ContentScale.Crop
+            painter = painter,
+            contentDescription = launch.name,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(9f / 10f),
+            contentScale = ContentScale.Crop
         )
 
         // name
         Text(
-                text = launch.name,
-                style = MaterialTheme.typography.h5,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+            text = launch.name,
+            style = MaterialTheme.typography.h5,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
         )
 
         LazyRow {
@@ -84,11 +83,7 @@ fun DetailsImage(launch: Launch, modifier: Modifier = Modifier) {
                 RocketIcon(itemText = icon.itemText, value = icon.value, icon = icon.icon)
             }
         }
-
     }
-
-
 }
 
 data class RocketIconDataClass(val itemText: String, val value: String, @DrawableRes val icon: Int)
-

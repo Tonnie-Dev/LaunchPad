@@ -20,5 +20,6 @@
     <string name="family_label">Family</string>
     <string name="agency_label">Agency</string>
     <string name="type_label">Type</string>
+    <string name="status_label">Status</string>
 
 </resources>
