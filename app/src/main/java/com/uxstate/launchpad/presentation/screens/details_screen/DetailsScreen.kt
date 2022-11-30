@@ -22,6 +22,7 @@ fun DetailsScreen(launch: Launch, viewModel: DetailsViewModel = hiltViewModel())
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
 
     BottomSheetScaffold(
+        drawerGesturesEnabled = true,
         scaffoldState = scaffoldState,
         sheetPeekHeight = (spacing.spaceExtraLarge * 2.5f),
 
