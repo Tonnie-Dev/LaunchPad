@@ -1,6 +1,11 @@
 package com.uxstate.launchpad.util
 
+import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
 import com.uxstate.launchpad.domain.model.Launch
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -8,9 +13,6 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 import kotlin.time.Duration.Companion.seconds
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 fun String.formatLaunchDatabaseStringDate(): String {
 
@@ -36,7 +38,7 @@ fun Launch.convertLaunchDatabaseDateToSeconds(): Long {
     // convert local date to millis
 
     return localDateTime.atZone(ZoneId.systemDefault())
-        .toEpochSecond()
+            .toEpochSecond()
 }
 
 fun Launch.generateSecondsFlow(): Flow<Long> = flow {
@@ -50,4 +52,16 @@ fun Launch.generateSecondsFlow(): Flow<Long> = flow {
         counter--
         emit(counter)
     }
+}
+
+
+@OptIn(ExperimentalAnimationApi::class)
+fun addAnimation(duration: Int = 800): ContentTransform {
+
+    return slideInVertically(animationSpec = tween(durationMillis = duration))
+    { height -> height } + fadeIn(animationSpec = tween(durationMillis = duration)) with
+            slideOutVertically(animationSpec = tween(durationMillis = duration))
+            { height -> -height } + fadeOut(tween(durationMillis = duration))
+
+
 }
