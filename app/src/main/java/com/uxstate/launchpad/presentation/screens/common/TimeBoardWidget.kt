@@ -2,6 +2,9 @@ package com.uxstate.launchpad.presentation.screens.common
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.SizeTransform
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -15,6 +18,7 @@ import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.TimeBoard
 import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 import com.uxstate.launchpad.util.LocalSpacing
+import com.uxstate.launchpad.util.addAnimation
 
 @Composable
 fun TimeBoardWidget(modifier: Modifier = Modifier, timeBoard: TimeBoard) {
@@ -52,6 +56,7 @@ fun TimeBoardWidget(modifier: Modifier = Modifier, timeBoard: TimeBoard) {
     }
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun TimeSlot(timeValue: Int, timeType: String, prefix: String = "") {
     val spacing = LocalSpacing.current
@@ -67,11 +72,18 @@ fun TimeSlot(timeValue: Int, timeType: String, prefix: String = "") {
                 style = MaterialTheme.typography.h5,
 
             )
-            Text(
-                text = stringResource(id = R.string.time_slot, timeValue),
-                style = MaterialTheme.typography.h5,
+            AnimatedContent(
+                targetState = timeValue,
+                transitionSpec = { addAnimation().using(SizeTransform(clip = true)) }
+            ) {
 
-            )
+                value ->
+                Text(
+                    text = stringResource(id = R.string.time_slot, value),
+                    style = MaterialTheme.typography.h5,
+
+                )
+            }
         }
 
         Text(
