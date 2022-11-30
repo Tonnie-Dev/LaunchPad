@@ -104,3 +104,5 @@ fun PadCounter(value: Int, countDesc: String, modifier: Modifier = Modifier) {
 fun PadCounterPreview() {
     PadCounter(value = 13, countDesc = stringResource(id = R.string.total_launches_text))
 }
+
+
