@@ -8,6 +8,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsImage
+import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsTopBar
 import com.uxstate.launchpad.presentation.screens.details_screen.components.LaunchBottomSheet
 import com.uxstate.launchpad.util.LocalSpacing
 
@@ -25,7 +26,7 @@ fun DetailsScreen(launch: Launch, viewModel: DetailsViewModel = hiltViewModel())
         drawerGesturesEnabled = true,
         scaffoldState = scaffoldState,
         sheetPeekHeight = (spacing.spaceExtraLarge * 2.5f),
-
+        topBar = { DetailsTopBar(launch = launch) },
         // bottom sheet content
         sheetContent = {
 
@@ -35,6 +36,7 @@ fun DetailsScreen(launch: Launch, viewModel: DetailsViewModel = hiltViewModel())
                 onClickViewMap = { latitude, longitude -> }
             )
         }
+
     )
 
     // underlying stuff

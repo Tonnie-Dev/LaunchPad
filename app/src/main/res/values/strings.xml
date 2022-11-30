@@ -25,5 +25,6 @@
     <string name="total_text">Total</string>
     <string name="landing_count_text">Landings</string>
     <string name="view_map_button_text">View Map</string>
+    <string name="back_label">Back</string>
 
 </resources>
