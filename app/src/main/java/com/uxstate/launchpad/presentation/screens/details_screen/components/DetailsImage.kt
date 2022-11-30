@@ -2,21 +2,14 @@ package com.uxstate.launchpad.presentation.screens.details_screen.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.launchpad.R
@@ -64,19 +57,11 @@ fun DetailsImage(launch: Launch, modifier: Modifier = Modifier) {
             contentDescription = launch.name,
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(9f / 10f),
+                .aspectRatio(19f / 20f),
             contentScale = ContentScale.Crop
         )
 
-        // name
-        Text(
-            text = launch.name,
-            style = MaterialTheme.typography.h5,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-        )
-
+        Spacer(modifier = Modifier.height(spacing.spaceSmall))
         LazyRow {
 
             items(rocketIcons) { icon ->

@@ -6,6 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsImage
 import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsTopBar
@@ -15,7 +16,11 @@ import com.uxstate.launchpad.util.LocalSpacing
 @OptIn(ExperimentalMaterialApi::class)
 @Destination
 @Composable
-fun DetailsScreen(launch: Launch, viewModel: DetailsViewModel = hiltViewModel()) {
+fun DetailsScreen(
+    launch: Launch,
+    viewModel: DetailsViewModel = hiltViewModel(),
+    navigator: DestinationsNavigator
+) {
 
     val probability by viewModel.probability.collectAsState()
     val spacing = LocalSpacing.current
@@ -26,7 +31,12 @@ fun DetailsScreen(launch: Launch, viewModel: DetailsViewModel = hiltViewModel())
         drawerGesturesEnabled = true,
         scaffoldState = scaffoldState,
         sheetPeekHeight = (spacing.spaceExtraLarge * 2.5f),
-        topBar = { DetailsTopBar(launch = launch) },
+        topBar = {
+            DetailsTopBar(
+                launch = launch,
+                onClickBackArrow = { navigator.navigateUp() }
+            )
+        },
         // bottom sheet content
         sheetContent = {
 
