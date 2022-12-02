@@ -2,7 +2,6 @@ package com.uxstate.launchpad.presentation.screens.common
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.AlertDialog
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,12 +22,13 @@ fun AppDialog(
     if (dialogState) {
 
         AlertDialog(
-            onDismissRequest = {
-                onDialogStateChange?.invoke(false)
-                onDismiss?.invoke()
-            },
-            title = { Text(text = "Error") },
-            text = { Text(text = "Launch not found!") }, buttons = {}
+                onDismissRequest = {
+                    onDialogStateChange?.invoke(false)
+                    onDismiss?.invoke()
+                },
+                title = null,
+                text = null,
+                buttons = {}
         )
     }
 }
