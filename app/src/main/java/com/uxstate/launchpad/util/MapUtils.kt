@@ -7,9 +7,9 @@ import android.net.Uri
 
 fun openGoogleMap(latitude: Double, longitude: Double, context: Context) {
 
-    //you need action, data and package name
+    // you need action, data and package name
 
-    val uri = Uri.parse("geo:$latitude,$longitude")
+    val uri = Uri.parse("geo:$latitude,$longitude?z=15")
     val mapIntent = Intent()
     mapIntent.action = Intent.ACTION_VIEW
     mapIntent.data = uri
@@ -19,6 +19,4 @@ fun openGoogleMap(latitude: Double, longitude: Double, context: Context) {
     } catch (e: ActivityNotFoundException) {
         e.printStackTrace()
     }
-
-
 }
