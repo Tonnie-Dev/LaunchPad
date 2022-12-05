@@ -23,5 +23,11 @@ class DetailsViewModel @Inject constructor(
     private val _isShowDialog = MutableStateFlow(false)
     val isShowDialog = _isShowDialog.asStateFlow()
 
-    
+    fun onDialogShow(){}
+    fun onDialogConfirm() {
+
+    }
+    fun onDialogDismiss() {
+        
+    }
 }
