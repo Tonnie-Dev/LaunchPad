@@ -1,14 +1,13 @@
 package com.uxstate.launchpad.presentation.screens.details_screen
 
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.launchpad.domain.model.Launch
+import com.uxstate.launchpad.presentation.screens.common.AppDialog
 import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsImage
 import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsTopBar
 import com.uxstate.launchpad.presentation.screens.details_screen.components.LaunchBottomSheet
@@ -25,6 +24,7 @@ fun DetailsScreen(
     navigator: DestinationsNavigator
 ) {
 
+    var isShowDialog by remember { mutableStateOf(false) }
     val probability by viewModel.probability.collectAsState()
     val spacing = LocalSpacing.current
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
@@ -51,9 +51,20 @@ fun DetailsScreen(
                         "The lat is $latitude, lon is" +
                             " $longitude  sum is ${latitude + longitude}"
                     )
-                    openGoogleMap(latitude, longitude, context)
+
+                    if (latitude == 0.0 || longitude == 0.0) {
+                        isShowDialog = true
+                    } else {
+
+                        openGoogleMap(latitude, longitude, context)
+                    }
                 }
             )
+
+            if (isShowDialog) {
+
+                AppDialog(dialogState = isShowDialog)
+            }
         }
 
     )

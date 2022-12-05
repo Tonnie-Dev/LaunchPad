@@ -26,5 +26,8 @@
     <string name="landing_count_text">Landings</string>
     <string name="view_map_button_text">View Map</string>
     <string name="back_label">Back</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_error_text">Error, pad location could not be found</string>
+    <string name="dialog_error_title">Location Error</string>
 
 </resources>

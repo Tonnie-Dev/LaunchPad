@@ -20,6 +20,8 @@ class DetailsViewModel @Inject constructor(
     private val _probability = MutableStateFlow(Random.nextInt(50, 100))
     val probability = _probability.asStateFlow()
 
-    fun generateLongFlow(launch: Launch): Flow<Long> =
-        wrapper.timerFlowUseCase(launch, viewModelScope)
+    private val _isShowDialog = MutableStateFlow(false)
+    val isShowDialog = _isShowDialog.asStateFlow()
+
+    
 }

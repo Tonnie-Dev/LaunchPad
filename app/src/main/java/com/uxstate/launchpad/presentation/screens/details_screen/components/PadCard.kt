@@ -68,9 +68,13 @@ fun PadCard(
             }
 
             Button(onClick = {
+
+                val latitude = launch.pad.latitude.toDouble()
+                val longitude = launch.pad.longitude.toDouble()
+
                 onClickViewMap(
-                    launch.pad.latitude.toDouble(),
-                    launch.pad.longitude.toDouble()
+                    latitude, longitude
+
                 )
             }) {
 
