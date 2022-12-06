@@ -53,7 +53,7 @@ fun LaunchBottomSheet(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .fillMaxHeight(.7f)
+            .fillMaxHeight(.75f)
             .padding(spacing.spaceSmall)
     ) {
 

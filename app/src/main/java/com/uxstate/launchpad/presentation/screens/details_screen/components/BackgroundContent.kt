@@ -14,7 +14,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
-import com.uxstate.launchpad.util.Constants.MIN_BACKGROUND_IMAGE_HEIGHT
+import com.uxstate.launchpad.util.Constants
 import com.uxstate.launchpad.util.LocalSpacing
 
 @Composable
@@ -57,17 +57,16 @@ fun BackgroundContent(
         )
     )
     Column(
-        modifier = modifier.fillMaxSize()
-           /* .fillMaxWidth()
-            .fillMaxHeight(imageFractionHeight + MIN_BACKGROUND_IMAGE_HEIGHT)*/
+        modifier = modifier
+            .fillMaxWidth()
+            .fillMaxHeight(imageFractionHeight)
     ) {
         Image(
             painter = painter,
             contentDescription = launch.name,
             modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(imageFractionHeight + MIN_BACKGROUND_IMAGE_HEIGHT)
-            /*.aspectRatio(19f / 20f)*/,
+                .fillMaxWidth(imageFractionHeight + Constants.MIN_BACKGROUND_IMAGE_HEIGHT)
+                .aspectRatio(19f / 20f),
             contentScale = ContentScale.Crop
         )
 
