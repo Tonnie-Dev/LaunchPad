@@ -1,6 +1,7 @@
 package com.uxstate.launchpad.presentation.screens.details_screen.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +23,7 @@ fun MissionSection(launch: Launch, modifier: Modifier = Modifier) {
         modifier = modifier.padding(spacing.spaceSmall),
         verticalArrangement = Arrangement.SpaceAround
     ) {
+        Spacer(modifier = Modifier.height(spacing.spaceExtraSmall))
         Text(
             text = stringResource(R.string.mission_label),
             style = MaterialTheme.typography.h6,
@@ -34,6 +36,16 @@ fun MissionSection(launch: Launch, modifier: Modifier = Modifier) {
             style = MaterialTheme.typography.body2,
 
         )
+        Spacer(modifier = Modifier.height(spacing.spaceExtraSmall))
+
+        Spacer(modifier = Modifier.height(spacing.spaceLarge))
+
+        Divider(
+            modifier = Modifier.fillMaxWidth(),
+            thickness = spacing.spaceSingleDp,
+            color = MaterialTheme.colors.onSurface
+        )
+
         Spacer(modifier = Modifier.height(spacing.spaceExtraSmall))
     }
 }

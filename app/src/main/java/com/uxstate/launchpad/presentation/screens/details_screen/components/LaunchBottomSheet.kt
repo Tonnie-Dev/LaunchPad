@@ -11,10 +11,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.domain.model.computeTimeBoard
@@ -120,18 +118,7 @@ fun LaunchBottomSheet(
         }
 
         // status
-        Column(modifier = Modifier.fillMaxWidth()) {
-            Text(
-                text = stringResource(R.string.status_label),
-                style = MaterialTheme.typography.h5,
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                text = launch.status.description,
-                style = MaterialTheme.typography.body1,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
+        StatusSection(launch = launch)
 
         MissionSection(launch = launch)
 
