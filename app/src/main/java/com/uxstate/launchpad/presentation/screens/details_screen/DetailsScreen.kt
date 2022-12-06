@@ -8,7 +8,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.presentation.screens.common.SimpleAlertDialog
-import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsImage
+import com.uxstate.launchpad.presentation.screens.details_screen.components.BackgroundContent
 import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsTopBar
 import com.uxstate.launchpad.presentation.screens.details_screen.components.LaunchBottomSheet
 import com.uxstate.launchpad.util.LocalSpacing
@@ -23,14 +23,18 @@ fun DetailsScreen(
     viewModel: DetailsViewModel = hiltViewModel(),
     navigator: DestinationsNavigator
 ) {
+    val spacing = LocalSpacing.current
+    val context = LocalContext.current
+
+    val probability by viewModel.probability.collectAsState()
+
+    val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
+    val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
 
     val isShowDialog by viewModel.isShowDialog.collectAsState()
 
-    val probability by viewModel.probability.collectAsState()
-    val spacing = LocalSpacing.current
-    val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
-    val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
-    val context = LocalContext.current
+
+
     BottomSheetScaffold(
         drawerGesturesEnabled = true,
         scaffoldState = scaffoldState,
@@ -72,6 +76,6 @@ fun DetailsScreen(
 
     // underlying stuff
     {
-        DetailsImage(launch = launch)
+        BackgroundContent(launch = launch)
     }
 }

@@ -17,7 +17,7 @@ import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.util.LocalSpacing
 
 @Composable
-fun DetailsImage(launch: Launch, modifier: Modifier = Modifier) {
+fun BackgroundContent(launch: Launch, modifier: Modifier = Modifier) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
 
