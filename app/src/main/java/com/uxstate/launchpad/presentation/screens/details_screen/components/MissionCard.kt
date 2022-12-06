@@ -1,9 +1,6 @@
 package com.uxstate.launchpad.presentation.screens.details_screen.components
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -21,25 +18,23 @@ fun MissionCard(launch: Launch, modifier: Modifier = Modifier) {
 
     val spacing = LocalSpacing.current
 
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(spacing.spaceExtraSmall)
+    Column(
+        modifier = modifier.padding(spacing.spaceSmall),
+        verticalArrangement = Arrangement.SpaceAround
     ) {
+        Text(
+            text = stringResource(R.string.mission_label),
+            style = MaterialTheme.typography.h6,
+            fontWeight = FontWeight.Bold
+        )
 
-        Column() {
-            Text(
-                text = stringResource(R.string.mission_label),
-                style = MaterialTheme.typography.h5,
-                fontWeight = FontWeight.Bold
-            )
+        Spacer(modifier = Modifier.height(spacing.spaceExtraSmall))
+        Text(
+            text = launch.mission.description,
+            style = MaterialTheme.typography.body2,
 
-            Text(
-                text = launch.mission.description,
-                style = MaterialTheme.typography.body1,
-
-            )
-        }
+        )
+        Spacer(modifier = Modifier.height(spacing.spaceExtraSmall))
     }
 }
 

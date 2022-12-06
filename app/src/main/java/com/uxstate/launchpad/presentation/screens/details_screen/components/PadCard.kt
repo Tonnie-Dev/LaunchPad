@@ -37,7 +37,7 @@ fun PadCard(
                 style = MaterialTheme.typography.h5,
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
-                maxLines = 1,
+                maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
 
@@ -72,10 +72,7 @@ fun PadCard(
                 val latitude = launch.pad.latitude.toDouble()
                 val longitude = launch.pad.longitude.toDouble()
 
-                onClickViewMap(
-                    latitude, longitude
-
-                )
+                onClickViewMap(latitude, longitude)
             }) {
 
                 Text(text = stringResource(R.string.view_map_button_text))
@@ -87,7 +84,7 @@ fun PadCard(
 @Composable
 fun PadCounter(value: Int, countDesc: String, modifier: Modifier = Modifier) {
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier) {
         Text(
             text = value.toString(),
             fontWeight = FontWeight.Bold,
