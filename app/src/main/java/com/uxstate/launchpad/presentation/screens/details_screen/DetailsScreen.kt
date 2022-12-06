@@ -33,7 +33,6 @@ fun DetailsScreen(
     val isShowDialog by viewModel.isShowDialog.collectAsState()
 
     BottomSheetScaffold(
-        drawerGesturesEnabled = true,
         scaffoldState = scaffoldState,
         sheetPeekHeight = (spacing.spaceExtraLarge * 2.5f),
         topBar = {

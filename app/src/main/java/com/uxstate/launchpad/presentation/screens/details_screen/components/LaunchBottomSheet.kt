@@ -32,7 +32,7 @@ fun LaunchBottomSheet(
     probability: Int,
     launch: Launch,
     onClickViewMap: (Double, Double) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val secondsFlow by launch.generateSecondsFlow()
         .collectAsState(initial = 0)
@@ -55,6 +55,7 @@ fun LaunchBottomSheet(
             .fillMaxWidth()
             .fillMaxHeight(.75f)
             .padding(spacing.spaceSmall)
+
     ) {
 
         Row(
