@@ -1,9 +1,6 @@
 package com.uxstate.launchpad.presentation.screens.details_screen.components
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -29,7 +26,10 @@ fun PadCard(
 ) {
 
     val spacing = LocalSpacing.current
-    Card(elevation = spacing.spaceExtraSmall, modifier = modifier) {
+    Card(
+        elevation = spacing.spaceExtraSmall,
+        modifier = modifier.padding(spacing.spaceSmall)
+    ) {
 
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
@@ -84,18 +84,22 @@ fun PadCard(
 @Composable
 fun PadCounter(value: Int, countDesc: String, modifier: Modifier = Modifier) {
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier) {
+    val spacing = LocalSpacing.current
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.padding(spacing.spaceSmall)
+    ) {
         Text(
             text = value.toString(),
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.h4,
             color = Color.Magenta
         )
 
         Text(
             text = countDesc,
             style = MaterialTheme.typography.caption,
-
+            fontWeight = FontWeight.Black
         )
     }
 }
