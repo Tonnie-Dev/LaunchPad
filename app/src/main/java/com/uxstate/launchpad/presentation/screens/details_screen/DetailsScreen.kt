@@ -26,7 +26,6 @@ fun DetailsScreen(
 
     val isShowDialog by viewModel.isShowDialog.collectAsState()
 
-
     val probability by viewModel.probability.collectAsState()
     val spacing = LocalSpacing.current
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
@@ -67,8 +66,7 @@ fun DetailsScreen(
                     }
                 }
             )
-
-                 }
+        }
 
     )
 
