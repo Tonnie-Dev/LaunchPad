@@ -14,7 +14,7 @@ import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 import com.uxstate.launchpad.util.LocalSpacing
 
 @Composable
-fun MissionCard(launch: Launch, modifier: Modifier = Modifier) {
+fun MissionSection(launch: Launch, modifier: Modifier = Modifier) {
 
     val spacing = LocalSpacing.current
 
@@ -69,7 +69,7 @@ numquam blanditiis harum quisquam eius
         rocket = Rocket(name = "", family = "")
     )
 
-    MissionCard(launch = launch)
+    MissionSection(launch = launch)
 }
 
 @Preview
@@ -105,6 +105,6 @@ numquam blanditiis harum quisquam eius
             rocket = Rocket(name = "", family = "")
         )
 
-        MissionCard(launch = launch)
+        MissionSection(launch = launch)
     }
 }

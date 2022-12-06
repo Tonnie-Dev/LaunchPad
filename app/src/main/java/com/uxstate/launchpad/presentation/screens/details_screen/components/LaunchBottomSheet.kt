@@ -133,7 +133,7 @@ fun LaunchBottomSheet(
             )
         }
 
-        MissionCard(launch = launch)
+        MissionSection(launch = launch)
 
         PadCard(launch = launch, onClickViewMap = onClickViewMap)
     }
