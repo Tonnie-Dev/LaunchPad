@@ -2,7 +2,9 @@ package com.uxstate.launchpad.presentation.screens.details_screen.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -51,6 +53,7 @@ fun LaunchBottomSheet(
     Column(
         modifier = modifier
             .fillMaxWidth()
+            .fillMaxHeight(.7f)
             .padding(spacing.spaceSmall)
     ) {
 
@@ -70,12 +73,7 @@ fun LaunchBottomSheet(
                     modifier = Modifier.padding(spacing.spaceSmall)
                 ) {
 
-                    ProbabilityCircle(
-                        probability = probability,
-                            /*  modifier = Modifier
-                                  .size(spacing.spaceExtraLarge + spacing.spaceLarge)
-                                  .padding(spacing.spaceExtraSmall)*/
-                    )
+                    ProbabilityCircle(probability = probability)
                 }
             }
             // c2 - Timeboard
@@ -117,11 +115,13 @@ fun LaunchBottomSheet(
             }
         }
 
-        // status
-        StatusSection(launch = launch)
+        Column(modifier = Modifier.verticalScroll(state = rememberScrollState())) {
+            // status
+            StatusSection(launch = launch)
 
-        MissionSection(launch = launch)
+            MissionSection(launch = launch)
 
-        PadCard(launch = launch, onClickViewMap = onClickViewMap)
+            PadCard(launch = launch, onClickViewMap = onClickViewMap)
+        }
     }
 }

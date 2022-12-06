@@ -14,10 +14,15 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
+import com.uxstate.launchpad.util.Constants.MIN_BACKGROUND_IMAGE_HEIGHT
 import com.uxstate.launchpad.util.LocalSpacing
 
 @Composable
-fun BackgroundContent(launch: Launch, modifier: Modifier = Modifier) {
+fun BackgroundContent(
+    launch: Launch,
+    modifier: Modifier = Modifier,
+    imageFractionHeight: Float = 0f,
+) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
 
@@ -51,13 +56,18 @@ fun BackgroundContent(launch: Launch, modifier: Modifier = Modifier) {
             icon = R.drawable.satellite_icon
         )
     )
-    Column(modifier = modifier.fillMaxSize()) {
+    Column(
+        modifier = modifier.fillMaxSize()
+           /* .fillMaxWidth()
+            .fillMaxHeight(imageFractionHeight + MIN_BACKGROUND_IMAGE_HEIGHT)*/
+    ) {
         Image(
             painter = painter,
             contentDescription = launch.name,
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(19f / 20f),
+                .fillMaxHeight(imageFractionHeight + MIN_BACKGROUND_IMAGE_HEIGHT)
+            /*.aspectRatio(19f / 20f)*/,
             contentScale = ContentScale.Crop
         )
 

@@ -13,7 +13,6 @@ import com.uxstate.launchpad.presentation.screens.details_screen.components.Deta
 import com.uxstate.launchpad.presentation.screens.details_screen.components.LaunchBottomSheet
 import com.uxstate.launchpad.util.LocalSpacing
 import com.uxstate.launchpad.util.openGoogleMap
-import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Destination
@@ -32,8 +31,6 @@ fun DetailsScreen(
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
 
     val isShowDialog by viewModel.isShowDialog.collectAsState()
-
-
 
     BottomSheetScaffold(
         drawerGesturesEnabled = true,
@@ -56,10 +53,6 @@ fun DetailsScreen(
                 probability = probability,
                 launch = launch,
                 onClickViewMap = { latitude, longitude ->
-                    Timber.i(
-                        "The lat is $latitude, lon is" +
-                            " $longitude  sum is ${latitude + longitude}"
-                    )
 
                     if (latitude == 0.0 || longitude == 0.0) {
 
@@ -76,6 +69,29 @@ fun DetailsScreen(
 
     // underlying stuff
     {
-        BackgroundContent(launch = launch)
+        BackgroundContent(
+            launch = launch,
+            imageFractionHeight = scaffoldState.currentSheetFraction
+        )
     }
 }
+
+@OptIn(ExperimentalMaterialApi::class)
+val BottomSheetScaffoldState.currentSheetFraction: Float
+    get() {
+        val fraction = bottomSheetState.progress.fraction
+        val targetValue = bottomSheetState.targetValue
+        val currentValue = bottomSheetState.currentValue
+
+        return when {
+            currentValue == BottomSheetValue.Collapsed && targetValue
+                == BottomSheetValue.Collapsed -> 1f
+            currentValue == BottomSheetValue.Expanded && targetValue
+                == BottomSheetValue.Expanded -> 0f
+            currentValue == BottomSheetValue.Collapsed && targetValue
+                == BottomSheetValue.Expanded -> 1f - fraction
+            currentValue == BottomSheetValue.Expanded && targetValue
+                == BottomSheetValue.Collapsed -> 0f + fraction
+            else -> fraction
+        }
+    }
