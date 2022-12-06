@@ -8,14 +8,25 @@ import androidx.compose.ui.res.stringResource
 import com.uxstate.launchpad.R
 
 @Composable
-fun SimpleAlertDialog() {
-
-    AlertDialog(onDismissRequest = { },
+fun SimpleAlertDialog(
+    isShowDialog: Boolean,
+    onDismiss: () -> Unit,
+    onConfirm: () -> Unit
+) {
+    if (isShowDialog) {
+        AlertDialog(
+            onDismissRequest = onDismiss,
             buttons = {
-                TextButton(onClick = { }) {
+                TextButton(onClick = onConfirm) {
                     Text(text = stringResource(id = R.string.dialog_ok))
                 }
             },
-            title = { Text(text = stringResource(R.string.dialog_error_title)) },
-            text = { Text(text = stringResource(id = R.string.dialog_error_text)) })
+            title = {
+                Text(text = stringResource(R.string.dialog_error_title))
+            },
+            text = {
+                Text(text = stringResource(id = R.string.dialog_error_text))
+            }
+        )
+    }
 }

@@ -84,10 +84,7 @@ fun AppDialog(
         )
     }
 }
-
 @Preview
 @Composable
 fun AppDialogPreview() {
-
-    AppDialog()
 }

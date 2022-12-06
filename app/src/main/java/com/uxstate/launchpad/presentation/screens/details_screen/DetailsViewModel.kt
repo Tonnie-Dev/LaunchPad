@@ -1,13 +1,10 @@
 package com.uxstate.launchpad.presentation.screens.details_screen
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.use_cases.UseCaseWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlin.random.Random
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
@@ -23,11 +20,15 @@ class DetailsViewModel @Inject constructor(
     private val _isShowDialog = MutableStateFlow(false)
     val isShowDialog = _isShowDialog.asStateFlow()
 
-    fun onDialogShow(){}
-    fun onDialogConfirm() {
-
+    fun onDialogShow() {
+        _isShowDialog.value = true
     }
+
+    fun onDialogConfirm() {
+        _isShowDialog.value = false
+    }
+
     fun onDialogDismiss() {
-        
+        _isShowDialog.value = false
     }
 }

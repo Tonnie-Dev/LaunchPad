@@ -7,7 +7,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.launchpad.domain.model.Launch
-import com.uxstate.launchpad.presentation.screens.common.AppDialog
+import com.uxstate.launchpad.presentation.screens.common.SimpleAlertDialog
 import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsImage
 import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsTopBar
 import com.uxstate.launchpad.presentation.screens.details_screen.components.LaunchBottomSheet
@@ -24,7 +24,9 @@ fun DetailsScreen(
     navigator: DestinationsNavigator
 ) {
 
-    var isShowDialog by remember { mutableStateOf(false) }
+    val isShowDialog by viewModel.isShowDialog.collectAsState()
+
+
     val probability by viewModel.probability.collectAsState()
     val spacing = LocalSpacing.current
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
@@ -42,7 +44,11 @@ fun DetailsScreen(
         },
         // bottom sheet content
         sheetContent = {
-
+            SimpleAlertDialog(
+                isShowDialog = isShowDialog,
+                onDismiss = viewModel::onDialogDismiss,
+                onConfirm = viewModel::onDialogConfirm
+            )
             LaunchBottomSheet(
                 probability = probability,
                 launch = launch,
@@ -53,7 +59,8 @@ fun DetailsScreen(
                     )
 
                     if (latitude == 0.0 || longitude == 0.0) {
-                        isShowDialog = true
+
+                        viewModel.onDialogShow()
                     } else {
 
                         openGoogleMap(latitude, longitude, context)
@@ -61,11 +68,7 @@ fun DetailsScreen(
                 }
             )
 
-            if (isShowDialog) {
-
-                AppDialog(dialogState = isShowDialog)
-            }
-        }
+                 }
 
     )
 
