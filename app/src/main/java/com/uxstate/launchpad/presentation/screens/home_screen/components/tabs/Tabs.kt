@@ -24,7 +24,8 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
         contentColor = MaterialTheme.colors.onSurface,
         indicator = { tabPositions ->
             TabRowDefaults.Indicator(
-                Modifier.pagerTabIndicatorOffset(
+                color = MaterialTheme.colors.secondary,
+                modifier = Modifier.pagerTabIndicatorOffset(
                     pagerState,
                     tabPositions
                 )
