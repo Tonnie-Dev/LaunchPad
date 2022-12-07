@@ -2,6 +2,7 @@ package com.uxstate.launchpad.presentation.screens.common
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -15,6 +16,22 @@ import com.uxstate.launchpad.presentation.ui.theme.Black400
 import com.uxstate.launchpad.presentation.ui.theme.ShimmerDarkGray
 import com.uxstate.launchpad.util.LocalSpacing
 
+@Composable
+fun ShimmerEffect() {
+    val spacing = LocalSpacing.current
+    LazyColumn(
+            contentPadding = PaddingValues(spacing.spaceSmall),
+            verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall),
+            content = {
+
+                      items(2){
+
+                          AnimatedShimmerItem()
+                      }
+            }
+
+    )
+}
 
 @Composable
 fun AnimatedShimmerItem() {
