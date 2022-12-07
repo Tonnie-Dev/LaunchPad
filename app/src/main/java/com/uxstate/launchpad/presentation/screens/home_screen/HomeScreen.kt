@@ -2,6 +2,7 @@ package com.uxstate.launchpad.presentation.screens.home_screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -10,6 +11,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -17,6 +19,7 @@ import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.Ta
 import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.Tabs
 import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.TabsContent
 import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.TopBar
+import com.uxstate.launchpad.presentation.ui.theme.statusBarColor
 
 @OptIn(ExperimentalPagerApi::class)
 @Destination()
@@ -32,6 +35,8 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel(), navigator: Destinatio
         TabItem.Upcoming(data = upcomingLaunches, navigator = navigator),
         TabItem.Previous(data = previousLaunches, navigator = navigator)
     )
+    val uiController = rememberSystemUiController()
+    uiController.setStatusBarColor(color = MaterialTheme.colors.statusBarColor)
 
     Scaffold(topBar = { TopBar() }) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
