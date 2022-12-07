@@ -35,7 +35,8 @@ fun LaunchImage(
     modifier: Modifier = Modifier
 ) {
 
-    val secondsFlow by launch.generateSecondsFlow().collectAsState(initial = 0)
+    val secondsFlow by launch.generateSecondsFlow()
+        .collectAsState(initial = 0)
     val spacing = LocalSpacing.current
     val context = LocalContext.current
 
@@ -73,7 +74,8 @@ fun LaunchImage(
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
                 maxLines = 1,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colors.secondary
             )
 
             // Agency
