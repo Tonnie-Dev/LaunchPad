@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.uxstate.launchpad.domain.model.Launch
@@ -106,6 +107,8 @@ fun LaunchBottomSheet(
                             text = (launch.status.name),
                             style = MaterialTheme.typography.body1,
                             fontWeight = FontWeight.Bold,
+                            color = Color.Black,
+                            textAlign = TextAlign.Center,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clip(CutCornerShape(spacing.spaceExtraSmall))
