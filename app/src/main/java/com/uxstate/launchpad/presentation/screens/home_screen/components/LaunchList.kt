@@ -12,7 +12,6 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.presentation.screens.destinations.DetailsScreenDestination
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun LaunchList(
     data: LazyPagingItems<Launch>,
