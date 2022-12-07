@@ -9,7 +9,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.presentation.screens.common.SimpleAlertDialog
 import com.uxstate.launchpad.presentation.screens.details_screen.components.BackgroundContent
-import com.uxstate.launchpad.presentation.screens.details_screen.components.DetailsTopBar
+import com.uxstate.launchpad.presentation.screens.details_screen.components.LaunchTopBar
 import com.uxstate.launchpad.presentation.screens.details_screen.components.LaunchBottomSheet
 import com.uxstate.launchpad.util.LocalSpacing
 import com.uxstate.launchpad.util.openGoogleMap
@@ -36,7 +36,7 @@ fun DetailsScreen(
         scaffoldState = scaffoldState,
         sheetPeekHeight = (spacing.spaceExtraLarge * 2.5f),
         topBar = {
-            DetailsTopBar(
+            LaunchTopBar(
                 launch = launch,
                 onClickBackArrow = { navigator.navigateUp() }
             )
