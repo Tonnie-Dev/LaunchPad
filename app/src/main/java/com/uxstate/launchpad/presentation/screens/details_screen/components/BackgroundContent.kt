@@ -5,7 +5,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -14,7 +20,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
-import com.uxstate.launchpad.util.Constants
+import com.uxstate.launchpad.util.Constants.MIN_BACKGROUND_IMAGE_HEIGHT
 import com.uxstate.launchpad.util.LocalSpacing
 
 @Composable
@@ -59,16 +65,50 @@ fun BackgroundContent(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .fillMaxHeight(imageFractionHeight)
+            .fillMaxHeight(imageFractionHeight + .085f)
     ) {
-        Image(
-            painter = painter,
-            contentDescription = launch.name,
+
+        Box(
             modifier = Modifier
-                .fillMaxWidth(imageFractionHeight + Constants.MIN_BACKGROUND_IMAGE_HEIGHT)
-                .aspectRatio(19f / 20f),
-            contentScale = ContentScale.Crop
-        )
+                .fillMaxWidth()
+                .fillMaxHeight(
+                    .6f
+                )
+        ) {
+
+            Row(
+                modifier = Modifier.align(alignment = Alignment.BottomEnd),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(text = "Full Screen", style = MaterialTheme.typography.body1)
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = "Close",
+                    tint = MaterialTheme.colors.secondary,
+                    modifier = Modifier
+                        .size(spacing.spaceExtraLarge)
+
+                )
+                Text(text = "Close", style = MaterialTheme.typography.body1)
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = "Close",
+                    tint = MaterialTheme.colors.secondary,
+                    modifier = Modifier
+                        .size(spacing.spaceExtraLarge)
+
+                )
+            }
+
+            Image(
+                painter = painter,
+                contentDescription = launch.name,
+                modifier = Modifier
+                    .fillMaxWidth(imageFractionHeight + MIN_BACKGROUND_IMAGE_HEIGHT)
+                    .aspectRatio(19f / 20f),
+                contentScale = ContentScale.Crop
+            )
+        }
 
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         LazyRow {
