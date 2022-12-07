@@ -29,5 +29,6 @@
     <string name="dialog_ok">OK</string>
     <string name="dialog_error_text">Error, pad location could not be found</string>
     <string name="dialog_error_title">Location Error</string>
+    <string name="close_text">Close</string>
 
 </resources>

@@ -70,7 +70,9 @@ fun DetailsScreen(
     {
         BackgroundContent(
             launch = launch,
-            imageFractionHeight = scaffoldState.currentSheetFraction
+            imageFractionHeight = scaffoldState.currentSheetFraction,
+            onShowFullScreen = {},
+            onClose = { navigator.navigateUp() }
         )
     }
 }
