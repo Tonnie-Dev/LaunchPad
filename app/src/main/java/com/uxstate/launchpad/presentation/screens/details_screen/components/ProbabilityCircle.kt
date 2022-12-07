@@ -26,7 +26,7 @@ import com.uxstate.launchpad.util.LocalSpacing
 fun ProbabilityCircle(
     probability: Int,
     modifier: Modifier = Modifier,
-    activeColor: Color = Color.Magenta,
+    activeColor: Color = MaterialTheme.colors.secondary,
     inactiveColor: Color = Color.LightGray,
 
 ) {
