@@ -1,9 +1,7 @@
 package com.uxstate.launchpad.presentation.screens.details_screen.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -12,18 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.domain.model.computeTimeBoard
 import com.uxstate.launchpad.presentation.screens.common.TimeBoardWidget
-import com.uxstate.launchpad.presentation.ui.theme.DahliaYellow
-import com.uxstate.launchpad.presentation.ui.theme.LuminousRed
-import com.uxstate.launchpad.presentation.ui.theme.MintGreen
-import com.uxstate.launchpad.presentation.ui.theme.OysterWhite
 import com.uxstate.launchpad.util.LocalSpacing
 import com.uxstate.launchpad.util.formatLaunchDatabaseStringDate
 import com.uxstate.launchpad.util.generateSecondsFlow
@@ -40,15 +32,6 @@ fun LaunchBottomSheet(
 
     val timerState = TimerState(secondsFlow)
     val timeBoard = timerState.computeTimeBoard()
-
-    val backgroundColor = when (launch.status.abbrev) {
-
-        "Success" -> MintGreen
-        "Go" -> MintGreen
-        "TBD" -> DahliaYellow
-        "Failure" -> LuminousRed
-        else -> OysterWhite
-    }
 
     val spacing = LocalSpacing.current
     Column(
@@ -102,18 +85,7 @@ fun LaunchBottomSheet(
                                 .fillMaxWidth()
                         )
 
-                        Spacer(modifier = Modifier.height(spacing.spaceMedium + spacing.spaceSmall))
-                        Text(
-                            text = (launch.status.name),
-                            style = MaterialTheme.typography.body1,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.Black,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clip(CutCornerShape(spacing.spaceExtraSmall))
-                                .background(color = backgroundColor)
-                        )
+                        StatusSlot(launch)
                     }
                 }
             }
