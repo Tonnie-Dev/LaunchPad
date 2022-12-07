@@ -50,7 +50,7 @@ fun EmptyScreen(
     }
 
     var icon = remember {
-        R.drawable.ic_search_document
+        R.drawable.search_icon
     }
 
 
