@@ -7,9 +7,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.launchpad.domain.model.Launch
+import com.uxstate.launchpad.presentation.screens.common.LaunchTopBar
 import com.uxstate.launchpad.presentation.screens.common.SimpleAlertDialog
+import com.uxstate.launchpad.presentation.screens.destinations.FullScreenDestination
 import com.uxstate.launchpad.presentation.screens.details_screen.components.BackgroundContent
-import com.uxstate.launchpad.presentation.screens.details_screen.components.LaunchTopBar
 import com.uxstate.launchpad.presentation.screens.details_screen.components.LaunchBottomSheet
 import com.uxstate.launchpad.util.LocalSpacing
 import com.uxstate.launchpad.util.openGoogleMap
@@ -37,7 +38,7 @@ fun DetailsScreen(
         sheetPeekHeight = (spacing.spaceExtraLarge * 2.5f),
         topBar = {
             LaunchTopBar(
-                launch = launch,
+                text = launch.name,
                 onClickBackArrow = { navigator.navigateUp() }
             )
         },
@@ -71,7 +72,10 @@ fun DetailsScreen(
         BackgroundContent(
             launch = launch,
             imageFractionHeight = scaffoldState.currentSheetFraction,
-            onShowFullScreen = {},
+            onShowFullScreen = {
+                navigator.popBackStack()
+                navigator.navigate(FullScreenDestination(launch = launch))
+            },
             onClose = { navigator.navigateUp() }
         )
     }

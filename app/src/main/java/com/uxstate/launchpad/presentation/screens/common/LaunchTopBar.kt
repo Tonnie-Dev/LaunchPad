@@ -1,4 +1,4 @@
-package com.uxstate.launchpad.presentation.screens.details_screen.components
+package com.uxstate.launchpad.presentation.screens.common
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -24,26 +24,26 @@ import com.uxstate.launchpad.util.LocalSpacing
 fun LaunchTopBar(text: String, modifier: Modifier = Modifier, onClickBackArrow: () -> Unit) {
     val spacing = LocalSpacing.current
     Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = modifier
-                    .height(spacing.spaceExtraLarge)
-                    .fillMaxWidth()
-                    .padding(spacing.spaceSmall)
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+            .height(spacing.spaceExtraLarge)
+            .fillMaxWidth()
+            .padding(spacing.spaceSmall)
     ) {
 
         Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = stringResource(R.string.back_label),
-                modifier = Modifier.clickable {
-                    onClickBackArrow()
-                }
+            imageVector = Icons.Default.ArrowBack,
+            contentDescription = stringResource(R.string.back_label),
+            modifier = Modifier.clickable {
+                onClickBackArrow()
+            }
         )
         Text(
-                text = "   $text",
-                style = MaterialTheme.typography.h6,
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Center,
-                modifier = modifier.fillMaxWidth()
+            text = "   $text",
+            style = MaterialTheme.typography.h6,
+            overflow = TextOverflow.Ellipsis,
+            textAlign = TextAlign.Center,
+            modifier = modifier.fillMaxWidth()
         )
     }
 }
