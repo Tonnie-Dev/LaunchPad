@@ -16,6 +16,8 @@ val Black400 = Color(0xFF2C2C2E)
 val Pink300 = Color(0xFFF700BD)
 val Pink800 = Color(0xFFBF008C)
 
+val ShimmerDarkGray = Color(0xFF1D1D1D)
+
 // Status Icon Tint Colors
 val LuminousRed = Color(0xFFFE0000)
 val DahliaYellow = Color(0xFFF3A505)
