@@ -93,7 +93,7 @@ fun PadCounter(value: Int, countDesc: String, modifier: Modifier = Modifier) {
             text = value.toString(),
             fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.h4,
-            color = Color.Magenta
+            color = MaterialTheme.colors.secondary
         )
 
         Text(
