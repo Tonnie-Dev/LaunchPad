@@ -11,7 +11,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -35,9 +34,10 @@ fun RocketIcon(
         modifier = modifier
             .size(spacing.spaceExtraLarge + spacing.spaceLarge + spacing.spaceSmall)
             .padding(spacing.spaceSmall)
+
     ) {
         Column(
-
+            modifier = Modifier.padding(spacing.spaceExtraSmall),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -45,7 +45,7 @@ fun RocketIcon(
                 painter = painterResource(id = icon),
                 contentDescription = itemText,
                 modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium),
-                tint = Color.Magenta
+                tint = MaterialTheme.colors.secondary
             )
             Text(
                 text = itemText,
