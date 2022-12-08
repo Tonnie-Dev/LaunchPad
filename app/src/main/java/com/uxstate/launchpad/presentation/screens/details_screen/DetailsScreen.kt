@@ -44,7 +44,11 @@ fun DetailsScreen(
         },
         // bottom sheet content
         sheetContent = {
-
+            SimpleAlertDialog(
+                isShowDialog = isShowDialog,
+                onDismiss = viewModel::onDialogDismiss,
+                onConfirm = viewModel::onDialogConfirm
+            )
             LaunchBottomSheet(
                 probability = probability,
                 launch = launch,
@@ -58,12 +62,6 @@ fun DetailsScreen(
                         openGoogleMap(latitude, longitude, context)
                     }
                 }
-            )
-
-            SimpleAlertDialog(
-                isShowDialog = isShowDialog,
-                onDismiss = viewModel::onDialogDismiss,
-                onConfirm = viewModel::onDialogConfirm
             )
         }
 

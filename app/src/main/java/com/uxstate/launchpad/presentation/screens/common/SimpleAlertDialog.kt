@@ -1,7 +1,11 @@
 package com.uxstate.launchpad.presentation.screens.common
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.AlertDialog
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -29,7 +33,10 @@ fun SimpleAlertDialog(
                     horizontalArrangement = Arrangement.Center
                 ) {
                     TextButton(onClick = onConfirm) {
-                        Text(text = stringResource(id = R.string.dialog_ok))
+                        Text(
+                            text = stringResource(id = R.string.dialog_ok),
+                            color = MaterialTheme.colors.secondary
+                        )
                     }
                 }
             },
