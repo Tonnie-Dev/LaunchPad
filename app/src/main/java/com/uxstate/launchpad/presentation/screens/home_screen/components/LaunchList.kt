@@ -22,8 +22,8 @@ fun LaunchList(
 ) {
 
     val result = handlePagingResult(launches = data)
-    
-    if (result){
+
+    if (result) {
         LazyColumn(modifier = modifier, content = {
 
             items(data) { launch ->
@@ -31,28 +31,27 @@ fun LaunchList(
                 launch?.let {
 
                     LaunchImage(
-                            launch = it,
-                            showCountDown = showCountDown,
-                            modifier = Modifier.clickable {
-                                navigator.navigate(
-                                        DetailsScreenDestination(it)
-                                )
-                            }
+                        launch = it,
+                        showCountDown = showCountDown,
+                        modifier = Modifier.clickable {
+                            navigator.navigate(
+                                DetailsScreenDestination(it)
+                            )
+                        }
 
                     )
                 }
             }
         })
     }
-
 }
-//starts with small letter because this function returns a value
+// starts with small letter because this function returns a value
 @Composable
 fun handlePagingResult(launches: LazyPagingItems<Launch>): Boolean {
 
-    //apply to get access to loadState
+    // apply to get access to loadState
     launches.apply {
-        //this variable stores errors found in refresh, prepend or append
+        // this variable stores errors found in refresh, prepend or append
         val error = when {
 
             loadState.refresh is LoadState.Error -> {
@@ -65,7 +64,7 @@ fun handlePagingResult(launches: LazyPagingItems<Launch>): Boolean {
                 loadState.append as LoadState.Error
             }
 
-            //else suggesting the error is null
+            // else suggesting the error is null
             else -> null
         }
 
@@ -76,22 +75,21 @@ fun handlePagingResult(launches: LazyPagingItems<Launch>): Boolean {
                 false
             }
 
-            //in case of an error
+            // in case of an error
             error != null -> {
                 EmptyScreen(error = error, launches = launches)
                 false
             }
 
-            //less than one is when we don't receive any heroes
+            // less than one is when we don't receive any heroes
             launches.itemCount < 1 -> {
 
-                //empty screen meaning default icon and message
+                // empty screen meaning default icon and message
                 EmptyScreen()
                 false
             }
             // if there is no error and data is not loading any more we show lazy column as above
             else -> true
         }
-
     }
 }

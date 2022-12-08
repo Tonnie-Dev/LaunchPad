@@ -28,34 +28,34 @@ fun LaunchBottomSheet(
     modifier: Modifier = Modifier,
 ) {
     val secondsFlow by launch.generateSecondsFlow()
-        .collectAsState(initial = 0)
+            .collectAsState(initial = 0)
 
     val timerState = TimerState(secondsFlow)
     val timeBoard = timerState.computeTimeBoard()
 
     val spacing = LocalSpacing.current
+
     Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .fillMaxHeight(.78f)
-            .padding(spacing.spaceSmall)
+            modifier = modifier
+                    .fillMaxHeight(.75f)
+                    .padding(spacing.spaceSmall)
 
     ) {
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
         ) {
             // c1 - Probability Circle
 
             Column(
-                modifier = Modifier
-                    .weight(.35f)
-                    .fillMaxWidth()
+                    modifier = Modifier
+                            .weight(.35f)
+                            .fillMaxWidth()
             ) {
                 Card(
-                    elevation = spacing.spaceExtraSmall,
-                    modifier = Modifier.padding(spacing.spaceSmall)
+                        elevation = spacing.spaceExtraSmall,
+                        modifier = Modifier.padding(spacing.spaceSmall)
                 ) {
 
                     ProbabilityCircle(probability = probability)
@@ -66,23 +66,26 @@ fun LaunchBottomSheet(
             Column(modifier = Modifier.weight(.65f)) {
 
                 Card(
-                    elevation = spacing.spaceExtraSmall,
-                    modifier = Modifier.padding(spacing.spaceSmall)
+                        elevation = spacing.spaceExtraSmall,
+                        modifier = Modifier.padding(spacing.spaceSmall)
                 ) {
-                    Column(modifier = Modifier.padding(spacing.spaceExtraSmall)) {
+                    Column(
+                            modifier = Modifier.padding(spacing.spaceExtraSmall)
+
+                    ) {
                         TimeBoardWidget(
-                            timeBoard = timeBoard,
-                            modifier = Modifier
-                                .fillMaxWidth()
+                                timeBoard = timeBoard,
+                                modifier = Modifier
+                                        .fillMaxWidth()
 
                         )
                         Text(
-                            text = (launch.startWindowDate).formatLaunchDatabaseStringDate(),
-                            style = MaterialTheme.typography.body1,
-                            fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .fillMaxWidth()
+                                text = (launch.startWindowDate).formatLaunchDatabaseStringDate(),
+                                style = MaterialTheme.typography.body1,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier
+                                        .fillMaxWidth()
                         )
 
                         StatusSlot(launch)
@@ -91,7 +94,12 @@ fun LaunchBottomSheet(
             }
         }
 
-        Column(modifier = Modifier.verticalScroll(state = rememberScrollState())) {
+        Column(
+                modifier = Modifier.verticalScroll(
+                        state =
+                        rememberScrollState()
+                )
+        ) {
             // status
             StatusSection(launch = launch)
 
