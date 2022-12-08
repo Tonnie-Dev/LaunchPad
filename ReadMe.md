@@ -34,6 +34,13 @@ LaunchPad shows upcoming rocket launches and previous rocket launches. It is bac
 ## 📷 Screenshots 📷
 
 This Project uses [**Material 2**](https://m2.material.io/design), which is a part of Google's open source design system for inituitive and consistent design patterns. 
+
+<p align="center">
+<img img width="200" height="400" src="./screenshots/screen_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
+<img img width="200" height="400" src="./screenshots/screen_3.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
+<img img width="200" height="400" src="./screenshots/screen_6.png"> &nbsp;&nbsp;&nbsp;&nbsp; 
+<img img width="200" height="400" src="./screenshots/screen_8.png">
+</p>
 ## Deployment
 These are the key parameters for Yummies
 
