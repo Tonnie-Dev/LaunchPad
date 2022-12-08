@@ -1,14 +1,39 @@
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="./screenshots/rocket_app_icon.png" alt="Logo" width="80" height="80">
+  </a>
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+<h1 align = "center">
+<b><i>LaunchPad</i></b>
+</h1>
 
+  <p align="center">
+    An Android App for Space Events
+    <br />
+    <a href="#-screenshots-">Screenshots</a>
+    ·
+    <a href="#-screenshots-">Deployment</a>
+    ·
+    <a href="#-architecture-">Architecture</a>
+    ·
+    <a href="#-screenshots-">API Reference</a>
+    ·
+     <a href="#-technologies-">Technologies</a>
+    ·
+    <a href="#-screenshots-">Authors</a>
+    ·
+    <a href="#-license-">License</a>
+  </p>
+</div>
 
-## Screenshots
-# Yummies
+LaunchPad shows upcoming rocket launches and previous rocket launches. It is backed up by data from the Launch Library API a product by The Space Devs with an up-to-date database of Spaceflight events.
 
-LaunchPad shows upcoming rocket launches and previous rocket launches. It is backed up by data from the Launch Library API  a product by The Space Devs with an up-to-date database of
- Spaceflight events.
+<a href='https://play.google.com/store/apps/details?id=com.uxstate.countriespad'><img alt='Get it on Google Play' src="./screenshots/google_badge.png" width="280"/></a>
 
+## 📷 Screenshots 📷
 
+This Project uses [**Material 2**](https://m2.material.io/design), which is a part of Google's open source design system for inituitive and consistent design patterns. 
 ## Deployment
 These are the key parameters for Yummies
 
