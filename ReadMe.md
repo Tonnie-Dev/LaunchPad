@@ -36,20 +36,20 @@ LaunchPad shows upcoming rocket launches and previous rocket launches. It is bac
 This Project uses [**Material 2**](https://m2.material.io/design), which is a part of Google's open source design system for inituitive and consistent design patterns. 
 
 <p align="center">
-<img img width="190" height="380" src="./screenshots/screen_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
-<img img width="190" height="380" src="./screenshots/screen_3.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
-<img img width="190" height="380" src="./screenshots/screen_6.png"> &nbsp;&nbsp;&nbsp;&nbsp; 
-<img img width="190" height="380" src="./screenshots/screen_8.png">
+<img img width="200" height="400" src="./screenshots/screen_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
+<img img width="200" height="400" src="./screenshots/screen_3.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
+<img img width="200" height="400" src="./screenshots/screen_6.png"> &nbsp;&nbsp;&nbsp;&nbsp; 
+
 </p>
-## Deployment
-These are the key parameters for Yummies
+## ⚖️ Deployment ⚖️
+These are the key parameters for LaunchPad
 
 | compileSdk     | 33     |
 |----------------|--------|
 | targetSdk      | 33     |
-| minSdk         | 21     |
-| composeVersion | 1.2.1  |
-| kotlinVersion  | 1.6.10 |
+| minSdk         | 26     |
+| composeVersion | 1.3.1  |
+| kotlinVersion  | 1.7.20 |
 
 You can clone the repository or download or download the Zip file.
 
