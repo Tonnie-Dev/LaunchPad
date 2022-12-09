@@ -11,29 +11,24 @@
   <p align="center">
     Android App for Space Events
     <br />
-    <a href="#-screenshots-">Screenshots</a>
-    ·
-    <a href="#-deployment-">Deployment</a>
-    ·
-    <a href="#architecture">Architecture</a>
-    ·
-    <a href="#-api-reference-">API Reference</a>
-    ·
-     <a href="#-technologies-">Technologies</a>
-    ·
-    [Authors](#black_nib-authors-black_nib)
-     >
-     [Contributing](#passport_control-contributing-passport_control)
-    ·
-    [License](#license)
-  </p>
-</div>
 
+
+  
+[Screenshots](#📷-screenshots-📷) ~
+[Deployment](#inbox_tray-deployment-inbox_tray)~
+[Architecture](#🛠️-architecture-🛠️)~
+[API Reference](#electric_plug-api-reference-electric_plug)
+[Tech Stack](#gear-tech-stack-gear)~
+[Authors](#black_nib-authors-black_nib)~
+ [Contributing](#passport_control-contributing-passport_control)  
+ [License](#📜-license-📜)~  
+</div>
+    
 LaunchPad shows upcoming rocket launches and previous rocket launches. It is backed up by data from the Launch Library API a product by The Space Devs with an up-to-date database of Spaceflight events.
 
 <a href='https://play.google.com/store/apps/details?id=com.uxstate.launchpad'><img alt='Get it on Google Play' src="./screenshots/google_badge.png" width="280"/></a>
 
-## 📷 **Screenshots** 📷
+# 📷 **Screenshots** 📷
 
 This Project uses [**Material 2**](https://m2.material.io/design), which is a part of Google's open source design system for inituitive and consistent design patterns. 
 
@@ -44,7 +39,7 @@ This Project uses [**Material 2**](https://m2.material.io/design), which is a pa
 
 </p>
 
-## :inbox_tray: Deployment :inbox_tray:
+# :inbox_tray: Deployment :inbox_tray:
 
 These are the key parameters for LaunchPad
 
@@ -60,7 +55,7 @@ These are the key parameters for LaunchPad
 
 You can clone the repository or download or download the Zip file.
 
-## 🛠️ Architecture 🛠️
+# 🛠️ Architecture 🛠️
 
 LaunchPad is implemented using Android Clean Architecture and follows the Model-View-ViewModel 
 (MVVM) pattern.
@@ -98,7 +93,7 @@ the BottomSheet. The user can scroll up and down to reveal additional Launch det
 When the user clicks on the full screen icon from the details screen, the app navigates to
 the full screen to display the rocket image in full screen.
 
-## :electric_plug: **API Reference** :electric_plug:
+# :electric_plug: **API Reference** :electric_plug:
 Yummies fetches its data from [**Launch Library 2 API**](https://thespacedevs.com/llapi/).
 You can find the API Documentation by following this [link](https://ll.thespacedevs.com/2.2.0/swagger/).
 
@@ -157,7 +152,7 @@ This interface function takes *limit* and *offset* and returns *ApiResponseDTO*
 
 
 
-## :gear: Tech Stack :gear:
+# :gear: Tech Stack :gear:
 
 LaunchPad project uses many popular libraries and tools in the Android Ecosystem
 
@@ -177,7 +172,7 @@ LaunchPad project uses many popular libraries and tools in the Android Ecosystem
 * [Lottie Animations](https://lottiefiles.com/) - provides Lightweight and scalable animations files
 * [Google Accompanist](https://github.com/google/accompanist) - a collection of extension libraries for Jetpack Compose
 
-## :black_nib: **Author(s)** :black_nib:
+# :black_nib: **Author(s)** :black_nib:
 
 - [@Tonnie-Dev](https://github.com/Tonnie-Dev)
 
