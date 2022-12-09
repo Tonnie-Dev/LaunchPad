@@ -14,9 +14,9 @@
 
 
   
-[Screenshots](#📷-screenshots-📷) ~
+[Screenshots](#camera_flash-screenshots-camera_flash) ~
 [Deployment](#inbox_tray-deployment-inbox_tray) ~
-[Architecture](#🛠️-architecture-🛠️) ~
+[Architecture](#hammer_and_wrench-architecture-hammer_and_wrench) ~
 [API Reference](#electric_plug-api-reference-electric_plug) ~
 [Tech Stack](#gear-tech-stack-gear) ~
 [Authors](#black_nib-authors-black_nib) ~
@@ -30,6 +30,7 @@ LaunchPad shows upcoming rocket launches and previous rocket launches. It is bac
 
 # :camera_flash: **Screenshots** :camera_flash:
 
+
 This Project uses [**Material 2**](https://m2.material.io/design), which is a part of Google's open source design system for inituitive and consistent design patterns. 
 
 <p align="center">
@@ -41,7 +42,7 @@ This Project uses [**Material 2**](https://m2.material.io/design), which is a pa
 
 # :inbox_tray: Deployment :inbox_tray:
 
-These are the key parameters for LaunchPad
+These are the key parameters for LaunchPad app:
 
 | Parameter      	| Value  	|
 |----------------	|--------	|
@@ -53,45 +54,45 @@ These are the key parameters for LaunchPad
 
 
 
-You can clone the repository or download or download the Zip file.
+You can clone the repository or download the project as a  zip file.
 
 # :hammer_and_wrench: Architecture 	:hammer_and_wrench:
 
 LaunchPad is implemented using Android Clean Architecture and follows the Model-View-ViewModel 
 (MVVM) pattern.
 
-It features these main 3 layers:
+It features :three: main layers:
 
-**1. Data Layer** - This is the layer that dispenses data to the LaunchPad app. It features 2 
-RemoteMediators (yes, :two: ) to provide paging functionality. It is flanked by a ROOM Database 
-for data persistence. The API provides the remote data which is cached by the mediators 
+**1. Data Layer** - This is the layer that dispenses data to the LaunchPad app. Deep in the data layer sits 2 
+RemoteMediators (yes, :two: ) to combine local and remote queries for consistent data flow to the user, regardless if the network is available or not. The mediators are flanked by a ROOM Database 
+for data persistence. The API service provides the remote data which is cached by the mediators 
 into the ROOM database for offline operations.
 
 **2. Domain Layer** - This layer holds the Business Logic for the LaunchApp. It holds the models and 
-the use cases that  encapsulates the very complex business logic for the  app.
+the use cases that encapsulates the very complex business logic for the  LauchPad app.
 
 **3. UI Layer** - This is the presentation layer which directly interacts with the user. It displays
 the  refined data to the user and facilitates interactions with the user.
-It contains the ViewModel holding the different states for the Yummies App.
+It contains the ViewModel holding the different states for the app.
 
-Launch has 4 Screen destinations which use Compose Destination to manage navigation.
+The app has :four: Screen destinations which use Compose Destination to manage navigation.
 
 | Splash Screen         | Overview Screen       | Detailed Screen       | Full Screen           |
 |-----------------------|-----------------------|-----------------------|-----------------------|
 | ![](./gifs/gif_1.gif) | ![](./gifs/gif_2.gif) | ![](./gifs/gif_3.gif) | ![](./gifs/gif_4.gif) |
 
 ### Overview Screen
-This screen is based on both TabLayout thanks to [**Accompanist Library**](https://github.com/google/accompanist). You can go into more details by following LaunchPad's tab implementation or [this blog](https://johncodeos.com/how-to-create-tabs-with-jetpack-compose/).
+This screen is based on both TabLayout thanks to [**Accompanist Library**](https://github.com/google/accompanist). You can go into more details by following LaunchPad's tab layout implementation or [this blog](https://johncodeos.com/how-to-create-tabs-with-jetpack-compose/).
 
 ### Details Screen
-The user navigates to the Details Screen by clicking on a launch item. The main feature is
+The user navigates to the Details Screen by clicking on a launch item. The main UI feature is
 the BottomSheet. The user can scroll up and down to reveal additional Launch details such as **Status**,
  **Mission** and **Launch Site**,
 
 
 ### Full Screen
 When the user clicks on the full screen icon from the details screen, the app navigates to
-the full screen to display the rocket image in full screen.
+the full screen to display the rocket image in its full glory.
 
 # :electric_plug: **API Reference** :electric_plug:
 Yummies fetches its data from [**Launch Library 2 API**](https://thespacedevs.com/llapi/).
