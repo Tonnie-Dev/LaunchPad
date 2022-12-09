@@ -28,7 +28,7 @@ LaunchPad shows upcoming rocket launches and previous rocket launches. It is bac
 
 <a href='https://play.google.com/store/apps/details?id=com.uxstate.launchpad'><img alt='Get it on Google Play' src="./screenshots/google_badge.png" width="280"/></a>
 
-# 📷 **Screenshots** 📷
+# :camera_flash: **Screenshots** :camera_flash:
 
 This Project uses [**Material 2**](https://m2.material.io/design), which is a part of Google's open source design system for inituitive and consistent design patterns. 
 
@@ -55,7 +55,7 @@ These are the key parameters for LaunchPad
 
 You can clone the repository or download or download the Zip file.
 
-# 🛠️ Architecture 🛠️
+# :hammer_and_wrench: Architecture 	:hammer_and_wrench:
 
 LaunchPad is implemented using Android Clean Architecture and follows the Model-View-ViewModel 
 (MVVM) pattern.
@@ -194,7 +194,7 @@ If you are interested in seeing a particular feature implemented in this app, pl
 ![Alt](https://repobeats.axiom.co/api/embed/84dfd3cd94832805dbcaa3569ec855d19e5c9401.svg "Repobeats analytics image")
 
 
-#  📜 **License**  📜
+#  :scroll: **License**  :scroll:
 
 
 
