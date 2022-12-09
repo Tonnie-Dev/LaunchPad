@@ -84,35 +84,72 @@ Launch has 4 Screen destinations which use Compose Destination to manage navigat
 | ![](./gifs/gif_1.gif) | ![](./gifs/gif_2.gif) | ![](./gifs/gif_3.gif) | ![](./gifs/gif_4.gif) |
 
 ### Overview Screen 1
-This screen is based on both TabLayout thanks to [**Accompanist Library**](https://github.com/google/accompanist). You can go into more details by following LaunchPad's tab implementation or [this blog](https://johncodeos.com/how-to-create-tabs-with-jetpack-compose/).LazyColumn and LazyRow to present categories 
-and recipes options.
-<p align="center">
-<img img width="200" height="400" src="./screenshots/ov_scrn_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
-<img img width="200" height="400" src="./screenshots/ov_scrn_2.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
- 
-</p>
-There is also a search box where you can search a meal by name.
+This screen is based on both TabLayout thanks to [**Accompanist Library**](https://github.com/google/accompanist). You can go into more details by following LaunchPad's tab implementation or [this blog](https://johncodeos.com/how-to-create-tabs-with-jetpack-compose/).
 
 ### Details Screen
-You get here by selecting a specific meal item and the app navigates you
-to the details screen.
+The user navigates to the Details Screen by clicking on a launch item. The main feature is
+the BottomSheet. The user can scroll up and down to reveal additional Launch details such as **Status**,
+ **Mission** and **Launch Site**,
 
-<p align="center">
-<img img width="200" height="400" src="./screenshots/det_scrn_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
-<img img width="200" height="400" src="./screenshots/det_scrn_2.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
- 
-</p>
 
-You can now see an image of final cooked meals and ingredients. Pull up
-the bottom sheet to reveal the cooking directions
-### Saved Items Screens
-You can also view the saved items by clicking Favorites button on the main screen..
+### Full Screen
+When the user clicks on the full screen icon from the details screen, the app navigates to
+the full screen to display the rocket image in full screen.
 
-<p align="center">
-<img img width="200" height="400" src="./screenshots/fav_scrn_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
-<img img width="200" height="400" src="./screenshots/fav_scrn_2.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
- 
-</p>
+## API Reference
+Yummies fetches its data from [The Meal Db](https://www.themealdb.com/).
+You can find the API Documentation by following this [link](https://www.themealdb.com/api.php).
+
+### Base URL
+https://www.themealdb.com/api/json/v1/1/
+
+
+### You don't need an **API Key**
+
+### Search meal by name
+
+
+```http
+     @GET("search.php")
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `s` | `string` | **Optional**. The meal keyword to search |
+
+This interface function returns a MealsResponse DTO Object.
+
+### Data Points for Meal Item
+
+| Data Point  | Type         |
+|-------------|--------------|
+| id          | Int          |
+| name        | String       |
+| category    | String       |
+| origin      | String       |
+| directions  | String       |
+| imageUrl    | String       |
+| ingredients | List<String> |
+| units       | List<String> |
+### Search meal by name
+
+
+```http
+     @GET("categories.php")
+```
+
+This interface function takes no queries returns a CategoriesResponse DTO Object.
+
+
+### Data Points for Category Item
+
+| categoryId          | Int    |
+|---------------------|--------|
+| categoryType        | String |
+| categoryDescription | String |
+| categoryImageUrl    | String |
+|                     |        |
+
 
 
 ## Tech Stack
