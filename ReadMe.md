@@ -15,17 +15,17 @@
     ·
     <a href="#-deployment-">Deployment</a>
     ·
-    <a href="#-architecture-">Architecture</a>
+    <a href="#architecture">Architecture</a>
     ·
     <a href="#-api-reference-">API Reference</a>
     ·
      <a href="#-technologies-">Technologies</a>
     ·
     [Authors](#black_nib-authors-black_nib)
-     ·
+     >
      [Contributing](#passport_control-contributing-passport_control)
     ·
-    [Licence](#📜-license-📜)
+    [License](#license)
   </p>
 </div>
 
@@ -190,7 +190,7 @@ Do Reach Out :
   * [LinkedIn](https://www.linkedin.com/in/antony-muchiri/)
 
 
-## :passport_control: **Contributing** :passport_control:
+# :passport_control: **Contributing** :passport_control:
 
 Contributions to make LaunchPad better are always welcome!
 
@@ -199,7 +199,7 @@ If you are interested in seeing a particular feature implemented in this app, pl
 ![Alt](https://repobeats.axiom.co/api/embed/84dfd3cd94832805dbcaa3569ec855d19e5c9401.svg "Repobeats analytics image")
 
 
-##  📜 **License**  📜
+#  📜 **License**  📜
 
 
 
