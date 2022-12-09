@@ -42,7 +42,7 @@ This Project uses [**Material 2**](https://m2.material.io/design), which is a pa
 
 </p>
 
-## :wrench: Deployment :wrench:
+## :inbox_tray: Deployment :inbox_tray:
 
 These are the key parameters for LaunchPad
 
@@ -83,80 +83,81 @@ Launch has 4 Screen destinations which use Compose Destination to manage navigat
 |-----------------------|-----------------------|-----------------------|-----------------------|
 | ![](./gifs/gif_1.gif) | ![](./gifs/gif_2.gif) | ![](./gifs/gif_3.gif) | ![](./gifs/gif_4.gif) |
 
-### Overview Screen 1
+### **Overview Screen** 
 This screen is based on both TabLayout thanks to [**Accompanist Library**](https://github.com/google/accompanist). You can go into more details by following LaunchPad's tab implementation or [this blog](https://johncodeos.com/how-to-create-tabs-with-jetpack-compose/).
 
-### Details Screen
+### **Details Screen**
 The user navigates to the Details Screen by clicking on a launch item. The main feature is
 the BottomSheet. The user can scroll up and down to reveal additional Launch details such as **Status**,
  **Mission** and **Launch Site**,
 
 
-### Full Screen
+### **Full Screen**
 When the user clicks on the full screen icon from the details screen, the app navigates to
 the full screen to display the rocket image in full screen.
 
-## API Reference
-Yummies fetches its data from [The Meal Db](https://www.themealdb.com/).
-You can find the API Documentation by following this [link](https://www.themealdb.com/api.php).
+## :electric_plug: **API Reference** :electric_plug:
+Yummies fetches its data from [**Launch Library 2 API**](https://thespacedevs.com/llapi/).
+You can find the API Documentation by following this [link](https://ll.thespacedevs.com/2.2.0/swagger/).
 
-### Base URL
-https://www.themealdb.com/api/json/v1/1/
+### **Base URL** :globe_with_meridians:
+https://lldev.thespacedevs.com/2.2.0/
 
 
-### You don't need an **API Key**
-
-### Search meal by name
+### **API Key** :old_key:
+You don't need an API Key
+### Get Upcoming Launches :inbox_tray:
 
 
 ```http
-     @GET("search.php")
+    @GET("launch/upcoming")
 ```
+This interface function takes *limit* and *offset* and returns *ApiResponseDTO*
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `s` | `string` | **Optional**. The meal keyword to search |
+| Parameter | Type    | Description                                        |
+|-----------|---------|----------------------------------------------------|
+| limit     | Integer | Number of results to return per page               |
+| offset    | Integer | The initial index from which to return the results |
 
-This interface function returns a MealsResponse DTO Object.
 
-### Data Points for Meal Item
 
-| Data Point  | Type         |
-|-------------|--------------|
-| id          | Int          |
-| name        | String       |
-| category    | String       |
-| origin      | String       |
-| directions  | String       |
-| imageUrl    | String       |
-| ingredients | List<String> |
-| units       | List<String> |
-### Search meal by name
+### Get Previus Launches :rocket:
 
 
 ```http
      @GET("categories.php")
 ```
 
-This interface function takes no queries returns a CategoriesResponse DTO Object.
+This interface function takes *limit* and *offset* and returns *ApiResponseDTO*
 
-
-### Data Points for Category Item
-
-| categoryId          | Int    |
-|---------------------|--------|
-| categoryType        | String |
-| categoryDescription | String |
-| categoryImageUrl    | String |
-|                     |        |
+| Parameter | Type    | Description                                        |
+|-----------|---------|----------------------------------------------------|
+| limit     | Integer | Number of results to return per page               |
+| offset    | Integer | The initial index from which to return the results |
 
 
 
-## Tech Stack
-This app is implemented using Clean Architecture MVVM Pattern. It features these other
-libraries mostily from Android Jetpack
 
-### Technologies used:
+### Data Points for Launch Model
+
+| Property        | Type     | Description                                                                   |
+|-----------------|----------|-------------------------------------------------------------------------------|
+| id              | Integer  | auto-generated unique identifier for the launch                               |
+| name            | String   | name of the launch                                                            |
+| mission         | Mission  | holds the name, type and Mission's description                                |
+| imageUrl        | String   | link for the launch image                                                     |
+| provider        | Provider | holds the name and Service Provider type                                      |
+| status          | Status   | holds the abbreviation, name and Status description                           |
+| pad             | Pad      | holds the location name, latitude, longitude, complex name and total landings |
+| startWindowDate | String   | time for the start of the launch period                                       |
+| rocket          | Rocket   | holds the name and rocket family                                              |
+
+
+
+
+## :gear: Technologies used :gear:
+
+LaunchPad project uses many popular libraries and tools in the Android Ecosystem
 
 * [Android KTX](https://developer.android.com/kotlin/ktx) - helps to write more concise, idiomatic Kotlin code.
 * [Jetpack Compose](https://developer.android.com/jetpack/compose) - modern toolkit for building native Android UI
@@ -170,7 +171,7 @@ libraries mostily from Android Jetpack
 * [Room](https://developer.android.com/topic/libraries/architecture/room) persistence library which provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
 * [Timber](https://github.com/JakeWharton/timber) - a logger with a small, extensible API which provides utility on top of Android's normal Log class.
 * [Lottie Animations](https://lottiefiles.com/) - provides Lightweight and scalable animations files
-## Architecture
+## :hammer_and_pick: Architecture :hammer_and_pick:
 Yummies is implemented using Android Clean Architecture with these key highlights:
 
 Uses Model-View-ViewModel (MVVM) pattern with Clean Architecture (data, domain and presentation)
@@ -200,71 +201,6 @@ to the details screen.
 You can now see an image of final cooked meals and ingredients. Pull up
 the bottom sheet to reveal the cooking directions
 
-
-## API Reference
-Yummies fetches its data from [The Meal Db](https://www.themealdb.com/).
-You can find the API Documentation by following this [link](https://www.themealdb.com/api.php).
-
-### Base URL
-https://www.themealdb.com/api/json/v1/1/
-
-
-### You don't need an **API Key**
-
-### Search meal by name
-
-
-```http
-     @GET("search.php")
-```
-
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `s` | `string` | **Optional**. The meal keyword to search |
-
-This interface function returns a MealsResponse DTO Object.
-
-### Data Points for Meal Item
-
-| Data Point  | Type         |
-|-------------|--------------|
-| id          | Int          |
-| name        | String       |
-| category    | String       |
-| origin      | String       |
-| directions  | String       |
-| imageUrl    | String       |
-| ingredients | List<String> |
-| units       | List<String> |
-### Search meal by name
-
-
-```http
-     @GET("categories.php")
-```
-
-This interface function takes no queries returns a CategoriesResponse DTO Object.
-
-
-### Data Points for Category Item
-
-| categoryId          | Int    |
-|---------------------|--------|
-| categoryType        | String |
-| categoryDescription | String |
-| categoryImageUrl    | String |
-|                     |        |
-## Authors
-
-- [@Tonnie-Dev(https://github.com/Tonnie-Dev
-
-<a href="https://www.buymeacoffee.com/felix.kariuki" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-
-Do Reach Out :
-
-  * [Twitter](https://twitter.com/felixkariuki_)
-
-  * [LinkedIn](https://www.linkedin.com/in/felix-kariuki/)
 
 
 ## Contributing
