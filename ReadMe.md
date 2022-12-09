@@ -9,19 +9,21 @@
 </h1>
 
   <p align="center">
-    An Android App for Space Events
+    Android App for Space Events
     <br />
     <a href="#-screenshots-">Screenshots</a>
     ·
-    <a href="#-screenshots-">Deployment</a>
+    <a href="#-deployment-">Deployment</a>
     ·
     <a href="#-architecture-">Architecture</a>
     ·
-    <a href="#-screenshots-">API Reference</a>
+    <a href="#-api-reference-">API Reference</a>
     ·
      <a href="#-technologies-">Technologies</a>
     ·
-    <a href="#-screenshots-">Authors</a>
+    <a href="#-authors-">Authors</a>
+     ·
+    <a href="#-license-">Contributing</a>
     ·
     <a href="#-license-">License</a>
   </p>
@@ -175,7 +177,7 @@ LaunchPad project uses many popular libraries and tools in the Android Ecosystem
 * [Lottie Animations](https://lottiefiles.com/) - provides Lightweight and scalable animations files
 * [Google Accompanist](https://github.com/google/accompanist) - a collection of extension libraries for Jetpack Compose
 
-## 🪶 **Author(s)** 🪶
+## :feather: **Author(s)** :feather:
 
 - [@Tonnie-Dev](https://github.com/Tonnie-Dev)
 
@@ -190,7 +192,7 @@ Do Reach Out :
 
 ## :passport_control: Contributing :passport_control:
 
-Contributions to make Yummie better are always welcome!
+Contributions to make LaunchPad better are always welcome!
 
 If you are interested in seeing a particular feature implemented in this app, please open a new issue after which you can make a PR!
 
