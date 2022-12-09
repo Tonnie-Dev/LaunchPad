@@ -41,7 +41,9 @@ This Project uses [**Material 2**](https://m2.material.io/design), which is a pa
 <img img width="200" height="400" src="./screenshots/screen_6.png"> &nbsp;&nbsp;&nbsp;&nbsp; 
 
 </p>
-## ⚖️ Deployment ⚖️
+
+## :wrench: Deployment :wrench:
+
 These are the key parameters for LaunchPad
 
 | compileSdk     | 33     |
@@ -53,6 +55,57 @@ These are the key parameters for LaunchPad
 
 You can clone the repository or download or download the Zip file.
 
+## 🛠️ Architecture 🛠️
+
+LaunchPad is implemented using Android Clean Architecture and follows the Model-View-ViewModel 
+(MVVM) pattern.
+
+It features these main 3 layers:
+
+**1. Data Layer** - This is the layer that dispenses data to the LaunchPad app. It features 2 
+RemoteMediators (yes, :two: ) to provide paging functionality. It is flanked by a ROOM Database 
+for data persistence. The API provides the remote data which is cached by the mediators 
+into the ROOM database for offline operations.
+
+**2. Domain Layer** - This layer holds the Business Logic for the LaunchApp. It holds the models and 
+the use cases that  encapsulates the very complex business logic for the  app.
+
+**3. UI Layer** - This is the presentation layer which directly interacts with the user. It displays
+the  refined data to the user and facilitates interactions with the user.
+It contains the ViewModel holding the different states for the Yummies App.
+
+Launch has 4 Screen destinations which use Compose Destination to manage navigation.
+
+### Overview Screen 1
+This screen is based on both TabLayout thanks to [**Accompanist Library**](https://github.com/google/accompanist). You can go into more details by following LaunchPad's tab implementation or [this blog] (https://johncodeos.com/how-to-create-tabs-with-jetpack-compose/).LazyColumn and LazyRow to present categories 
+and recipes options.
+<p align="center">
+<img img width="200" height="400" src="./screenshots/ov_scrn_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
+<img img width="200" height="400" src="./screenshots/ov_scrn_2.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
+ 
+</p>
+There is also a search box where you can search a meal by name.
+
+### Details Screen
+You get here by selecting a specific meal item and the app navigates you
+to the details screen.
+
+<p align="center">
+<img img width="200" height="400" src="./screenshots/det_scrn_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
+<img img width="200" height="400" src="./screenshots/det_scrn_2.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
+ 
+</p>
+
+You can now see an image of final cooked meals and ingredients. Pull up
+the bottom sheet to reveal the cooking directions
+### Saved Items Screens
+You can also view the saved items by clicking Favorites button on the main screen..
+
+<p align="center">
+<img img width="200" height="400" src="./screenshots/fav_scrn_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
+<img img width="200" height="400" src="./screenshots/fav_scrn_2.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
+ 
+</p>
 
 
 ## Tech Stack
