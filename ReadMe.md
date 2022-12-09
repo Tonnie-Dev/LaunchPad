@@ -15,13 +15,13 @@
 
   
 [Screenshots](#📷-screenshots-📷) ~
-[Deployment](#inbox_tray-deployment-inbox_tray)~
-[Architecture](#🛠️-architecture-🛠️)~
-[API Reference](#electric_plug-api-reference-electric_plug)
-[Tech Stack](#gear-tech-stack-gear)~
-[Authors](#black_nib-authors-black_nib)~
+[Deployment](#inbox_tray-deployment-inbox_tray) ~
+[Architecture](#🛠️-architecture-🛠️) ~
+[API Reference](#electric_plug-api-reference-electric_plug) ~
+[Tech Stack](#gear-tech-stack-gear) ~
+[Authors](#black_nib-authors-black_nib) ~
  [Contributing](#passport_control-contributing-passport_control)  
- [License](#📜-license-📜)~  
+ 
 </div>
     
 LaunchPad shows upcoming rocket launches and previous rocket launches. It is backed up by data from the Launch Library API a product by The Space Devs with an up-to-date database of Spaceflight events.
