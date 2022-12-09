@@ -127,15 +127,8 @@ dependencies {
     // Compose Nav Destinations
     implementation 'io.github.raamcosta.compose-destinations:core:1.6.23-beta'
     ksp 'io.github.raamcosta.compose-destinations:ksp:1.6.23-beta'
-
-    //shimmer
-    implementation "com.facebook.shimmer:shimmer:$shimmer"
-
-    //Firebase Analytics
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.1'
-    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
-
-    // Accompanist
+    
+    // Pager - Accompanist
     implementation "com.google.accompanist:accompanist-pager:0.25.0" // Pager
     implementation "com.google.accompanist:accompanist-pager-indicators:0.25.0" // Pager Indicators
 

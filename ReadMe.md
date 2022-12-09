@@ -31,7 +31,7 @@ LaunchPad shows upcoming rocket launches and previous rocket launches. It is bac
 
 <a href='https://play.google.com/store/apps/details?id=com.uxstate.launchpad'><img alt='Get it on Google Play' src="./screenshots/google_badge.png" width="280"/></a>
 
-## 📷 Screenshots 📷
+## 📷 **Screenshots** 📷
 
 This Project uses [**Material 2**](https://m2.material.io/design), which is a part of Google's open source design system for inituitive and consistent design patterns. 
 
@@ -100,11 +100,11 @@ the full screen to display the rocket image in full screen.
 Yummies fetches its data from [**Launch Library 2 API**](https://thespacedevs.com/llapi/).
 You can find the API Documentation by following this [link](https://ll.thespacedevs.com/2.2.0/swagger/).
 
-### **Base URL** :globe_with_meridians:
+### Base URL :globe_with_meridians:
 https://lldev.thespacedevs.com/2.2.0/
 
 
-### **API Key** :old_key:
+### API Key :old_key:
 You don't need an API Key
 ### Get Upcoming Launches :inbox_tray:
 
@@ -155,55 +155,40 @@ This interface function takes *limit* and *offset* and returns *ApiResponseDTO*
 
 
 
-## :gear: Technologies used :gear:
+## :gear: Tech Stack :gear:
 
 LaunchPad project uses many popular libraries and tools in the Android Ecosystem
 
 * [Android KTX](https://developer.android.com/kotlin/ktx) - helps to write more concise, idiomatic Kotlin code.
 * [Jetpack Compose](https://developer.android.com/jetpack/compose) - modern toolkit for building native Android UI
-* [Material Design 3](https://m3.material.io/) - an adaptable system of guidelines, components, and tools that support the best practices of user interface design.
+* [Material Design 2](https://m2.material.io/design) - an adaptable system of guidelines, components, and tools that support the best practices of user interface design.
 * [Compose Destinations](https://github.com/raamcosta/compose-destinations) - used to handle all navigations and arguments passing while hiding the complex, non-type-safe and boilerplate code
-* [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) to store and manage UI-related data in a lifecycle conscious way.
-* [Dagger Hilt](https://dagger.dev/hilt/) - used for Dependency Injection.
+* [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - designed to store and manage UI-related data in a lifecycle conscious way.
+* [Dagger Hilt](https://dagger.dev/hilt/) - a full static, compile-time dependency injectin framework for both Java and Android
 * [Coil](https://coil-kt.github.io/coil/) - an image loading library for Android backed by Kotlin Coroutines
-* [Retrofit](https://square.github.io/retrofit/) a REST Client for Android which makes it relatively easy to retrieve and upload JSON (or other structured data) via a REST based webservice.
+* [Retrofit](https://square.github.io/retrofit/) - a type-safe HTTP Client
+* [Moshi](https://github.com/square/moshi) - converts data used by an application to a format that can be transfered over a network or stored in a database or a file.
 * [Coroutines and Kotlin Flow](https://kotlinlang.org/docs/reference/coroutines-overview.html) - used to manage the local storage i.e. `writing to and reading from the database`. Coroutines help in managing background threads and reduces the need for callbacks.
-* [Room](https://developer.android.com/topic/libraries/architecture/room) persistence library which provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
+* [Room](https://developer.android.com/topic/libraries/architecture/room) - persistence library which provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
+* [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview) - helps to load and display pages of data from a larger dataset and display small chunks of data in a paginated way
 * [Timber](https://github.com/JakeWharton/timber) - a logger with a small, extensible API which provides utility on top of Android's normal Log class.
 * [Lottie Animations](https://lottiefiles.com/) - provides Lightweight and scalable animations files
-## :hammer_and_pick: Architecture :hammer_and_pick:
-Yummies is implemented using Android Clean Architecture with these key highlights:
+* [Google Accompanist](https://github.com/google/accompanist) - a collection of extension libraries for Jetpack Compose
 
-Uses Model-View-ViewModel (MVVM) pattern with Clean Architecture (data, domain and presentation)
-## Data Layer
-The Data layer features a single repository flanked by  
-a ROOM Database for data persistence and remote data from the API. The API provides
-the remote data which is cached by the repository into the ROOM database for offline operations.
-## Domain Layer
-This layer houses the meal and category models and the use cases which encapsulates
-the complex business logic for the Yummies app.
-## UI Layer
-Displays the Yummies refined data on the screen and facilitates interactions with the users.
-It contains the ViewModel holding the different states for the Yummies App.
+## 🪶 **Author(s)** 🪶
 
-It has 3 Screen destinations which use Compose Destination to manage navigation.
+- [@Tonnie-Dev](https://github.com/Tonnie-Dev)
 
-#Overview Screen 1
-This screen is based on both LazyColumn and LazyRow to present categories 
-and recipes options.
+<a href="https://www.buymeacoffee.com/AgVrgB4N3r" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
-There is also a search box where you can search a meal by name.
+Do Reach Out :
 
-#Details Screen
-You get here by selecting a specific meal item and the app navigates you
-to the details screen.
+  * [Twitter](https://twitter.com/Tonnie_Dev)
 
-You can now see an image of final cooked meals and ingredients. Pull up
-the bottom sheet to reveal the cooking directions
+  * [LinkedIn](https://www.linkedin.com/in/antony-muchiri/)
 
 
-
-## Contributing
+## :passport_control: Contributing :passport_control:
 
 Contributions to make Yummie better are always welcome!
 
@@ -212,7 +197,8 @@ If you are interested in seeing a particular feature implemented in this app, pl
 ![Alt](https://repobeats.axiom.co/api/embed/84dfd3cd94832805dbcaa3569ec855d19e5c9401.svg "Repobeats analytics image")
 
 
-## License
+##  📜 **License**  📜
+
 
 
 
@@ -237,4 +223,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
 
