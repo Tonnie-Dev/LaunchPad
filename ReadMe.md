@@ -21,11 +21,11 @@
     ·
      <a href="#-technologies-">Technologies</a>
     ·
-    <a href="#-authors-">Authors</a>
+    [Authors](#black_nib-authors-black_nib)
      ·
-    <a href="#-license-">Contributing</a>
+     [Contributing](#passport_control-contributing-passport_control)
     ·
-    <a href="#-license-">License</a>
+    [Licence](#📜-license-📜)
   </p>
 </div>
 
@@ -85,16 +85,16 @@ Launch has 4 Screen destinations which use Compose Destination to manage navigat
 |-----------------------|-----------------------|-----------------------|-----------------------|
 | ![](./gifs/gif_1.gif) | ![](./gifs/gif_2.gif) | ![](./gifs/gif_3.gif) | ![](./gifs/gif_4.gif) |
 
-### **Overview Screen** 
+### Overview Screen
 This screen is based on both TabLayout thanks to [**Accompanist Library**](https://github.com/google/accompanist). You can go into more details by following LaunchPad's tab implementation or [this blog](https://johncodeos.com/how-to-create-tabs-with-jetpack-compose/).
 
-### **Details Screen**
+### Details Screen
 The user navigates to the Details Screen by clicking on a launch item. The main feature is
 the BottomSheet. The user can scroll up and down to reveal additional Launch details such as **Status**,
  **Mission** and **Launch Site**,
 
 
-### **Full Screen**
+### Full Screen
 When the user clicks on the full screen icon from the details screen, the app navigates to
 the full screen to display the rocket image in full screen.
 
@@ -106,7 +106,7 @@ You can find the API Documentation by following this [link](https://ll.thespaced
 https://lldev.thespacedevs.com/2.2.0/
 
 
-### API Key :old_key:
+### API Key :key:
 You don't need an API Key
 ### Get Upcoming Launches :inbox_tray:
 
@@ -177,7 +177,7 @@ LaunchPad project uses many popular libraries and tools in the Android Ecosystem
 * [Lottie Animations](https://lottiefiles.com/) - provides Lightweight and scalable animations files
 * [Google Accompanist](https://github.com/google/accompanist) - a collection of extension libraries for Jetpack Compose
 
-## :feather: **Author(s)** :feather:
+## :black_nib: **Author(s)** :black_nib:
 
 - [@Tonnie-Dev](https://github.com/Tonnie-Dev)
 
@@ -190,7 +190,7 @@ Do Reach Out :
   * [LinkedIn](https://www.linkedin.com/in/antony-muchiri/)
 
 
-## :passport_control: Contributing :passport_control:
+## :passport_control: **Contributing** :passport_control:
 
 Contributions to make LaunchPad better are always welcome!
 
