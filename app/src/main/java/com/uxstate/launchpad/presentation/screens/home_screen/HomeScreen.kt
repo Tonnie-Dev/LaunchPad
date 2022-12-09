@@ -13,7 +13,6 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.TabItem
 import com.uxstate.launchpad.presentation.screens.home_screen.components.tabs.Tabs
@@ -23,7 +22,6 @@ import com.uxstate.launchpad.presentation.ui.theme.statusBarColor
 
 @OptIn(ExperimentalPagerApi::class)
 @Destination()
-@RootNavGraph(start = true)
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel(), navigator: DestinationsNavigator) {
 

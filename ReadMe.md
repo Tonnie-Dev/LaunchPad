@@ -77,7 +77,7 @@ It contains the ViewModel holding the different states for the Yummies App.
 Launch has 4 Screen destinations which use Compose Destination to manage navigation.
 
 ### Overview Screen 1
-This screen is based on both TabLayout thanks to [**Accompanist Library**](https://github.com/google/accompanist). You can go into more details by following LaunchPad's tab implementation or [this blog] (https://johncodeos.com/how-to-create-tabs-with-jetpack-compose/).LazyColumn and LazyRow to present categories 
+This screen is based on both TabLayout thanks to [**Accompanist Library**](https://github.com/google/accompanist). You can go into more details by following LaunchPad's tab implementation or [this blog](https://johncodeos.com/how-to-create-tabs-with-jetpack-compose/).LazyColumn and LazyRow to present categories 
 and recipes options.
 <p align="center">
 <img img width="200" height="400" src="./screenshots/ov_scrn_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
