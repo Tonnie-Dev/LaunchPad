@@ -46,12 +46,15 @@ This Project uses [**Material 2**](https://m2.material.io/design), which is a pa
 
 These are the key parameters for LaunchPad
 
-| compileSdk     | 33     |
-|----------------|--------|
-| targetSdk      | 33     |
-| minSdk         | 26     |
-| composeVersion | 1.3.1  |
-| kotlinVersion  | 1.7.20 |
+| Parameter      	| Value  	|
+|----------------	|--------	|
+| compileSdk     	| 33     	|
+| targetSdk      	| 33     	|
+| minSdk         	| 26     	|
+| composeVersion 	| 1.3.1  	|
+| kotlinVersion  	| 1.7.20 	|
+
+
 
 You can clone the repository or download or download the Zip file.
 
@@ -75,6 +78,10 @@ the  refined data to the user and facilitates interactions with the user.
 It contains the ViewModel holding the different states for the Yummies App.
 
 Launch has 4 Screen destinations which use Compose Destination to manage navigation.
+
+| Splash Screen         | Overview Screen       | Detailed Screen       | Full Screen           |
+|-----------------------|-----------------------|-----------------------|-----------------------|
+| ![](./gifs/gif_1.gif) | ![](./gifs/gif_2.gif) | ![](./gifs/gif_3.gif) | ![](./gifs/gif_4.gif) |
 
 ### Overview Screen 1
 This screen is based on both TabLayout thanks to [**Accompanist Library**](https://github.com/google/accompanist). You can go into more details by following LaunchPad's tab implementation or [this blog](https://johncodeos.com/how-to-create-tabs-with-jetpack-compose/).LazyColumn and LazyRow to present categories 
