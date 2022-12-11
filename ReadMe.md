@@ -160,7 +160,7 @@ LaunchPad project uses many popular libraries and tools in the Android Ecosystem
 * [Android KTX](https://developer.android.com/kotlin/ktx) - helps to write more concise, idiomatic Kotlin code.
 * [Jetpack Compose](https://developer.android.com/jetpack/compose) - modern toolkit for building native Android UI
 * [Material Design 2](https://m2.material.io/design) - an adaptable system of guidelines, components, and tools that support the best practices of user interface design.
-* [Compose Destinations](https://github.com/raamcosta/compose-destinations) - used to handle all navigations and arguments passing while hiding the complex, non-type-safe and boilerplate code
+* [Ramcosta Compose Destinations](https://github.com/raamcosta/compose-destinations) - used to handle all navigations and arguments passing while hiding the complex, non-type-safe and boilerplate code
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - designed to store and manage UI-related data in a lifecycle conscious way.
 * [Dagger Hilt](https://dagger.dev/hilt/) - a full static, compile-time dependency injectin framework for both Java and Android
 * [Coil](https://coil-kt.github.io/coil/) - an image loading library for Android backed by Kotlin Coroutines
@@ -172,6 +172,7 @@ LaunchPad project uses many popular libraries and tools in the Android Ecosystem
 * [Timber](https://github.com/JakeWharton/timber) - a logger with a small, extensible API which provides utility on top of Android's normal Log class.
 * [Lottie Animations](https://lottiefiles.com/) - provides Lightweight and scalable animations files
 * [Google Accompanist](https://github.com/google/accompanist) - a collection of extension libraries for Jetpack Compose
+* [CI/CD](https://codemagic.io/android-continuous-integration/) - Continuous integration systems let you automatically build and test your app every time you check in updates to your source control system.
 
 # :black_nib: **Author(s)** :black_nib:
 
