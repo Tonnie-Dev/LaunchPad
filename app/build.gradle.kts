@@ -65,19 +65,63 @@ android {
             exclude("/META-INF/{AL2.0,LGPL2.1}")
         }
     }
+
+    ktlint {
+        disabledRules.set(setOf("final-newline","no-wildcard-imports", "filename"))
+    }
 }
 //ktlintFormat task will need to run before preBuild
 tasks.getByPath("preBuild").dependsOn("ktlintFormat")
-ktlint {
-    android = true
-    ignoreFailures = false
-    disabledRules = ["final-newline", "no-wildcard-imports"]
-    reporters {
-        reporter "plain"
-        reporter "checkstyle"
-        reporter "sarif"
+
+subprojects {
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
+    repositories {
+        mavenCentral()
     }
-}
+
+    configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+        version.set("11.0.0")
+        debug.set(true)
+        verbose.set(true)
+        android.set(false)
+        outputToConsole.set(true)
+        outputColorName.set("RED")
+        ignoreFailures.set(true)
+        enableExperimentalRules.set(true)
+        additionalEditorconfigFile.set(file("/some/additional/.editorconfig"))
+        baseline.set(file("my-project-ktlint-baseline.xml"))
+        reporters {
+            reporter(ReporterType.PLAIN)
+            reporter(ReporterType.CHECKSTYLE)
+            reporter(ReporterType.SARIF)
+
+            customReporters {
+                register("csv") {
+                    fileExtension = "csv"
+                    dependency = project(":project-reporters:csv-reporter")
+                }
+                register("yaml") {
+                    fileExtension = "yml"
+                    dependency = "com.example:ktlint-yaml-reporter:1.0.0"
+                }
+            }
+        }
+        kotlinScriptAdditionalPaths {
+            include(fileTree("scripts/"))
+        }
+        filter {
+            exclude("**/generated/**")
+            include("**/kotlin/**")
+        }
+    }
+
+    dependencies {
+        ktlintRuleset("com.github.username:rulseset:master-SNAPSHOT")
+        ktlintRuleset(files("/path/to/custom/rulseset.jar"))
+        ktlintRuleset(project(":chore:project-ruleset"))
+    }
+}}
 
 dependencies {
 
