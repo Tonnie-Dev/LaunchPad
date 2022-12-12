@@ -64,7 +64,9 @@ android {
     }
     packagingOptions {
         resources {
-            exclude("/META-INF/{AL2.0,LGPL2.1}")
+
+            resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+            // exclude("/META-INF/{AL2.0,LGPL2.1}")
         }
     }
 
@@ -86,10 +88,10 @@ subprojects {
         version.set("11.0.0")
         debug.set(true)
         verbose.set(true)
-        android.set(false)
+        android.set(true)
         outputToConsole.set(true)
         outputColorName.set("RED")
-        ignoreFailures.set(true)
+        ignoreFailures.set(false)
         enableExperimentalRules.set(true)
         additionalEditorconfigFile.set(file("/some/additional/.editorconfig"))
         baseline.set(file("my-project-ktlint-baseline.xml"))
