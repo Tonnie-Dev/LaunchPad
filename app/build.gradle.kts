@@ -1,25 +1,26 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 plugins {
-    id ("com.android.application")
-    kotlin ("android")
-    id ("kotlin-kapt")
-    id ("dagger.hilt.android.plugin")
-    id ("kotlin-parcelize")
-    id ("com.google.devtools.ksp") version "1.7.21-1.0.8"
-    id ("org.jlleitschuh.gradle.ktlint") version "11.0.0"
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
+    id("kotlin-parcelize")
+    id("com.google.devtools.ksp") version "1.7.21-1.0.8"
+    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
 
 android {
     namespace = "com.uxstate.launchpad"
-    compileSdk =33
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.uxstate.launchpad"
         minSdk = 26
         targetSdk = 33
         versionCode = 1
-        versionName ="1.0"
+        versionName = "1.0"
 
-        testInstrumentationRunner ="androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -38,18 +39,19 @@ android {
         }
     }
 
-
     buildTypes {
 
-        getByName("release"){
-            isMinifyEnabled =false
-            proguardFiles (getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro")
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
-        sourceCompatibility =JavaVersion.VERSION_1_8
-        targetCompatibility =JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -58,7 +60,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion ="1.3.2"
+        kotlinCompilerExtensionVersion = "1.3.2"
     }
     packagingOptions {
         resources {
@@ -67,10 +69,10 @@ android {
     }
 
     ktlint {
-        disabledRules.set(setOf("final-newline","no-wildcard-imports", "filename"))
+        disabledRules.set(setOf("final-newline", "no-wildcard-imports", "filename"))
     }
 }
-//ktlintFormat task will need to run before preBuild
+// ktlintFormat task will need to run before preBuild
 tasks.getByPath("preBuild").dependsOn("ktlintFormat")
 
 subprojects {
@@ -121,7 +123,7 @@ subprojects {
         ktlintRuleset(files("/path/to/custom/rulseset.jar"))
         ktlintRuleset(project(":chore:project-ruleset"))
     }
-}}
+}
 
 dependencies {
 
@@ -141,7 +143,7 @@ dependencies {
     // Coil
     implementation("io.coil-kt:coil-compose:2.2.2")
 
-    //Dagger - Hilt
+    // Dagger - Hilt
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
@@ -153,7 +155,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.7")
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7")
 
-    //Moshi Library Dependencies - Core Moshi JSON Library and Moshi"s Kotlin support and converter factory
+    // Moshi Library Dependencies - Core Moshi JSON Library and Moshi"s Kotlin support and converter factory
     implementation("com.squareup.moshi:moshi:1.12.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
 
@@ -167,14 +169,14 @@ dependencies {
     // Paging 3.0
     implementation("androidx.paging:paging-compose:1.0.0-alpha17")
 
-    //Lottie Animation
+    // Lottie Animation
     implementation("com.airbnb.android:lottie-compose:5.0.1")
 
     // Compose Nav Destinations
     implementation("io.github.raamcosta.compose-destinations:core:1.6.23-beta")
     ksp("io.github.raamcosta.compose-destinations:ksp:1.6.23-beta")
-    
-    // Pager - Accompanist
+
+// Pager - Accompanist
     implementation("com.google.accompanist:accompanist-pager:0.25.0") // Pager
     implementation("com.google.accompanist:accompanist-pager-indicators:0.25.0") // Pager Indicators
 
@@ -183,9 +185,7 @@ dependencies {
 
     // System UI Controller - Accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
-    
-    //Timber Logging
+
+// Timber Logging
     implementation("com.jakewharton.timber:timber:5.0.1")
-
-
 }
