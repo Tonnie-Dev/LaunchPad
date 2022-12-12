@@ -125,67 +125,67 @@ subprojects {
 
 dependencies {
 
-    implementation "androidx.core:core-ktx:1.9.0"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
-    implementation "androidx.activity:activity-compose:1.6.1"
-    implementation "androidx.compose.ui:ui:$compose_ui_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
-    implementation "androidx.compose.material:material:1.3.1"
-    testImplementation "junit:junit:4.13.2"
-    androidTestImplementation "androidx.test.ext:junit:1.1.4"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.0"
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    implementation("androidx.activity:activity-compose:1.6.1")
+    implementation("androidx.compose.ui:ui:1.3.1")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.3.1")
+    implementation("androidx.compose.material:material:1.3.1")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.4")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.3.1")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.3.1")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.3.1")
 
     // Coil
-    implementation "io.coil-kt:coil-compose:2.2.2"
+    implementation("io.coil-kt:coil-compose:2.2.2")
 
     //Dagger - Hilt
-    implementation "com.google.dagger:hilt-android:2.44"
-    kapt "com.google.dagger:hilt-android-compiler:2.44"
-    kapt "androidx.hilt:hilt-compiler:1.0.0"
-    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:2.9.0"
-    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
-    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.7"
-    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7"
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.7")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7")
 
     //Moshi Library Dependencies - Core Moshi JSON Library and Moshi"s Kotlin support and converter factory
-    implementation "com.squareup.moshi:moshi:1.12.0"
-    implementation "com.squareup.moshi:moshi-kotlin:1.12.0"
+    implementation("com.squareup.moshi:moshi:1.12.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
 
     // Room KTX with Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:2.4.3"
-    kapt "androidx.room:room-compiler:2.4.3"
+    implementation("androidx.room:room-ktx:2.4.3")
+    kapt("androidx.room:room-compiler:2.4.3")
 
     // room-paging artifact
-    implementation "androidx.room:room-paging:2.4.3"
+    implementation("androidx.room:room-paging:2.4.3")
 
     // Paging 3.0
-    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
+    implementation("androidx.paging:paging-compose:1.0.0-alpha17")
 
     //Lottie Animation
-    implementation "com.airbnb.android:lottie-compose:5.0.1"
+    implementation("com.airbnb.android:lottie-compose:5.0.1")
 
     // Compose Nav Destinations
-    implementation "io.github.raamcosta.compose-destinations:core:1.6.23-beta"
-    ksp "io.github.raamcosta.compose-destinations:ksp:1.6.23-beta"
+    implementation("io.github.raamcosta.compose-destinations:core:1.6.23-beta")
+    ksp("io.github.raamcosta.compose-destinations:ksp:1.6.23-beta")
     
     // Pager - Accompanist
-    implementation "com.google.accompanist:accompanist-pager:0.25.0" // Pager
-    implementation "com.google.accompanist:accompanist-pager-indicators:0.25.0" // Pager Indicators
+    implementation("com.google.accompanist:accompanist-pager:0.25.0") // Pager
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.25.0") // Pager Indicators
 
     // Swipe to Refresh - Accompanist
-    implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist_version"
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.28.0")
 
     // System UI Controller - Accompanist
-    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
     
     //Timber Logging
-    implementation "com.jakewharton.timber:timber:5.0.1"
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
 
 }
