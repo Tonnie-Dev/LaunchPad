@@ -27,7 +27,6 @@ android {
 
     /* Kotlin Block - makes sure that the KSP Plugin looks at
      the right paths when it comes to generated classes*/
-
     kotlin {
         sourceSets {
             debug {
@@ -38,10 +37,19 @@ android {
             }
         }
     }
+
+
     buildTypes {
+
+        getByName("release"){
+
+            isMinifyEnabled =false
+            proguardFiles (getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro")
+        }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+
+            proguardFiles = getDefaultProguardFile("proguard-android-optimize.txt", "proguard-rules.pro")
         }
     }
     compileOptions {
