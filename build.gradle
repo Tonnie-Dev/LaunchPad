@@ -4,11 +4,11 @@ buildscript {
         paging_compose = "1.0.0-alpha16"
         swipe_refresh = "0.24.7-alpha"
         shimmer = "0.5.0"
-        accompanist_version = '0.24.7-alpha'
+        accompanist_version = '0.28.0'
     }
 
     dependencies {
-        classpath "com.google.dagger:hilt-android-gradle-plugin:2.42"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.44"
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
