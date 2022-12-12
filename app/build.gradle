@@ -9,19 +9,19 @@ plugins {
 }
 
 android {
-    namespace "com.uxstate.launchpad"
-    compileSdk 33
+    namespace = "com.uxstate.launchpad"
+    compileSdk =33
 
     defaultConfig {
-        applicationId "com.uxstate.launchpad"
-        minSdk 26
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        applicationId = "com.uxstate.launchpad"
+        minSdk = 26
+        targetSdk = 33
+        versionCode = 1
+        versionName ="1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner ="androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
-            useSupportLibrary true
+            useSupportLibrary = true
         }
     }
 
