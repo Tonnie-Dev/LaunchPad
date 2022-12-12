@@ -42,32 +42,27 @@ android {
     buildTypes {
 
         getByName("release"){
-
             isMinifyEnabled =false
             proguardFiles (getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro")
         }
-        release {
-
-            proguardFiles = getDefaultProguardFile("proguard-android-optimize.txt", "proguard-rules.pro")
-        }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility =JavaVersion.VERSION_1_8
+        targetCompatibility =JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
     }
     buildFeatures {
-        compose true
+        compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion "1.3.2"
+        kotlinCompilerExtensionVersion ="1.3.2"
     }
     packagingOptions {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            exclude("/META-INF/{AL2.0,LGPL2.1}")
         }
     }
 }
