@@ -90,8 +90,7 @@ object AppModule {
     fun provideUseCaseWrapper(repository: LaunchRepository): UseCaseWrapper {
 
         return UseCaseWrapper(
-            getPreviousLaunchesUseCase = GetPreviousLaunchesUseCase(repository = repository),
-            getUpcomingLaunchesUseCase = GetUpcomingLaunchesUseCase(repository = repository),
+            getPreviousLaunchesUseCase = GetPreviousLaunchesUseCase(repository = repository), getUpcomingLaunchesUseCase = GetUpcomingLaunchesUseCase(repository = repository),
             countDownUseCase = CountDownUseCase(),
             timerFlowUseCase = TimerFlowUseCase()
         )
