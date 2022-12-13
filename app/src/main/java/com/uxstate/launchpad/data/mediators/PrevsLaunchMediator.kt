@@ -11,10 +11,10 @@ import com.uxstate.launchpad.data.remote.LaunchAPI
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.util.Constants
 import com.uxstate.launchpad.util.Constants.CACHE_TIMEOUT
-import retrofit2.HttpException
-import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
+import retrofit2.HttpException
+import timber.log.Timber
 
 @OptIn(ExperimentalPagingApi::class)
 class PrevsLaunchMediator @Inject constructor(
