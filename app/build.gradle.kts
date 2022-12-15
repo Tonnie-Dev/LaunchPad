@@ -1,4 +1,5 @@
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -7,6 +8,7 @@ plugins {
     id("kotlin-parcelize")
     id("com.google.devtools.ksp") version "1.7.21-1.0.8"
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
+     id("com.diffplug.spotless")
 }
 
 android {
@@ -72,7 +74,8 @@ android {
 }
 
 // ktlintFormat task will need to run before preBuild
-tasks.getByPath("preBuild").dependsOn("ktlintFormat")
+tasks.getByPath("preBuild")
+    .dependsOn("ktlintFormat")
 
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
 
@@ -86,6 +89,19 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
     }
 }
 
+configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+    kotlin {
+        // version, setUseExperimental, userData and editorConfigOverride are all optional
+        ktlint("0.45.2")
+                .setUseExperimental(true)
+                .userData(mapOf("android" to "true"))
+                .editorConfigOverride(mapOf("indent_size" to 2))
+    }
+    kotlinGradle {
+        target("*.gradle.kts") // default target for kotlinGradle
+        ktlint() // or ktfmt() or prettier()
+    }
+}
 dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
@@ -94,6 +110,7 @@ dependencies {
     implementation("androidx.compose.ui:ui:1.3.1")
     implementation("androidx.compose.ui:ui-tooling-preview:1.3.1")
     implementation("androidx.compose.material:material:1.3.1")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.4")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
@@ -137,7 +154,7 @@ dependencies {
     implementation("io.github.raamcosta.compose-destinations:core:1.6.23-beta")
     ksp("io.github.raamcosta.compose-destinations:ksp:1.6.23-beta")
 
-// Pager - Accompanist
+    // Pager - Accompanist
     implementation("com.google.accompanist:accompanist-pager:0.25.0") // Pager
     implementation("com.google.accompanist:accompanist-pager-indicators:0.25.0") // Pager Indicators
 
@@ -147,10 +164,6 @@ dependencies {
     // System UI Controller - Accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
 
-// Timber Logging
+    // Timber Logging
     implementation("com.jakewharton.timber:timber:5.0.1")
 }
-
-/*ktlint {
-    disabledRules.set(setOf("final-newline", "no-wildcard-imports", "filename"))
-}*/
