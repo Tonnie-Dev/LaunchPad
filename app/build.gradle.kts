@@ -8,7 +8,7 @@ plugins {
     id("kotlin-parcelize")
     id("com.google.devtools.ksp") version "1.7.21-1.0.8"
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
-     id("com.diffplug.spotless")
+    id("com.diffplug.spotless")
 }
 
 android {
@@ -93,9 +93,9 @@ configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     kotlin {
         // version, setUseExperimental, userData and editorConfigOverride are all optional
         ktlint("0.45.2")
-                .setUseExperimental(true)
-                .userData(mapOf("android" to "true"))
-                .editorConfigOverride(mapOf("indent_size" to 2))
+            .setUseExperimental(true)
+            .userData(mapOf("android" to "true"))
+            .editorConfigOverride(mapOf("indent_size" to 2))
     }
     kotlinGradle {
         target("*.gradle.kts") // default target for kotlinGradle

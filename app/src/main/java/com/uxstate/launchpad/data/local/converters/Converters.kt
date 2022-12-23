@@ -129,12 +129,5 @@ class Converters {
         )
     }
 
-    /* @RequiresApi(Build.VERSION_CODES.O)
-     @TypeConverter
-     fun readStringDateFromRoom(date: String): LocalDateTime {
 
-         val temporalAccessor: TemporalAccessor = DateTimeFormatter.ISO_INSTANT.parse(date)
-         val instant: Instant = Instant.from(temporalAccessor)
-         return LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault())
-     }*/
 }
