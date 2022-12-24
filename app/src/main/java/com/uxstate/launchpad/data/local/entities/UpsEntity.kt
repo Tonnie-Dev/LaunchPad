@@ -16,6 +16,5 @@ data class UpsEntity(
     val mission: Mission,
     val provider: Provider,
     val pad: Pad,
-
     val rocket: Rocket
 )

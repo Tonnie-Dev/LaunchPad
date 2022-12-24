@@ -128,6 +128,4 @@ class Converters {
             description = statusPropertiesList[2]
         )
     }
-
-
 }
