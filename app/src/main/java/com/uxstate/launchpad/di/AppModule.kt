@@ -1,8 +1,6 @@
 package com.uxstate.launchpad.di
 
 import android.content.Context
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.room.Room
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -97,5 +95,3 @@ object AppModule {
         )
     }
 }
-
-
