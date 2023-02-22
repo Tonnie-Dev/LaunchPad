@@ -1,7 +1,7 @@
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="./screenshots/rocket_app_icon.png" alt="Logo" width="80" height="80">
+  <a href="#">
+    <img src="./readme-assets/screenshots/rocket_app_icon.png" alt="Logo" width="80" height="80">
   </a>
 
 <h1 align = "center">
@@ -20,13 +20,13 @@
 [API Reference](#electric_plug-api-reference-electric_plug) ~
 [Tech Stack](#gear-tech-stack-gear) ~
 [Authors](#black_nib-authors-black_nib) ~
- [Contributing](#passport_control-contributing-passport_control)  
+[Contributing](#passport_control-contributing-passport_control)  
  
 </div>
     
 LaunchPad shows upcoming rocket launches and previous rocket launches. It is backed up by data from the Launch Library API a product by The Space Devs with an up-to-date database of Spaceflight events.
 
-<a href='https://play.google.com/store/apps/details?id=com.uxstate.launchpad'><img alt='Get it on Google Play' src="./screenshots/google_badge.png" width="280"/></a>
+<a href='https://play.google.com/store/apps/details?id=com.uxstate.launchpad'><img alt='Get it on Google Play' src="./readme-assets/screenshots/google_badge.png" width="280"/></a>
 
 # :camera_flash: **Screenshots** :camera_flash:
 
@@ -34,9 +34,9 @@ LaunchPad shows upcoming rocket launches and previous rocket launches. It is bac
 This Project uses [**Material 2**](https://m2.material.io/design), which is a part of Google's open source design system for inituitive and consistent design patterns. 
 
 <p align="center">
-<img img width="200" height="400" src="./screenshots/screen_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
-<img img width="200" height="400" src="./screenshots/screen_3.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
-<img img width="200" height="400" src="./screenshots/screen_6.png"> &nbsp;&nbsp;&nbsp;&nbsp; 
+<img img width="200" height="400" src="./readme-assets/screenshots/screen_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
+<img img width="200" height="400" src="./readme-assets/screenshots/screen_3.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
+<img img width="200" height="400" src="./readme-assets/screenshots/screen_6.png"> &nbsp;&nbsp;&nbsp;&nbsp; 
 
 </p>
 
@@ -79,7 +79,7 @@ The app has :four: Screen destinations which use Compose Destination to manage n
 
 | Splash Screen         | Overview Screen       | Detailed Screen       | Full Screen           |
 |-----------------------|-----------------------|-----------------------|-----------------------|
-| ![](./gifs/gif_1.gif) | ![](./gifs/gif_2.gif) | ![](./gifs/gif_3.gif) | ![](./gifs/gif_4.gif) |
+| ![](readme-assets/gifs/gif_1.gif) | ![](readme-assets/gifs/gif_2.gif) | ![](readme-assets/gifs/gif_3.gif) | ![](readme-assets/gifs/gif_4.gif) |
 
 ### Overview Screen
 This screen is based on both TabLayout thanks to [**Accompanist Library**](https://github.com/google/accompanist). You can go into more details by following LaunchPad's tab layout implementation or [this blog](https://johncodeos.com/how-to-create-tabs-with-jetpack-compose/).
@@ -199,8 +199,7 @@ If you are interested in seeing a particular feature implemented in this app, pl
 #  :scroll: **License**  :scroll:
 
 
-
-
+```
 MIT License
 
 Copyright (c) [2022] [Tonnie Dev]
@@ -222,6 +221,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
+```
 
 

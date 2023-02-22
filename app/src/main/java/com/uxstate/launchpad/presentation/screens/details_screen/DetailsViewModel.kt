@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-
     private val wrapper: UseCaseWrapper
 ) : ViewModel() {
 
