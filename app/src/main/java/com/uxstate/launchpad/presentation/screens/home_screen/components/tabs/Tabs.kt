@@ -34,7 +34,7 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
     ) {
 
         tabs.forEachIndexed { i, tabItem ->
-
+            // Tab
             LeadingIconTab(
                 icon = {
                     Icon(
@@ -55,11 +55,11 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
 @Composable
 fun TabsPreviewLight() {
 
-  /*
-    val tabs = listOf(TabItem.Previous(data = null ), TabItem.Upcoming)
-    val pagerState = rememberPagerState()
-    LaunchPadTheme() {
-        Tabs(tabs = tabs, pagerState = pagerState)
+    /*    val tabs = listOf(TabItem.Previous(data = null ), TabItem.Upcoming)
+        val pagerState = rememberPagerState()
+        LaunchPadTheme() {
+            Tabs(tabs = tabs, pagerState = pagerState)
+
     }*/
 }
 
@@ -68,9 +68,9 @@ fun TabsPreviewLight() {
 @Composable
 fun TabsPreviewDark() {
 
-  /*  val tabs = listOf(TabItem.Previous, TabItem.Upcoming)
-    val pagerState = rememberPagerState()
-    LaunchPadTheme() {
-        Tabs(tabs = tabs, pagerState = pagerState)
-    }*/
+    /*  val tabs = listOf(TabItem.Previous, TabItem.Upcoming)
+      val pagerState = rememberPagerState()
+      LaunchPadTheme() {
+          Tabs(tabs = tabs, pagerState = pagerState)
+      }*/
 }
