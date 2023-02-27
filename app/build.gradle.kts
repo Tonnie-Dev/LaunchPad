@@ -7,7 +7,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("kotlin-parcelize")
     id("com.google.devtools.ksp") version "1.7.21-1.0.8"
-    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
+    id("org.jlleitschuh.gradle.ktlint")
     id("com.diffplug.spotless")
 }
 
@@ -104,66 +104,66 @@ configure<com.diffplug.gradle.spotless.SpotlessExtension> {
 }
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
-    implementation("androidx.activity:activity-compose:1.6.1")
-    implementation("androidx.compose.ui:ui:1.3.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.3.1")
-    implementation("androidx.compose.material:material:1.3.1")
+    implementation(AndroidX.core.ktx)
+    implementation(AndroidX.lifecycle.runtime.ktx)
+    implementation(AndroidX.activity.compose)
+    implementation(AndroidX.compose.ui)
+    implementation(AndroidX.compose.ui.toolingPreview)
+    implementation(AndroidX.compose.material)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.4")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.3.1")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.3.1")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.3.1")
+    testImplementation(Testing.junit4)
+    androidTestImplementation(AndroidX.test.ext.junit)
+    androidTestImplementation(AndroidX.test.espresso.core)
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+    debugImplementation(AndroidX.compose.ui.tooling)
+    debugImplementation(AndroidX.compose.ui.testManifest)
 
     // Coil
-    implementation("io.coil-kt:coil-compose:2.2.2")
+    implementation(COIL.compose)
 
     // Dagger - Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
-    kapt("androidx.hilt:hilt-compiler:1.0.0")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation(Google.dagger.hilt.android)
+    kapt(Google.dagger.hilt.android.compiler)
+    kapt(AndroidX.hilt.compiler)
+    implementation(AndroidX.hilt.navigationCompose)
 
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.7")
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7")
+    implementation(Square.retrofit2)
+    implementation(Square.retrofit2.converter.moshi)
+    implementation(Square.okHttp3)
+    implementation(Square.okHttp3.loggingInterceptor)
 
     // Moshi Library Dependencies - Core Moshi JSON Library and Moshi"s Kotlin support and converter factory
-    implementation("com.squareup.moshi:moshi:1.12.0")
-    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
+    implementation(Square.moshi)
+    implementation(Square.moshi.kotlinReflect)
 
     // Room KTX with Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:2.4.3")
-    kapt("androidx.room:room-compiler:2.4.3")
+    implementation(AndroidX.room.ktx)
+    kapt(AndroidX.room.compiler)
 
     // room-paging artifact
-    implementation("androidx.room:room-paging:2.4.3")
+    implementation(AndroidX.room.paging)
 
     // Paging 3.0
-    implementation("androidx.paging:paging-compose:1.0.0-alpha17")
+    implementation(AndroidX.paging.compose)
 
     // Lottie Animation
-    implementation("com.airbnb.android:lottie-compose:5.0.1")
+    implementation(libs.lottie.compose)
 
     // Compose Nav Destinations
-    implementation("io.github.raamcosta.compose-destinations:core:1.6.23-beta")
-    ksp("io.github.raamcosta.compose-destinations:ksp:1.6.23-beta")
+    implementation(libs.io.github.raamcosta.compose.destinations.core)
+    ksp(libs.ksp)
 
     // Pager - Accompanist
-    implementation("com.google.accompanist:accompanist-pager:0.25.0") // Pager
-    implementation("com.google.accompanist:accompanist-pager-indicators:0.25.0") // Pager Indicators
+    implementation(Google.accompanist.pager) // Pager
+    implementation(Google.accompanist.pager.indicators) // Pager Indicators
 
     // Swipe to Refresh - Accompanist
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.28.0")
+    implementation(Google.accompanist.swipeRefresh)
 
     // System UI Controller - Accompanist
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
+    implementation(Google.accompanist.systemUiController)
 
     // Timber Logging
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation(JakeWharton.timber)
 }
