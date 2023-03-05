@@ -7,10 +7,10 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.uxstate.launchpad.data.local.LaunchDatabase
 import com.uxstate.launchpad.data.mapper.toPrevEntity
-import com.uxstate.launchpad.data.remote.LaunchAPI
+import com.uxstate.launchpad.data.remote.LaunchApi
 import com.uxstate.launchpad.domain.model.Launch
-import com.uxstate.launchpad.util.Constants
-import com.uxstate.launchpad.util.Constants.CACHE_TIMEOUT
+import com.uxstate.launchpad.utils.Constants
+import com.uxstate.launchpad.utils.Constants.CACHE_TIMEOUT
 import java.io.IOException
 import javax.inject.Inject
 import retrofit2.HttpException
@@ -19,10 +19,10 @@ import timber.log.Timber
 @OptIn(ExperimentalPagingApi::class)
 class PrevsLaunchMediator @Inject constructor(
     private val db: LaunchDatabase,
-    private val api: LaunchAPI
+    private val api: LaunchApi
 ) : RemoteMediator<Int, Launch>() {
 
-    private val dao = db.dao
+    private val dao = db.launchDao
 
     override suspend fun load(
         loadType: LoadType,

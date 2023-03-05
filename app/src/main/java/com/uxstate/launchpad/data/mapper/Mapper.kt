@@ -2,11 +2,11 @@ package com.uxstate.launchpad.data.mapper
 
 import com.uxstate.launchpad.data.local.entities.PrevsEntity
 import com.uxstate.launchpad.data.local.entities.UpsEntity
-import com.uxstate.launchpad.data.remote.dtos.LaunchDTO
+import com.uxstate.launchpad.data.remote.dto.LaunchDto
 import com.uxstate.launchpad.domain.model.*
 
 // LaunchDTO to entity
-fun LaunchDTO.toPrevEntity(): PrevsEntity {
+fun LaunchDto.toPrevEntity(): PrevsEntity {
     return PrevsEntity(
         timeStamp = System.currentTimeMillis(),
         name = this.name.substringBefore('|'),
@@ -43,7 +43,7 @@ fun LaunchDTO.toPrevEntity(): PrevsEntity {
 }
 
 // LaunchDTO to entity
-fun LaunchDTO.toUpsEntity(): UpsEntity {
+fun LaunchDto.toUpsEntity(): UpsEntity {
 
     return UpsEntity(
         timeStamp = System.currentTimeMillis(),

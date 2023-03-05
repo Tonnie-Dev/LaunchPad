@@ -2,8 +2,8 @@ package com.uxstate.launchpad.di
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.uxstate.launchpad.data.remote.LaunchAPI
-import com.uxstate.launchpad.util.Constants
+import com.uxstate.launchpad.data.remote.LaunchApi
+import com.uxstate.launchpad.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -64,7 +64,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(converter: Converter.Factory) =
         Retrofit.Builder()
-            .baseUrl(LaunchAPI.BASE_URL)
+            .baseUrl(LaunchApi.BASE_URL)
             .addConverterFactory(converter)
             .build()
 }

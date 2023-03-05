@@ -1,9 +1,9 @@
 package com.uxstate.launchpad.di.modules
 
-import com.uxstate.launchpad.data.remote.LaunchAPI
-import com.uxstate.launchpad.data.remote.data_source.RemoteDataSourceImpl
+import com.uxstate.launchpad.data.remote.LaunchApi
+import com.uxstate.launchpad.data.remote.source.RemoteDataSourceImpl
 import com.uxstate.launchpad.data.repository.LaunchRepositoryImpl
-import com.uxstate.launchpad.domain.paging_source.RemoteDataSource
+import com.uxstate.launchpad.domain.pagingSource.RemoteDataSource
 import com.uxstate.launchpad.domain.repository.LaunchRepository
 import dagger.Binds
 import dagger.Module
@@ -30,7 +30,7 @@ interface LaunchModule {
     companion object {
         @Provides
         @Singleton
-        fun provideLaunchApi(retrofit: Retrofit): LaunchAPI =
+        fun provideLaunchApi(retrofit: Retrofit): LaunchApi =
             retrofit.create()
     }
 }

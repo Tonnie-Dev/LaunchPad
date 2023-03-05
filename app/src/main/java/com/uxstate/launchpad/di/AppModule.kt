@@ -3,7 +3,7 @@ package com.uxstate.launchpad.di
 import android.content.Context
 import androidx.room.Room
 import com.uxstate.launchpad.data.local.LaunchDatabase
-import com.uxstate.launchpad.domain.use_cases.*
+import com.uxstate.launchpad.domain.useCases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

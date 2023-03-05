@@ -15,7 +15,7 @@ import com.uxstate.launchpad.data.local.entities.UpsEntity
 )
 @TypeConverters(Converters::class)
 abstract class LaunchDatabase : RoomDatabase() {
-    abstract val dao: LaunchDao
+    abstract val launchDao: LaunchDao
 
     companion object {
         const val DATABASE_NAME = "LaunchDatabase"
