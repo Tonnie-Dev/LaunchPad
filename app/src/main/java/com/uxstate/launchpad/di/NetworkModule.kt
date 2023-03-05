@@ -2,23 +2,25 @@ package com.uxstate.launchpad.di
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.uxstate.launchpad.data.remote.LaunchApi
-import com.uxstate.launchpad.utils.Constants
+import com.uxstate.launchpad.data.remote.api.LaunchApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 object NetworkModule {
+
+    private const val READ_TIMEOUT_IN_SECONDS = 15L
+    private const val CONNECT_TIMEOUT_IN_SECONDS = 15L
 
     /*
     For debugging purposes it’s nice to have a log feature integrated to
@@ -46,8 +48,8 @@ object NetworkModule {
     fun provideOkHttpClient(interceptor: HttpLoggingInterceptor) =
         OkHttpClient.Builder()
             .addInterceptor(interceptor)
-            .connectTimeout(Constants.CONNECT_TIMEOUT, TimeUnit.SECONDS)
-            .readTimeout(Constants.READ_TIMEOUT, TimeUnit.SECONDS)
+            .connectTimeout(CONNECT_TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
+            .readTimeout(READ_TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
             .build()
 
     @Provides

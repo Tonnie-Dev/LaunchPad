@@ -9,7 +9,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.presentation.screens.common.LaunchTopBar
 import com.uxstate.launchpad.presentation.screens.common.SimpleAlertDialog
-import com.uxstate.launchpad.presentation.screens.destinations.FullScreenDestination
+import com.uxstate.launchpad.presentation.screens.destinations.FullPhotoScreenDestination
 import com.uxstate.launchpad.presentation.screens.details.components.BackgroundContent
 import com.uxstate.launchpad.presentation.screens.details.components.LaunchBottomSheet
 import com.uxstate.launchpad.utils.LocalSpacing
@@ -74,7 +74,7 @@ fun DetailsScreen(
             imageFractionHeight = scaffoldState.currentSheetFraction,
             onShowFullScreen = {
                 navigator.popBackStack()
-                navigator.navigate(FullScreenDestination(launch = launch))
+                navigator.navigate(FullPhotoScreenDestination(launch = launch))
             },
             onClose = { navigator.navigateUp() }
         )

@@ -1,4 +1,4 @@
-package com.uxstate.launchpad.data.local
+package com.uxstate.launchpad.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

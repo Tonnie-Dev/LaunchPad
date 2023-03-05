@@ -4,25 +4,26 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import androidx.room.withTransaction
-import com.uxstate.launchpad.data.local.LaunchDatabase
+import com.uxstate.launchpad.data.local.dao.LaunchDao
+import com.uxstate.launchpad.data.local.database.utils.TransactionProvider
 import com.uxstate.launchpad.data.mapper.toUpsEntity
-import com.uxstate.launchpad.data.remote.LaunchApi
+import com.uxstate.launchpad.data.remote.api.LaunchApi
+import com.uxstate.launchpad.data.remote.api.constants.LaunchApiParams
 import com.uxstate.launchpad.domain.model.Launch
-import com.uxstate.launchpad.utils.Constants
 import com.uxstate.launchpad.utils.Constants.CACHE_TIMEOUT
 import java.io.IOException
 import javax.inject.Inject
+import javax.inject.Singleton
 import retrofit2.HttpException
 import timber.log.Timber
 
 @OptIn(ExperimentalPagingApi::class)
+@Singleton
 class UpsLaunchMediator @Inject constructor(
-    private val db: LaunchDatabase,
+    private val dao: LaunchDao,
+    private val transactionProvider: TransactionProvider,
     private val api: LaunchApi
 ) : RemoteMediator<Int, Launch>() {
-
-    private val dao = db.launchDao
 
     override suspend fun load(
         loadType: LoadType,
@@ -36,7 +37,7 @@ class UpsLaunchMediator @Inject constructor(
                 LoadType.REFRESH -> {
 
                     Timber.i("Inside REFRESH Block")
-                    Constants.OFFSET_STARTING_INDEX
+                    LaunchApiParams.DEFAULT_OFFSET
                 }
                 LoadType.PREPEND -> {
                     Timber.i("Inside PREPEND Block")
@@ -59,12 +60,12 @@ class UpsLaunchMediator @Inject constructor(
             }
 
             Timber.i("Load Key is $loadKey") // Make API request
-            val response = api.getUpcomingLaunches(offSet = loadKey)
+            val response = api.getUpcomingLaunches(offset = loadKey)
             Timber.i("The size of response is: ${response.launchDTOS.map { it.name }}")
 
             if (response.launchDTOS.isNotEmpty()) {
 
-                db.withTransaction {
+                transactionProvider.withTransaction {
 
                     if (loadType == LoadType.REFRESH) {
                         dao.clearUpcomingLaunches()

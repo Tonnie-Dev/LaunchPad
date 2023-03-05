@@ -2,8 +2,6 @@ package com.uxstate.launchpad.domain.useCases
 
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -12,6 +10,8 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
 
 @Singleton
 class CountDownUseCase @Inject constructor() {
