@@ -4,12 +4,17 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.repository.LaunchRepository
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class GetUpcomingLaunchesUseCase(private val repository: LaunchRepository) {
+@Singleton
+class GetUpcomingLaunchesUseCase @Inject constructor(
+    private val repository: LaunchRepository
+) {
 
     operator fun invoke(): Flow<PagingData<Launch>> {
         return repository.getUpcomingLaunches()

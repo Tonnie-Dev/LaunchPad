@@ -10,10 +10,15 @@ import com.uxstate.launchpad.data.local.entities.UpsEntity
 
 @Database(
     entities = [PrevsEntity::class, UpsEntity::class],
-    version = 1,
+    version = LaunchDatabase.DATABASE_VERSION,
     exportSchema = true
 )
 @TypeConverters(Converters::class)
 abstract class LaunchDatabase : RoomDatabase() {
     abstract val dao: LaunchDao
+
+    companion object {
+        const val DATABASE_NAME = "LaunchDatabase"
+        const val DATABASE_VERSION = 1
+    }
 }

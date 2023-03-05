@@ -9,8 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 
 class LaunchRepositoryImpl @Inject constructor(
-    private val dataSource:
-        RemoteDataSource
+    private val dataSource: RemoteDataSource
 ) : LaunchRepository {
 
     override fun getPreviousLaunches(): Flow<PagingData<Launch>> {
