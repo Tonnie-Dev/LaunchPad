@@ -5,23 +5,23 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.uxstate.launchpad.data.local.dao.LaunchDao
-import com.uxstate.launchpad.data.local.database.utils.TransactionProvider
+import com.uxstate.launchpad.data.local.database.utils.DatabaseTransactionProvider
 import com.uxstate.launchpad.data.mapper.toPrevEntity
 import com.uxstate.launchpad.data.remote.api.LaunchApi
 import com.uxstate.launchpad.data.remote.api.constants.LaunchApiParams
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.utils.Constants.CACHE_TIMEOUT
+import retrofit2.HttpException
+import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
-import retrofit2.HttpException
-import timber.log.Timber
 
 @OptIn(ExperimentalPagingApi::class)
 @Singleton
 class PrevsLaunchMediator @Inject constructor(
     private val dao: LaunchDao,
-    private val transactionProvider: TransactionProvider,
+    private val transactionProvider: DatabaseTransactionProvider,
     private val api: LaunchApi
 ) : RemoteMediator<Int, Launch>() {
 
@@ -65,8 +65,8 @@ class PrevsLaunchMediator @Inject constructor(
             Timber.i("loadKey is: $loadKey")
             val response = api.getPreviousLaunches(offset = loadKey)
 
-            Timber.i("The size is: ${response.launchDTOS.size}")
-            if (response.launchDTOS.isNotEmpty()) {
+            Timber.i("The size is: ${response.launchDtos.size}")
+            if (response.launchDtos.isNotEmpty()) {
                 transactionProvider.withTransaction {
 
                     if (loadType == LoadType.REFRESH) {
@@ -76,7 +76,7 @@ class PrevsLaunchMediator @Inject constructor(
                     }
 
                     Timber.i("NOT REFRESH - Data Inserted")
-                    dao.insertPreviousLaunches(response.launchDTOS.map { it.toPrevEntity() })
+                    dao.insertPreviousLaunches(response.launchDtos.map { it.toPrevEntity() })
                 }
             }
 

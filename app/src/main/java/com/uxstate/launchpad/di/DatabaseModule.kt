@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.uxstate.launchpad.data.local.database.LaunchDatabase
 import com.uxstate.launchpad.data.local.database.transaction.LaunchDatabaseTransactionProvider
-import com.uxstate.launchpad.data.local.database.utils.TransactionProvider
+import com.uxstate.launchpad.data.local.database.utils.DatabaseTransactionProvider
 import com.uxstate.launchpad.domain.useCases.*
 import dagger.Binds
 import dagger.Module
@@ -21,7 +21,7 @@ interface DatabaseModule {
     @Binds
     @Singleton
     fun bindLaunchDbTransactionProvider(provider: LaunchDatabaseTransactionProvider):
-        TransactionProvider
+        DatabaseTransactionProvider
 
     companion object {
         @Provides

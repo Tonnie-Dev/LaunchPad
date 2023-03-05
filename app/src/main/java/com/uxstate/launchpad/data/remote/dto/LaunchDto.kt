@@ -22,13 +22,13 @@ data class LaunchDto(
     @Json(name = "last_updated")
     val lastUpdated: String,
     @Json(name = "launch_service_provider")
-    val launchServiceProviderDTO: LaunchServiceProviderDto,
+    val launchServiceProviderDto: LaunchServiceProviderDto,
     @Json(name = "location_launch_attempt_count")
     val locationLaunchAttemptCount: Int,
     @Json(name = "location_launch_attempt_count_year")
     val locationLaunchAttemptCountYear: Int,
     @Json(name = "mission")
-    val mission: MissionDto?,
+    val missionDto: MissionDto?,
     @Json(name = "name")
     val name: String,
     @Json(name = "net")
@@ -38,7 +38,7 @@ data class LaunchDto(
     @Json(name = "orbital_launch_attempt_count_year")
     val orbitalLaunchAttemptCountYear: Int,
     @Json(name = "pad")
-    val padDTO: PadDto,
+    val padDto: PadDto,
     @Json(name = "pad_launch_attempt_count")
     val padLaunchAttemptCount: Int,
     @Json(name = "pad_launch_attempt_count_year")
@@ -48,11 +48,11 @@ data class LaunchDto(
     @Json(name = "program")
     val program: List<Any>,
     @Json(name = "rocket")
-    val rocketDTO: RocketDto,
+    val rocketDto: RocketDto,
     @Json(name = "slug")
     val slug: String,
     @Json(name = "status")
-    val statusDTO: StatusDto,
+    val statusDto: StatusDto,
     @Json(name = "url")
     val url: String,
     @Json(name = "webcast_live")

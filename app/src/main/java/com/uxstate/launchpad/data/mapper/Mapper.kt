@@ -2,80 +2,70 @@ package com.uxstate.launchpad.data.mapper
 
 import com.uxstate.launchpad.data.local.entities.PrevsEntity
 import com.uxstate.launchpad.data.local.entities.UpsEntity
-import com.uxstate.launchpad.data.remote.dto.LaunchDto
+import com.uxstate.launchpad.data.remote.dto.*
 import com.uxstate.launchpad.domain.model.*
 
-// LaunchDTO to entity
-fun LaunchDto.toPrevEntity(): PrevsEntity {
-    return PrevsEntity(
-        timeStamp = System.currentTimeMillis(),
-        name = this.name.substringBefore('|'),
-        imageUrl = this.image ?: "",
-        status = Status(
-            name = this.statusDTO.name,
-            abbrev = this.statusDTO.abbrev,
-            description = this.statusDTO.description
-        ),
-        startWindowDate = this.windowStart,
-        mission = Mission(
-            name = this.mission?.name ?: "Not Found",
-            description = this.mission?.description ?: "",
-            type = this.mission?.type ?: ""
-        ),
-        provider = Provider(
-            id = this.launchServiceProviderDTO.id,
-            name = this.launchServiceProviderDTO.name,
-            type = this.launchServiceProviderDTO.type ?: "Not Found"
-        ),
-        pad = Pad(
-            locationName = this.padDTO.location.name,
-            latitude = this.padDTO.latitude ?: "0.0",
-            longitude = this.padDTO.longitude ?: "0.0",
-            complex = this.padDTO.name,
-            totalLaunchCount = this.padDTO.location.totalLaunchCount,
-            totalLandingCount = this.padDTO.location.totalLandingCount
-        ),
-        rocket = Rocket(
-            name = this.rocketDTO.configuration.name,
-            family = this.rocketDTO.configuration.family
-        )
-    )
-}
 
-// LaunchDTO to entity
-fun LaunchDto.toUpsEntity(): UpsEntity {
-
-    return UpsEntity(
+fun LaunchDto.toPrevEntity(): PrevsEntity =
+    PrevsEntity(
         timeStamp = System.currentTimeMillis(),
-        name = this.name.substringBefore('|'),
-        imageUrl = this.image ?: "",
-        status = Status(
-            name = this.statusDTO.name,
-            abbrev = this.statusDTO.abbrev,
-            description = this.statusDTO.description
-        ),
-        startWindowDate = this.windowStart,
-        mission = Mission(
-            name = this.mission?.name ?: "Not Found",
-            description = this.mission?.description ?: "",
-            type = this.mission?.type ?: ""
-        ),
-        provider = Provider(
-            id = this.launchServiceProviderDTO.id,
-            name = this.launchServiceProviderDTO.name,
-            type = this.launchServiceProviderDTO.type ?: "Not Found"
-        ),
-        pad = Pad(
-            locationName = this.padDTO.location.name,
-            latitude = this.padDTO.latitude ?: "0.0",
-            longitude = this.padDTO.longitude ?: "0.0",
-            complex = this.padDTO.name,
-            totalLaunchCount = this.padDTO.location.totalLaunchCount,
-            totalLandingCount = this.padDTO.location.totalLandingCount
-        ),
-        rocket = Rocket(
-            name = this.rocketDTO.configuration.name,
-            family = this.rocketDTO.configuration.family
-        )
+        name = name.substringBefore('|'),
+        imageUrl = image ?: "",
+        status = statusDto.toStatus(),
+        startWindowDate = windowStart,
+        mission = missionDto.toMission(),
+        provider = launchServiceProviderDto.toProvider(),
+        pad = padDto.toPad(),
+        rocket = rocketDto.toRocket(),
     )
-}
+
+
+fun LaunchDto.toUpsEntity(): UpsEntity =
+    UpsEntity(
+        timeStamp = System.currentTimeMillis(),
+        name = name.substringBefore('|'),
+        imageUrl = image ?: "",
+        status = statusDto.toStatus(),
+        startWindowDate = windowStart,
+        mission = missionDto.toMission(),
+        provider = launchServiceProviderDto.toProvider(),
+        pad = padDto.toPad(),
+        rocket = rocketDto.toRocket(),
+    )
+
+fun StatusDto.toStatus(): Status =
+    Status(
+        name = name,
+        abbrev = abbrev,
+        description = description
+    )
+
+fun LaunchServiceProviderDto.toProvider(): Provider =
+    Provider(
+        id = id,
+        name = name,
+        type = type ?: "Not Found"
+    )
+
+fun PadDto.toPad() : Pad =
+    Pad(
+        locationName = location.name,
+        latitude = latitude ?: "0.0",
+        longitude = longitude ?: "0.0",
+        complex = name,
+        totalLaunchCount = location.totalLaunchCount,
+        totalLandingCount = location.totalLandingCount
+    )
+
+fun RocketDto.toRocket() : Rocket =
+    Rocket(
+        name = configuration.name,
+        family = configuration.family
+    )
+
+fun MissionDto?.toMission(): Mission = Mission(
+    name = this?.name ?: "Not Found",
+    description = this?.description ?: "",
+    type = this?.type ?: ""
+)
+

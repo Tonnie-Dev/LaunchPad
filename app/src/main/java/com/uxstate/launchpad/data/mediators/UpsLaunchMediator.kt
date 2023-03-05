@@ -5,7 +5,7 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.uxstate.launchpad.data.local.dao.LaunchDao
-import com.uxstate.launchpad.data.local.database.utils.TransactionProvider
+import com.uxstate.launchpad.data.local.database.utils.DatabaseTransactionProvider
 import com.uxstate.launchpad.data.mapper.toUpsEntity
 import com.uxstate.launchpad.data.remote.api.LaunchApi
 import com.uxstate.launchpad.data.remote.api.constants.LaunchApiParams
@@ -21,7 +21,7 @@ import timber.log.Timber
 @Singleton
 class UpsLaunchMediator @Inject constructor(
     private val dao: LaunchDao,
-    private val transactionProvider: TransactionProvider,
+    private val transactionProvider: DatabaseTransactionProvider,
     private val api: LaunchApi
 ) : RemoteMediator<Int, Launch>() {
 
@@ -61,9 +61,9 @@ class UpsLaunchMediator @Inject constructor(
 
             Timber.i("Load Key is $loadKey") // Make API request
             val response = api.getUpcomingLaunches(offset = loadKey)
-            Timber.i("The size of response is: ${response.launchDTOS.map { it.name }}")
+            Timber.i("The size of response is: ${response.launchDtos.map { it.name }}")
 
-            if (response.launchDTOS.isNotEmpty()) {
+            if (response.launchDtos.isNotEmpty()) {
 
                 transactionProvider.withTransaction {
 
@@ -72,7 +72,7 @@ class UpsLaunchMediator @Inject constructor(
                         Timber.i("Existing Data Wiped")
                     }
                     Timber.i("New Data in place")
-                    dao.insertUpcomingLaunches(response.launchDTOS.map { it.toUpsEntity() })
+                    dao.insertUpcomingLaunches(response.launchDtos.map { it.toUpsEntity() })
                 }
             }
 
