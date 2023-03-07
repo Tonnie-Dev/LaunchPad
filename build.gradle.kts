@@ -6,6 +6,7 @@ buildscript {
     }
 
     dependencies {
+// features/add-version-catalogs
         classpath(Android.tools.build.gradlePlugin)
         classpath (libs.kotlin.gradle.plugin)
         classpath(Google.dagger.hilt.android.gradlePlugin)
