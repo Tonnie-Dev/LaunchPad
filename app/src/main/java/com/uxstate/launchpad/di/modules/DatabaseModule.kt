@@ -1,4 +1,4 @@
-package com.uxstate.launchpad.di
+package com.uxstate.launchpad.di.modules
 
 import android.content.Context
 import androidx.room.Room

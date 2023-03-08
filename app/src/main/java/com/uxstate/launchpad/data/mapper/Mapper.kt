@@ -5,7 +5,6 @@ import com.uxstate.launchpad.data.local.entities.UpsEntity
 import com.uxstate.launchpad.data.remote.dto.*
 import com.uxstate.launchpad.domain.model.*
 
-
 fun LaunchDto.toPrevEntity(): PrevsEntity =
     PrevsEntity(
         timeStamp = System.currentTimeMillis(),
@@ -18,7 +17,6 @@ fun LaunchDto.toPrevEntity(): PrevsEntity =
         pad = padDto.toPad(),
         rocket = rocketDto.toRocket(),
     )
-
 
 fun LaunchDto.toUpsEntity(): UpsEntity =
     UpsEntity(
@@ -47,7 +45,7 @@ fun LaunchServiceProviderDto.toProvider(): Provider =
         type = type ?: "Not Found"
     )
 
-fun PadDto.toPad() : Pad =
+fun PadDto.toPad(): Pad =
     Pad(
         locationName = location.name,
         latitude = latitude ?: "0.0",
@@ -57,7 +55,7 @@ fun PadDto.toPad() : Pad =
         totalLandingCount = location.totalLandingCount
     )
 
-fun RocketDto.toRocket() : Rocket =
+fun RocketDto.toRocket(): Rocket =
     Rocket(
         name = configuration.name,
         family = configuration.family
@@ -68,4 +66,3 @@ fun MissionDto?.toMission(): Mission = Mission(
     description = this?.description ?: "",
     type = this?.type ?: ""
 )
-
