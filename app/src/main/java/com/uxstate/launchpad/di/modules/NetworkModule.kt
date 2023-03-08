@@ -64,7 +64,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(converter: Converter.Factory) =
+    fun provideRetrofit(converter: Converter.Factory): Retrofit =
         Retrofit.Builder()
             .baseUrl(LaunchApi.BASE_URL)
             .addConverterFactory(converter)
