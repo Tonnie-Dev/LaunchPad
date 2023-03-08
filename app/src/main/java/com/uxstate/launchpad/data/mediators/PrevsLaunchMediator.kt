@@ -4,25 +4,26 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import androidx.room.withTransaction
-import com.uxstate.launchpad.data.local.LaunchDatabase
+import com.uxstate.launchpad.data.local.dao.LaunchDao
+import com.uxstate.launchpad.data.local.database.utils.DatabaseTransactionProvider
 import com.uxstate.launchpad.data.mapper.toPrevEntity
-import com.uxstate.launchpad.data.remote.LaunchAPI
+import com.uxstate.launchpad.data.remote.api.LaunchApi
+import com.uxstate.launchpad.data.remote.api.constants.LaunchApiParams
 import com.uxstate.launchpad.domain.model.Launch
-import com.uxstate.launchpad.util.Constants
-import com.uxstate.launchpad.util.Constants.CACHE_TIMEOUT
-import java.io.IOException
-import javax.inject.Inject
+import com.uxstate.launchpad.utils.Constants.CACHE_TIMEOUT
 import retrofit2.HttpException
 import timber.log.Timber
+import java.io.IOException
+import javax.inject.Inject
+import javax.inject.Singleton
 
 @OptIn(ExperimentalPagingApi::class)
+@Singleton
 class PrevsLaunchMediator @Inject constructor(
-    private val db: LaunchDatabase,
-    private val api: LaunchAPI
+    private val dao: LaunchDao,
+    private val transactionProvider: DatabaseTransactionProvider,
+    private val api: LaunchApi
 ) : RemoteMediator<Int, Launch>() {
-
-    private val dao = db.dao
 
     override suspend fun load(
         loadType: LoadType,
@@ -38,7 +39,7 @@ class PrevsLaunchMediator @Inject constructor(
 
                 LoadType.REFRESH -> {
                     Timber.i("Hitting Refresh loadkey should be 0")
-                    Constants.OFFSET_STARTING_INDEX
+                    LaunchApiParams.DEFAULT_OFFSET
                 }
 
                 LoadType.PREPEND -> {
@@ -62,11 +63,11 @@ class PrevsLaunchMediator @Inject constructor(
             }
 
             Timber.i("loadKey is: $loadKey")
-            val response = api.getPreviousLaunches(offSet = loadKey)
+            val response = api.getPreviousLaunches(offset = loadKey)
 
-            Timber.i("The size is: ${response.launchDTOS.size}")
-            if (response.launchDTOS.isNotEmpty()) {
-                db.withTransaction {
+            Timber.i("The size is: ${response.launchDtos.size}")
+            if (response.launchDtos.isNotEmpty()) {
+                transactionProvider.withTransaction {
 
                     if (loadType == LoadType.REFRESH) {
 
@@ -75,7 +76,7 @@ class PrevsLaunchMediator @Inject constructor(
                     }
 
                     Timber.i("NOT REFRESH - Data Inserted")
-                    dao.insertPreviousLaunches(response.launchDTOS.map { it.toPrevEntity() })
+                    dao.insertPreviousLaunches(response.launchDtos.map { it.toPrevEntity() })
                 }
             }
 

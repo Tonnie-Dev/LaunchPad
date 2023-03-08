@@ -11,7 +11,6 @@ buildscript {
         classpath (libs.kotlin.gradle.plugin)
         classpath(Google.dagger.hilt.android.gradlePlugin)
         classpath(libs.spotless.plugin.gradle)
-
     }
 
 }

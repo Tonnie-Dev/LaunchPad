@@ -2,15 +2,14 @@ package com.uxstate.launchpad.data.repository
 
 import androidx.paging.PagingData
 import com.uxstate.launchpad.domain.model.Launch
-import com.uxstate.launchpad.domain.paging_source.RemoteDataSource
+import com.uxstate.launchpad.domain.pagingSource.RemoteDataSource
 import com.uxstate.launchpad.domain.repository.LaunchRepository
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 
 class LaunchRepositoryImpl @Inject constructor(
-    private val dataSource:
-        RemoteDataSource
+    private val dataSource: RemoteDataSource
 ) : LaunchRepository {
 
     override fun getPreviousLaunches(): Flow<PagingData<Launch>> {
