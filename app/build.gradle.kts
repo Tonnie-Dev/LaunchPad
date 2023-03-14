@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
