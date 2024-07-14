@@ -1,13 +1,13 @@
-@file:Suppress("UnstableApiUsage")
 
-import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
+
 
 plugins {
     //id("com.android.application")
     //id("org.jetbrains.kotlin.android")
   //  id("kotlin-kapt")
 
-    id("com.android.application")
+   /* id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
@@ -16,7 +16,12 @@ plugins {
 
 
     id("org.jlleitschuh.gradle.ktlint")
-    id("com.diffplug.spotless")
+    id("com.diffplug.spotless")*/
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -31,30 +36,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments["room.schemaLocation"] =
-                    "$projectDir/schemas"
-            }
+        vectorDrawables {
+            useSupportLibrary = true
         }
     }
 
-    /* Kotlin Block - makes sure that the KSP Plugin looks at
-     the right paths when it comes to generated classes*/
-    kotlin {
-        sourceSets {
-            debug {
-                kotlin.srcDir("build/generated/ksp/debug/kotlin")
-            }
-            release {
-                kotlin.srcDir("build/generated/ksp/release/kotlin")
-            }
-        }
-    }
 
-    buildTypes {
+   buildTypes {
 
         getByName("release") {
             isMinifyEnabled = false
@@ -70,6 +59,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "18"
+
     }
     buildFeatures {
         compose = true
@@ -109,9 +99,9 @@ dependencies {
     implementation(COIL.compose)
 
     // Dagger - Hilt
-    implementation(Google.dagger.hilt.android)
+    implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
-    implementation(AndroidX.hilt.navigationCompose)
+    implementation(libs.hilt.navigation.compose)
 
     // Retrofit
     implementation(Square.retrofit2)
