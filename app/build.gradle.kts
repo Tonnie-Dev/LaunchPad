@@ -3,12 +3,18 @@
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
+    //id("com.android.application")
+    //id("org.jetbrains.kotlin.android")
+  //  id("kotlin-kapt")
+
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
     id("kotlin-parcelize")
-    id("com.google.devtools.ksp") version "1.7.21-1.0.8"
+    id("com.google.devtools.ksp")
+    id("dagger.hilt.android.plugin")
+
+
+
     id("org.jlleitschuh.gradle.ktlint")
     id("com.diffplug.spotless")
 }
@@ -59,11 +65,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "18"
     }
     buildFeatures {
         compose = true
@@ -80,35 +86,8 @@ android {
     }
 }
 
-// ktlintFormat task will need to run before preBuild
-tasks.getByPath("preBuild")
-    .dependsOn("ktlintFormat")
 
-configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
 
-    android.set(true)
-    ignoreFailures.set(false)
-    disabledRules.set(setOf("final-newline", "no-wildcard-imports"))
-    reporters {
-        reporter(ReporterType.PLAIN)
-        reporter(ReporterType.CHECKSTYLE)
-        reporter(ReporterType.SARIF)
-    }
-}
-
-configure<com.diffplug.gradle.spotless.SpotlessExtension> {
-    kotlin {
-        // version, setUseExperimental, userData and editorConfigOverride are all optional
-        ktlint("0.45.2")
-            .setUseExperimental(true)
-            .userData(mapOf("android" to "true"))
-            .editorConfigOverride(mapOf("indent_size" to 2))
-    }
-    kotlinGradle {
-        target("*.gradle.kts") // default target for kotlinGradle
-        ktlint() // or ktfmt() or prettier()
-    }
-}
 dependencies {
 
     implementation(AndroidX.core.ktx)
@@ -117,6 +96,7 @@ dependencies {
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.material)
+    implementation(AndroidX.navigation.compose)
 
     testImplementation(Testing.junit4)
     androidTestImplementation(AndroidX.test.ext.junit)
@@ -130,8 +110,7 @@ dependencies {
 
     // Dagger - Hilt
     implementation(Google.dagger.hilt.android)
-    kapt(Google.dagger.hilt.android.compiler)
-    kapt(AndroidX.hilt.compiler)
+    ksp(libs.hilt.compiler)
     implementation(AndroidX.hilt.navigationCompose)
 
     // Retrofit
@@ -144,12 +123,11 @@ dependencies {
     implementation(Square.moshi)
     implementation(Square.moshi.kotlinReflect)
 
-    // Room KTX with Kotlin Extensions and Coroutines support for Room
-    implementation(AndroidX.room.ktx)
-    kapt(AndroidX.room.compiler)
+    // Room components
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 
-    // room-paging artifact
-    implementation(AndroidX.room.paging)
+    // room-paging artifac
 
     // Paging 3.0
     implementation(AndroidX.paging.compose)
@@ -162,14 +140,27 @@ dependencies {
     ksp(libs.ksp)
 
     // Pager - Accompanist
-    implementation(Google.accompanist.pager) // Pager
-    implementation(Google.accompanist.pager.indicators) // Pager Indicators
+    // Deprecated because Pager is now directly into androidx.compose.foundation.
+    //FIXME: Migrate using the following guide:
+    // https://google.github.io/accompanist/pager/
+    implementation("com.google.accompanist:accompanist-pager:_") // Pager
+    // Deprecated because Pager is now directly into androidx.compose.foundation.
+    //FIXME: Migrate using the following guide:
+    // https://google.github.io/accompanist/pager/
+    implementation("com.google.accompanist:accompanist-pager-indicators:_") // Pager Indicators
 
     // Swipe to Refresh - Accompanist
-    implementation(Google.accompanist.swipeRefresh)
+    // Deprecated because Swipe Refresh is now right into androidx.compose.material.
+    // Note that it's not in Material3 at the moment.
+    //FIXME: Migrate using the following guide:
+    // https://google.github.io/accompanist/swiperefresh/
+    implementation("com.google.accompanist:accompanist-swiperefresh:_")
 
     // System UI Controller - Accompanist
-    implementation(Google.accompanist.systemUiController)
+    // Deprecated in favor of Activity.enableEdgeToEdge from androidx.activity 1.8+
+    //FIXME: See the example PR in the migration guide here:
+    // https://google.github.io/accompanist/systemuicontroller/
+    implementation("com.google.accompanist:accompanist-systemuicontroller:_")
 
     // Timber Logging
     implementation(JakeWharton.timber)
