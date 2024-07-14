@@ -21,12 +21,12 @@ plugins {
 
 android {
     namespace = "com.uxstate.launchpad"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.uxstate.launchpad"
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -125,9 +125,8 @@ dependencies {
 
     // Room components
     implementation(libs.room.ktx)
+    implementation(libs.room.paging)
     ksp(libs.room.compiler)
-
-    // room-paging artifac
 
     // Paging 3.0
     implementation(AndroidX.paging.compose)

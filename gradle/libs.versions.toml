@@ -17,6 +17,7 @@ hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-com
 
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
+room-paging = { group = "androidx.room", name = "room-paging", version.ref = "androidx-room" }
 
 lottie-compose = "com.airbnb.android:lottie-compose:6.4.1"
 
