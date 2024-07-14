@@ -24,7 +24,7 @@ fun TabsContent(tabs: List<TabItem>, pagerState: PagerState) {
 @Composable
 fun TabsContentPreviewLight() {
 
-    /*val tabs = listOf(TabItem.Upcoming, TabItem.Previous)
+   /* val tabs = listOf(TabItem.Upcoming, TabItem.Previous)
     val pagerState = rememberPagerState()
     LaunchPadTheme() {
         TabsContent(tabs = tabs, pagerState = pagerState)
