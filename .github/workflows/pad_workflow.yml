@@ -1,61 +1,69 @@
-name: Pad Workflow
-
-on:
-   
-   pull_request:
-      branches: [ master ]
-   
-   push:
-      branches: [ master ]
-
+name: Deploy Launchpad
+'on':
+   workflow_dispatch: null
 jobs:
-   
-   lint-check:
-      name: 🔍 Lint
-      runs-on: ubuntu-latest
-      steps:
-         
-         -  name: Checkout code
-            uses: actions/checkout@v3
-         
-         -  name: Grant execute permission for gradlew
-            run:  chmod +x gradlew
-         
-         -  name: Lint check
-            run: ./gradlew lint
-         
-         -  name: Generate lint report
-            uses: actions/upload-artifact@v2
-            with:
-               name: lint_report.html
-               path: app/build/reports/lint-results-debug.html
-   
    build:
-      name: ⚒ Build
+      name: Job 1 - Build Signed AAB
       runs-on: ubuntu-latest
       steps:
+         - uses: actions/checkout@v3
          
-         -  name: Checkout code
-            uses: actions/checkout@v3
-         
-         -  name: set up JDK 11
-            uses: actions/setup-java@v3
-            with:
-               java-version: '11'
-               distribution: 'temurin'
-               cache: gradle
-         
-         -  name: Grant execute permission for gradlew
-            run: chmod +x gradlew
-         
-         -  name: Run Tests
-            run: ./gradlew test
-         
-         -  name: Build Project
-            run: ./gradlew assemble
-         
-         -  name: Build with Gradle
-            run: ./gradlew build
+         - name: Setup JDK 20
+           uses: actions/setup-java@v3
+           with:
+              distribution: temurin
+              java-version: 20
+              
+         - name: Make gradlew executable
+           run: chmod +x ./gradlew
+           
+         - name: Setup Gradle Cache
+           uses: gradle/gradle-build-action@v2
+           with:
+              gradle-home-cache-cleanup: true
+              
+         - name: Bump Version Code
+           uses: chkfung/android-version-actions@v1.2.1
+           with:
+              gradlePath: app/build.gradle.kts
+              versionCode: '${{ github.run_number }}'
+              versionName: 1.0.0
+              
+         - name: Build prodRelease
+           run: ./gradlew bundleRelease
+           
+         - name: Sign AAb
+           id: sign
+           uses: r0adkll/sign-android-release@v1
+           with:
+              releaseDirectory: app/build/outputs/bundle/release
+              signingKeyBase64: '${{ secrets.KEYSTORE }}'
+              alias: '${{ secrets.SIGNING_KEY_ALIAS }}'
+              keyStorePassword: '${{ secrets.SIGNING_STORE_PASSWORD }}'
+              keyPassword: '${{ secrets.SIGNING_KEY_PASSWORD }}'
+              
+         - name: Upload app bundle as artifact
+           uses: actions/upload-artifact@v2
+           with:
+              name: app-bundle
+              path: app/build/outputs/bundle/release/app-release.aab
+         - run: 'echo Build status report=${{ job.status }}'
+   deploy:
+      name: Job_2 - Deploy aab to playstore
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+         - name: Download app bundle from artifact
+           uses: actions/download-artifact@v2
+           with:
+              name: app-bundle
+         - name: Publish to Play Store
+           uses: r0adkll/upload-google-play@v1
+           with:
+              serviceAccountJsonPlainText: '${{ secrets.SERVICE_ACCOUNT_JSON }}'
+              packageName: com.uxstate.launchpad
+              releaseFiles: '${{ github.workspace }}/app-release.aab'
+              track: production
 
 
 

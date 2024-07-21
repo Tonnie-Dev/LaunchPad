@@ -2,8 +2,6 @@ package com.uxstate.launchpad.presentation.screens.home.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
@@ -30,17 +28,14 @@ fun LaunchList(
     if (result) {
         LazyColumn(modifier = modifier, content = {
 
-            items(
-                    count = data.itemCount,
+            items(count = data.itemCount,
                     key = data.itemKey { it.id },
-                    contentType = data.itemContentType{"Launch"}
-            ) { i ->
+                    contentType = data.itemContentType { "Launch" }) { i ->
 
                 val launch = data[i]
                 launch?.let {
 
-                    LaunchImage(
-                            launch = it,
+                    LaunchImage(launch = it,
                             showCountDown = showCountDown,
                             modifier = Modifier.clickable {
                                 navigator.navigate(
@@ -60,8 +55,7 @@ fun LaunchList(
 fun handlePagingResult(launches: LazyPagingItems<Launch>): Boolean {
 
     // apply to get access to loadState
-    launches.apply {
-        // this variable stores errors found in refresh, prepend or append
+    launches.apply { // this variable stores errors found in refresh, prepend or append
         val error = when {
 
             loadState.refresh is LoadState.Error -> {
@@ -99,8 +93,7 @@ fun handlePagingResult(launches: LazyPagingItems<Launch>): Boolean {
                 // empty screen meaning default icon and message
                 EmptyScreen()
                 false
-            }
-            // if there is no error and data is not loading any more we show lazy column as above
+            } // if there is no error and data is not loading any more we show lazy column as above
             else -> true
         }
     }
