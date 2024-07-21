@@ -63,20 +63,21 @@ android {
 
 dependencies {
 
-    implementation(AndroidX.core.ktx)
-    implementation(AndroidX.lifecycle.runtime.ktx)
-    implementation(AndroidX.activity.compose)
-    implementation(AndroidX.compose.ui)
-    implementation(AndroidX.compose.ui.toolingPreview)
-    implementation(AndroidX.compose.material)
-    implementation(AndroidX.navigation.compose)
-
-    testImplementation(Testing.junit4)
-    androidTestImplementation(AndroidX.test.ext.junit)
-    androidTestImplementation(AndroidX.test.espresso.core)
-    androidTestImplementation(AndroidX.compose.ui.testJunit4)
-    debugImplementation(AndroidX.compose.ui.tooling)
-    debugImplementation(AndroidX.compose.ui.testManifest)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 
     // Coil
     implementation(COIL.compose)
