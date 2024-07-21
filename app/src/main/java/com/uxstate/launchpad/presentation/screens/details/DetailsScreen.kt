@@ -84,7 +84,7 @@ fun DetailsScreen(
 @OptIn(ExperimentalMaterialApi::class)
 val BottomSheetScaffoldState.currentSheetFraction: Float
     get() {
-        val fraction = bottomSheetState.progress.fraction
+        val fraction = bottomSheetState.progress
         val targetValue = bottomSheetState.targetValue
         val currentValue = bottomSheetState.currentValue
 
