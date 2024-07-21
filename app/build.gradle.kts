@@ -1,27 +1,10 @@
-
-
-
-
 plugins {
-    //id("com.android.application")
-    //id("org.jetbrains.kotlin.android")
-  //  id("kotlin-kapt")
-
-   /* id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-parcelize")
-    id("com.google.devtools.ksp")
-    id("dagger.hilt.android.plugin")
-
-
-
-    id("org.jlleitschuh.gradle.ktlint")
-    id("com.diffplug.spotless")*/
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-parcelize")
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.hilt.plugin)
+    alias(libs.plugins.ksp.plugin)
+    alias(libs.plugins.parcelize.plugin)
 }
 
 android {
@@ -43,13 +26,13 @@ android {
     }
 
 
-   buildTypes {
+    buildTypes {
 
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
             )
         }
     }
