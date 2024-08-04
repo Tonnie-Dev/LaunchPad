@@ -1,7 +1,10 @@
 package com.uxstate.launchpad.presentation.ui.theme
 
-import androidx.compose.material.Colors
+
+import androidx.compose.material3.ColorScheme
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
+
 
 // Defaults
 val Purple200 = Color(0xFFBB86FC)
@@ -25,6 +28,15 @@ val DahliaYellow = Color(0xFFF3A505)
 val OysterWhite = Color(0xFFEAE6CA)
 val MintGreen = Color(0xFF06F773)
 
-// StatusBar extension color from MaterialTheme
-val Colors.statusBarColor
+
+val ColorScheme.isLight:Boolean
+    get() = this.primary.luminance() > 0.5
+
+
+// StatusBar extension color from MaterialTheme3
+val ColorScheme.statusBarColor
     get() = if (this.isLight) Black900 else Black400
+
+
+
+
