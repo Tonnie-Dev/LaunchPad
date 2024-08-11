@@ -2,14 +2,13 @@ package com.uxstate.launchpad.presentation.screens.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.ramcosta.composedestinations.annotation.Destination
@@ -20,7 +19,7 @@ import com.uxstate.launchpad.presentation.screens.home.components.tabs.TabsConte
 import com.uxstate.launchpad.presentation.screens.home.components.tabs.TopBar
 import com.uxstate.launchpad.presentation.ui.theme.statusBarColor
 
-@OptIn(ExperimentalPagerApi::class)
+
 @Destination()
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel(), navigator: DestinationsNavigator) {
@@ -34,7 +33,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel(), navigator: Destinatio
         TabItem.Previous(data = previousLaunches, navigator = navigator)
     )
     val uiController = rememberSystemUiController()
-    uiController.setStatusBarColor(color = MaterialTheme.colors.statusBarColor)
+    uiController.setStatusBarColor(color = MaterialTheme.colorScheme.statusBarColor)
 
     Scaffold(topBar = { TopBar() }) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
