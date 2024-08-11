@@ -109,8 +109,8 @@ dependencies {
     implementation(libs.lottie.compose)
 
     // Compose Nav Destinations
-    implementation(libs.io.github.raamcosta.compose.destinations.core)
-    ksp(libs.ksp)
+    implementation(libs.compose.destinations.core.one)
+    ksp(libs.compose.destinations.ksp.one)
 
     // Pager - Accompanist
     // Deprecated because Pager is now directly into androidx.compose.foundation.
