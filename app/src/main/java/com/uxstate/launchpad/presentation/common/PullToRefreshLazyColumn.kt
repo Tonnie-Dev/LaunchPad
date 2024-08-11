@@ -65,7 +65,6 @@ fun <T> PullToRefreshLazyColumn(
 
         //Listen to the External isRefreshing state
 
-
         LaunchedEffect(key1 = isRefreshing) {
 
             if (isRefreshing) {
