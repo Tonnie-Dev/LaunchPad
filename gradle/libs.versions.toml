@@ -11,7 +11,7 @@ ksp-plugin = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 parcelize-plugin = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 
 [versions]
-agp = "8.5.1"
+agp = "8.5.2"
 kotlin = "2.0.0"
 ##  ⬆ = "2.0.10-RC"
 ##  ⬆ = "2.0.10-RC2"
