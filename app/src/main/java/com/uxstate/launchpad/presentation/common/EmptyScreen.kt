@@ -38,6 +38,8 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
+import com.uxstate.launchpad.presentation.common.PullToRefreshLazyColumn
+import com.uxstate.launchpad.presentation.common.RefreshScreen
 import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 import com.uxstate.launchpad.utils.LocalSpacing
 import java.net.ConnectException
@@ -102,12 +104,28 @@ fun EmptyContent(
         mutableStateOf(false)
     }
 
-    SwipeRefresh(
+    RefreshScreen(
+            alphaValue = alphaValue,
+            message = message,
+            icon = icon,
+            isRefreshing = launches?.loadState?.refresh == LoadState.Loading,
+            onRefresh = {   // first set the value of isRefreshing to true
+                //  isRefreshing = true
+
+                // call refresh() off the LazyPagingItem
+
+                launches?.loadState?.refresh
+
+                // reset is refreshing to false
+
+                //isRefreshing = false})
+
+                /*SwipeRefresh(
             state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
 
             // SwipeRefresh will be visible only if the error is not null
             swipeEnabled = error != null,
-            /*In this lambda we need to invalidate data*/
+            *//*In this lambda we need to invalidate data*//*
             onRefresh = {
 
                 // first set the value of isRefreshing to true
@@ -123,7 +141,7 @@ fun EmptyContent(
             }
     ) {
 
-        /*Column not scrollable by default there we add verticalScroll modifier*/
+        *//*Column not scrollable by default there we add verticalScroll modifier*//*
         Column(
                 modifier = Modifier
                         .fillMaxSize()
@@ -157,8 +175,8 @@ fun EmptyContent(
                     textAlign = TextAlign.Center
             )
         }
-    }
-}
+    }*/
+            })}
 
 fun parseErrorMessage(loadStateError: LoadState.Error): String {
 
@@ -175,7 +193,6 @@ fun parseErrorMessage(loadStateError: LoadState.Error): String {
         else -> "Unknown Error"
     }
 }
-
 
 @Preview(showBackground = true)
 @PreviewLightDark
@@ -194,3 +211,6 @@ private fun EmptyContentPreview() {
     }
 
 }
+
+
+
