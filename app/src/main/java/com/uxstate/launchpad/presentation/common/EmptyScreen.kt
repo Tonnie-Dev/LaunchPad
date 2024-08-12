@@ -1,7 +1,6 @@
 package com.uxstate.launchpad.presentation.screens.common
 
-import android.content.res.Configuration.UI_MODE_NIGHT_NO
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
+
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -32,6 +31,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -42,6 +42,7 @@ import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 import com.uxstate.launchpad.utils.LocalSpacing
 import java.net.ConnectException
 import java.net.SocketTimeoutException
+
 
 // default value added to enable us call this screen even if there is no error
 
@@ -66,7 +67,7 @@ fun EmptyScreen(
 
         // in case of an error
         message = parseErrorMessage(error)
-        icon = R.drawable.network_error_icon
+        icon = com.uxstate.launchpad.R.drawable.network_error_icon
     }
 
     var start by remember {
@@ -175,32 +176,21 @@ fun parseErrorMessage(loadStateError: LoadState.Error): String {
     }
 }
 
-@Preview(name = "Light", showBackground = true, uiMode = UI_MODE_NIGHT_NO, showSystemUi = true)
-@Composable
-fun EmptyScreenPreviewLight() {
 
-    LaunchPadTheme() {
+@Preview(showBackground = true)
+@PreviewLightDark
+@Composable
+private fun EmptyContentPreview() {
+
+    LaunchPadTheme {
+
         EmptyContent(
                 alphaValue = 0.38f,
                 icon = R.drawable.network_error_icon,
                 message = stringResource(
-                        id = R.string.dialog_error_title
+                        id = R.string.dialog_error_text
                 )
         )
     }
-}
 
-@Preview(name = "Dark", showBackground = false, uiMode = UI_MODE_NIGHT_YES, showSystemUi = true)
-@Composable
-fun EmptyScreenPreviewDark() {
-
-    LaunchPadTheme() {
-        EmptyContent(
-                alphaValue = 0.38f,
-                icon = R.drawable.search_icon,
-                message = stringResource(
-                        id = R.string.dialog_error_title
-                )
-        )
-    }
 }
