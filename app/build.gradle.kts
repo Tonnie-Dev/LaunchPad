@@ -112,6 +112,10 @@ dependencies {
     implementation(libs.compose.destinations.core.one)
     ksp(libs.compose.destinations.ksp.one)
 
+    // Timber Logging
+    implementation(JakeWharton.timber)
+
+    /*
     // Pager - Accompanist
     // Deprecated because Pager is now directly into androidx.compose.foundation.
     //FIXME: Migrate using the following guide:
@@ -133,8 +137,8 @@ dependencies {
     // Deprecated in favor of Activity.enableEdgeToEdge from androidx.activity 1.8+
     //FIXME: See the example PR in the migration guide here:
     // https://google.github.io/accompanist/systemuicontroller/
-    implementation("com.google.accompanist:accompanist-systemuicontroller:_")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:_")*/
 
-    // Timber Logging
-    implementation(JakeWharton.timber)
+
+
 }
