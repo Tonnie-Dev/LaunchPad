@@ -1,9 +1,24 @@
 package com.uxstate.launchpad.presentation.screens.common
 
-import androidx.compose.animation.core.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Surface
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -47,7 +62,7 @@ fun AnimatedShimmerItem() {
                 easing = FastOutSlowInEasing
             ),
             repeatMode = RepeatMode.Reverse
-        )
+        ), label = ""
     )
 
     ShimmerPlaceholderItem(alpha = alphaValue)
@@ -110,7 +125,7 @@ fun ShimmerBar(alpha: Float, modifier: Modifier = Modifier, height: Dp = 0.dp) {
             .height(height)
             .alpha(alpha),
         color = ShimmerDarkGray,
-        elevation = spacing.spaceExtraSmall
+        shadowElevation = spacing.spaceExtraSmall
     ) {}
 }
 
