@@ -5,9 +5,15 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.SizeTransform
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -69,7 +75,7 @@ fun TimeSlot(timeValue: Int, timeType: String, prefix: String = "") {
         Row(horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
                 text = prefix,
-                style = MaterialTheme.typography.h5,
+           style = MaterialTheme.typography.headlineSmall
 
             )
             AnimatedContent(
@@ -80,7 +86,7 @@ fun TimeSlot(timeValue: Int, timeType: String, prefix: String = "") {
                 value ->
                 Text(
                     text = stringResource(id = R.string.time_slot, value),
-                    style = MaterialTheme.typography.h5,
+                    style = MaterialTheme.typography.headlineSmall
 
                 )
             }
@@ -88,7 +94,7 @@ fun TimeSlot(timeValue: Int, timeType: String, prefix: String = "") {
 
         Text(
             text = timeType,
-            style = MaterialTheme.typography.overline,
+   style = MaterialTheme.typography.labelSmall,
             textAlign = TextAlign.End,
             modifier = Modifier
                 .fillMaxWidth()
