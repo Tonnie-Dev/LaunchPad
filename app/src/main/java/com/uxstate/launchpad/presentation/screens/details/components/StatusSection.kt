@@ -1,9 +1,9 @@
 package com.uxstate.launchpad.presentation.screens.details.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,7 +27,7 @@ fun StatusSection(launch: Launch, modifier: Modifier = Modifier) {
 
         Text(
             text = stringResource(R.string.status_label),
-            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.align(Alignment.Start)
         )
@@ -35,7 +35,7 @@ fun StatusSection(launch: Launch, modifier: Modifier = Modifier) {
 
         Text(
             text = launch.status.description,
-            style = MaterialTheme.typography.subtitle1,
+            style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -44,7 +44,7 @@ fun StatusSection(launch: Launch, modifier: Modifier = Modifier) {
         Divider(
             modifier = Modifier.fillMaxWidth(),
             thickness = spacing.spaceSingleDp,
-            color = MaterialTheme.colors.onSurface
+            color = MaterialTheme.colorScheme.onSurface
         )
 
         Spacer(modifier = Modifier.height(spacing.spaceExtraSmall))
