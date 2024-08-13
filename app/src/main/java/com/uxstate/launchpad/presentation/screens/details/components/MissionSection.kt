@@ -2,6 +2,7 @@ package com.uxstate.launchpad.presentation.screens.details.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,7 +43,7 @@ fun MissionSection(launch: Launch, modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(spacing.spaceLarge))
 
-        Divider(
+        HorizontalDivider(
                 modifier = Modifier.fillMaxWidth(),
                 thickness = spacing.spaceSingleDp,
                 color = MaterialTheme.colorScheme.onSurface
