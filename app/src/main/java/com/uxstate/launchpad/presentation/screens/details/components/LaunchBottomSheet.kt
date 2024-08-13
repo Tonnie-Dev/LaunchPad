@@ -3,9 +3,10 @@ package com.uxstate.launchpad.presentation.screens.details.components
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -28,7 +29,7 @@ fun LaunchBottomSheet(
     modifier: Modifier = Modifier,
 ) {
     val secondsFlow by launch.generateSecondsFlow()
-        .collectAsState(initial = 0)
+            .collectAsState(initial = 0)
 
     val timerState = TimerState(secondsFlow)
     val timeBoard = timerState.computeTimeBoard()
@@ -36,26 +37,28 @@ fun LaunchBottomSheet(
     val spacing = LocalSpacing.current
 
     Column(
-        modifier = modifier
-            .fillMaxHeight(.75f)
-            .padding(spacing.spaceSmall)
+            modifier = modifier
+                    .fillMaxHeight(.75f)
+                    .padding(spacing.spaceSmall)
 
     ) {
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
         ) {
             // c1 - Probability Circle
 
             Column(
-                modifier = Modifier
-                    .weight(.35f)
-                    .fillMaxWidth()
+                    modifier = Modifier
+                            .weight(.35f)
+                            .fillMaxWidth()
             ) {
                 Card(
-                    elevation = spacing.spaceExtraSmall,
-                    modifier = Modifier.padding(spacing.spaceSmall)
+                        elevation = CardDefaults.cardElevation(
+                                defaultElevation = spacing.spaceSmall
+                        ),
+                        modifier = Modifier.padding(spacing.spaceSmall)
                 ) {
 
                     ProbabilityCircle(probability = probability)
@@ -66,26 +69,28 @@ fun LaunchBottomSheet(
             Column(modifier = Modifier.weight(.65f)) {
 
                 Card(
-                    elevation = spacing.spaceExtraSmall,
-                    modifier = Modifier.padding(spacing.spaceSmall)
+                        elevation = CardDefaults.cardElevation(
+                                defaultElevation = spacing.spaceSmall
+                        ),
+                        modifier = Modifier.padding(spacing.spaceSmall)
                 ) {
                     Column(
-                        modifier = Modifier.padding(spacing.spaceExtraSmall)
+                            modifier = Modifier.padding(spacing.spaceExtraSmall)
 
                     ) {
                         TimeBoardWidget(
-                            timeBoard = timeBoard,
-                            modifier = Modifier
-                                .fillMaxWidth()
+                                timeBoard = timeBoard,
+                                modifier = Modifier
+                                        .fillMaxWidth()
 
                         )
                         Text(
-                            text = (launch.startWindowDate).formatLaunchDatabaseStringDate(),
-                            style = MaterialTheme.typography.body1,
-                            fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .fillMaxWidth()
+                                text = (launch.startWindowDate).formatLaunchDatabaseStringDate(),
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier
+                                        .fillMaxWidth()
                         )
 
                         StatusSlot(launch)
@@ -95,10 +100,10 @@ fun LaunchBottomSheet(
         }
 
         Column(
-            modifier = Modifier.verticalScroll(
-                state =
-                rememberScrollState()
-            )
+                modifier = Modifier.verticalScroll(
+                        state =
+                        rememberScrollState()
+                )
         ) {
             // status
             StatusSection(launch = launch)
