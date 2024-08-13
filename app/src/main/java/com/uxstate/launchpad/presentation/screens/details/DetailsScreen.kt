@@ -1,6 +1,12 @@
 package com.uxstate.launchpad.presentation.screens.details
 
-import androidx.compose.material.*
+
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.BottomSheetScaffoldState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SheetValue
+import androidx.compose.material3.rememberBottomSheetScaffoldState
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -15,7 +21,7 @@ import com.uxstate.launchpad.presentation.screens.details.components.LaunchBotto
 import com.uxstate.launchpad.utils.LocalSpacing
 import com.uxstate.launchpad.utils.openGoogleMap
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn( ExperimentalMaterial3Api::class)
 @Destination
 @Composable
 fun DetailsScreen(
@@ -28,7 +34,8 @@ fun DetailsScreen(
 
     val probability by viewModel.probability.collectAsState()
 
-    val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
+
+    val sheetState = rememberModalBottomSheetState()
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
 
     val isShowDialog by viewModel.isShowDialog.collectAsState()
@@ -80,23 +87,23 @@ fun DetailsScreen(
         )
     }
 }
-
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 val BottomSheetScaffoldState.currentSheetFraction: Float
+    @Composable
     get() {
-        val fraction = bottomSheetState.progress
+        val fraction by remember(bottomSheetState) {
+            derivedStateOf {
+                runCatching { bottomSheetState.requireOffset() }.getOrDefault(0F)
+            }
+        }
         val targetValue = bottomSheetState.targetValue
         val currentValue = bottomSheetState.currentValue
 
         return when {
-            currentValue == BottomSheetValue.Collapsed && targetValue
-                == BottomSheetValue.Collapsed -> 1f
-            currentValue == BottomSheetValue.Expanded && targetValue
-                == BottomSheetValue.Expanded -> 0f
-            currentValue == BottomSheetValue.Collapsed && targetValue
-                == BottomSheetValue.Expanded -> 1f - fraction
-            currentValue == BottomSheetValue.Expanded && targetValue
-                == BottomSheetValue.Collapsed -> 0f + fraction
+            currentValue == SheetValue.Hidden && targetValue == SheetValue.Hidden -> 1f
+            currentValue == SheetValue.Expanded && targetValue == SheetValue.Expanded -> 0f
+            currentValue == SheetValue.Hidden && targetValue == SheetValue.Expanded -> 1f - fraction
+            currentValue == SheetValue.Expanded && targetValue == SheetValue.Hidden -> fraction
             else -> fraction
         }
     }
