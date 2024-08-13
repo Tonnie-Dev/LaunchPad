@@ -4,10 +4,11 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,8 +16,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.uxstate.launchpad.R
-import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 import com.uxstate.launchpad.utils.LocalSpacing
 
 @Composable
@@ -30,7 +31,7 @@ fun RocketIcon(
     val spacing = LocalSpacing.current
 
     Card(
-        elevation = spacing.spaceExtraSmall,
+        elevation = CardDefaults.cardElevation(defaultElevation = spacing.spaceExtraSmall),
         modifier = modifier
             .size(spacing.spaceExtraLarge + spacing.spaceLarge + spacing.spaceSmall)
             .padding(spacing.spaceSmall)
@@ -45,15 +46,15 @@ fun RocketIcon(
                 painter = painterResource(id = icon),
                 contentDescription = itemText,
                 modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium),
-                tint = MaterialTheme.colors.secondary
+                tint = MaterialTheme.colorScheme.secondary
             )
             Text(
                 text = itemText,
-                style = MaterialTheme.typography.overline
+                style = MaterialTheme.typography.labelSmall
             )
             Text(
                 text = value,
-                style = MaterialTheme.typography.caption,
+                style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.Black,
                 overflow = TextOverflow.Ellipsis
             )
@@ -61,7 +62,8 @@ fun RocketIcon(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 fun RocketIconPreviewLight() {
 
@@ -72,18 +74,4 @@ fun RocketIconPreviewLight() {
         icon = R.drawable.satellite_icon,
         modifier = Modifier.size(spacing.spaceLarge)
     )
-}
-
-@Preview
-@Composable
-fun RocketIconPreviewDark() {
-    val spacing = LocalSpacing.current
-    LaunchPadTheme {
-        RocketIcon(
-            itemText = "Family",
-            value = "SpaceX",
-            icon = R.drawable.satellite_icon,
-            modifier = Modifier.size(spacing.spaceLarge)
-        )
-    }
 }
