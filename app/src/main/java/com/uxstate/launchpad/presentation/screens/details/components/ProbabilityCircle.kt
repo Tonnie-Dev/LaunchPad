@@ -7,8 +7,8 @@ import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,10 +26,10 @@ import com.uxstate.launchpad.utils.LocalSpacing
 fun ProbabilityCircle(
     probability: Int,
     modifier: Modifier = Modifier,
-    activeColor: Color = MaterialTheme.colors.secondary,
+    activeColor: Color = MaterialTheme.colorScheme.secondary,
     inactiveColor: Color = Color.LightGray,
 
-) {
+    ) {
     val spacing = LocalSpacing.current
     val strokeWidth = (spacing.spaceSmall)
 
@@ -85,13 +85,13 @@ fun ProbabilityCircle(
             Text(
                 text = "$animatedProbInt%",
                 fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.body1
+                style = MaterialTheme.typography.bodyLarge
             )
         }
         Text(
             text = stringResource(R.string.probability_label),
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.body1
+            style = MaterialTheme.typography.bodyLarge
         )
     }
 }
