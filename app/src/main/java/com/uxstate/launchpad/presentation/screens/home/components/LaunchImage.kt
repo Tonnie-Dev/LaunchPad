@@ -3,8 +3,8 @@ package com.uxstate.launchpad.presentation.screens.home.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -69,19 +69,19 @@ fun LaunchImage(
             // Name
             Text(
                 text = launch.name,
-                style = MaterialTheme.typography.h5,
+                style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
                 maxLines = 1,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colors.secondary
+                color = MaterialTheme.colorScheme.secondary
             )
 
             // Agency
             Text(
                 text = launch.provider.name,
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.bodyLarge,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
                 maxLines = 1,
@@ -92,7 +92,7 @@ fun LaunchImage(
 
             Text(
                 text = launch.pad.locationName,
-                style = MaterialTheme.typography.caption,
+                style = MaterialTheme.typography.bodySmall,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
                 maxLines = 1,
@@ -111,7 +111,7 @@ fun LaunchImage(
             Text(
                 /* text = formatLaunchDatabaseStringDate(launch.startWindowDate),*/
                 text = (launch.startWindowDate).formatLaunchDatabaseStringDate(),
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Bold,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
