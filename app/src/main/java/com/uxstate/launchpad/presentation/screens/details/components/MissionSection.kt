@@ -9,10 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.*
 import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 import com.uxstate.launchpad.utils.LocalSpacing
+import com.uxstate.launchpad.utils.generateLoremIpsum
 
 @Composable
 fun MissionSection(launch: Launch, modifier: Modifier = Modifier) {
@@ -50,20 +52,16 @@ fun MissionSection(launch: Launch, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview
+
+@PreviewLightDark
 @Composable
-fun MissionCardPreviewLight() {
+fun MissionCardPreview() {
     val launch = Launch(
             id = 0,
             name = "",
             mission = Mission(
                     name = "My Mission",
-                    description = """
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-numquam blanditiis harum quisquam eius 
-                        
-            """.trimIndent(),
+                    description = generateLoremIpsum(30),
                     type = ""
             ),
             imageUrl = "",
@@ -84,39 +82,3 @@ numquam blanditiis harum quisquam eius
     MissionSection(launch = launch)
 }
 
-@Preview
-@Composable
-fun MissionCardPreviewDark() {
-
-    LaunchPadTheme() {
-
-        val launch = Launch(
-                id = 0,
-                name = "",
-                mission = Mission(
-                        name = "My Mission",
-                        description = """
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-numquam blanditiis harum quisquam eius 
-                        
-                """.trimIndent(),
-                        type = ""
-                ),
-                imageUrl = "",
-                provider = Provider(id = 0, name = "", type = ""),
-                status = Status(name = "Name", abbrev = "TBD", description = ""),
-                pad = Pad(
-                        locationName = "",
-                        latitude = "",
-                        longitude = "", complex = "",
-                        totalLaunchCount = 0,
-                        totalLandingCount = 0
-                ),
-                startWindowDate = "",
-                rocket = Rocket(name = "", family = "")
-        )
-
-        MissionSection(launch = launch)
-    }
-}
