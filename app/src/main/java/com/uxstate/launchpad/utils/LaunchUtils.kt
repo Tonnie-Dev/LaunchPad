@@ -7,6 +7,7 @@ import com.uxstate.launchpad.domain.model.Provider
 import com.uxstate.launchpad.domain.model.Rocket
 import com.uxstate.launchpad.domain.model.Status
 import java.util.Date
+import java.util.Locale
 
 
 fun generateRandomIntId(): Int {
@@ -29,6 +30,14 @@ fun generateLoremIpsum(wordCount: Int): String {
     return (1..wordCount).joinToString(" ") { loremText.random() }
 }
 
+fun String.capitalizeFirstLetter():String {
+   return replaceFirstChar {
+        if (it.isLowerCase()) it.titlecase(
+                Locale.getDefault()
+        ) else it.toString()
+    }
+}
+
 
 fun generateLaunch():Launch {
 
@@ -38,10 +47,10 @@ fun generateLaunch():Launch {
             mission = Mission(
                     name = "My Mission",
                     description = generateLoremIpsum(30),
-                    type = ""
+                    type = generateLoremIpsum(2)
             ),
             imageUrl = "android.resource://",
-            provider = Provider(id = generateRandomIntId(), name = "", type = ""),
+            provider = Provider(id = generateRandomIntId(), name = "Space X", type = generateLoremIpsum(1)),
             status = Status(name = "Name", abbrev = "TBD", description = ""),
             pad = Pad(
                     locationName = generateLoremIpsum(2),
