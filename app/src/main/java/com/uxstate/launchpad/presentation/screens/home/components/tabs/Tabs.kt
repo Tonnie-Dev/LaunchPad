@@ -1,18 +1,22 @@
 package com.uxstate.launchpad.presentation.screens.home.components.tabs
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.material.*
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LeadingIconTab
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults.SecondaryIndicator
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.google.accompanist.pager.*
 import com.uxstate.launchpad.R
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
 
@@ -20,15 +24,12 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
 
     TabRow(
         selectedTabIndex = pagerState.currentPage,
-        backgroundColor = MaterialTheme.colors.background,
-        contentColor = MaterialTheme.colors.onSurface,
+        containerColor = MaterialTheme.colorScheme.background,
+        contentColor = MaterialTheme.colorScheme.onSurface,
         indicator = { tabPositions ->
-            TabRowDefaults.Indicator(
-                color = MaterialTheme.colors.secondary,
-                modifier = Modifier.pagerTabIndicatorOffset(
-                    pagerState,
-                    tabPositions
-                )
+            SecondaryIndicator(
+                    modifier = Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
+                    color = MaterialTheme.colorScheme.secondary
             )
         }
     ) {
@@ -50,27 +51,13 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
 @Preview
 @Composable
 fun TabsPreviewLight() {
-
-    /*    val tabs = listOf(TabItem.Previous(data = null ), TabItem.Upcoming)
-        val pagerState = rememberPagerState()
+       /* val tabs = listOf(TabItem.Previous(data = null ), TabItem.Upcoming)
+        val pagerState = rememberPagerState{tabs.size}
         LaunchPadTheme() {
             Tabs(tabs = tabs, pagerState = pagerState)
-
     }*/
 }
 
-@OptIn(ExperimentalPagerApi::class)
-@Preview(uiMode = UI_MODE_NIGHT_YES)
-@Composable
-fun TabsPreviewDark() {
-
-    /*  val tabs = listOf(TabItem.Previous, TabItem.Upcoming)
-      val pagerState = rememberPagerState()
-      LaunchPadTheme() {
-          Tabs(tabs = tabs, pagerState = pagerState)
-      }*/
-}
