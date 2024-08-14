@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -34,7 +34,7 @@ fun StatusSlot(launch: Launch) {
         else -> OysterWhite
     }
 
-    val transition = rememberInfiniteTransition()
+    val transition = rememberInfiniteTransition(label = "")
 
     val alphaValue by transition.animateFloat(
         initialValue = 1f,
@@ -45,13 +45,13 @@ fun StatusSlot(launch: Launch) {
                 easing = FastOutSlowInEasing
             ),
             repeatMode = RepeatMode.Reverse
-        )
+        ), label = ""
     )
     val spacing = LocalSpacing.current
     Spacer(modifier = Modifier.height(spacing.spaceMedium + spacing.spaceSmall))
     Text(
         text = (launch.status.name),
-        style = MaterialTheme.typography.body1,
+        style = MaterialTheme.typography.bodyLarge,
         fontWeight = FontWeight.Bold,
         color = Color.Black,
         textAlign = TextAlign.Center,
