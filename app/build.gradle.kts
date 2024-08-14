@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -50,7 +52,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.3.2"
     }
-    packagingOptions {
+    packaging {
         resources {
 
             resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
@@ -70,6 +72,7 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.material.icons.extended)
     implementation(libs.androidx.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -114,30 +117,6 @@ dependencies {
 
     // Timber Logging
     implementation(JakeWharton.timber)
-
-    /*
-    // Pager - Accompanist
-    // Deprecated because Pager is now directly into androidx.compose.foundation.
-    //FIXME: Migrate using the following guide:
-    // https://google.github.io/accompanist/pager/
-    implementation("com.google.accompanist:accompanist-pager:_") // Pager
-    // Deprecated because Pager is now directly into androidx.compose.foundation.
-    //FIXME: Migrate using the following guide:
-    // https://google.github.io/accompanist/pager/
-    implementation("com.google.accompanist:accompanist-pager-indicators:_") // Pager Indicators
-
-    // Swipe to Refresh - Accompanist
-    // Deprecated because Swipe Refresh is now right into androidx.compose.material.
-    // Note that it's not in Material3 at the moment.
-    //FIXME: Migrate using the following guide:
-    // https://google.github.io/accompanist/swiperefresh/
-    implementation("com.google.accompanist:accompanist-swiperefresh:_")
-
-    // System UI Controller - Accompanist
-    // Deprecated in favor of Activity.enableEdgeToEdge from androidx.activity 1.8+
-    //FIXME: See the example PR in the migration guide here:
-    // https://google.github.io/accompanist/systemuicontroller/
-    implementation("com.google.accompanist:accompanist-systemuicontroller:_")*/
 
 
 
