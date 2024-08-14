@@ -27,7 +27,7 @@ fun generateLoremIpsum(wordCount: Int): String {
             "officia", "deserunt", "mollit", "anim", "id", "est", "laborum"
     )
 
-    return (1..wordCount).joinToString(" ") { loremText.random() }
+    return (1..wordCount).joinToString(" ") { loremText.random() }.capitalizeFirstLetter()
 }
 
 fun String.capitalizeFirstLetter():String {
@@ -51,7 +51,7 @@ fun generateLaunch():Launch {
             ),
             imageUrl = "android.resource://",
             provider = Provider(id = generateRandomIntId(), name = "Space X", type = generateLoremIpsum(1)),
-            status = Status(name = "Name", abbrev = "TBD", description = ""),
+            status = Status(name = "Name", abbrev = "TBD", description = generateLoremIpsum(10)),
             pad = Pad(
                     locationName = generateLoremIpsum(2),
                     latitude = "",
