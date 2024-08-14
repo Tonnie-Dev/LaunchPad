@@ -23,7 +23,7 @@ import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.domain.model.TimerState
 import com.uxstate.launchpad.domain.model.computeTimeBoard
 import com.uxstate.launchpad.presentation.screens.common.StatusIcon
-import com.uxstate.launchpad.presentation.screens.common.TimeBoardWidget
+import com.uxstate.launchpad.presentation.screens.common.TimeSlotsRow
 import com.uxstate.launchpad.utils.LocalSpacing
 import com.uxstate.launchpad.utils.formatLaunchDatabaseStringDate
 import com.uxstate.launchpad.utils.generateSecondsFlow
@@ -104,7 +104,7 @@ fun LaunchImage(
                 val timerState = TimerState(secondsFlow)
                 val timeBoard = timerState.computeTimeBoard()
 
-                TimeBoardWidget(timeBoard = timeBoard)
+                TimeSlotsRow(timeBoard = timeBoard)
             }
 
             // Date

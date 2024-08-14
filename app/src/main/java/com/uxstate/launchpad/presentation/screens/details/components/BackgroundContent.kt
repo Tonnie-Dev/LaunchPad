@@ -46,7 +46,7 @@ fun BackgroundContent(
                 contentDescription = launch.name,
                 modifier = Modifier
                         .fillMaxWidth()
-                        .aspectRatio(19f / 20f),
+                        .aspectRatio(16f / 20f),
                 contentScale = ContentScale.Crop
         )
 
@@ -59,7 +59,6 @@ fun BackgroundContent(
     }
 
 }
-
 
 @PreviewLightDark
 @Composable
