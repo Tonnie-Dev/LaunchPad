@@ -13,6 +13,9 @@ import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 fun String.formatLaunchDatabaseStringDate(): String {
 
@@ -57,13 +60,18 @@ fun Launch.generateSecondsFlow(): Flow<Long> = flow {
 @OptIn(ExperimentalAnimationApi::class)
 fun addAnimation(duration: Int = 800): ContentTransform {
 
-    return slideInVertically(
-        animationSpec = tween(durationMillis = duration)
+    return (slideInVertically(
+            animationSpec = tween(durationMillis = duration)
     ) { height -> height } + fadeIn(
-        animationSpec = tween(durationMillis = duration)
-    ) with
-        slideOutVertically(
+            animationSpec = tween(durationMillis = duration)
+    )).togetherWith(slideOutVertically(
             animationSpec =
             tween(durationMillis = duration)
-        ) { height -> -height } + fadeOut(tween(durationMillis = duration))
+    ) { height -> -height } + fadeOut(tween(durationMillis = duration)))
+}
+
+fun Long.getCurrentDateTime(): String {
+    
+    val pattern = "MMM dd, yyyy hh:mm a"
+    return SimpleDateFormat(pattern, Locale.getDefault()).format(Date())
 }
