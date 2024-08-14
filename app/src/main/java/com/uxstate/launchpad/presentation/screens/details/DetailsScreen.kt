@@ -34,9 +34,7 @@ fun DetailsScreen(
 
     val probability by viewModel.probability.collectAsState()
 
-
-    val sheetState = rememberModalBottomSheetState()
-    val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
+    val scaffoldState = rememberBottomSheetScaffoldState()
 
     val isShowDialog by viewModel.isShowDialog.collectAsState()
 

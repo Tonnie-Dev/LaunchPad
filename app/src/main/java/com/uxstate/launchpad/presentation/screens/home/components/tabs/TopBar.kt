@@ -16,7 +16,6 @@ import com.uxstate.launchpad.utils.LocalSpacing
 @Composable
 fun TopBar() {
 
-    val spacing = LocalSpacing.current
     TopAppBar(
 
             title = {
