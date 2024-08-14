@@ -46,7 +46,7 @@ fun BackgroundContent(
                 contentDescription = launch.name,
                 modifier = Modifier
                         .fillMaxWidth()
-                        .aspectRatio(16f / 20f),
+                        .aspectRatio(17f / 20f),
                 contentScale = ContentScale.Crop
         )
 

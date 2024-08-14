@@ -1,30 +1,34 @@
 package com.uxstate.launchpad.presentation.screens.details
 
-
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FitScreen
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.BottomSheetScaffold
-import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.SheetValue
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.spec.Direction
 import com.uxstate.launchpad.domain.model.Launch
-import com.uxstate.launchpad.presentation.screens.common.LaunchTopBar
+import com.uxstate.launchpad.presentation.common.LaunchTopBar
 import com.uxstate.launchpad.presentation.screens.common.SimpleAlertDialog
 import com.uxstate.launchpad.presentation.screens.destinations.FullPhotoScreenDestination
 import com.uxstate.launchpad.presentation.screens.details.components.BackgroundContent
 import com.uxstate.launchpad.presentation.screens.details.components.LaunchBottomSheet
-import com.uxstate.launchpad.utils.LocalSpacing
+import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
+import com.uxstate.launchpad.utils.generateLaunch
 import com.uxstate.launchpad.utils.openGoogleMap
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Destination
 @Composable
 fun DetailsScreen(
@@ -32,41 +36,75 @@ fun DetailsScreen(
     viewModel: DetailsViewModel = hiltViewModel(),
     navigator: DestinationsNavigator
 ) {
-    val spacing = LocalSpacing.current
-    val context = LocalContext.current
 
-    val probability by viewModel.probability.collectAsState()
+    val isShowDialog by viewModel.isShowDialog.collectAsState()
+    DetailScreenContent(
+            launch = launch,
+            isShowDialog = isShowDialog,
+            onShowDialog = viewModel::onDialogShow,
+            onConfirmDialog = viewModel::onConfirmDialog,
+            onDismissDialog = viewModel::onDismissDialog,
+            onNavigateUp = { navigator.navigateUp() },
+            onNavigateToFullScreen = { navigator.navigate(it) },
+            onPopBackStack = { navigator.popBackStack() }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DetailScreenContent(
+    launch: Launch,
+    isShowDialog: Boolean,
+    onShowDialog: () -> Unit,
+    onConfirmDialog: () -> Unit,
+    onDismissDialog: () -> Unit,
+    onNavigateUp: () -> Unit,
+    onNavigateToFullScreen: (Direction) -> Unit,
+    onPopBackStack: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    
+    val context = LocalContext.current
 
     val scaffoldState = rememberBottomSheetScaffoldState()
 
-    val isShowDialog by viewModel.isShowDialog.collectAsState()
-
     BottomSheetScaffold(
             scaffoldState = scaffoldState,
-            sheetPeekHeight = (spacing.spaceExtraLarge * 2.5f),
+            sheetPeekHeight = (BottomSheetDefaults.SheetPeekHeight),
             topBar = {
                 LaunchTopBar(
                         text = launch.name,
-                        onClickBackArrow = { navigator.navigateUp() }
+                        onClickBackArrow = onNavigateUp,
+                        action = {
+                            IconButton(onClick = {
+                                onPopBackStack()
+                                onNavigateToFullScreen(FullPhotoScreenDestination(launch = launch))
+
+                            }) {
+                                Icon(
+                                        imageVector = Icons.Filled.FitScreen,
+                                        contentDescription = ""
+                                )
+
+                            }
+                        }
                 )
             },
             // bottom sheet content
             sheetContent = {
                 SimpleAlertDialog(
                         isShowDialog = isShowDialog,
-                        onDismiss = viewModel::onDialogDismiss,
-                        onConfirm = viewModel::onDialogConfirm
+                        onDismiss = onDismissDialog,
+                        onConfirm = onConfirmDialog
                 )
                 LaunchBottomSheet(
-                        probability = probability,
                         launch = launch,
                         onClickViewMap = { latitude, longitude ->
 
                             if (latitude == 0.0 || longitude == 0.0) {
 
-                                viewModel.onDialogShow()
+                                onShowDialog()
                             } else {
-
                                 openGoogleMap(latitude, longitude, context)
                             }
                         }
@@ -75,21 +113,54 @@ fun DetailsScreen(
 
     )
 
-    // underlying stuff
+
     {
-        BackgroundContent(
-                launch = launch,
-                imageFractionHeight = scaffoldState.currentSheetFraction,
-                onShowFullScreen = {
-                    navigator.popBackStack()
-                    navigator.navigate(FullPhotoScreenDestination(launch = launch))
-                },
-                onClose = { navigator.navigateUp() }
-        )
+        BackgroundContent(launch = launch, modifier = modifier)
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+
+@PreviewLightDark
+@Composable
+private fun DetailScreenContentPreview() {
+
+    LaunchPadTheme {
+        DetailScreenContent(
+                launch = generateLaunch(),
+                isShowDialog = false,
+                onShowDialog = {},
+                onPopBackStack = {},
+                onNavigateUp = {},
+                onNavigateToFullScreen = {},
+                onConfirmDialog = {},
+                onDismissDialog = {},
+                modifier = Modifier.fillMaxSize()
+        )
+    }
+
+}
+
+@PreviewLightDark
+@Composable
+private fun DetailScreenContentShowDialogPreview() {
+
+    LaunchPadTheme {
+        DetailScreenContent(
+                launch = generateLaunch(),
+                isShowDialog = false,
+                onShowDialog = {},
+                onPopBackStack = {},
+                onNavigateUp = {},
+                onNavigateToFullScreen = {},
+                onConfirmDialog = {},
+                onDismissDialog = {},
+                modifier = Modifier.fillMaxSize()
+        )
+    }
+
+}
+
+/*@OptIn(ExperimentalMaterial3Api::class)
 val BottomSheetScaffoldState.currentSheetFraction: Float
     @Composable
     get() {
@@ -108,4 +179,4 @@ val BottomSheetScaffoldState.currentSheetFraction: Float
             currentValue == SheetValue.Expanded && targetValue == SheetValue.Hidden -> fraction
             else -> fraction
         }
-    }
+    }*/

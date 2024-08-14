@@ -1,56 +1,73 @@
-package com.uxstate.launchpad.presentation.screens.common
+package com.uxstate.launchpad.presentation.common
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Fullscreen
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.uxstate.launchpad.R
-import com.uxstate.launchpad.utils.LocalSpacing
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LaunchTopBar(text: String, modifier: Modifier = Modifier, onClickBackArrow: () -> Unit) {
-    val spacing = LocalSpacing.current
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
-            .height(spacing.spaceExtraLarge)
-            .fillMaxWidth()
-            .padding(spacing.spaceSmall)
-    ) {
+fun LaunchTopBar(
+    text: String,
+    onClickBackArrow: () -> Unit,
+    modifier: Modifier = Modifier,
+    action: @Composable (() -> Unit)? = null
+) {
 
-        Icon(
-            imageVector = Icons.Default.ArrowBack,
-            contentDescription = stringResource(R.string.back_label),
-            modifier = Modifier.clickable {
-                onClickBackArrow()
-            }
-        )
-        Text(
-            text = "   $text",
-            style = MaterialTheme.typography.titleLarge,
-            overflow = TextOverflow.Ellipsis,
-            textAlign = TextAlign.Center,
-            modifier = modifier.fillMaxWidth()
-        )
-    }
+    TopAppBar(
+            modifier = modifier,
+            navigationIcon = {
+                Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = stringResource(R.string.back_label),
+                        modifier = Modifier.clickable {
+                            onClickBackArrow()
+                        }
+                )
+            },
+            title = {
+                Text(
+                        text = "   $text",
+                        style = MaterialTheme.typography.titleLarge,
+                        overflow = TextOverflow.Ellipsis,
+                        textAlign = TextAlign.Center,
+                        modifier = modifier.fillMaxWidth()
+                )
+            },
+
+            actions = { action?.invoke() }
+
+
+    )
+
 }
 
-@Preview
-@Composable
-fun TopBarPreview() {
 
-    LaunchTopBar(text = "Falcon", onClickBackArrow = {})
+@PreviewLightDark
+@Composable
+private fun TopBarPreview() {
+
+    LaunchTopBar(
+            text = "Falcon",
+            onClickBackArrow = {},
+            action = {
+                Icon(
+                        imageVector = Icons.Default.Fullscreen,
+                        contentDescription = ""
+                )
+            }
+    )
 }

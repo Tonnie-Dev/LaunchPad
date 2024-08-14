@@ -15,7 +15,8 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
-import com.uxstate.launchpad.presentation.screens.common.LaunchTopBar
+import com.uxstate.launchpad.presentation.common.LaunchTopBar
+
 import com.uxstate.launchpad.utils.LocalSpacing
 
 @Destination
