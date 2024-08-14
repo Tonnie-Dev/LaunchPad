@@ -2,9 +2,9 @@ package com.uxstate.launchpad.domain.model
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
-@RequiresApi(Build.VERSION_CODES.O)
 data class TimerState(
     val totalSecondsToLaunch: Long = 0
 
@@ -19,16 +19,23 @@ data class TimerState(
     val secondsLeft = TimeUnit.SECONDS.toSeconds(timeDifference) % 60
 
     override fun toString(): String {
-        return String.format("%02d:%02d:%02d", hoursLeft, minutesLeft, secondsLeft)
+        return String.format(
+                Locale.getDefault(),
+                "%02d:%02d:%02d",
+                hoursLeft,
+                minutesLeft,
+                secondsLeft
+        )
     }
 }
-@RequiresApi(Build.VERSION_CODES.O)
+
 fun TimerState.computeTimeBoard(): TimeBoard {
     return TimeBoard(
-        days = if (this.daysLeft >= 0) this.daysLeft.toInt() else 0,
-        hours = if (this.hoursLeft >= 0) this.hoursLeft.toInt() else 0,
-        minutes = if (this.minutesLeft >= 0) this.minutesLeft.toInt() else 0,
-        seconds = if (this.secondsLeft >= 0) this.secondsLeft.toInt() else 0,
+            days = if (this.daysLeft >= 0) this.daysLeft.toInt() else 0,
+            hours = if (this.hoursLeft >= 0) this.hoursLeft.toInt() else 0,
+            minutes = if (this.minutesLeft >= 0) this.minutesLeft.toInt() else 0,
+            seconds = if (this.secondsLeft >= 0) this.secondsLeft.toInt() else 0,
     )
 }
+
 data class TimeBoard(val days: Int, val hours: Int, val minutes: Int, val seconds: Int)
