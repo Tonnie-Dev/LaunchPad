@@ -6,8 +6,11 @@ import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.rememberBottomSheetScaffoldState
-import androidx.compose.material3.rememberModalBottomSheetState
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
@@ -21,7 +24,7 @@ import com.uxstate.launchpad.presentation.screens.details.components.LaunchBotto
 import com.uxstate.launchpad.utils.LocalSpacing
 import com.uxstate.launchpad.utils.openGoogleMap
 
-@OptIn( ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Destination
 @Composable
 fun DetailsScreen(
@@ -39,52 +42,53 @@ fun DetailsScreen(
     val isShowDialog by viewModel.isShowDialog.collectAsState()
 
     BottomSheetScaffold(
-        scaffoldState = scaffoldState,
-        sheetPeekHeight = (spacing.spaceExtraLarge * 2.5f),
-        topBar = {
-            LaunchTopBar(
-                text = launch.name,
-                onClickBackArrow = { navigator.navigateUp() }
-            )
-        },
-        // bottom sheet content
-        sheetContent = {
-            SimpleAlertDialog(
-                isShowDialog = isShowDialog,
-                onDismiss = viewModel::onDialogDismiss,
-                onConfirm = viewModel::onDialogConfirm
-            )
-            LaunchBottomSheet(
-                probability = probability,
-                launch = launch,
-                onClickViewMap = { latitude, longitude ->
+            scaffoldState = scaffoldState,
+            sheetPeekHeight = (spacing.spaceExtraLarge * 2.5f),
+            topBar = {
+                LaunchTopBar(
+                        text = launch.name,
+                        onClickBackArrow = { navigator.navigateUp() }
+                )
+            },
+            // bottom sheet content
+            sheetContent = {
+                SimpleAlertDialog(
+                        isShowDialog = isShowDialog,
+                        onDismiss = viewModel::onDialogDismiss,
+                        onConfirm = viewModel::onDialogConfirm
+                )
+                LaunchBottomSheet(
+                        probability = probability,
+                        launch = launch,
+                        onClickViewMap = { latitude, longitude ->
 
-                    if (latitude == 0.0 || longitude == 0.0) {
+                            if (latitude == 0.0 || longitude == 0.0) {
 
-                        viewModel.onDialogShow()
-                    } else {
+                                viewModel.onDialogShow()
+                            } else {
 
-                        openGoogleMap(latitude, longitude, context)
-                    }
-                }
-            )
-        }
+                                openGoogleMap(latitude, longitude, context)
+                            }
+                        }
+                )
+            }
 
     )
 
     // underlying stuff
     {
         BackgroundContent(
-            launch = launch,
-            imageFractionHeight = scaffoldState.currentSheetFraction,
-            onShowFullScreen = {
-                navigator.popBackStack()
-                navigator.navigate(FullPhotoScreenDestination(launch = launch))
-            },
-            onClose = { navigator.navigateUp() }
+                launch = launch,
+                imageFractionHeight = scaffoldState.currentSheetFraction,
+                onShowFullScreen = {
+                    navigator.popBackStack()
+                    navigator.navigate(FullPhotoScreenDestination(launch = launch))
+                },
+                onClose = { navigator.navigateUp() }
         )
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 val BottomSheetScaffoldState.currentSheetFraction: Float
     @Composable
