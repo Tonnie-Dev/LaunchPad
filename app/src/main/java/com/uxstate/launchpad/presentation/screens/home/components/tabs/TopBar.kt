@@ -1,45 +1,40 @@
 package com.uxstate.launchpad.presentation.screens.home.components.tabs
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 import com.uxstate.launchpad.utils.LocalSpacing
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar() {
 
     val spacing = LocalSpacing.current
     TopAppBar(
-        backgroundColor = MaterialTheme.colors.background,
-        contentColor = MaterialTheme.colors.onSurface,
-        elevation = spacing.spaceSmall,
-        content = {
-            Text(
-                text = stringResource(id = R.string.app_name),
-                fontSize = MaterialTheme.typography.h5.fontSize
-            )
-        }
+
+            title = {
+                Text(
+                        text = stringResource(id = R.string.app_name),
+                        fontSize = MaterialTheme.typography.headlineSmall.fontSize
+                )
+            }
     )
 }
 
-@Preview(showBackground = true)
+
+@PreviewLightDark
 @Composable
 fun TopBarPrevLight() {
     LaunchPadTheme {
-        TopBar()
-    }
-}
-
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Composable
-fun TopBarPrevDark() {
-    LaunchPadTheme {
-        TopBar()
+        Surface {
+            TopBar()
+        }
     }
 }
