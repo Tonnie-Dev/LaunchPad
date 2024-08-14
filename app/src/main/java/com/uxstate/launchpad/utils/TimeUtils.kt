@@ -23,7 +23,7 @@ fun String.formatLaunchDatabaseStringDate(): String {
     val temporalAccessor: TemporalAccessor = DateTimeFormatter.ISO_INSTANT.parse(this)
     val instant: Instant = Instant.from(temporalAccessor)
     val localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault())
-
+    
     val pattern = "MMM dd, yyyy hh:mm a"
     val dateFormatter = DateTimeFormatter.ofPattern(pattern)
 
@@ -41,7 +41,7 @@ fun Launch.convertLaunchDatabaseDateToSeconds(): Long {
     // convert local date to millis
 
     return localDateTime.atZone(ZoneId.systemDefault())
-        .toEpochSecond()
+            .toEpochSecond()
 }
 
 fun Launch.generateSecondsFlow(): Flow<Long> = flow {
@@ -71,7 +71,7 @@ fun addAnimation(duration: Int = 800): ContentTransform {
 }
 
 fun Date.getCurrentDateTime(): String {
-
-    val pattern = "MMM dd, yyyy hh:mm a"
+    // Database Pattern 2024-08-12T10:37:00Z
+    val pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'"
     return SimpleDateFormat(pattern, Locale.getDefault()).format(this)
 }
