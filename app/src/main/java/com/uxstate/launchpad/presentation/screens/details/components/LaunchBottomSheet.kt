@@ -1,116 +1,47 @@
 package com.uxstate.launchpad.presentation.screens.details.components
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.uxstate.launchpad.domain.model.Launch
-import com.uxstate.launchpad.domain.model.TimerState
-import com.uxstate.launchpad.domain.model.computeTimeBoard
-import com.uxstate.launchpad.presentation.screens.common.TimeBoardWidget
-import com.uxstate.launchpad.utils.LocalSpacing
-import com.uxstate.launchpad.utils.formatLaunchDatabaseStringDate
-import com.uxstate.launchpad.utils.generateSecondsFlow
+import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
+import com.uxstate.launchpad.utils.generateLaunch
 
 @Composable
 fun LaunchBottomSheet(
-    probability: Int,
     launch: Launch,
     onClickViewMap: (Double, Double) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val secondsFlow by launch.generateSecondsFlow()
-            .collectAsState(initial = 0)
-
-    val timerState = TimerState(secondsFlow)
-    val timeBoard = timerState.computeTimeBoard()
-
-    val spacing = LocalSpacing.current
-
     Column(
-            modifier = modifier
-                    .fillMaxHeight(.75f)
-                    .padding(spacing.spaceSmall)
-
+            modifier = modifier.verticalScroll(state = rememberScrollState())
     ) {
 
-        Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            // c1 - Probability Circle
+        StatusSection(launch = launch)
 
-            Column(
-                    modifier = Modifier
-                            .weight(.35f)
-                            .fillMaxWidth()
-            ) {
-                Card(
-                        elevation = CardDefaults.cardElevation(
-                                defaultElevation = spacing.spaceSmall
-                        ),
-                        modifier = Modifier.padding(spacing.spaceSmall)
-                ) {
+        MissionSection(launch = launch)
 
-                    ProbabilityCircle(probability = probability)
-                }
-            }
-            // c2 - Timeboard
+        PadCard(launch = launch, onClickViewMap = onClickViewMap)
+    }
+}
 
-            Column(modifier = Modifier.weight(.65f)) {
 
-                Card(
-                        elevation = CardDefaults.cardElevation(
-                                defaultElevation = spacing.spaceSmall
-                        ),
-                        modifier = Modifier.padding(spacing.spaceSmall)
-                ) {
-                    Column(
-                            modifier = Modifier.padding(spacing.spaceExtraSmall)
+@PreviewLightDark
+@Composable
+private fun LaunchBottomSheetContentPreview() {
+    LaunchPadTheme {
+        Surface {
 
-                    ) {
-                        TimeBoardWidget(
-                                timeBoard = timeBoard,
-                                modifier = Modifier
-                                        .fillMaxWidth()
+            LaunchBottomSheet(
+                    launch = generateLaunch(),
+                    onClickViewMap = { _, _ -> }
+            )
 
-                        )
-                        Text(
-                                text = (launch.startWindowDate).formatLaunchDatabaseStringDate(),
-                                style = MaterialTheme.typography.bodyLarge,
-                                fontWeight = FontWeight.Bold,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier
-                                        .fillMaxWidth()
-                        )
-
-                        StatusSlot(launch)
-                    }
-                }
-            }
-        }
-
-        Column(
-                modifier = Modifier.verticalScroll(
-                        state =
-                        rememberScrollState()
-                )
-        ) {
-            // status
-            StatusSection(launch = launch)
-
-            MissionSection(launch = launch)
-
-            PadCard(launch = launch, onClickViewMap = onClickViewMap)
         }
     }
 }
