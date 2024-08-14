@@ -18,7 +18,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
+import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 import com.uxstate.launchpad.utils.LocalSpacing
+import com.uxstate.launchpad.utils.generateLaunch
 
 @Composable
 fun PadCard(
@@ -33,7 +35,13 @@ fun PadCard(
             modifier = modifier.padding(spacing.spaceSmall)
     ) {
 
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+                modifier = Modifier.padding(
+                        horizontal = spacing.spaceMedium,
+                        vertical = spacing.spaceSmall
+                ),
+                horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Text(
                     text = launch.pad.locationName,
                     style = MaterialTheme.typography.headlineSmall,
@@ -120,4 +128,16 @@ private fun PadCounterPreview() {
             value = 13,
             countDesc = stringResource(id = R.string.total_launches_text)
     )
+}
+
+
+@PreviewLightDark
+@Composable
+private fun PadCardPreview() {
+    LaunchPadTheme {
+        PadCard(
+                launch = generateLaunch(),
+                onClickViewMap = { _, _ -> }
+        )
+    }
 }
