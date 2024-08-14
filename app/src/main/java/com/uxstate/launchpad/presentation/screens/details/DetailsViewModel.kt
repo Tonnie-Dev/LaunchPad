@@ -9,9 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
-class DetailsViewModel @Inject constructor(
-    private val wrapper: UseCaseWrapper
-) : ViewModel() {
+class DetailsViewModel @Inject constructor() : ViewModel() {
 
     private val _probability = MutableStateFlow(Random.nextInt(50, 100))
     val probability = _probability.asStateFlow()
@@ -23,11 +21,11 @@ class DetailsViewModel @Inject constructor(
         _isShowDialog.value = true
     }
 
-    fun onDialogConfirm() {
+    fun onConfirmDialog() {
         _isShowDialog.value = false
     }
 
-    fun onDialogDismiss() {
+    fun onDismissDialog() {
         _isShowDialog.value = false
     }
 }

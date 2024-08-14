@@ -63,7 +63,7 @@ fun DetailScreenContent(
     onPopBackStack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    
+
     val context = LocalContext.current
 
     val scaffoldState = rememberBottomSheetScaffoldState()
