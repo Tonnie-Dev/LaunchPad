@@ -70,8 +70,8 @@ fun addAnimation(duration: Int = 800): ContentTransform {
     ) { height -> -height } + fadeOut(tween(durationMillis = duration)))
 }
 
-fun Long.getCurrentDateTime(): String {
-    
+fun Date.getCurrentDateTime(): String {
+
     val pattern = "MMM dd, yyyy hh:mm a"
-    return SimpleDateFormat(pattern, Locale.getDefault()).format(Date())
+    return SimpleDateFormat(pattern, Locale.getDefault()).format(this)
 }
