@@ -2,24 +2,23 @@ package com.uxstate.launchpad.presentation.screens.home.components.tabs
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PageSize
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.PagerState
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun TabsContent(tabs: List<TabItem>, pagerState: PagerState) {
 
-    HorizontalPager(state = pagerState, count = tabs.size) {
+    HorizontalPager(state = pagerState, pageSize = PageSize.Fill) {
         page ->
 
         tabs[page].composeFunction()
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
+
 @Preview(uiMode = UI_MODE_NIGHT_NO, showBackground = true)
 @Composable
 fun TabsContentPreviewLight() {
@@ -31,7 +30,6 @@ fun TabsContentPreviewLight() {
     }*/
 }
 
-@OptIn(ExperimentalPagerApi::class)
 @Preview(uiMode = UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun TabsContentPreviewDark() {
