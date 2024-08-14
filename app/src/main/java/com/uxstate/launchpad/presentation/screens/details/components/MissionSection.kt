@@ -15,6 +15,7 @@ import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.*
 import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 import com.uxstate.launchpad.utils.LocalSpacing
+import com.uxstate.launchpad.utils.generateLaunch
 import com.uxstate.launchpad.utils.generateLoremIpsum
 
 @Composable
@@ -57,29 +58,7 @@ fun MissionSection(launch: Launch, modifier: Modifier = Modifier) {
 @PreviewLightDark
 @Composable
 fun MissionCardPreview() {
-    val launch = Launch(
-            id = 0,
-            name = "",
-            mission = Mission(
-                    name = "My Mission",
-                    description = generateLoremIpsum(30),
-                    type = ""
-            ),
-            imageUrl = "",
-            provider = Provider(id = 0, name = "", type = ""),
-            status = Status(name = "Name", abbrev = "TBD", description = ""),
-            pad = Pad(
-                    locationName = "",
-                    latitude = "",
-                    longitude = "", complex = "",
-                    totalLaunchCount = 0,
-                    totalLandingCount = 0,
 
-                    ),
-            startWindowDate = "",
-            rocket = Rocket(name = "", family = "")
-    )
-
-    MissionSection(launch = launch)
+    MissionSection(launch = generateLaunch())
 }
 
