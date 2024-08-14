@@ -3,10 +3,14 @@ package com.uxstate.launchpad.presentation.screens.details.components
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -19,20 +23,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key.Companion.Ro
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 import com.uxstate.launchpad.utils.LocalSpacing
+import com.uxstate.launchpad.utils.generateLaunch
 
 
 @Composable
 fun RocketInfoRow(launch: Launch, modifier: Modifier = Modifier) {
-
+    val spacing = LocalSpacing.current
 
     val rocketIcons = listOf(
             RocketIconDataClass(
@@ -56,6 +63,23 @@ fun RocketInfoRow(launch: Launch, modifier: Modifier = Modifier) {
                     icon = R.drawable.satellite_icon
             )
     )
+
+    Row(
+            modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(spacing.spaceSmall),
+            horizontalArrangement = Arrangement.spacedBy(spacing.spaceExtraSmall)
+    ) {
+        rocketIcons.forEach { icon ->
+            RocketIcon(
+                    itemText = icon.itemText,
+                    value = icon.value,
+                    icon = icon.icon,
+                    modifier = Modifier.weight(1f)
+            )
+        }
+    }
 
 
 }
@@ -81,8 +105,10 @@ fun RocketIcon(
 
 
         Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(spacing.spaceExtraSmall)
+                modifier = Modifier
+                        .padding(spacing.spaceExtraSmall)
+                        .align(Alignment.CenterHorizontally),
+                horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
                     modifier = Modifier
@@ -131,4 +157,14 @@ fun RocketIconPreviewLight() {
 
     }
 
+}
+
+
+@PreviewLightDark
+@Composable
+private fun RocketInfoRowPreview() {
+
+    LaunchPadTheme {
+        RocketInfoRow(launch = generateLaunch())
+    }
 }
