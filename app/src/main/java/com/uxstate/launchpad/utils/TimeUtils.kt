@@ -23,7 +23,7 @@ fun String.formatLaunchDatabaseStringDate(): String {
     val temporalAccessor: TemporalAccessor = DateTimeFormatter.ISO_INSTANT.parse(this)
     val instant: Instant = Instant.from(temporalAccessor)
     val localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault())
-    
+
     val pattern = "MMM dd, yyyy hh:mm a"
     val dateFormatter = DateTimeFormatter.ofPattern(pattern)
 
