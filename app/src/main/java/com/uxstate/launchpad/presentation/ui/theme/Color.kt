@@ -224,6 +224,22 @@ val surfaceContainerHighestDarkHighContrast = Color(0xFF3C3235)
 
 
 
+val ShimmerDarkGray = Color(0xFF1D1D1D)
+
+// Status Icon Tint Colors
+val LuminousRed = Color(0xFFFE0000)
+val DahliaYellow = Color(0xFFF3A505)
+val OysterWhite = Color(0xFFEAE6CA)
+val MintGreen = Color(0xFF06F773)
+
+
+val ColorScheme.isLight:Boolean
+    get() = this.primary.luminance() > 0.5
+
+
+// StatusBar extension color from MaterialTheme3
+val ColorScheme.statusBarColor
+    get() = if (this.isLight) primaryLight else primaryDark
 
 
 
