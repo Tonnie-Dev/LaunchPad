@@ -1,12 +1,11 @@
 package com.uxstate.launchpad.presentation.screens.details
 
 import androidx.lifecycle.ViewModel
-import com.uxstate.launchpad.domain.useCases.UseCaseWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
-import kotlin.random.Random
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor() : ViewModel() {
