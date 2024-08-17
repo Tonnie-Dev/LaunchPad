@@ -56,7 +56,7 @@ android {
         resources {
 
             resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
-            // exclude("/META-INF/{AL2.0,LGPL2.1}")
+           
         }
     }
 }
@@ -117,7 +117,5 @@ dependencies {
 
     // Timber Logging
     implementation(JakeWharton.timber)
-
-
 
 }
