@@ -20,14 +20,9 @@ import com.uxstate.launchpad.R
 import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.presentation.common.RefreshScreen
 import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
-import com.uxstate.launchpad.utils.LocalSpacing
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
-
-// default value added to enable us call this screen even if there is no error
-
-// Add heroes:LazyPagingItems which has a convenient function to refresh data
 @Composable
 fun EmptyScreen(
     error: LoadState.Error? = null,
@@ -66,7 +61,7 @@ fun EmptyScreen(
             animationSpec = tween(1000, easing = FastOutSlowInEasing), label = ""
     )
 
-    EmptyContent(alphaValue, icon, message, launches = launches, error = error)
+    EmptyContent(alphaValue, icon, message, launches = launches)
 }
 
 @Composable
@@ -74,11 +69,9 @@ fun EmptyContent(
     alphaValue: Float,
     @DrawableRes icon: Int,
     message: String,
-    launches: LazyPagingItems<Launch>? = null,
-    error: LoadState.Error? = null
+    launches: LazyPagingItems<Launch>? = null
 ) {
 
-    val spacing = LocalSpacing.current
     var isRefreshing by remember {
         mutableStateOf(false)
     }
@@ -87,83 +80,13 @@ fun EmptyContent(
             alphaValue = alphaValue,
             message = message,
             icon = icon,
-            isRefreshing = isRefreshing ,
+            isRefreshing = isRefreshing,
             onRefresh = {
                 isRefreshing = true
-                launches?.loadState?.refresh
-                isRefreshing = false
-            } )
-}
-
-
-                    // first set the value of isRefreshing to true
-                //  isRefreshing = true
-
-                // call refresh() off the LazyPagingItem
-
-               // launches?.loadState?.refresh
-
-                // reset is refreshing to false
-
-                //isRefreshing = false})
-
-                /*SwipeRefresh(
-            state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
-
-            // SwipeRefresh will be visible only if the error is not null
-            swipeEnabled = error != null,
-            *//*In this lambda we need to invalidate data*//*
-            onRefresh = {
-
-                // first set the value of isRefreshing to true
-                isRefreshing = true
-
-                // call refresh() off the LazyPagingItem
-
                 launches?.refresh()
-
-                // reset is refreshing to false
-
                 isRefreshing = false
-            }
-    ) {
-
-        *//*Column not scrollable by default there we add verticalScroll modifier*//*
-        Column(
-                modifier = Modifier
-                        .fillMaxSize()
-                        .verticalScroll(state = rememberScrollState()),
-
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-        ) {
-
-            // Icon
-
-            Icon(
-                    modifier = Modifier
-                            .size(spacing.spaceOneHundredFifty)
-                            .alpha(alphaValue),
-                    painter = painterResource(id = icon),
-                    contentDescription = stringResource(R.string.dialog_error_title),
-                    tint = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
-            )
-
-            // Text
-
-            Text(
-                    modifier = Modifier
-                            .padding(top = spacing.spaceSmall)
-                            .alpha(alphaValue),
-                    text = message,
-                    color = Color.White,
-                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                    fontWeight = FontWeight.Medium,
-                    textAlign = TextAlign.Center
-            )
-        }
-    }*/
-
+            })
+}
 
 fun parseErrorMessage(loadStateError: LoadState.Error): String {
 
