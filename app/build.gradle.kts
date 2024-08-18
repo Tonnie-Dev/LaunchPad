@@ -61,8 +61,6 @@ android {
     }
 }
 
-
-
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -117,5 +115,4 @@ dependencies {
 
     // Timber Logging
     implementation(JakeWharton.timber)
-
 }
