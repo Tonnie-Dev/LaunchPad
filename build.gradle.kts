@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.ksp.plugin) apply false
     alias(libs.plugins.parcelize.plugin) apply false
     alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.klint) apply false
 
 }
 
