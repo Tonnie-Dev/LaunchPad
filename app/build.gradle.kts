@@ -1,5 +1,3 @@
-import com.android.build.api.dsl.Packaging
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -7,6 +5,7 @@ plugins {
     alias(libs.plugins.hilt.plugin)
     alias(libs.plugins.ksp.plugin)
     alias(libs.plugins.parcelize.plugin)
+    alias(libs.plugins.ktlint)
 }
 
 android {
@@ -27,14 +26,12 @@ android {
         }
     }
 
-
     buildTypes {
-
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
             )
         }
     }
@@ -44,7 +41,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = "18"
-
     }
     buildFeatures {
         compose = true
@@ -54,15 +50,22 @@ android {
     }
     packaging {
         resources {
-
             resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
-           
         }
     }
 }
 
-dependencies {
+ktlint {
+    android.set(true) // Enable Android-specific linting rules
+    ignoreFailures.set(false) // Fail the build if KtLint finds any issues, // Continue build even if there are lint errors
+    //disabledRules.set(setOf("final-newline", "no-wildcard-imports", "max-line-length")) // Specify any rules to ignore
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN) // Output KtLint results in plain text format
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML) // Output KtLint results in HTML format
+    }
+}
 
+dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
