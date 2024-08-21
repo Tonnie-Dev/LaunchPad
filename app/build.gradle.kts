@@ -58,7 +58,7 @@ android {
 ktlint {
     android.set(true) // Enable Android-specific linting rules
     ignoreFailures.set(false) // Fail the build if KtLint finds any issues, // Continue build even if there are lint errors
-    //disabledRules.set(setOf("final-newline", "no-wildcard-imports", "max-line-length")) // Specify any rules to ignore
+    // disabledRules.set(setOf("final-newline", "no-wildcard-imports", "max-line-length")) // Specify any rules to ignore
     reporters {
         reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN) // Output KtLint results in plain text format
         reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML) // Output KtLint results in HTML format

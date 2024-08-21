@@ -31,17 +31,14 @@ object NetworkModule {
         HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
+    /* Connect timeout defines a time period in which our
+        client should establish a connection with a target host.
+        By default, for the OkHttpClient, this timeout is set to 10 seconds.
 
-    /*
-    Connect timeout defines a time period in which our
-    client should establish a connection with a target host.
-    By default, for the OkHttpClient, this timeout is set to 10 seconds.
+        Maximum time of inactivity between two data packets when waiting for the
+        server's response.The default timeout of 10 seconds
      */
 
-    /*
-    Maximum time of inactivity between two data packets when waiting for the
-    server's response.The default timeout of 10 seconds
-     */
     @Provides
     @Singleton
     fun provideOkHttpClient(interceptor: HttpLoggingInterceptor) =

@@ -16,7 +16,7 @@ interface LaunchApi {
         @Query(LaunchApiParams.QUERY_LIMIT)
         limit: Int = LaunchApiParams.DEFAULT_LIMIT,
         @Query(LaunchApiParams.QUERY_OFFSET)
-        offset: Int = LaunchApiParams.DEFAULT_OFFSET
+        offset: Int = LaunchApiParams.DEFAULT_OFFSET,
     ): ApiResponseDto
 
     @GET(LaunchApiEndpoints.LAUNCHES_PREVIOUS)
