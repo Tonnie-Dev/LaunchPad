@@ -6,5 +6,5 @@ data class RocketDto(
     @Json(name = "configuration")
     val configuration: ConfigurationDto,
     @Json(name = "id")
-    val id: Int
+    val id: Int,
 )

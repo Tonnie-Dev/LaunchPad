@@ -60,5 +60,5 @@ data class LaunchDto(
     @Json(name = "window_end")
     val windowEnd: String,
     @Json(name = "window_start")
-    val windowStart: String
+    val windowStart: String,
 )

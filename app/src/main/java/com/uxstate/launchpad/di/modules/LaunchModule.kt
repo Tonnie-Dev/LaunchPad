@@ -12,14 +12,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 import retrofit2.Retrofit
 import retrofit2.create
+import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 interface LaunchModule {
-
     @Binds
     @Singleton
     fun bindLaunchRepository(repository: LaunchRepositoryImpl): LaunchRepository
@@ -31,12 +30,10 @@ interface LaunchModule {
     companion object {
         @Provides
         @Singleton
-        fun provideLaunchApi(retrofit: Retrofit): LaunchApi =
-            retrofit.create()
+        fun provideLaunchApi(retrofit: Retrofit): LaunchApi = retrofit.create()
 
         @Provides
         @Singleton
-        fun provideLaunchDao(database: LaunchDatabase): LaunchDao =
-            database.launchDao
+        fun provideLaunchDao(database: LaunchDatabase): LaunchDao = database.launchDao
     }
 }

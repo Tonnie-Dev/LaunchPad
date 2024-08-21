@@ -14,7 +14,6 @@ import com.uxstate.launchpad.presentation.ui.theme.LaunchPadTheme
 import com.uxstate.launchpad.utils.generateLaunch
 import com.uxstate.launchpad.utils.openGoogleMap
 
-
 @Composable
 fun LaunchBottomSheet(
     launch: Launch,
@@ -23,25 +22,24 @@ fun LaunchBottomSheet(
     onDismissDialog: () -> Unit,
     onConfirmDialog: () -> Unit,
     onShowDialog: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     SimpleAlertDialog(
-            isShowDialog = isShowDialog,
-            onDismiss = onDismissDialog,
-            onConfirm = onConfirmDialog
+        isShowDialog = isShowDialog,
+        onDismiss = onDismissDialog,
+        onConfirm = onConfirmDialog,
     )
     LaunchBottomSheetContent(
-            modifier = modifier,
-            launch = launch,
-            onClickViewMap = { latitude, longitude ->
+        modifier = modifier,
+        launch = launch,
+        onClickViewMap = { latitude, longitude ->
 
-                if (latitude == 0.0 || longitude == 0.0) {
-
-                    onShowDialog()
-                } else {
-                    openGoogleMap(latitude, longitude, context)
-                }
+            if (latitude == 0.0 || longitude == 0.0) {
+                onShowDialog()
+            } else {
+                openGoogleMap(latitude, longitude, context)
             }
+        },
     )
 }
 
@@ -52,9 +50,8 @@ fun LaunchBottomSheetContent(
     modifier: Modifier = Modifier,
 ) {
     Column(
-            modifier = modifier.verticalScroll(state = rememberScrollState())
+        modifier = modifier.verticalScroll(state = rememberScrollState()),
     ) {
-
         StatusSection(launch = launch)
 
         MissionSection(launch = launch)
@@ -63,18 +60,15 @@ fun LaunchBottomSheetContent(
     }
 }
 
-
 @PreviewLightDark
 @Composable
 private fun LaunchBottomSheetContentPreview() {
     LaunchPadTheme {
         Surface {
-
             LaunchBottomSheetContent(
-                    launch = generateLaunch(),
-                    onClickViewMap = { _, _ -> }
+                launch = generateLaunch(),
+                onClickViewMap = { _, _ -> },
             )
-
         }
     }
 }

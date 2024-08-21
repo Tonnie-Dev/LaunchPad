@@ -5,8 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 
-fun openGoogleMap(latitude: Double, longitude: Double, context: Context) {
-
+fun openGoogleMap(
+    latitude: Double,
+    longitude: Double,
+    context: Context,
+) {
     // you need action, data and package name
 
     val uri = Uri.parse("geo:$latitude,$longitude?z=15")
@@ -22,7 +25,6 @@ fun openGoogleMap(latitude: Double, longitude: Double, context: Context) {
     try {
         context.startActivity(mapIntent)
     } catch (e: ActivityNotFoundException) {
-
         // if map app isn't resolved/installed catch error
         e.printStackTrace()
     }

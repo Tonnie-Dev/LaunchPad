@@ -36,55 +36,54 @@ import com.uxstate.launchpad.utils.LocalSpacing
 import com.uxstate.launchpad.utils.capitalizeFirstLetter
 import com.uxstate.launchpad.utils.generateLaunch
 
-
 @Composable
-fun RocketInfoRow(launch: Launch, modifier: Modifier = Modifier) {
+fun RocketInfoRow(
+    launch: Launch,
+    modifier: Modifier = Modifier,
+) {
     val spacing = LocalSpacing.current
 
-    val rocketIcons = listOf(
-
+    val rocketIcons =
+        listOf(
             RocketIconDataClass(
-                    itemText = stringResource(R.string.agency_label),
-                    value = launch.provider.name,
-                    icon = Icons.Default.Apartment
+                itemText = stringResource(R.string.agency_label),
+                value = launch.provider.name,
+                icon = Icons.Default.Apartment,
             ),
             RocketIconDataClass(
-                    itemText = stringResource(R.string.rocket_label),
-                    value = launch.rocket.name,
-                    icon = Icons.Default.Rocket
+                itemText = stringResource(R.string.rocket_label),
+                value = launch.rocket.name,
+                icon = Icons.Default.Rocket,
             ),
-
             RocketIconDataClass(
-                    itemText = stringResource(R.string.family_label),
-                    value = launch.rocket.family.capitalizeFirstLetter(),
-                    icon = Icons.Default.Anchor
+                itemText = stringResource(R.string.family_label),
+                value = launch.rocket.family.capitalizeFirstLetter(),
+                icon = Icons.Default.Anchor,
             ),
-
             RocketIconDataClass(
-                    itemText = stringResource(R.string.type_label),
-                    value = launch.provider.type.capitalizeFirstLetter(),
-                    icon = Icons.Default.SatelliteAlt
-            )
-    )
+                itemText = stringResource(R.string.type_label),
+                value = launch.provider.type.capitalizeFirstLetter(),
+                icon = Icons.Default.SatelliteAlt,
+            ),
+        )
 
     Row(
-            modifier = modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(spacing.spaceSmall),
-            horizontalArrangement = Arrangement.spacedBy(spacing.spaceSmall)
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(spacing.spaceSmall),
+        horizontalArrangement = Arrangement.spacedBy(spacing.spaceSmall),
     ) {
         rocketIcons.forEach { icon ->
             RocketIcon(
-                    itemText = icon.itemText,
-                    value = icon.value,
-                    icon = icon.icon,
-                    modifier = Modifier.weight(1f)
+                itemText = icon.itemText,
+                value = icon.value,
+                icon = icon.icon,
+                modifier = Modifier.weight(1f),
             )
         }
     }
-
-
 }
 
 data class RocketIconDataClass(val itemText: String, val value: String, val icon: ImageVector)
@@ -94,78 +93,68 @@ fun RocketIcon(
     itemText: String,
     value: String,
     icon: ImageVector,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-
     val spacing = LocalSpacing.current
 
     Card(
-            elevation = CardDefaults.cardElevation(defaultElevation = spacing.spaceSmall),
-            modifier = modifier
+        elevation = CardDefaults.cardElevation(defaultElevation = spacing.spaceSmall),
+        modifier = modifier,
     ) {
-
-
         Column(
-                modifier = Modifier
-                        .padding(spacing.spaceExtraSmall)
-                        .align(Alignment.CenterHorizontally),
-                horizontalAlignment = Alignment.CenterHorizontally
+            modifier =
+                Modifier
+                    .padding(spacing.spaceExtraSmall)
+                    .align(Alignment.CenterHorizontally),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Box(
-                    modifier = Modifier
-                            .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.secondary)
-                            .padding(spacing.spaceExtraSmall),
-                    contentAlignment = Alignment.Center
-
+                modifier =
+                    Modifier
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.secondary)
+                        .padding(spacing.spaceExtraSmall),
+                contentAlignment = Alignment.Center,
             ) {
                 Icon(
-                        imageVector = icon,
-                        contentDescription = itemText,
-                        tint = MaterialTheme.colorScheme.onSecondary,
-                        modifier = Modifier.align(Alignment.Center)
+                    imageVector = icon,
+                    contentDescription = itemText,
+                    tint = MaterialTheme.colorScheme.onSecondary,
+                    modifier = Modifier.align(Alignment.Center),
                 )
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                        text = itemText,
-                        style = MaterialTheme.typography.labelSmall
+                    text = itemText,
+                    style = MaterialTheme.typography.labelSmall,
                 )
                 Text(
-                        text = value,
-                        style = MaterialTheme.typography.bodySmall,
-                        fontWeight = FontWeight.Black,
-                        overflow = TextOverflow.Ellipsis,
-                        maxLines = 1
+                    text = value,
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Black,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
                 )
             }
         }
-
     }
 }
-
 
 @PreviewLightDark
 @Composable
 fun RocketIconPreviewLight() {
-
     LaunchPadTheme {
-
         RocketIcon(
-                itemText = "Family",
-                value = "SpaceX",
-                icon = Icons.Default.TempleBuddhist
+            itemText = "Family",
+            value = "SpaceX",
+            icon = Icons.Default.TempleBuddhist,
         )
-
     }
-
 }
-
 
 @PreviewLightDark
 @Composable
 private fun RocketInfoRowPreview() {
-
     LaunchPadTheme {
         RocketInfoRow(launch = generateLaunch())
     }

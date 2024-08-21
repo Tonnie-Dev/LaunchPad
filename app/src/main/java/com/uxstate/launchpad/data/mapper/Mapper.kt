@@ -35,14 +35,14 @@ fun StatusDto.toStatus(): Status =
     Status(
         name = name,
         abbrev = abbrev,
-        description = description
+        description = description,
     )
 
 fun LaunchServiceProviderDto.toProvider(): Provider =
     Provider(
         id = id,
         name = name,
-        type = type ?: "Not Found"
+        type = type ?: "Not Found",
     )
 
 fun PadDto.toPad(): Pad =
@@ -52,17 +52,18 @@ fun PadDto.toPad(): Pad =
         longitude = longitude ?: "0.0",
         complex = name,
         totalLaunchCount = location.totalLaunchCount,
-        totalLandingCount = location.totalLandingCount
+        totalLandingCount = location.totalLandingCount,
     )
 
 fun RocketDto.toRocket(): Rocket =
     Rocket(
         name = configuration.name,
-        family = configuration.family
+        family = configuration.family,
     )
 
-fun MissionDto?.toMission(): Mission = Mission(
-    name = this?.name ?: "Not Found",
-    description = this?.description ?: "",
-    type = this?.type ?: ""
-)
+fun MissionDto?.toMission(): Mission =
+    Mission(
+        name = this?.name ?: "Not Found",
+        description = this?.description ?: "",
+        type = this?.type ?: "",
+    )

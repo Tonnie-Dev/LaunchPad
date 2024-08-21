@@ -11,7 +11,7 @@ import com.uxstate.launchpad.data.local.entities.UpsEntity
 @Database(
     entities = [PrevsEntity::class, UpsEntity::class],
     version = LaunchDatabase.DATABASE_VERSION,
-    exportSchema = true
+    exportSchema = true,
 )
 @TypeConverters(Converters::class)
 abstract class LaunchDatabase : RoomDatabase() {

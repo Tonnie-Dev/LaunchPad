@@ -38,69 +38,72 @@ fun ShimmerEffect() {
         contentPadding = PaddingValues(spacing.spaceSmall),
         verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall),
         content = {
-
             items(2) {
-
                 AnimatedShimmerItem()
             }
-        }
-
+        },
     )
 }
 
 @Composable
 fun AnimatedShimmerItem() {
-
     val transition = rememberInfiniteTransition()
 
     val alphaValue by transition.animateFloat(
         initialValue = 1f,
         targetValue = 0f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(
-                durationMillis = 500,
-                easing = FastOutSlowInEasing
+        animationSpec =
+            infiniteRepeatable(
+                animation =
+                    tween(
+                        durationMillis = 500,
+                        easing = FastOutSlowInEasing,
+                    ),
+                repeatMode = RepeatMode.Reverse,
             ),
-            repeatMode = RepeatMode.Reverse
-        ), label = ""
+        label = "",
     )
 
     ShimmerPlaceholderItem(alpha = alphaValue)
 }
 
 @Composable
-fun ShimmerPlaceholderItem(alpha: Float, modifier: Modifier = Modifier) {
+fun ShimmerPlaceholderItem(
+    alpha: Float,
+    modifier: Modifier = Modifier,
+) {
     val spacing = LocalSpacing.current
     Surface(
         modifier = modifier,
-        color = MaterialTheme.colorScheme.secondary
+        color = MaterialTheme.colorScheme.secondary,
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(19f / 20f)
-                .padding(spacing.spaceSmall),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(19f / 20f)
+                    .padding(spacing.spaceSmall),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Bottom
+            verticalArrangement = Arrangement.Bottom,
         ) {
             ShimmerBar(
                 alpha = alpha,
                 height = spacing.spaceLarge,
-                modifier = Modifier.fillMaxWidth(.7f)
+                modifier = Modifier.fillMaxWidth(.7f),
             )
 
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
             ShimmerBar(
                 alpha = alpha,
                 height = spacing.spaceMedium,
-                modifier = Modifier.fillMaxWidth(.3f)
+                modifier = Modifier.fillMaxWidth(.3f),
             )
 
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
             ShimmerBar(
                 alpha = alpha,
                 height = spacing.spaceMedium,
-                modifier = Modifier.fillMaxWidth(.4f)
+                modifier = Modifier.fillMaxWidth(.4f),
             )
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
 
@@ -108,7 +111,7 @@ fun ShimmerPlaceholderItem(alpha: Float, modifier: Modifier = Modifier) {
                 repeat(5) {
                     ShimmerBar(
                         alpha = alpha,
-                        modifier = Modifier.size(spacing.spaceLarge)
+                        modifier = Modifier.size(spacing.spaceLarge),
                     )
                     Spacer(modifier = Modifier.width(spacing.spaceExtraSmall))
                 }
@@ -118,14 +121,19 @@ fun ShimmerPlaceholderItem(alpha: Float, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ShimmerBar(alpha: Float, modifier: Modifier = Modifier, height: Dp = 0.dp) {
+fun ShimmerBar(
+    alpha: Float,
+    modifier: Modifier = Modifier,
+    height: Dp = 0.dp,
+) {
     val spacing = LocalSpacing.current
     Surface(
-        modifier = modifier
-            .height(height)
-            .alpha(alpha),
+        modifier =
+            modifier
+                .height(height)
+                .alpha(alpha),
         color = ShimmerDarkGray,
-        shadowElevation = spacing.spaceExtraSmall
+        shadowElevation = spacing.spaceExtraSmall,
     ) {}
 }
 

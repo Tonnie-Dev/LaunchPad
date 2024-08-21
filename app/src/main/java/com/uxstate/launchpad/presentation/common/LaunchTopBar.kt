@@ -24,50 +24,44 @@ fun LaunchTopBar(
     text: String,
     onClickBackArrow: () -> Unit,
     modifier: Modifier = Modifier,
-    action: @Composable (() -> Unit)? = null
+    action: @Composable (() -> Unit)? = null,
 ) {
-
     TopAppBar(
-            modifier = modifier,
-            navigationIcon = {
-                Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = stringResource(R.string.back_label),
-                        modifier = Modifier.clickable {
-                            onClickBackArrow()
-                        }
-                )
-            },
-            title = {
-                Text(
-                        text = "   $text",
-                        style = MaterialTheme.typography.titleLarge,
-                        overflow = TextOverflow.Ellipsis,
-                        textAlign = TextAlign.Center,
-                        modifier = modifier.fillMaxWidth()
-                )
-            },
-
-            actions = { action?.invoke() }
-
-
+        modifier = modifier,
+        navigationIcon = {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = stringResource(R.string.back_label),
+                modifier =
+                    Modifier.clickable {
+                        onClickBackArrow()
+                    },
+            )
+        },
+        title = {
+            Text(
+                text = "   $text",
+                style = MaterialTheme.typography.titleLarge,
+                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.Center,
+                modifier = modifier.fillMaxWidth(),
+            )
+        },
+        actions = { action?.invoke() },
     )
-
 }
-
 
 @PreviewLightDark
 @Composable
 private fun TopBarPreview() {
-
     LaunchTopBar(
-            text = "Falcon",
-            onClickBackArrow = {},
-            action = {
-                Icon(
-                        imageVector = Icons.Default.Fullscreen,
-                        contentDescription = ""
-                )
-            }
+        text = "Falcon",
+        onClickBackArrow = {},
+        action = {
+            Icon(
+                imageVector = Icons.Default.Fullscreen,
+                contentDescription = "",
+            )
+        },
     )
 }

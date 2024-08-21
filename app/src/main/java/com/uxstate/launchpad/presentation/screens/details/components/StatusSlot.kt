@@ -24,28 +24,30 @@ import com.uxstate.launchpad.utils.LocalSpacing
 
 @Composable
 fun StatusSlot(launch: Launch) {
-
-    val backgroundColor = when (launch.status.abbrev) {
-
-        "Success" -> MintGreen
-        "Go" -> MintGreen
-        "TBD" -> DahliaYellow
-        "Failure" -> LuminousRed
-        else -> OysterWhite
-    }
+    val backgroundColor =
+        when (launch.status.abbrev) {
+            "Success" -> MintGreen
+            "Go" -> MintGreen
+            "TBD" -> DahliaYellow
+            "Failure" -> LuminousRed
+            else -> OysterWhite
+        }
 
     val transition = rememberInfiniteTransition(label = "")
 
     val alphaValue by transition.animateFloat(
         initialValue = 1f,
         targetValue = .3f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(
-                durationMillis = 3_000,
-                easing = FastOutSlowInEasing
+        animationSpec =
+            infiniteRepeatable(
+                animation =
+                    tween(
+                        durationMillis = 3_000,
+                        easing = FastOutSlowInEasing,
+                    ),
+                repeatMode = RepeatMode.Reverse,
             ),
-            repeatMode = RepeatMode.Reverse
-        ), label = ""
+        label = "",
     )
     val spacing = LocalSpacing.current
     Spacer(modifier = Modifier.height(spacing.spaceMedium + spacing.spaceSmall))
@@ -55,9 +57,10 @@ fun StatusSlot(launch: Launch) {
         fontWeight = FontWeight.Bold,
         color = Color.Black,
         textAlign = TextAlign.Center,
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(CutCornerShape(spacing.spaceExtraSmall))
-            .background(color = backgroundColor.copy(alpha = alphaValue))
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .clip(CutCornerShape(spacing.spaceExtraSmall))
+                .background(color = backgroundColor.copy(alpha = alphaValue)),
     )
 }

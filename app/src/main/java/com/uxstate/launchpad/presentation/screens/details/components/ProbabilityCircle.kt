@@ -28,8 +28,7 @@ fun ProbabilityCircle(
     modifier: Modifier = Modifier,
     activeColor: Color = MaterialTheme.colorScheme.secondary,
     inactiveColor: Color = Color.LightGray,
-
-    ) {
+) {
     val spacing = LocalSpacing.current
     val strokeWidth = (spacing.spaceSmall)
 
@@ -37,38 +36,36 @@ fun ProbabilityCircle(
     var probCounter by remember { mutableStateOf(0) }
     val animatedProbInt by animateIntAsState(
         targetValue = probCounter,
-        animationSpec = tween(durationMillis = 1_500, easing = FastOutSlowInEasing)
+        animationSpec = tween(durationMillis = 1_500, easing = FastOutSlowInEasing),
     )
 
     LaunchedEffect(key1 = probability, block = {
-
         // when the provided targetValue is changed, the animation will run automatically
         probCounter = probability
         animatedProbRatio.animateTo(
             targetValue = if (probability > 0) (probability / 100f) else 0f,
-            animationSpec = tween(durationMillis = 1_500, easing = FastOutSlowInEasing)
+            animationSpec = tween(durationMillis = 1_500, easing = FastOutSlowInEasing),
         )
     })
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
+        modifier = modifier,
     ) {
         Box(contentAlignment = Alignment.Center) {
-
             Canvas(
-                modifier = Modifier
-                    .width(IntrinsicSize.Min)
-                    .aspectRatio(1f)
-                    .padding(spacing.spaceSmall),
+                modifier =
+                    Modifier
+                        .width(IntrinsicSize.Min)
+                        .aspectRatio(1f)
+                        .padding(spacing.spaceSmall),
                 onDraw = {
-
                     drawArc(
                         color = inactiveColor,
                         startAngle = -90f,
                         sweepAngle = 360f,
                         useCenter = false,
                         size = size,
-                        style = Stroke(strokeWidth.toPx())
+                        style = Stroke(strokeWidth.toPx()),
                     )
 
                     drawArc(
@@ -77,21 +74,21 @@ fun ProbabilityCircle(
                         sweepAngle = animatedProbRatio.value * 360,
                         useCenter = false,
                         size = size,
-                        style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Butt)
+                        style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Butt),
                     )
-                }
+                },
             )
 
             Text(
                 text = "$animatedProbInt%",
                 fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.bodyLarge,
             )
         }
         Text(
             text = stringResource(R.string.probability_label),
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.bodyLarge
+            style = MaterialTheme.typography.bodyLarge,
         )
     }
 }
@@ -102,9 +99,9 @@ fun ProbabilityCirclePreview() {
     val spacing = LocalSpacing.current
     ProbabilityCircle(
         probability = 90,
-        modifier = Modifier
-            .size(spacing.spaceExtraLarge)
-
+        modifier =
+            Modifier
+                .size(spacing.spaceExtraLarge),
     )
 }
 
@@ -112,12 +109,12 @@ fun ProbabilityCirclePreview() {
 @Composable
 fun ProbabilityCirclePreviewDark() {
     val spacing = LocalSpacing.current
-    LaunchPadTheme() {
+    LaunchPadTheme {
         ProbabilityCircle(
             probability = 50,
-            modifier = Modifier
-                .size(spacing.spaceExtraLarge)
-
+            modifier =
+                Modifier
+                    .size(spacing.spaceExtraLarge),
         )
     }
 }

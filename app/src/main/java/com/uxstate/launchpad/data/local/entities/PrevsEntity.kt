@@ -16,5 +16,5 @@ data class PrevsEntity(
     val mission: Mission,
     val provider: Provider,
     val pad: Pad,
-    val rocket: Rocket
+    val rocket: Rocket,
 )

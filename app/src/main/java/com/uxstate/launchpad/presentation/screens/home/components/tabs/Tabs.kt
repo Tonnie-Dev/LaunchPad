@@ -18,8 +18,10 @@ import com.uxstate.launchpad.R
 import kotlinx.coroutines.launch
 
 @Composable
-fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
-
+fun Tabs(
+    tabs: List<TabItem>,
+    pagerState: PagerState,
+) {
     val coroutineScope = rememberCoroutineScope()
 
     TabRow(
@@ -28,24 +30,23 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
         contentColor = MaterialTheme.colorScheme.onSurface,
         indicator = { tabPositions ->
             SecondaryIndicator(
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
-                    color = MaterialTheme.colorScheme.secondary
+                modifier = Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
+                color = MaterialTheme.colorScheme.secondary,
             )
-        }
+        },
     ) {
-
         tabs.forEachIndexed { i, tabItem ->
             // Tab
             LeadingIconTab(
                 icon = {
                     Icon(
                         painter = painterResource(id = tabItem.icon),
-                        contentDescription = stringResource(R.string.upcoming_label)
+                        contentDescription = stringResource(R.string.upcoming_label),
                     )
                 },
                 text = { Text(text = tabItem.title) },
                 selected = pagerState.currentPage == i,
-                onClick = { coroutineScope.launch { pagerState.animateScrollToPage(i) } }
+                onClick = { coroutineScope.launch { pagerState.animateScrollToPage(i) } },
             )
         }
     }
@@ -60,4 +61,3 @@ fun TabsPreviewLight() {
             Tabs(tabs = tabs, pagerState = pagerState)
     }*/
 }
-

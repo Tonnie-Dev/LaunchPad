@@ -4,5 +4,5 @@ data class RemoteKeys(
     val id: Int,
     val prevPage: String?,
     val nextPage: String?,
-    val lastUpdated: Long?
+    val lastUpdated: Long?,
 )

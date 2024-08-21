@@ -18,8 +18,7 @@ data class Dimens(
     val spaceOneHundred: Dp = 100.dp,
     val spaceOneHundredFifty: Dp = 150.dp,
     val spaceTwoHundred: Dp = 200.dp,
-    val spaceFiveHundred: Dp = 500.dp
-
+    val spaceFiveHundred: Dp = 500.dp,
 )
 
 val LocalSpacing = compositionLocalOf { Dimens() }

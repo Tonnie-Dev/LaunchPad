@@ -11,9 +11,7 @@ data class Pad(
     val complex: String,
     val totalLaunchCount: Int,
     val totalLandingCount: Int,
-
 ) : Parcelable {
-
     val total: Int
         get() = totalLaunchCount + totalLandingCount
 }

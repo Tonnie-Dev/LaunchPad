@@ -11,7 +11,6 @@ import com.uxstate.launchpad.domain.model.Launch
 
 @Dao
 interface LaunchDao {
-
     // PREVIOUS_LAUNCHES
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPreviousLaunches(launches: List<PrevsEntity>)

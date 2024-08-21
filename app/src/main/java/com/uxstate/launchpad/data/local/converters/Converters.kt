@@ -6,7 +6,6 @@ import com.uxstate.launchpad.domain.model.*
 class Converters {
     @TypeConverter
     fun writeMissionToRoom(mission: Mission): String {
-
         val missionName = mission.name
         val missionDesc = mission.description
         val missionType = mission.type
@@ -17,14 +16,14 @@ class Converters {
 
     @TypeConverter
     fun readMissionFromRoom(roomString: String): Mission {
-
-        val roomStringList = roomString.split("~")
-            .map { it }
+        val roomStringList =
+            roomString.split("~")
+                .map { it }
 
         return Mission(
             name = roomStringList[0],
             description = roomStringList[1],
-            type = roomStringList[2]
+            type = roomStringList[2],
         )
     }
 
@@ -40,19 +39,18 @@ class Converters {
 
     @TypeConverter
     fun readProviderFromRoom(roomString: String): Provider {
-
-        val providerList = roomString.split("~")
-            .map { it }
+        val providerList =
+            roomString.split("~")
+                .map { it }
         return Provider(
             id = providerList[0].toInt(),
             name = providerList[1],
-            type = providerList[2]
+            type = providerList[2],
         )
     }
 
     @TypeConverter
     fun writePadToRoom(pad: Pad): String {
-
         val padLocationName = pad.locationName
         val padLatitude = pad.latitude
         val padLongitude = pad.longitude
@@ -60,21 +58,21 @@ class Converters {
         val padTotalLaunchCount = pad.totalLaunchCount
         val padTotalLandingCount = pad.totalLandingCount
 
-        val padProviderList = listOf(
-            padLocationName,
-            padLatitude,
-            padLongitude,
-            padComplex,
-            padTotalLaunchCount,
-            padTotalLandingCount
-        )
+        val padProviderList =
+            listOf(
+                padLocationName,
+                padLatitude,
+                padLongitude,
+                padComplex,
+                padTotalLaunchCount,
+                padTotalLandingCount,
+            )
 
         return padProviderList.joinToString(separator = "~")
     }
 
     @TypeConverter
     fun readPadFromRoom(roomString: String): Pad {
-
         val padStringList = roomString.split("~")
         return Pad(
             locationName = padStringList[0],
@@ -82,13 +80,12 @@ class Converters {
             longitude = padStringList[2],
             complex = padStringList[3],
             totalLaunchCount = padStringList[4].toInt(),
-            totalLandingCount = padStringList[5].toInt()
+            totalLandingCount = padStringList[5].toInt(),
         )
     }
 
     @TypeConverter
     fun writeRocketToRoom(rocket: Rocket): String {
-
         val rocketName = rocket.name
         val rocketFamily = rocket.family
 
@@ -99,33 +96,32 @@ class Converters {
 
     @TypeConverter
     fun readRocketFromRoom(roomString: String): Rocket {
-
-        val rocketPropertiesListString = roomString.split("~")
-            .map { it }
+        val rocketPropertiesListString =
+            roomString.split("~")
+                .map { it }
 
         return Rocket(
             name = rocketPropertiesListString[0],
-            family = rocketPropertiesListString[1]
+            family = rocketPropertiesListString[1],
         )
     }
 
     @TypeConverter
     fun writeStatusToRoom(status: Status): String {
-
         val statusPropertiesList = listOf(status.name, status.abbrev, status.description)
         return statusPropertiesList.joinToString(separator = "~")
     }
 
     @TypeConverter
     fun readStatusFromRoom(roomString: String): Status {
-
-        val statusPropertiesList = roomString.split("~")
-            .map { it }
+        val statusPropertiesList =
+            roomString.split("~")
+                .map { it }
 
         return Status(
             name = statusPropertiesList[0],
             abbrev = statusPropertiesList[1],
-            description = statusPropertiesList[2]
+            description = statusPropertiesList[2],
         )
     }
 }

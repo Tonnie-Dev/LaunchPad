@@ -32,38 +32,38 @@ import com.uxstate.launchpad.utils.generateSecondsFlow
 fun LaunchImage(
     launch: Launch,
     showCountDown: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-
     val secondsFlow by launch.generateSecondsFlow()
         .collectAsState(initial = 0)
     val spacing = LocalSpacing.current
     val context = LocalContext.current
 
-    val painter = rememberAsyncImagePainter(
-        model = ImageRequest.Builder(context = context)
-            .data(launch.imageUrl)
-            .placeholder(R.drawable.rocket_svgrepo)
-            .error(R.drawable.broken_image)
-            .crossfade(true)
-            .build()
-
-    )
+    val painter =
+        rememberAsyncImagePainter(
+            model =
+                ImageRequest.Builder(context = context)
+                    .data(launch.imageUrl)
+                    .placeholder(R.drawable.rocket_svgrepo)
+                    .error(R.drawable.broken_image)
+                    .crossfade(true)
+                    .build(),
+        )
 
     Box(
         modifier = modifier.padding(spacing.spaceExtraSmall),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
                 painter = painter,
                 contentDescription = launch.name,
                 contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(topEnd = spacing.spaceMedium))
-                    .aspectRatio(3f / 2f)
-
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(topEnd = spacing.spaceMedium))
+                        .aspectRatio(3f / 2f),
             )
 
             // Name
@@ -75,7 +75,7 @@ fun LaunchImage(
                 modifier = Modifier.fillMaxWidth(),
                 maxLines = 1,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.secondary
+                color = MaterialTheme.colorScheme.secondary,
             )
 
             // Agency
@@ -85,7 +85,7 @@ fun LaunchImage(
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
                 maxLines = 1,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
 
             // Pad
@@ -96,11 +96,10 @@ fun LaunchImage(
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
                 maxLines = 1,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
 
             if (showCountDown) {
-
                 val timerState = TimerState(secondsFlow)
                 val timeBoard = timerState.computeTimeBoard()
 
@@ -109,14 +108,14 @@ fun LaunchImage(
 
             // Date
             Text(
-                /* text = formatLaunchDatabaseStringDate(launch.startWindowDate),*/
+                // text = formatLaunchDatabaseStringDate(launch.startWindowDate),
                 text = (launch.startWindowDate).formatLaunchDatabaseStringDate(),
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Bold,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
                 maxLines = 1,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
         }
 

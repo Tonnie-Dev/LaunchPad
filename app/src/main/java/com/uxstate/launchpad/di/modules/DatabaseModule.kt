@@ -17,20 +17,20 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 interface DatabaseModule {
-
     @Binds
     @Singleton
-    fun bindLaunchDbTransactionProvider(provider: LaunchDatabaseTransactionProvider):
-        DatabaseTransactionProvider
+    fun bindLaunchDbTransactionProvider(provider: LaunchDatabaseTransactionProvider): DatabaseTransactionProvider
 
     companion object {
         @Provides
         @Singleton
-        fun provideDatabase(@ApplicationContext context: Context): LaunchDatabase =
+        fun provideDatabase(
+            @ApplicationContext context: Context,
+        ): LaunchDatabase =
             Room.databaseBuilder(
                 context,
                 LaunchDatabase::class.java,
-                LaunchDatabase.DATABASE_NAME
+                LaunchDatabase.DATABASE_NAME,
             ).build()
     }
 }

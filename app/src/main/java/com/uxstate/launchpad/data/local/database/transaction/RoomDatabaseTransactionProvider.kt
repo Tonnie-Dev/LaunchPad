@@ -6,6 +6,5 @@ import com.uxstate.launchpad.data.local.database.utils.DatabaseTransactionProvid
 
 abstract class RoomDatabaseTransactionProvider(private val database: RoomDatabase) :
     DatabaseTransactionProvider {
-    override suspend fun <R> withTransaction(doOnTransaction: suspend () -> R): R =
-        database.withTransaction(doOnTransaction)
+    override suspend fun <R> withTransaction(doOnTransaction: suspend () -> R): R = database.withTransaction(doOnTransaction)
 }

@@ -7,7 +7,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface LaunchApi {
-
     companion object {
         const val BASE_URL = "https://lldev.thespacedevs.com/2.2.0/"
     }
@@ -25,6 +24,6 @@ interface LaunchApi {
         @Query(LaunchApiParams.QUERY_LIMIT)
         limit: Int = LaunchApiParams.DEFAULT_LIMIT,
         @Query(LaunchApiParams.QUERY_OFFSET)
-        offset: Int = LaunchApiParams.DEFAULT_OFFSET
+        offset: Int = LaunchApiParams.DEFAULT_OFFSET,
     ): ApiResponseDto
 }

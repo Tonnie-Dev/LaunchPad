@@ -37,20 +37,19 @@ import com.uxstate.launchpad.utils.generateLaunch
 fun DetailsScreen(
     launch: Launch,
     viewModel: DetailsViewModel = hiltViewModel(),
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
 ) {
     val isShowDialog by viewModel.isShowDialog.collectAsState()
 
     DetailScreenContent(
-            launch = launch,
-            isShowDialog = isShowDialog,
-            onShowDialog = viewModel::onDialogShow,
-            onConfirmDialog = viewModel::onConfirmDialog,
-            onDismissDialog = viewModel::onDismissDialog,
-            onNavigateUp = { navigator.navigateUp() },
-            onNavigateToFullScreen = { navigator.navigate(it) },
-            onPopBackStack = { navigator.popBackStack() }
-
+        launch = launch,
+        isShowDialog = isShowDialog,
+        onShowDialog = viewModel::onDialogShow,
+        onConfirmDialog = viewModel::onConfirmDialog,
+        onDismissDialog = viewModel::onDismissDialog,
+        onNavigateUp = { navigator.navigateUp() },
+        onNavigateToFullScreen = { navigator.navigate(it) },
+        onPopBackStack = { navigator.popBackStack() },
     )
 }
 
@@ -65,54 +64,47 @@ fun DetailScreenContent(
     onNavigateUp: () -> Unit,
     onNavigateToFullScreen: (Direction) -> Unit,
     onPopBackStack: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-
     val context = LocalContext.current
 
     val scaffoldState = rememberBottomSheetScaffoldState()
-    val navigationBarHeight = WindowInsets.navigationBars.asPaddingValues()
+    val navigationBarHeight =
+        WindowInsets.navigationBars.asPaddingValues()
             .calculateBottomPadding()
     BottomSheetScaffold(
-            scaffoldState = scaffoldState,
-            sheetPeekHeight = BottomSheetDefaults.SheetPeekHeight + navigationBarHeight,
-            topBar = {
-                LaunchTopBar(
-                        text = launch.name,
-                        onClickBackArrow = onNavigateUp,
-                        action = {
-                            IconButton(onClick = {
-                                onPopBackStack()
-                                onNavigateToFullScreen(FullPhotoScreenDestination(launch = launch))
-
-                            }) {
-                                Icon(
-                                        imageVector = Icons.Filled.FitScreen,
-                                        contentDescription = ""
-                                )
-
-                            }
-                        }
-                )
-            },
-            // bottom sheet content
-            sheetContent = {
-                LaunchBottomSheet(
-                        launch = launch,
-                        isShowDialog = isShowDialog,
-                        context = context,
-                        onDismissDialog = onDismissDialog,
-                        onConfirmDialog = onConfirmDialog,
-                        onShowDialog = onShowDialog,
-                        modifier = modifier
-
-                )
-            }
-
-    )
-
-
-    {
+        scaffoldState = scaffoldState,
+        sheetPeekHeight = BottomSheetDefaults.SheetPeekHeight + navigationBarHeight,
+        topBar = {
+            LaunchTopBar(
+                text = launch.name,
+                onClickBackArrow = onNavigateUp,
+                action = {
+                    IconButton(onClick = {
+                        onPopBackStack()
+                        onNavigateToFullScreen(FullPhotoScreenDestination(launch = launch))
+                    }) {
+                        Icon(
+                            imageVector = Icons.Filled.FitScreen,
+                            contentDescription = "",
+                        )
+                    }
+                },
+            )
+        },
+        // bottom sheet content
+        sheetContent = {
+            LaunchBottomSheet(
+                launch = launch,
+                isShowDialog = isShowDialog,
+                context = context,
+                onDismissDialog = onDismissDialog,
+                onConfirmDialog = onConfirmDialog,
+                onShowDialog = onShowDialog,
+                modifier = modifier,
+            )
+        },
+    ) {
         BackgroundContent(launch = launch, modifier = modifier.padding(it))
     }
 }
@@ -120,42 +112,38 @@ fun DetailScreenContent(
 @PreviewLightDark
 @Composable
 private fun DetailScreenContentPreview() {
-
     LaunchPadTheme {
         DetailScreenContent(
-                launch = generateLaunch(),
-                isShowDialog = false,
-                onShowDialog = {},
-                onPopBackStack = {},
-                onNavigateUp = {},
-                onNavigateToFullScreen = {},
-                onConfirmDialog = {},
-                onDismissDialog = {},
-                modifier = Modifier.fillMaxSize()
+            launch = generateLaunch(),
+            isShowDialog = false,
+            onShowDialog = {},
+            onPopBackStack = {},
+            onNavigateUp = {},
+            onNavigateToFullScreen = {},
+            onConfirmDialog = {},
+            onDismissDialog = {},
+            modifier = Modifier.fillMaxSize(),
         )
     }
-
 }
 
 @Preview(showSystemUi = true, showBackground = true)
 @PreviewLightDark
 @Composable
 private fun DetailScreenContentShowDialogPreview() {
-
     LaunchPadTheme {
         DetailScreenContent(
-                launch = generateLaunch(),
-                isShowDialog = false,
-                onShowDialog = {},
-                onPopBackStack = {},
-                onNavigateUp = {},
-                onNavigateToFullScreen = {},
-                onConfirmDialog = {},
-                onDismissDialog = {},
-                modifier = Modifier.fillMaxSize()
+            launch = generateLaunch(),
+            isShowDialog = false,
+            onShowDialog = {},
+            onPopBackStack = {},
+            onNavigateUp = {},
+            onNavigateToFullScreen = {},
+            onConfirmDialog = {},
+            onDismissDialog = {},
+            modifier = Modifier.fillMaxSize(),
         )
     }
-
 }
 
 /*@OptIn(ExperimentalMaterial3Api::class)

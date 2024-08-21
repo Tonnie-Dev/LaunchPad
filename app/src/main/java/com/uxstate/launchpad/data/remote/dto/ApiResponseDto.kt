@@ -10,5 +10,5 @@ data class ApiResponseDto(
     @Json(name = "previous")
     val previous: String?,
     @Json(name = "results")
-    val launchDtos: List<LaunchDto>
+    val launchDtos: List<LaunchDto>,
 )

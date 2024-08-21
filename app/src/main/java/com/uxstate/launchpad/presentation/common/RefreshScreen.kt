@@ -19,8 +19,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
-import androidx.compose.material3.pulltorefresh.pullToRefresh
-import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,23 +41,17 @@ fun RefreshScreen(
     @DrawableRes icon: Int,
     isRefreshing: Boolean,
     onRefresh: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-
-PullToRefreshBox(isRefreshing = isRefreshing, onRefresh = onRefresh, modifier = modifier) {
-
-    RefreshContent(
+    PullToRefreshBox(isRefreshing = isRefreshing, onRefresh = onRefresh, modifier = modifier) {
+        RefreshContent(
             alphaValue = alphaValue,
             message = message,
             icon = icon,
             onRefresh = onRefresh,
-
-            )
+        )
+    }
 }
-
-
-}
-
 
 @Composable
 fun RefreshContent(
@@ -67,90 +59,77 @@ fun RefreshContent(
     message: String,
     @DrawableRes icon: Int,
     onRefresh: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val spacing = LocalSpacing.current
 
     Column(
-            modifier = modifier
-                    .fillMaxSize()
-                    .verticalScroll(state = rememberScrollState())
-                    .padding(spacing.spaceSmall),
-
-            horizontalAlignment = Alignment.CenterHorizontally
-
-
+        modifier =
+            modifier
+                .fillMaxSize()
+                .verticalScroll(state = rememberScrollState())
+                .padding(spacing.spaceSmall),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
         Column(
-                modifier = Modifier.weight(.8f),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.weight(.8f),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Icon(
-                    modifier = Modifier
-                            .size(spacing.spaceOneHundredFifty)
-                            .alpha(alphaValue),
-                    painter = painterResource(id = icon),
-                    contentDescription = stringResource(R.string.dialog_error_title),
-                    tint = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
+                modifier =
+                    Modifier
+                        .size(spacing.spaceOneHundredFifty)
+                        .alpha(alphaValue),
+                painter = painterResource(id = icon),
+                contentDescription = stringResource(R.string.dialog_error_title),
+                tint = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
             )
 
             // Text
 
             Text(
-                    modifier = Modifier
-                            .padding(top = spacing.spaceSmall)
-                            .alpha(alphaValue),
-                    text = message,
-                    color = Color.White,
-                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                    fontWeight = FontWeight.Medium,
-                    textAlign = TextAlign.Center
+                modifier =
+                    Modifier
+                        .padding(top = spacing.spaceSmall)
+                        .alpha(alphaValue),
+                text = message,
+                color = Color.White,
+                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                fontWeight = FontWeight.Medium,
+                textAlign = TextAlign.Center,
             )
         }
 
-
         Column(modifier = Modifier.weight(.2f)) {
-
             Button(onClick = onRefresh) {
-
-
                 Row(
-                        horizontalArrangement = Arrangement.spacedBy(spacing.spaceExtraSmall),
-                        verticalAlignment = Alignment.CenterVertically
+                    horizontalArrangement = Arrangement.spacedBy(spacing.spaceExtraSmall),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
-
                     Text(text = stringResource(R.string.refresh_text))
                     Icon(
-                            imageVector = Icons.Default.Refresh,
-                            contentDescription = "",
-                            modifier = Modifier.size(spacing.spaceMedium)
+                        imageVector = Icons.Default.Refresh,
+                        contentDescription = "",
+                        modifier = Modifier.size(spacing.spaceMedium),
                     )
                 }
-
-
             }
         }
-
-
     }
 }
-
 
 @PreviewLightDark
 @Composable
 private fun RefreshContentPreview() {
-
     LaunchPadTheme {
-
         Surface {
             RefreshContent(
-                    alphaValue = 0.38f,
-                    message = "Network Error",
-                    icon = R.drawable.network_error_icon,
-                    onRefresh = {})
+                alphaValue = 0.38f,
+                message = "Network Error",
+                icon = R.drawable.network_error_icon,
+                onRefresh = {},
+            )
         }
     }
-
 }

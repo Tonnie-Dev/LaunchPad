@@ -16,5 +16,5 @@ data class LocationDto(
     @Json(name = "total_launch_count")
     val totalLaunchCount: Int,
     @Json(name = "url")
-    val url: String
+    val url: String,
 )

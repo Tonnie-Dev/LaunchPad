@@ -14,5 +14,5 @@ data class MissionDto(
     @Json(name = "orbit")
     val orbit: OrbitDto?,
     @Json(name = "type")
-    val type: String
+    val type: String,
 )

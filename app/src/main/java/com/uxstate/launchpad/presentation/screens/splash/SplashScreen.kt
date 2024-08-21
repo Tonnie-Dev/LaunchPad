@@ -25,18 +25,17 @@ fun SplashScreen(navigator: DestinationsNavigator) {
     val spacing = LocalSpacing.current
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomStart) {
-
         val spec = LottieCompositionSpec.RawRes(R.raw.rocket_launch_lottie)
         val composition by rememberLottieComposition(spec = spec)
         val state = animateLottieCompositionAsState(composition = composition)
 
         LottieAnimation(
-            composition = composition, progress = state.progress,
-            modifier = Modifier.size(spacing.spaceFiveHundred, spacing.spaceFiveHundred * 5)
+            composition = composition,
+            progress = state.progress,
+            modifier = Modifier.size(spacing.spaceFiveHundred, spacing.spaceFiveHundred * 5),
         )
 
         if (state.isAtEnd && state.isPlaying) {
-
             navigator.navigate(HomeScreenDestination)
         }
     }

@@ -14,5 +14,5 @@ data class ConfigurationDto(
     @Json(name = "url")
     val url: String,
     @Json(name = "variant")
-    val variant: String
+    val variant: String,
 )

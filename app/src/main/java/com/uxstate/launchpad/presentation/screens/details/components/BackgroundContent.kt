@@ -22,33 +22,34 @@ import com.uxstate.launchpad.utils.generateLaunch
 @Composable
 fun BackgroundContent(
     launch: Launch,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
 
-
-    val painter = if (launch.imageUrl.startsWith("android.resource://")) {
-        painterResource(id = R.drawable.falcon_9)
-    } else {
-        rememberAsyncImagePainter(
-                model = ImageRequest.Builder(context)
+    val painter =
+        if (launch.imageUrl.startsWith("android.resource://")) {
+            painterResource(id = R.drawable.falcon_9)
+        } else {
+            rememberAsyncImagePainter(
+                model =
+                    ImageRequest.Builder(context)
                         .data(launch.imageUrl)
                         .crossfade(true)
                         .placeholder(R.drawable.placeholder_image)
-                        .build()
-
-        )
-    }
+                        .build(),
+            )
+        }
 
     Column(modifier = modifier.fillMaxSize()) {
         Image(
-                painter = painter,
-                contentDescription = launch.name,
-                modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(17f / 20f),
-                contentScale = ContentScale.Crop
+            painter = painter,
+            contentDescription = launch.name,
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(17f / 20f),
+            contentScale = ContentScale.Crop,
         )
 
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
@@ -56,21 +57,17 @@ fun BackgroundContent(
         RocketInfoRow(launch = launch)
 
         TimeBoardWidget(launch = launch)
-
     }
-
 }
 
 @Preview(showSystemUi = true)
 @PreviewLightDark
 @Composable
 private fun BackgroundContentPreview() {
-
     LaunchPadTheme {
-
         Surface {
             BackgroundContent(
-                    launch = generateLaunch()
+                launch = generateLaunch(),
             )
         }
     }

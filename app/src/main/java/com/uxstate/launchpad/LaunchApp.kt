@@ -6,7 +6,6 @@ import timber.log.Timber
 
 @HiltAndroidApp
 class LaunchApp : Application() {
-
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.DEBUG) {

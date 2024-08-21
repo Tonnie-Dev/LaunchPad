@@ -9,20 +9,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun TabsContent(tabs: List<TabItem>, pagerState: PagerState) {
-
+fun TabsContent(
+    tabs: List<TabItem>,
+    pagerState: PagerState,
+) {
     HorizontalPager(state = pagerState, pageSize = PageSize.Fill) {
-        page ->
+            page ->
 
         tabs[page].composeFunction()
     }
 }
 
-
 @Preview(uiMode = UI_MODE_NIGHT_NO, showBackground = true)
 @Composable
 fun TabsContentPreviewLight() {
-
    /* val tabs = listOf(TabItem.Upcoming, TabItem.Previous)
     val pagerState = rememberPagerState()
     LaunchPadTheme() {
@@ -33,7 +33,6 @@ fun TabsContentPreviewLight() {
 @Preview(uiMode = UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun TabsContentPreviewDark() {
-
    /* val tabs = listOf(TabItem.Upcoming, TabItem.Previous)
     val pagerState = rememberPagerState()
     LaunchPadTheme() {

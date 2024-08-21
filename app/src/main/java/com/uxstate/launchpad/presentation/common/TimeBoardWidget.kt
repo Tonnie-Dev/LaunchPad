@@ -37,42 +37,45 @@ import com.uxstate.launchpad.utils.formatLaunchDatabaseStringDate
 import com.uxstate.launchpad.utils.generateLaunch
 import com.uxstate.launchpad.utils.generateSecondsFlow
 
-
 @Composable
-fun TimeBoardWidget(launch: Launch, modifier: Modifier = Modifier) {
-
+fun TimeBoardWidget(
+    launch: Launch,
+    modifier: Modifier = Modifier,
+) {
     val spacing = LocalSpacing.current
     val secondsFlow by launch.generateSecondsFlow()
-            .collectAsState(initial = 0)
+        .collectAsState(initial = 0)
 
     val timerState = TimerState(secondsFlow)
     val timeBoard = timerState.computeTimeBoard()
     Card(
-            elevation = CardDefaults.cardElevation(
-                    defaultElevation = spacing.spaceSmall
+        elevation =
+            CardDefaults.cardElevation(
+                defaultElevation = spacing.spaceSmall,
             ),
-            modifier = modifier.padding(spacing.spaceSmall)
+        modifier = modifier.padding(spacing.spaceSmall),
     ) {
         Column(
-                modifier = Modifier.padding(
-                        horizontal = spacing.spaceMedium,
-                        vertical = spacing.spaceSmall
-                )
-
+            modifier =
+                Modifier.padding(
+                    horizontal = spacing.spaceMedium,
+                    vertical = spacing.spaceSmall,
+                ),
         ) {
             TimeSlotsRow(
-                    timeBoard = timeBoard,
-                    modifier = Modifier
-                            .fillMaxWidth()
-
+                timeBoard = timeBoard,
+                modifier =
+                    Modifier
+                        .fillMaxWidth(),
             )
             Text(
-                    text = (launch.startWindowDate).formatLaunchDatabaseStringDate(),
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                            .fillMaxWidth()
+                text = (launch.startWindowDate).formatLaunchDatabaseStringDate(),
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier =
+                    Modifier
+                        .fillMaxWidth(),
             )
 
             StatusSlot(launch)
@@ -83,81 +86,82 @@ fun TimeBoardWidget(launch: Launch, modifier: Modifier = Modifier) {
 @Composable
 fun TimeSlotsRow(
     modifier: Modifier = Modifier,
-    timeBoard: TimeBoard
+    timeBoard: TimeBoard,
 ) {
-
     val spacing = LocalSpacing.current
 
     Row(
-            modifier = modifier
-                    .fillMaxWidth()
-                    .padding(spacing.spaceExtraSmall),
-            horizontalArrangement = Arrangement.Center
-
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(spacing.spaceExtraSmall),
+        horizontalArrangement = Arrangement.Center,
     ) {
-
         TimeSlot(
-                timeValue = timeBoard.days,
-                prefix = stringResource(id = R.string.t_minus_label),
-                timeType = stringResource(R.string.time_label)
+            timeValue = timeBoard.days,
+            prefix = stringResource(id = R.string.t_minus_label),
+            timeType = stringResource(R.string.time_label),
         )
 
         TimeSlot(
-                timeValue = timeBoard.hours,
-                prefix = stringResource(id = R.string.time_colon_separator),
-                timeType = stringResource(R.string.hrs_abbrev)
+            timeValue = timeBoard.hours,
+            prefix = stringResource(id = R.string.time_colon_separator),
+            timeType = stringResource(R.string.hrs_abbrev),
         )
 
         TimeSlot(
-                timeValue = timeBoard.minutes,
-                prefix = stringResource(id = R.string.time_colon_separator),
-                timeType = stringResource(R.string.min_abbrev)
+            timeValue = timeBoard.minutes,
+            prefix = stringResource(id = R.string.time_colon_separator),
+            timeType = stringResource(R.string.min_abbrev),
         )
 
         TimeSlot(
-                timeValue = timeBoard.seconds,
-                prefix = stringResource(id = R.string.time_colon_separator),
-                timeType = stringResource(R.string.sec_abbrev)
+            timeValue = timeBoard.seconds,
+            prefix = stringResource(id = R.string.time_colon_separator),
+            timeType = stringResource(R.string.sec_abbrev),
         )
     }
 }
 
 @Composable
-fun TimeSlot(timeValue: Int, timeType: String, prefix: String = "") {
+fun TimeSlot(
+    timeValue: Int,
+    timeType: String,
+    prefix: String = "",
+) {
     val spacing = LocalSpacing.current
     Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                    .width(IntrinsicSize.Max)
-                    .padding(spacing.spaceDoubleDp)
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier =
+            Modifier
+                .width(IntrinsicSize.Max)
+                .padding(spacing.spaceDoubleDp),
     ) {
         Row(horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
-                    text = prefix,
-                    style = MaterialTheme.typography.headlineSmall
-
+                text = prefix,
+                style = MaterialTheme.typography.headlineSmall,
             )
             AnimatedContent(
-                    targetState = timeValue,
-                    transitionSpec = { addAnimation().using(SizeTransform(clip = true)) }
+                targetState = timeValue,
+                transitionSpec = { addAnimation().using(SizeTransform(clip = true)) },
             ) {
-
-                value ->
+                    value ->
                 Text(
-                        text = stringResource(id = R.string.time_slot, value),
-                        style = MaterialTheme.typography.headlineSmall
-
+                    text = stringResource(id = R.string.time_slot, value),
+                    style = MaterialTheme.typography.headlineSmall,
                 )
             }
         }
 
         Text(
-                text = timeType,
-                style = MaterialTheme.typography.labelSmall,
-                textAlign = TextAlign.End,
-                modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = spacing.spaceExtraSmall)
+            text = timeType,
+            style = MaterialTheme.typography.labelSmall,
+            textAlign = TextAlign.End,
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = spacing.spaceExtraSmall),
         )
     }
 }
@@ -166,29 +170,25 @@ fun TimeSlot(timeValue: Int, timeType: String, prefix: String = "") {
 @Composable
 fun TimeBoardPreview() {
     TimeSlotsRow(
-            timeBoard = TimeBoard(
-                    days = 8,
-                    hours = 18,
-                    minutes = 12,
-                    seconds = 32
-            )
+        timeBoard =
+            TimeBoard(
+                days = 8,
+                hours = 18,
+                minutes = 12,
+                seconds = 32,
+            ),
     )
 }
 
-
 @PreviewLightDark
 @Composable
-
 private fun TimeSlotPreviewDark() {
-
     LaunchPadTheme {
         Surface {
-
             TimeSlot(timeValue = 7, timeType = "Min")
         }
     }
 }
-
 
 @Preview(showBackground = true)
 @PreviewLightDark

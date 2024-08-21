@@ -14,14 +14,18 @@ import com.uxstate.launchpad.domain.model.Launch
 import com.uxstate.launchpad.utils.LocalSpacing
 
 @Composable
-fun StatusSection(launch: Launch, modifier: Modifier = Modifier) {
+fun StatusSection(
+    launch: Launch,
+    modifier: Modifier = Modifier,
+) {
     val spacing = LocalSpacing.current
     Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(spacing.spaceSmall),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(spacing.spaceSmall),
         verticalArrangement = Arrangement.SpaceAround,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(modifier = Modifier.height(spacing.spaceExtraSmall))
 
@@ -29,14 +33,14 @@ fun StatusSection(launch: Launch, modifier: Modifier = Modifier) {
             text = stringResource(R.string.status_label),
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(Alignment.Start)
+            modifier = Modifier.align(Alignment.Start),
         )
         Spacer(modifier = Modifier.height(spacing.spaceExtraSmall))
 
         Text(
             text = launch.status.description,
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         )
 
         Spacer(modifier = Modifier.height(spacing.spaceLarge))
@@ -44,7 +48,7 @@ fun StatusSection(launch: Launch, modifier: Modifier = Modifier) {
         Divider(
             modifier = Modifier.fillMaxWidth(),
             thickness = spacing.spaceSingleDp,
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onSurface,
         )
 
         Spacer(modifier = Modifier.height(spacing.spaceExtraSmall))

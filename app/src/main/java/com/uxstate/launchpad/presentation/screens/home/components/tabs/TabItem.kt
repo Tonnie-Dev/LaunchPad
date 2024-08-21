@@ -12,36 +12,35 @@ sealed class TabItem(
     @DrawableRes
     val icon: Int,
     val title: String,
-    val composeFunction: @Composable () -> Unit
+    val composeFunction: @Composable () -> Unit,
 ) {
-
     data class Upcoming(
         val data: LazyPagingItems<Launch>,
         val navigator: DestinationsNavigator,
     ) : TabItem(
-        icon = R.drawable.hourglass,
-        title = "UPCOMING",
-        composeFunction = {
-            LaunchList(
-                data = data,
-                showCountDown = true,
-                navigator = navigator
-            )
-        }
-    )
+            icon = R.drawable.hourglass,
+            title = "UPCOMING",
+            composeFunction = {
+                LaunchList(
+                    data = data,
+                    showCountDown = true,
+                    navigator = navigator,
+                )
+            },
+        )
 
     data class Previous(
         val data: LazyPagingItems<Launch>,
-        val navigator: DestinationsNavigator
+        val navigator: DestinationsNavigator,
     ) : TabItem(
-        icon = R.drawable.rocket_icon,
-        title = "PREVIOUS",
-        composeFunction = {
-            LaunchList(
-                data = data,
-                showCountDown = false,
-                navigator = navigator
-            )
-        }
-    )
+            icon = R.drawable.rocket_icon,
+            title = "PREVIOUS",
+            composeFunction = {
+                LaunchList(
+                    data = data,
+                    showCountDown = false,
+                    navigator = navigator,
+                )
+            },
+        )
 }

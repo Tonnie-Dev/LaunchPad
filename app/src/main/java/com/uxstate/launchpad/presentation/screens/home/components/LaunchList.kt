@@ -20,29 +20,28 @@ fun LaunchList(
     showCountDown: Boolean,
     navigator: DestinationsNavigator,
     modifier: Modifier = Modifier,
-
-    ) {
-
+) {
     val result = handlePagingResult(launches = data)
 
     if (result) {
         LazyColumn(modifier = modifier, content = {
-
-            items(count = data.itemCount,
-                    key = data.itemKey { it.id },
-                    contentType = data.itemContentType { "Launch" }) { i ->
+            items(
+                count = data.itemCount,
+                key = data.itemKey { it.id },
+                contentType = data.itemContentType { "Launch" },
+            ) { i ->
 
                 val launch = data[i]
                 launch?.let {
-
-                    LaunchImage(launch = it,
-                            showCountDown = showCountDown,
-                            modifier = Modifier.clickable {
+                    LaunchImage(
+                        launch = it,
+                        showCountDown = showCountDown,
+                        modifier =
+                            Modifier.clickable {
                                 navigator.navigate(
-                                        DetailsScreenDestination(it)
+                                    DetailsScreenDestination(it),
                                 )
-                            }
-
+                            },
                     )
                 }
             }
@@ -53,29 +52,27 @@ fun LaunchList(
 // starts with small letter because this function returns a value
 @Composable
 fun handlePagingResult(launches: LazyPagingItems<Launch>): Boolean {
-
     // apply to get access to loadState
     launches.apply { // this variable stores errors found in refresh, prepend or append
-        val error = when {
+        val error =
+            when {
+                loadState.refresh is LoadState.Error -> {
+                    loadState.refresh as LoadState.Error
+                }
 
-            loadState.refresh is LoadState.Error -> {
-                loadState.refresh as LoadState.Error
+                loadState.prepend is LoadState.Error -> {
+                    loadState.prepend as LoadState.Error
+                }
+
+                loadState.append is LoadState.Error -> {
+                    loadState.append as LoadState.Error
+                }
+
+                // else suggesting the error is null
+                else -> null
             }
-
-            loadState.prepend is LoadState.Error -> {
-                loadState.prepend as LoadState.Error
-            }
-
-            loadState.append is LoadState.Error -> {
-                loadState.append as LoadState.Error
-            }
-
-            // else suggesting the error is null
-            else -> null
-        }
 
         return when {
-
             loadState.refresh is LoadState.Loading -> {
                 ShimmerEffect()
                 false
@@ -89,7 +86,6 @@ fun handlePagingResult(launches: LazyPagingItems<Launch>): Boolean {
 
             // less than one is when we don't receive any heroes
             launches.itemCount < 1 -> {
-
                 // empty screen meaning default icon and message
                 EmptyScreen()
                 false
