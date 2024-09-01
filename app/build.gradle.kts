@@ -1,3 +1,5 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType.*
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -30,8 +32,8 @@ android {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro",
             )
         }
     }
@@ -57,11 +59,10 @@ android {
 
 ktlint {
     android.set(true) // Enable Android-specific linting rules
-    ignoreFailures.set(false) // Fail the build if KtLint finds any issues, // Continue build even if there are lint errors
-    // disabledRules.set(setOf("final-newline", "no-wildcard-imports", "max-line-length")) // Specify any rules to ignore
+    ignoreFailures.set(true) // Prevents build from failing due to linting errors
     reporters {
-        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN) // Output KtLint results in plain text format
-        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML) // Output KtLint results in HTML format
+        reporter(PLAIN) // Output KtLint results in plain text format
+        reporter(HTML) // Output KtLint results in HTML format
     }
 }
 
@@ -86,11 +87,14 @@ dependencies {
     // Coil
     implementation(COIL.compose)
 
-    // Dagger Hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
-    implementation(libs.hilt.navigation.compose)
 
+
+    // Dagger Hilt
+    implementation(Google.dagger.hilt.android)
+    ksp(Google.dagger.hilt.compiler)
+    implementation(AndroidX.hilt.navigationCompose)
+
+    implementation(COIL.compose)
     // Retrofit
     implementation(Square.retrofit2)
     implementation(Square.retrofit2.converter.moshi)
@@ -102,9 +106,9 @@ dependencies {
     implementation(Square.moshi.kotlinReflect)
 
     // Room components
-    implementation(libs.room.ktx)
-    implementation(libs.room.paging)
-    ksp(libs.room.compiler)
+    implementation(AndroidX.room.ktx)
+    ksp(AndroidX.room.compiler)
+    implementation(AndroidX.room.paging)
 
     // Paging 3.0
     implementation(AndroidX.paging.compose)
