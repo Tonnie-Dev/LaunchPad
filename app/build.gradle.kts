@@ -12,14 +12,14 @@ plugins {
 
 android {
     namespace = "com.uxstate.launchpad"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.uxstate.launchpad"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 2
-        versionName = "2.0.0"
+        targetSdk = 36
+        versionCode = 3
+        versionName = "2.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
