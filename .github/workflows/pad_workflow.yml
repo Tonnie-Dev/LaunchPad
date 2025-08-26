@@ -12,27 +12,40 @@ jobs:
            uses: actions/setup-java@v3
            with:
               distribution: temurin
-              java-version: 20
+              java-version: 17
               
+         - name: Set up Android SDK
+           uses: android-actions/setup-android@v2
+         
          - name: Make gradlew executable
            run: chmod +x ./gradlew
-           
+         
          - name: Setup Gradle Cache
            uses: gradle/gradle-build-action@v2
            with:
               gradle-home-cache-cleanup: true
-              
+         
+         
+         - name: Extract versionCode and versionName
+           id: get_versions
+           run: |
+              ./gradlew -q printVersionCodeAndName > version_output.txt
+              cat version_output.txt
+              echo "VERSION_CODE=$(grep VERSION_CODE version_output.txt | cut -d '=' -f2)" >> $GITHUB_ENV
+              echo "VERSION_NAME=$(grep VERSION_NAME version_output.txt | cut -d '=' -f2)" >> $GITHUB_ENV
+         
          - name: Bump Version Code
            uses: chkfung/android-version-actions@v1.2.1
            with:
               gradlePath: app/build.gradle.kts
-              versionCode: '${{ github.run_number }}'
-              versionName: 1.0.0
-              
+              versionCode: ${{ env.VERSION_CODE }}
+              versionName: ${{ env.VERSION_NAME }}
+         
          - name: Build prodRelease
            run: ./gradlew bundleRelease
-           
-         - name: Sign AAb
+           continue-on-error: false  # Fail if build fails
+         
+         - name: Sign AAB
            id: sign
            uses: r0adkll/sign-android-release@v1
            with:
@@ -41,29 +54,36 @@ jobs:
               alias: '${{ secrets.SIGNING_KEY_ALIAS }}'
               keyStorePassword: '${{ secrets.SIGNING_STORE_PASSWORD }}'
               keyPassword: '${{ secrets.SIGNING_KEY_PASSWORD }}'
-              
+         
          - name: Upload app bundle as artifact
-           uses: actions/upload-artifact@v2
+           uses: actions/upload-artifact@v4
            with:
               name: app-bundle
               path: app/build/outputs/bundle/release/app-release.aab
-         - run: 'echo Build status report=${{ job.status }}'
+              retention-days: 2
+           continue-on-error: false  # Fail if upload fails
+   
    deploy:
-      name: Job_2 - Deploy aab to playstore
+      name: Job_2 - Deploy AAB to playstore
       needs: build
       runs-on: ubuntu-latest
+      
       steps:
          - name: Download app bundle from artifact
-           uses: actions/download-artifact@v2
+           uses: actions/download-artifact@v4
            with:
               name: app-bundle
+              path: ${{ github.workspace }}
+              continue-on-error: false  # Fail if download fails
+              
          - name: Publish to Play Store
            uses: r0adkll/upload-google-play@v1
            with:
               serviceAccountJsonPlainText: '${{ secrets.SERVICE_ACCOUNT_JSON }}'
               packageName: com.uxstate.launchpad
-              releaseFiles: '${{ github.workspace }}/app-release.aab'
+              releaseFiles: ${{ github.workspace }}/app-release.aab
               track: production
+              continue-on-error: false  # Fail if deployment fails
 
 
 
