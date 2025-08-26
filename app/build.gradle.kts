@@ -57,6 +57,15 @@ android {
     }
 }
 
+
+tasks.register("printVersionCodeAndName") {
+    doLast {
+        println("VERSION_CODE=${android.defaultConfig.versionCode}")
+        println("VERSION_NAME=${android.defaultConfig.versionName}")
+    }
+}
+
+
 ktlint {
     android.set(true) // Enable Android-specific linting rules
     ignoreFailures.set(true) // Prevents build from failing due to linting errors
